@@ -1,0 +1,24 @@
+
+header {
+    width: calc(100% - 232px);
+    height: 94px;
+    
+    #header-content {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        >span {
+            font-family: 'Inter';
+            font-weight: 400;
+            font-size: 20px;
+            color: #000000;
+        }
+
+        >div {
+            display: flex; 
+            gap: 16px;
+            align-items: center;
+        }
+    }
+}
