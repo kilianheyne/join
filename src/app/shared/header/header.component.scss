@@ -25,6 +25,41 @@ header {
             display: flex; 
             gap: 16px;
             align-items: center;
+
+            img {
+                transition: transform 0.2s ease-in-out;
+                cursor: pointer;
+
+                &:hover {
+                    transform: scale(1.2);
+                }
+            }
+        }
+
+        #user {
+            width: 56px;
+            height: 56px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: #FFFFFF;
+            border: solid #2A3647 3px;
+            border-radius: 50%;
+
+            cursor: pointer;
+
+            >span {
+                font-family: 'Inter';
+                _font-weight: 700;
+                font-size: 16px;
+                color: #29ABE2;
+            }
+
+            &:hover {
+                background: #0C2E621F;
+            }
         }
     }
 }

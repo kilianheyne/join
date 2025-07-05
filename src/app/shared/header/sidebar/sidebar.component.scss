@@ -15,24 +15,45 @@ section {
         gap: 15px;
         width: 100%;
 
-        div {
+        a {
             width: 100%;
             height: 46px;
 
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 8px;
 
-            a {
+            cursor: pointer;
+
+            .default-icon {
                 display: flex;
-                align-items: center;
-                gap: 8px;
+            }
+
+            .active-icon {
+                display: none;
+            }
+
+            span {
+                font-family: 'Inter';
+                font-weight: 400;
+                font-size: 16px;
+                color: #CDCDCD;
+            }
+
+            &.active {
+                background: #091931;
+
+                .default-icon {
+                    display: none;
+                }
+
+                .active-icon {
+                    display: flex;
+                }
 
                 span {
-                    font-family: 'Inter';
-                    font-weight: 400;
-                    font-size: 16px;
-                    color: #CDCDCD;
+                    color: #FFFFFF;
                 }
             }
 
@@ -55,7 +76,7 @@ section {
                 color: #CDCDCD;
 
                 &:hover {
-                    font-weight: 700;
+                    _font-weight: 700; // TO-DO: font 700 einfügen
                     color: #29ABE2;
                 }
             }
