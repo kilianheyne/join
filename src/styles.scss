@@ -2,9 +2,40 @@
 
 /* inter-regular - latin */
 @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-display: swap;
+    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
     font-family: "Inter";
     font-style: normal;
     font-weight: 400;
-    src: url("../fonts/inter-v19-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    src: url("../public/assets/fonts/inter-v19-latin-regular.woff2") format("woff2");
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+
+* {
+    position: relative;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: Inter;
+
+}
+
+html {
+    background-color: #f6f7f8;
+}
+
+section {
+    .content {
+        width: 90%;
+        _max-width: calc(100% - 232px);
+        height: 100%;
+        min-height: calc(100dvh - 96px);
+        padding: 40px;
+        display: flex;
+        justify-content: center;
+        max-width: 1920px;
+    }
 }

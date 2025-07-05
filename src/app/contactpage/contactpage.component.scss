@@ -1,0 +1,139 @@
+@import '../../styles.scss';
+
+.content {
+    display: flex;
+
+    .contactlist {
+        height: 100%;
+        max-height: calc(100dvh - 96px);
+        width: 30%;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 20px 0px 20px 20px;
+        z-index: 2;
+        box-shadow: 5px 0px 0px rgba(202, 202, 202, 0.171);
+
+        button {
+            border: none;
+            background-color: #2A3647;
+            color: white;
+            width: 352px;
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            font-weight: bold;
+            font-size: 21px;
+            border-radius: 10px;
+
+            &:hover {
+                cursor: pointer;
+                background-color: #29ABE2;
+                box-shadow: 0px 5px 0px rgba(202, 202, 202, 0.555);
+            }
+
+            img {
+                height: 20px;
+                width: 30px;
+            }
+        }
+
+        .list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            overflow-y: auto;
+
+            .contact {
+                padding: 32px 24px;
+                display: flex;
+                justify-content: flex-start;
+                gap: 35px;
+                width: 100%;
+                border-radius: 10px;
+
+                &:hover {
+                    background-color: #f6f7f8;
+                    cursor: pointer;
+                }
+
+                .contactcircle {
+                    width: 38px;
+                    height: 38px;
+                    background-color: aquamarine;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    font-size: 12px;
+                }
+
+                .contactright {
+                    display: flex;
+                    flex-direction: column;
+
+                    .name {
+                        font-size: 20px;
+                    }
+
+                    .mail {
+                        font-size: 16px;
+                        color: #007CEE;
+                    }
+                }
+            }
+        }
+
+
+        .list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .list::-webkit-scrollbar-track {
+            background: white;
+            border-radius: 10px;
+        }
+
+        .list::-webkit-scrollbar-thumb {
+            background-color: #A8A8A8;
+            border-radius: 3px;
+            background-clip: content-box;
+            min-height: 53px;
+        }
+
+    }
+
+    .contactlist::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    .contactlist::-webkit-scrollbar {
+        width: 6px; // This controls the thumb's horizontal width
+    }
+
+    .contactlist::-webkit-scrollbar-track {
+        background: #f0f0f0; // Track color
+        border-radius: 10px;
+    }
+
+    .contactlist::-webkit-scrollbar-thumb {
+        background-color: #A8A8A8;
+        border-radius: 3px;
+        padding: 5px; // Gives background room to breathe
+        background-clip: content-box;
+    }
+
+
+    .contactinfo {
+        height: auto;
+        width: 70%;
+        background-color: rgb(255, 243, 243);
+        z-index: 0;
+    }
+}
