@@ -1,0 +1,125 @@
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    .detail-top {
+        display: flex;
+        align-items: center;
+        gap: 54px;
+        padding: 5px;
+
+        .circle {
+            background-color: orange;
+            height: 120px;
+            width: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 47px;
+
+        }
+
+        .top-right {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            h3 {
+                font-size: 47px;
+                font-weight: 400;
+            }
+
+            .buttons {
+                display: flex;
+                gap: 20px;
+
+                .button-edit {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    border: none;
+                    background-color: #f6f7f8;
+                    font-size: 16px;
+
+                    &:hover {
+                        cursor: pointer;
+                        color: #29ABE2;
+                        font-weight: 700;
+
+                        .icon-edit {
+                            height: 24px;
+                            width: 24px;
+                            background-image: url(../../../../public/assets/icons/icon-edit-blue.png);
+                            background-repeat: no-repeat;
+                        }
+                    }
+
+                    .icon-edit {
+                        height: 24px;
+                        width: 24px;
+                        background-image: url(../../../../public/assets/icons/icon-edit.png);
+                    }
+
+                }
+
+                .button-delete {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    border: none;
+                    background-color: none;
+                    font-size: 16px;
+                    background-color: #f6f7f8
+
+;
+
+                    &:hover {
+                        cursor: pointer;
+                        color: #29ABE2;
+                        font-weight: 700;
+
+                        .icon-delete {
+                            height: 16px;
+                            width: 24px;
+                            background-image: url(../../../../public/assets/icons/icon-delete-blue.png);
+                        }
+                    }
+
+                    .icon-delete {
+                        height: 24px;
+                        width: 24px;
+                        background-image: url(../../../../public/assets/icons/icon-delete.png);
+                    }
+                }
+            }
+        }
+    }
+
+    h4 {
+        font-size: 20px;
+        font-weight: 400;
+    }
+
+    .details {
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+
+        h5 {
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .mail {
+            color: #007CEE;
+            font-size: 16px;
+        }
+
+        .phone {
+            font-size: 16px;
+        }
+    }
+}
