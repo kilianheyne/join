@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Contacts } from '../shared/interfaces/contacts';
+import { ContactDetailsComponent } from "./contact-details/contact-details.component";
 
 @Component({
   selector: 'app-contactpage',
-  imports: [],
+  imports: [ContactDetailsComponent],
   templateUrl: './contactpage.component.html',
   styleUrl: './contactpage.component.scss'
 })

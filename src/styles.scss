@@ -11,6 +11,14 @@
     /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
+@font-face {
+    font-display: swap;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("/assets/fonts/inter-v19-latin-700.woff2") format("woff2");
+}
 
 * {
     position: relative;
@@ -38,4 +46,9 @@ section {
         justify-content: center;
         max-width: 1920px;
     }
+}
+
+h2 {
+    font-weight: 700;
+    font-size: 61px;
 }
