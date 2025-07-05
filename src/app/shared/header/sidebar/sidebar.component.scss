@@ -1,0 +1,64 @@
+section {
+    width: 232px;
+    height: 100dvh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    background: #2A3647;
+
+    #menu {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+
+        div {
+            width: 100%;
+            height: 46px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            a {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                span {
+                    font-family: 'Inter';
+                    font-weight: 400;
+                    font-size: 16px;
+                    color: #CDCDCD;
+                }
+            }
+
+            &:hover {
+                background: #2A3D59;
+            }
+        }
+    }
+
+    #policies {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        a {
+            span {
+                font-family: 'Inter';
+                font-weight: 400;
+                font-size: 16px;
+                color: #CDCDCD;
+
+                &:hover {
+                    font-weight: 700;
+                    color: #29ABE2;
+                }
+            }
+        }
+    }
+}

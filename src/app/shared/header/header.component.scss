@@ -1,9 +1,15 @@
+section {
+    display: flex;
+}
 
 header {
     width: calc(100% - 232px);
     height: 94px;
+    display: flex; 
+    align-items: center;
     
     #header-content {
+        width: 100%;
         display: flex;
         justify-content: space-around;
         align-items: center;

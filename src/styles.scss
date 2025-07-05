@@ -8,3 +8,16 @@
     font-weight: 400;
     src: url("../public/assets/fonts/inter-v19-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+
+// #region global styles
+
+* {
+    position: relative; 
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    scroll-behavior: smooth;
+}
+
+// #endregion
