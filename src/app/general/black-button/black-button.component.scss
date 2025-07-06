@@ -1,0 +1,29 @@
+@use 'styles/variables' as *;
+
+button {
+    padding: 16px;
+    border: solid 1px $primaryColor;
+    border-radius: 10px;
+    background: $primaryColor;
+    font-size: 20px;
+    font-weight: 300;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+        border-color: $lightBlue;
+        background: $lightBlue;
+        filter: drop-shadow(0px 2px 3px rgb(0 0 0 / 30%));
+    }
+
+    &:active {
+        border-color: #091931;
+        background: #091931;
+    }
+
+    span {
+        font-size: 15px;
+        margin-left: 5px;
+    }
+}

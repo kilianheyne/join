@@ -1,0 +1,135 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: "join-icon";
+    src: url("/assets/fonts/icon/join-icon.eot");
+    src: url("/assets/fonts/icon/join-icon.eot?#iefix") format("embedded-opentype"),
+        url("/assets/fonts/icon/join-icon.woff") format("woff"),
+        url("/assets/fonts/icon/join-icon.ttf") format("truetype"),
+        url("/assets/fonts/icon/join-icon.svg#join-icon") format("svg");
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+[data-icon]:before {
+    font-family: "join-icon" !important;
+    content: attr(data-icon);
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    vertical-align: baseline;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+    font-family: "join-icon" !important;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    vertical-align: baseline;
+}
+
+.icon-add:before {
+    content: "\61";
+}
+
+.icon-add-task:before {
+    content: "\62";
+}
+
+.icon-arrow-drop-down:before {
+    content: "\63";
+}
+
+.icon-arrow-drop-down-2:before {
+    content: "\65";
+}
+
+.icon-board:before {
+    content: "\66";
+}
+
+.icon-call:before {
+    content: "\67";
+}
+
+.icon-urgent:before {
+    content: "\68";
+}
+
+.icon-check:before {
+    content: "\69";
+}
+
+.icon-close:before {
+    content: "\6a";
+}
+
+.icon-delete:before {
+    content: "\6b";
+}
+
+.icon-edit:before {
+    content: "\6c";
+}
+
+.icon-event:before {
+    content: "\6d";
+}
+
+.icon-help:before {
+    content: "\6e";
+}
+
+.icon-lock:before {
+    content: "\6f";
+}
+
+.icon-low:before {
+    content: "\70";
+}
+
+.icon-mail:before {
+    content: "\71";
+}
+
+.icon-medium:before {
+    content: "\72";
+}
+
+.icon-perm-contact-calendar:before {
+    content: "\73";
+}
+
+.icon-person:before {
+    content: "\75";
+}
+
+.icon-person-add:before {
+    content: "\76";
+}
+
+.icon-search:before {
+    content: "\77";
+}
+
+.icon-summary:before {
+    content: "\78";
+}
+
+.icon-visibility:before {
+    content: "\79";
+}
+
+.icon-visibility-off:before {
+    content: "\7a";
+}

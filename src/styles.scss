@@ -1,10 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'styles/icons' as *;
 
-/* inter-regular - latin */
 @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
     font-family: "Inter";
+    src: url("/assets/fonts/inter/Inter-VariableFont_opsz_wght.ttf");
     font-style: normal;
-    font-weight: 400;
-    src: url("../fonts/inter-v19-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("/assets/fonts/inter/Inter-Italic-VariableFont_opsz_wght.ttf");
+    font-style: italic;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Inter";
 }
