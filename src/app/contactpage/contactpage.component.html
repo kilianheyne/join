@@ -3,36 +3,52 @@
         <div class="contactlist">
             <button (click)="openCreateContactForm()" class="add-button">
                 <span>Add new contact</span>
-                <img src="assets/icons/icon-add-contact.png">
+                <img src="assets/icons/icon-add-contact.png" />
             </button>
 
             <div class="list">
                 @for (item of contacts; track $index) {
-                <div class="contact">
-                    <div class="contactcircle">XX</div>
-                    <div class="contactright">
-                        <span class="name">{{item.firstname}} {{item.lastname}}</span>
-                        <span class="mail">{{item.email}}</span>
+
+                <div (click)="showContactDetails(item)" class="contact">
+                    <div class="contact-mb">
+                        <div class="contactcircle">XX</div>
+                        <div class="contactright">
+                            <span class="name">{{ item.firstname }} {{ item.lastname }}</span>
+                            <span class="mail">{{ item.email }}</span>
+                        </div>
+
                     </div>
+                    <span class="mail-mb">{{ item.email }}</span>
                 </div>
-
                 }
+            </div>
 
+            <div (click)="openCreateContactForm()" class="show-info">
+                <img src="assets/icons/icon-add-person.png" alt="" />
             </div>
         </div>
 
-
-
-        <div class="contactinfo">
-            <div class="headline">
+        <!-- CONTACT INFO AREA: always visible on desktop, overlay below 945px -->
+        <div class="contactinfo" [class.visible]="isOverlayActive || isDetailsVisible">
+            <!-- Headline only shown on desktop -->
+            <div class="headline" *ngIf="!isOverlayActive">
                 <h2>Contacts</h2>
                 <div class="blueline"></div>
                 <span>Better with a team</span>
+                <div class="blueline-mb"></div>
             </div>
 
-            <app-contact-details></app-contact-details>
-        </div>
-        <app-create-contact #createContact></app-create-contact>
+            <!-- Contact Details Component -->
+            <app-contact-details [contact]="selectedContact"
+                [isVisible]="isDetailsVisible || isOverlayActive"></app-contact-details>
 
+            <!-- Go Back image: only for mobile overlay -->
+            <div class="goback" *ngIf="isOverlayActive" (click)="closeOverlay()">
+                <img src="assets/icons/icon-go-back.png" alt="Go back" />
+            </div>
+        </div>
+
+        <!-- Create Contact Component -->
+        <app-create-contact #createContact></app-create-contact>
     </div>
 </section>

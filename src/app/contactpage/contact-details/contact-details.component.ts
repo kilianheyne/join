@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-contact-details',
@@ -7,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrl: './contact-details.component.scss'
 })
 export class ContactDetailsComponent {
+  @Input() contact: any;
+
+  @Input() isVisible: boolean = false;
 
 }
