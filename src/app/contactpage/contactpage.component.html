@@ -1,7 +1,7 @@
 <section id="contacts">
     <div class="content">
         <div class="contactlist">
-            <button class="add-button">
+            <button (click)="openCreateContactForm()" class="add-button">
                 <span>Add new contact</span>
                 <img src="assets/icons/icon-add-contact.png">
             </button>
@@ -32,5 +32,8 @@
 
             <app-contact-details></app-contact-details>
         </div>
+      <app-create-contact #createContact></app-create-contact>
+      
     </div>
 </section>
+

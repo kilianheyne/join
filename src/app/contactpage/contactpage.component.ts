@@ -1,14 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { CreateContactComponent } from "./create-contact/create-contact.component";
 import { Contacts } from '../shared/interfaces/contacts';
 import { ContactDetailsComponent } from "./contact-details/contact-details.component";
 
 @Component({
   selector: 'app-contactpage',
-  imports: [ContactDetailsComponent],
+  imports: [ContactDetailsComponent, CreateContactComponent],
   templateUrl: './contactpage.component.html',
   styleUrl: './contactpage.component.scss'
 })
+
 export class ContactpageComponent {
+
+  @ViewChild('createContact') private createContact!: CreateContactComponent;
+
   contacts: Array<Contacts> = [
   {
     firstname: 'Liam',
@@ -72,4 +77,7 @@ export class ContactpageComponent {
   }
 ];
 
+  openCreateContactForm() {
+    this.createContact.isVisible = true;
+  }
 }
