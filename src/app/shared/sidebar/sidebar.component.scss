@@ -5,18 +5,43 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding: 64px 0px;
 
     background: #2A3647;
 
-    #menu {
+    .sidebar-top {
         display: flex;
+        justify-content: space-between;
         flex-direction: column;
-        gap: 15px;
+        align-items: center;
+        gap: 100px;
+
         width: 100%;
 
-        a {
+        >img {
+            width: 100px;
+            height: 122px;
+        }
+    }
+
+    #menu {
+        
+
+        .menulinks {
+            display: flex;
+            flex-direction: column;
+            width: auto;
+            gap: 15px;
+        }
+
+        .headerlink {
             width: 100%;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        a {
             height: 46px;
 
             display: flex;
