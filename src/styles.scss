@@ -20,4 +20,13 @@
     scroll-behavior: smooth;
 }
 
+.dFlex {
+    display: flex;
+}
+
+.flexCol {
+    display: flex; 
+    flex-direction: column;
+}
+
 // #endregion
