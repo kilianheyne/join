@@ -15,6 +15,11 @@ section {
     pointer-events: none;
     z-index: 10;
 
+    @media(max-width: 1250px) {
+        align-items: start;
+        padding-top: 50px;
+    }
+
     &.visible {
         opacity: 1;
         pointer-events: auto;
@@ -24,6 +29,12 @@ section {
         display: flex;
         justify-content: center;
         align-items: stretch;
+        margin: 0 20px;
+
+        @media(max-width: 1250px) {
+            flex-direction: column;
+            position: relative;
+        }
 
         >div:first-child {
             display: flex;
@@ -33,8 +44,17 @@ section {
             padding: 150px 48px 200px;
             border-radius: 30px 0 0 30px;
 
+            @media(max-width: 1250px) {
+                border-radius: 30px 30px 0 0;
+                padding: 100px 48px;
+            }
+
             >img {
                 width: 56px;
+
+                @media(max-width: 1250px) {
+                    display: none;
+                }
             }
 
             >h2 {
@@ -42,6 +62,14 @@ section {
                 font-size: 61px;
                 color: white;
                 font-weight: 600;
+
+                @media(max-width: 1250px) {
+                    font-size: 47px;
+                }
+
+                @media(max-width: 430px) {
+                    font-size: 30px;
+                }
             }
 
             >p {
@@ -49,6 +77,14 @@ section {
                 font-size: 27px;
                 color: white;
                 font-weight: 250;
+
+                @media(max-width: 1250px) {
+                    font-size: 20px;
+                }
+
+                @media(max-width: 400px) {
+                    font-size: 14px;
+                }
             }
 
             >span {
@@ -67,8 +103,29 @@ section {
             padding-right: 48px;
             border-radius: 0 30px 30px 0;
 
+            @media(max-width: 1250px) {
+                border-radius: 0 0 30px 30px;
+                flex-direction: column;
+                padding: 80px 15px 40px;
+                position: static;
+            }
+
             >div:first-child {
                 padding: 0 100px;
+
+                @media(max-width: 1250px) {
+                    position: absolute;
+                    top: 250px;
+                    z-index: 10;
+                }
+
+                @media(max-width: 430px) {
+                    top: 230px;
+                }
+
+                @media(max-width: 400px) {
+                    top: 220px;
+                }
 
                 >div {
                     width: 120px;
@@ -80,17 +137,31 @@ section {
                     border: solid 3px white;
                     background: #D1D1D1;
                     box-shadow: 0px 0px 10px 0px #e0e0e0;
+
+                    @media(max-width: 1250px) {
+                        box-shadow: none;
+                    }
                 }
             }
 
             >div:last-child {
                 position: relative;
 
+                @media(max-width: 1250px) {
+                    position: static;
+                }
+
                 >div {
                     position: absolute;
                     top: -70px;
                     right: 0;
                     font-size: 14px;
+
+                    @media(max-width: 1250px) {
+                        top: 30px;
+                        right: 25px;
+                        color: white;
+                    }
 
                     >span {
                         cursor: pointer;
@@ -99,6 +170,10 @@ section {
 
                         &:hover {
                             background-color: hsl(0deg 0% 13% / 8%);
+
+                            @media(max-width: 1250px) {
+                                background-color: hsla(0, 0%, 95%, 0.08);
+                            }
                         }
                     }
                 }
@@ -108,20 +183,42 @@ section {
                     flex-direction: column;
                     gap: 50px;
 
+                    @media(max-width: 1250px) {
+                        gap: 30px;
+                    }
+
                     >div:first-child {
                         display: flex;
                         flex-direction: column;
                         gap: 32px;
+                        width: 340px;
+
+                        @media(max-width: 1250px) {
+                            gap: 15px;
+                        }
+
+                        @media(max-width: 400px) {
+                            width: 265px;
+                        }
                     }
 
                     >div:last-child {
                         display: flex;
                         gap: 24px;
 
-
+                        @media(max-width: 1250px) {
+                            justify-content: center;
+                            align-items: center;
+                        }
                     }
                 }
             }
         }
+    }
+}
+
+app-white-button {
+    @media(max-width: 1250px) {
+        display: none;
     }
 }
