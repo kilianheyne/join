@@ -12,4 +12,6 @@ export class InputComponent {
   @Input() inputId: string = '';
 
   @Input() type: string = 'text';
+
+  @Input() value: string = '';
 }

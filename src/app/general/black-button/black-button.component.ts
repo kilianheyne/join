@@ -13,4 +13,8 @@ export class BlackButtonComponent {
   @Input() icon?: string;
 
   @Input() type: string = 'button'
+
+  @Input() padding: string = '16px'
+
+  @Input() iconFontSize: string = '15px'
 }

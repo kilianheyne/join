@@ -1,10 +1,8 @@
 <section id="contacts">
     <div class="content">
         <div class="contactlist">
-            <button (click)="openCreateContactForm()" class="add-button">
-                <span>Add new contact</span>
-                <img src="assets/icons/icon-add-contact.png" />
-            </button>
+            <app-black-button (click)="openCreateContactForm()" title="Add new contact" icon="icon-person-add"
+                padding="9px 80px 13px" iconFontSize="30px"></app-black-button>
 
             <div class="list">
                 @for (item of contacts; track $index) {
@@ -39,8 +37,8 @@
             </div>
 
             <!-- Contact Details Component -->
-            <app-contact-details [contact]="selectedContact"
-                [isVisible]="isDetailsVisible || isOverlayActive"></app-contact-details>
+            <app-contact-details [contact]="selectedContact" [isVisible]="isDetailsVisible || isOverlayActive"
+                (openEditContactForm)="openEditContactFormINFather()"></app-contact-details>
 
             <!-- Go Back image: only for mobile overlay -->
             <div class="goback" *ngIf="isOverlayActive" (click)="closeOverlay()">
@@ -50,5 +48,8 @@
 
         <!-- Create Contact Component -->
         <app-create-contact #createContact></app-create-contact>
+
+        <!-- Edit Contact Component -->
+        <app-edit-contact #editContact></app-edit-contact>
     </div>
 </section>
