@@ -6,7 +6,7 @@ import { ContactpageComponent } from "./contactpage/contactpage.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, SidebarComponent, ContactpageComponent],
+  imports: [RouterOutlet, ContactpageComponent, HeaderComponent, SidebarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

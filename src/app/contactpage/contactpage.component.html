@@ -1,1 +1,36 @@
-<p>contactpage works!</p>
+<section id="contacts">
+    <div class="content">
+        <div class="contactlist">
+            <button class="add-button">
+                <span>Add new contact</span>
+                <img src="assets/icons/icon-add-contact.png">
+            </button>
+
+            <div class="list">
+                @for (item of contacts; track $index) {
+                <div class="contact">
+                    <div class="contactcircle">XX</div>
+                    <div class="contactright">
+                        <span class="name">{{item.firstname}} {{item.lastname}}</span>
+                        <span class="mail">{{item.email}}</span>
+                    </div>
+                </div>
+
+                }
+
+            </div>
+        </div>
+
+
+
+        <div class="contactinfo">
+            <div class="headline">
+                <h2>Contacts</h2>
+                <div class="blueline"></div>
+                <span>Better with a team</span>
+            </div>
+
+            <app-contact-details></app-contact-details>
+        </div>
+    </div>
+</section>
