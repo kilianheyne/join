@@ -13,6 +13,7 @@ section {
     opacity: 0;
     transition: opacity 200ms ease;
     pointer-events: none;
+    z-index: 10;
 
     &.visible {
         opacity: 1;

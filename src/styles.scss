@@ -6,7 +6,7 @@
     font-family: "Inter";
     src: url("/assets/fonts/inter/Inter-VariableFont_opsz_wght.ttf");
     font-style: normal;
-  font-weight: 400;
+    font-weight: 400;
     /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
@@ -18,7 +18,7 @@
     font-display: swap;
     src: url("/assets/fonts/inter-v19-latin-700.woff2") format("woff2");
 }
- 
+
 
 @font-face {
     font-family: "Inter";
@@ -53,6 +53,10 @@ section {
 h2 {
     font-weight: 700;
     font-size: 61px;
+
+    @media (max-width: 1200px) {
+        font-size: 40px;
+    }
 }
 
 // #region global styles
@@ -63,10 +67,8 @@ h2 {
 }
 
 .flexCol {
-    display: flex; 
+    display: flex;
     flex-direction: column;
 }
 
 // #endregion
-
-

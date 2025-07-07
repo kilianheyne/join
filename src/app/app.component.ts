@@ -3,10 +3,11 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./shared/header/header.component";
 import { SidebarComponent } from "./shared/sidebar/sidebar.component";
 import { ContactpageComponent } from "./contactpage/contactpage.component";
+import { SidebarMobileComponent } from "./shared/sidebar-mobile/sidebar-mobile.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ContactpageComponent, HeaderComponent, SidebarComponent],
+  imports: [RouterOutlet, ContactpageComponent, HeaderComponent, SidebarComponent, SidebarMobileComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
