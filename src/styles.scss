@@ -51,3 +51,18 @@ h2 {
     font-weight: 700;
     font-size: 61px;
 }
+
+// #region global styles
+
+
+.dFlex {
+    display: flex;
+}
+
+.flexCol {
+    display: flex; 
+    flex-direction: column;
+}
+
+// #endregion
+
