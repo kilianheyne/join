@@ -17,6 +17,7 @@ export class ContactpageComponent {
 
   isDetailsVisible = false;
   selectedContact: any = null;
+  isOverlayActive: boolean = false;
 
   contacts: Array<Contacts> = [
     {
@@ -86,8 +87,17 @@ export class ContactpageComponent {
   }
 
   showContactDetails(contact: any) {
-  this.selectedContact = contact;
-  this.isDetailsVisible = true;
-}
+    this.selectedContact = contact;
+
+    if (window.innerWidth <= 945) {
+      this.isOverlayActive = true;
+    } else {
+      this.isDetailsVisible = true;
+    }
+  }
+
+  closeOverlay() {
+    this.isOverlayActive = false;
+  }
 
 }
