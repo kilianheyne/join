@@ -1,7 +1,6 @@
 @use 'styles/variables' as *;
 
 button {
-    padding: 16px;
     border: solid 1px $primaryColor;
     border-radius: 10px;
     background: $primaryColor;
@@ -23,7 +22,10 @@ button {
     }
 
     span {
-        font-size: 15px;
         margin-left: 5px;
+
+        &.icon-person-add::before {
+            vertical-align: middle;
+        }
     }
 }

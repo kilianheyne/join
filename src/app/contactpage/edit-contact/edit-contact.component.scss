@@ -1,0 +1,125 @@
+@use 'styles/variables' as *;
+
+section {
+    background: rgb(0 0 0 / 30%);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 200ms ease;
+    pointer-events: none;
+    z-index: 10;
+
+    &.visible {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    >div {
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+
+        >div:first-child {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            background: $primaryColor;
+            padding: 150px 48px 200px;
+            border-radius: 30px 0 0 30px;
+
+            >img {
+                width: 56px;
+            }
+
+            >h2 {
+                font-family: 'Inter', 'Courier New', Courier, monospace;
+                font-size: 61px;
+                color: white;
+                font-weight: 600;
+            }
+
+            >span {
+                display: inline-block;
+                width: 90px;
+                border-top: solid 3px $lightBlue;
+                border-radius: 15px;
+            }
+        }
+
+        >div:last-child {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            padding-right: 48px;
+            border-radius: 0 30px 30px 0;
+
+            >div:first-child {
+                padding: 0 100px;
+
+                >div {
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border: solid 3px white;
+                    background: #D1D1D1;
+                    box-shadow: 0px 0px 10px 0px #e0e0e0;
+
+                    >span {
+                        color: white;
+                        font-size: 45px;
+                    }
+                }
+            }
+
+            >div:last-child {
+                position: relative;
+
+                >div {
+                    position: absolute;
+                    top: -70px;
+                    right: 0;
+                    font-size: 14px;
+
+                    >span {
+                        cursor: pointer;
+                        padding: 9px 9px 6px;
+                        border-radius: 50%;
+
+                        &:hover {
+                            background-color: hsl(0deg 0% 13% / 8%);
+                        }
+                    }
+                }
+
+                >form {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 50px;
+
+                    >div:first-child {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 32px;
+                    }
+
+                    >div:last-child {
+                        display: flex;
+                        gap: 24px;
+
+
+                    }
+                }
+            }
+        }
+    }
+}

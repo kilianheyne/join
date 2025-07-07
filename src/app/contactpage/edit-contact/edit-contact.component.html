@@ -1,0 +1,34 @@
+<section [class.visible]="isVisible">
+    <div *ngIf="isVisible" @slideInFromRight>
+        <div>
+            <img src="/assets/images/logo/small-logo-white.svg" alt="Logo">
+            <h2>Edit contact</h2>
+            <span></span>
+        </div>
+        <div>
+            <div>
+                <div [ngStyle]="{'background-color': '#FF7A00'}">
+                    <span>AM</span>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <span (click)="closeForm()" class="icon icon-close"></span>
+                </div>
+                <form>
+                    <div>
+                        <app-input placeHolder="Name" inputId="name" value="Anton Mayer"></app-input>
+
+                        <app-input placeHolder="Email" inputId="email" type="email" value="antom@gmail.com"></app-input>
+
+                        <app-input placeHolder="Phone" inputId="phone" value="+49 1111 11111"></app-input>
+                    </div>
+                    <div>
+                        <app-white-button title="Delete" padding="15px 25px"></app-white-button>
+                        <app-black-button title="Save" icon="icon-check" type="submit"></app-black-button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
