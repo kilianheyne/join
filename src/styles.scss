@@ -1,10 +1,24 @@
 @use 'styles/icons' as *;
 
 @font-face {
+    font-display: swap;
+    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
     font-family: "Inter";
     src: url("/assets/fonts/inter/Inter-VariableFont_opsz_wght.ttf");
     font-style: normal;
+  font-weight: 400;
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+
+@font-face {
+    font-display: swap;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("/assets/fonts/inter-v19-latin-700.woff2") format("woff2");
+}
+ 
 
 @font-face {
     font-family: "Inter";
@@ -13,7 +27,49 @@
 }
 
 * {
+    position: relative;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: "Inter";
+    text-decoration: none;
+    font-family: Inter;
 }
+
+html {
+    background-color: #f6f7f8;
+}
+
+section {
+    .content {
+        width: 90%;
+        _max-width: calc(100% - 232px);
+        height: 100%;
+        min-height: calc(100dvh - 96px);
+        padding: 40px;
+        display: flex;
+        justify-content: center;
+        max-width: 1920px;
+    }
+}
+
+h2 {
+    font-weight: 700;
+    font-size: 61px;
+}
+
+// #region global styles
+
+
+.dFlex {
+    display: flex;
+}
+
+.flexCol {
+    display: flex; 
+    flex-direction: column;
+}
+
+// #endregion
+
+
