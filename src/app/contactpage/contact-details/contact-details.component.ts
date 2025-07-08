@@ -17,4 +17,5 @@ export class ContactDetailsComponent {
   openEditForm() {
     this.openEditContactForm.emit();
   }
+  
 }

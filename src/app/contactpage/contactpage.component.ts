@@ -96,12 +96,7 @@ export class ContactpageComponent {
 
   showContactDetails(contact: any) {
     this.selectedContact = contact;
-
-    if (window.innerWidth <= 945) {
-      this.isOverlayActive = true;
-    } else {
-      this.isDetailsVisible = true;
-    }
+    this.isDetailsVisible = true;
   }
 
   closeOverlay() {
