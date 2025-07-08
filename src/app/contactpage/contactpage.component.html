@@ -36,13 +36,11 @@
         class="contactinfo"
         [class.visible]="isOverlayActive || isDetailsVisible"
     >
-         <div class="goback "  *ngIf="!isOverlayActive" >
-            <img (click)="closeOverlay()" src="assets/icons/icon-go-back.png" alt="Go back" />
+        <div class="goback ">
+            <img *ngIf="!isOverlayActive"  (click)="closeOverlay()" src="assets/icons/icon-go-back.png" alt="Go back" />
         </div>
         
         <div class="headline" *ngIf="!isOverlayActive">
-
-           
             <h2>Contacts</h2>
             <div class="blueline"></div>
             <span>Better with a team</span>

@@ -100,7 +100,7 @@ export class ContactpageComponent {
   }
 
   closeOverlay() {
-    this.isOverlayActive = false;
+    this.isDetailsVisible = !this.isDetailsVisible;
   }
 
 }

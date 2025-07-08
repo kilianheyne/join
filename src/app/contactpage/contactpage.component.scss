@@ -339,12 +339,13 @@
 
         .goback {
             position: absolute;
+            display: none;
             z-index: 20;
-            top: 50px;
-            right: 50px;
+            top: 120px;
+            right: 300px;
 
-            @media (min-width: 945px) {
-                display: none;
+            @media (max-width: 945px) {
+                display: flex;
             }
 
             &:hover {
