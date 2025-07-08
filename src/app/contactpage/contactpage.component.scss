@@ -25,10 +25,12 @@
             width: 100%;
             padding-left: 30px;
             align-items: flex-start;
+             z-index: 0;
         }
 
         @media (max-width: 820px) {
             padding-left: 10px;
+           
         }
 
         @media (max-width: 411px) {
