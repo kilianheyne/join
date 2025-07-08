@@ -14,7 +14,9 @@
     gap: 50px;
     z-index: 10;
 
-    
+    @media (max-width: 428px) {
+        gap: 21px;
+    }
 
     &.visible {
         transform: translateX(0);
@@ -32,13 +34,12 @@
             gap: 20px;
         }
 
-
-
         .circle {
             background-color: orange;
             height: 120px;
             width: 120px;
             border-radius: 50%;
+            border: solid 3px white;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -50,7 +51,14 @@
                 width: 80px;
                 font-size: 30px;
             }
-
+            @media (max-width: 640px) {
+                font-size: 27px;
+            }
+            @media (max-width: 370px) {
+                height: 50px;
+                width: 50px;
+                font-size: 18px;
+            }
         }
 
         .top-right {
@@ -65,11 +73,25 @@
                 @media (max-width: 1200px) {
                     font-size: 30px;
                 }
+                @media (max-width: 640px) {
+                    font-weight: 700;
+                    font-size: 36px;
+                }
+                @media (max-width: 428px) {
+                    font-size: 27px;
+                }
+                @media (max-width: 370px) {
+                    font-size: 24px;
+                }
             }
 
             .buttons {
                 display: flex;
                 gap: 20px;
+
+                @media (max-width: 640px) {
+                    display: none;
+                }
 
                 .button-edit {
                     display: flex;

@@ -5,11 +5,10 @@ import { ContactDetailsComponent } from "./contact-details/contact-details.compo
 import { CommonModule } from '@angular/common';
 import { BlackButtonComponent } from "../general/black-button/black-button.component";
 import { EditContactComponent } from './edit-contact/edit-contact.component';
-import { ContactDetailsMobileComponent } from "./contact-details-mobile/contact-details-mobile.component";
 
 @Component({
   selector: 'app-contactpage',
-  imports: [ContactDetailsComponent, CreateContactComponent, CommonModule, BlackButtonComponent, EditContactComponent, ContactDetailsMobileComponent],
+  imports: [ContactDetailsComponent, CreateContactComponent, CommonModule, BlackButtonComponent, EditContactComponent],
   templateUrl: './contactpage.component.html',
   styleUrl: './contactpage.component.scss'
 })
@@ -22,6 +21,7 @@ export class ContactpageComponent {
   isDetailsVisible = false;
   selectedContact: any = null;
   isOverlayActive: boolean = false;
+  isEditVisible:boolean = false;
 
   contacts: Array<Contacts> = [
     {
@@ -103,4 +103,7 @@ export class ContactpageComponent {
     this.isDetailsVisible = !this.isDetailsVisible;
   }
 
+  openEditMenuMobile() {
+    this.isEditVisible = !this.isEditVisible;
+  }
 }

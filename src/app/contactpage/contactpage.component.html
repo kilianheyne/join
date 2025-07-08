@@ -56,9 +56,23 @@
 
         <!-- Go Back image: only for mobile overlay -->
         
-    </div>
+        <div id="mobile-edit-btn" (click)="openEditMenuMobile()">
+          <img src="assets/icons/mobile-edit-menu-btn.png" alt="">
+        </div>
 
-    <!-- <app-contact-details-mobile></app-contact-details-mobile> -->
+        @if (isEditVisible) {
+          <div id="mobile-edit-overlay">
+            <div>
+              <div id="edit-img"></div> <!-- TO-DO: function to open EditContactForm -->
+              <span>Edit</span>
+            </div>
+            <div>
+              <div id="delete-img"></div>
+              <span>Delete</span>
+            </div>
+          </div>
+        }
+    </div>
 
     <!-- Create Contact Component -->
     <app-create-contact #createContact></app-create-contact>
