@@ -1,31 +1,36 @@
 @use 'styles/variables' as *;
 
-button {
-    border: solid 1px $primaryColor;
-    border-radius: 10px;
-    background: $primaryColor;
-    font-size: 20px;
-    font-weight: 300;
-    color: white;
-    cursor: pointer;
-    transition: all 0.2s ease;
+ button {
+            border: none;
+            background-color: #2A3647;
+            color: white;
+            width: 352px;
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            font-weight: bold;
+            font-size: 21px;
+            border-radius: 10px;
 
-    &:hover {
-        border-color: $lightBlue;
-        background: $lightBlue;
-        filter: drop-shadow(0px 2px 3px rgb(0 0 0 / 30%));
-    }
+            @media (max-width: 1010px) {
+                width: auto;
+                padding: 16px 20px;
+            }
 
-    &:active {
-        border-color: #091931;
-        background: #091931;
-    }
+            @media (max-width: 820px) {
+                display: none;
+            }
 
-    span {
-        margin-left: 5px;
+            &:hover {
+                cursor: pointer;
+                background-color: #29ABE2;
+                box-shadow: 0px 5px 0px rgba(202, 202, 202, 0.555);
+            }
 
-        &.icon-person-add::before {
-            vertical-align: middle;
+            img {
+                height: 20px;
+                width: 30px;
+            }
         }
-    }
-}
