@@ -5,10 +5,11 @@ import { ContactDetailsComponent } from "./contact-details/contact-details.compo
 import { CommonModule } from '@angular/common';
 import { BlackButtonComponent } from "../general/black-button/black-button.component";
 import { EditContactComponent } from './edit-contact/edit-contact.component';
+import { ContactDetailsMobileComponent } from "./contact-details-mobile/contact-details-mobile.component";
 
 @Component({
   selector: 'app-contactpage',
-  imports: [ContactDetailsComponent, CreateContactComponent, CommonModule, BlackButtonComponent, EditContactComponent],
+  imports: [ContactDetailsComponent, CreateContactComponent, CommonModule, BlackButtonComponent, EditContactComponent, ContactDetailsMobileComponent],
   templateUrl: './contactpage.component.html',
   styleUrl: './contactpage.component.scss'
 })

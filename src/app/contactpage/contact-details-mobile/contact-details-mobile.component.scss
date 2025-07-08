@@ -1,0 +1,59 @@
+section {
+    
+    #slogan {
+        display: flex; 
+        flex-direction: column; 
+        gap: 16px;
+
+        >span {
+            font-size: 20px;
+        }
+
+        >div {
+            background: #29ABE2;
+            width: 90px;
+            height: 3px;
+        }
+    }
+    #contact-overview {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        >div {
+            width: 80px;
+            height: 80px;
+            background: #FFC700;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border: solid 1px white;
+            border-radius: 100%;
+
+            >span {
+                font-size: 27px;
+                color: white;
+            }
+        }
+
+        h3 {
+            font-weight: 700;
+            font-size: 36px;
+        }
+    }
+    #contact-information {
+        
+    }
+    #edit-menu {
+        
+    }
+
+    #back-btn {
+        
+    }
+    #edit-menu-btn {
+        
+    }
+}

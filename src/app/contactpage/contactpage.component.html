@@ -27,24 +27,28 @@
         </div>
 
         <!-- CONTACT INFO AREA: always visible on desktop, overlay below 945px -->
-        <div class="contactinfo" [class.visible]="isOverlayActive || isDetailsVisible">
-            <!-- Headline only shown on desktop -->
-            <div class="headline" *ngIf="!isOverlayActive">
-                <h2>Contacts</h2>
-                <div class="blueline"></div>
-                <span>Better with a team</span>
-                <div class="blueline-mb"></div>
+        @if (isDetailsVisible) {
+            <div class="contactinfo" [class.visible]="isOverlayActive || isDetailsVisible">
+                <!-- Headline only shown on desktop -->
+                <div class="headline" *ngIf="!isOverlayActive">
+                    <h2>Contacts</h2>
+                    <div class="blueline"></div>
+                    <span>Better with a team</span>
+                    <div class="blueline-mb"></div>
+                </div>
+    
+                <!-- Contact Details Component -->
+                <app-contact-details [contact]="selectedContact" [isVisible]="isDetailsVisible || isOverlayActive"
+                    (openEditContactForm)="openEditContactFormINFather()"></app-contact-details>
+    
+                <!-- Go Back image: only for mobile overlay -->
+                <div class="goback" *ngIf="isOverlayActive" (click)="closeOverlay()">
+                    <img src="assets/icons/icon-go-back.png" alt="Go back" />
+                </div>
             </div>
-
-            <!-- Contact Details Component -->
-            <app-contact-details [contact]="selectedContact" [isVisible]="isDetailsVisible || isOverlayActive"
-                (openEditContactForm)="openEditContactFormINFather()"></app-contact-details>
-
-            <!-- Go Back image: only for mobile overlay -->
-            <div class="goback" *ngIf="isOverlayActive" (click)="closeOverlay()">
-                <img src="assets/icons/icon-go-back.png" alt="Go back" />
-            </div>
-        </div>
+        } @else if (isOverlayActive) {
+            <app-contact-details-mobile></app-contact-details-mobile>
+        }
 
         <!-- Create Contact Component -->
         <app-create-contact #createContact></app-create-contact>
