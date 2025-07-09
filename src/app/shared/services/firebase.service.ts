@@ -25,8 +25,9 @@ export class FirebaseService implements OnDestroy {
     return {
       id: id,
       name: obj.name,
-      phone: obj.phone,
-      email: obj.email
+      email: obj.email,
+      phone: obj.phone
+      
     };
   }
 
@@ -37,8 +38,8 @@ export class FirebaseService implements OnDestroy {
   async updateContactInDatabase(id: string, contact: Contacts) {
     await updateDoc(doc(this.firestore, 'contacts', id), {
       name: contact.name,
-      phone: contact.phone,
-      email: contact.email
+      email: contact.email,
+      phone: contact.phone
     });
   }
 

@@ -16,7 +16,8 @@ import { FirebaseService } from '../shared/services/firebase.service';
 
 export class ContactpageComponent {
 
-  firebaseService = inject(FirebaseService)
+  // #region attributes
+  firebaseService = inject(FirebaseService);
   
   @ViewChild('createContact') private createContact!: CreateContactComponent;
 
@@ -27,6 +28,14 @@ export class ContactpageComponent {
   isOverlayActive: boolean = false;
   isEditVisible:boolean = false;
 
+  backgroundColors: string[] = [
+    '#0038FF', '#00BEE8', '#1FD7C1', '#6E52FF', '#9327FF',
+    '#C3FF2B', '#FC71FF', '#FF4646', '#FF5EB3', '#FF745E',
+    '#FF7A00', '#FFA35E', '#FFBB2B', '#FFC701', '#FFE62B'
+  ]
+  // #endregion
+
+  // #region methods
   openCreateContactForm() {
     this.createContact.isVisible = true;
   }
@@ -59,4 +68,32 @@ export class ContactpageComponent {
     const lastInitial = names[names.length - 1].charAt(0).toUpperCase();
     return firstInitial + lastInitial;
   }
+
+  getBgColorForCircle(name: string) {
+    let cache = 0;
+    for (let i = 0; i < name.length; i++){
+      cache = name.charCodeAt(i) + ((cache << 5) - cache);
+    }
+    const index = Math.abs(cache) % this.backgroundColors.length;
+    return this.backgroundColors[index];
+  }
+
+  sortContactList(): void {
+    this.firebaseService.contactsList.sort((a, b) => 
+      a.name.localeCompare(b.name, 'de', {sensitivity: 'base'})
+    );
+  }
+
+  addNewContact(newContact: Contacts): void {
+    this.firebaseService.addContactToDatabase(newContact);
+    this.sortContactList();
+  }
+
+  handleContactDeleted() {
+    this.isDetailsVisible = false;
+    this.isOverlayActive = false;
+    this.selectedContact = null;
+    this.sortContactList();
+  }
+  // #endregion
 }

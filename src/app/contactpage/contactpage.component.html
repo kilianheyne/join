@@ -13,7 +13,7 @@
         @for (item of firebaseService.contactsList; track $index) {
         <div (click)="showContactDetails(item)" class="contact">
           <div class="contact-mb">
-            <div class="contactcircle">{{ getContactInitials(item.name) }}</div>
+            <div class="contactcircle" [ngStyle]="{ 'background-color': getBgColorForCircle(item.name) }">{{ getContactInitials(item.name) }}</div>
             <div class="contactright">
               <span class="name">{{ item.name }}</span>
               <span class="mail">{{ item.email }}</span>
@@ -55,6 +55,7 @@
         [contact]="selectedContact"
         [isVisible]="isDetailsVisible || isOverlayActive"
         (openEditContactForm)="openEditContactFormINFather()"
+        (contactDeleted)="handleContactDeleted()"
       ></app-contact-details>
 
       <!-- Go Back image: only for mobile overlay -->
@@ -79,7 +80,7 @@
     </div>
 
     <!-- Create Contact Component -->
-    <app-create-contact #createContact></app-create-contact>
+    <app-create-contact #createContact (contactCreated)="addNewContact($event)"></app-create-contact>
 
     <!-- Edit Contact Component -->
     <app-edit-contact #editContact></app-edit-contact>

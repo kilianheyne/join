@@ -8,7 +8,7 @@
         <div>
             <div>
                 <div [ngStyle]="{'background-color': '#FF7A00'}">
-                    <span>AM</span>
+                    <span>{{ getContactInitials(editedContact.name) }}</span>
                 </div>
             </div>
             <div>
@@ -25,7 +25,7 @@
                     </div>
                     <div>
                         <app-white-button title="Delete" padding="15px 25px"></app-white-button>
-                        <app-black-button title="Save" icon="icon-check" type="submit"></app-black-button>
+                        <app-black-button (click)="saveEdit()"  title="Save" icon="icon-check"></app-black-button>
                     </div>
                 </form>
             </div>

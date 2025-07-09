@@ -18,15 +18,13 @@
                 </div>
                 <form>
                     <div>
-                        <app-input placeHolder="Name" inputId="name"></app-input>
-
-                        <app-input placeHolder="Email" inputId="email" type="email"></app-input>
-
-                        <app-input placeHolder="Phone" inputId="phone"></app-input>
+                        <app-input #nameInput placeHolder="Name" inputId="name"></app-input>
+                        <app-input #emailInput placeHolder="Email" inputId="email" type="email"></app-input>
+                        <app-input #phoneInput placeHolder="Phone" inputId="phone"></app-input>
                     </div>
                     <div>
                         <app-white-button title="Cancel" icon="icon-close"></app-white-button>
-                        <app-black-button title="Create contact" icon="icon-check" type="submit" iconFontSize="18px"></app-black-button>
+                        <app-black-button title="Create contact" icon="icon-check" type="submit" iconFontSize="18px" (click)="createContact()"></app-black-button>
                     </div>
                 </form>
             </div>
