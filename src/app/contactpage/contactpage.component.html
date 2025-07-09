@@ -10,12 +10,12 @@
       >
       </app-black-button>
       <div class="list">
-        @for (item of contacts; track $index) {
+        @for (item of firebaseService.contactsList; track $index) {
         <div (click)="showContactDetails(item)" class="contact">
           <div class="contact-mb">
-            <div class="contactcircle">XX</div>
+            <div class="contactcircle">{{ getContactInitials(item.name) }}</div>
             <div class="contactright">
-              <span class="name">{{ item.firstname }} {{ item.lastname }}</span>
+              <span class="name">{{ item.name }}</span>
               <span class="mail">{{ item.email }}</span>
             </div>
           </div>

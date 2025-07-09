@@ -9,43 +9,41 @@ export class FirebaseService implements OnDestroy {
 
   firestore = inject(Firestore);
   unsubscribe: () => void;
-  contatctsList: Contacts[] = [];
-
+  contactsList: Contacts[] = [];
+  
   constructor() {
-    this.unsubscribe = onSnapshot(collection(this.firestore, 'contact'), (contact) => {
-      this.contatctsList = [];
+    this.unsubscribe = onSnapshot(collection(this.firestore, 'contacts'), (contact) => {
+      this.contactsList = [];
       contact.forEach((element) => {
-        this.contatctsList.push(this.setContactObject(element.id, element.data()));
+        this.contactsList.push(this.setContactObject(element.id, element.data()));
       });
-      console.log(this.contatctsList);
+      console.log(this.contactsList);
     });
   }
 
   setContactObject(id: string, obj: any): Contacts {
     return {
       id: id,
-      firstname: obj.firstname,
-      lastname: obj.lastname,
+      name: obj.name,
       phone: obj.phone,
       email: obj.email
     };
   }
 
   async addContactToDatabase(contact: Contacts) {
-    await addDoc(collection(this.firestore, 'contact'), contact);
+    await addDoc(collection(this.firestore, 'contacts'), contact);
   }
 
   async updateContactInDatabase(id: string, contact: Contacts) {
-    await updateDoc(doc(this.firestore, 'contact', id), {
-      firstname: contact.firstname,
-      lastname: contact.lastname,
+    await updateDoc(doc(this.firestore, 'contacts', id), {
+      name: contact.name,
       phone: contact.phone,
       email: contact.email
     });
   }
 
   async deleteContactFromDatabase(id: string) {
-    await deleteDoc(doc(this.firestore, 'contact', id));
+    await deleteDoc(doc(this.firestore, 'contacts', id));
   }
 
   ngOnDestroy() {
