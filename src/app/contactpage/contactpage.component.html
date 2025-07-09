@@ -8,9 +8,22 @@
         padding="9px 80px 13px"
         iconFontSize="30px"
       ></app-black-button>
+            <div class="list">
+                @for (item of contacts; track $index) {
 
-      <div class="list">
-        @for (item of contacts; track $index) {
+                <div (click)="showContactDetails(item)" class="contact">
+                    <div class="contact-mb">
+                        <div class="contactcircle">XX</div>
+                        <div class="contactright">
+                            <span class="name">{{ item.firstname }} {{ item.lastname }}</span>
+                            <span class="mail">{{ item.email }}</span>
+                        </div>
+
+                    </div>
+                    <span class="mail-mb">{{ item.email }}</span>
+                </div>
+                }
+            </div>
 
         <div (click)="showContactDetails(item)" class="contact">
           <div class="contact-mb">
