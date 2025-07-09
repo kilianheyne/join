@@ -1,9 +1,13 @@
 <section id="contacts">
-    <div class="content">
-        <div class="contactlist">
-            <app-black-button (click)="openCreateContactForm()" title="Add new contact" icon="icon-person-add"
-                padding="5px 75px 6px" iconFontSize="30px" gap="20px"></app-black-button>
-
+  <div class="content">
+    <div class="contactlist">
+      <app-black-button
+        (click)="openCreateContactForm()"
+        title="Add new contact"
+        icon="icon-person-add"
+        padding="9px 80px 13px"
+        iconFontSize="30px"
+      ></app-black-button>
             <div class="list">
                 @for (item of contacts; track $index) {
 
@@ -21,35 +25,72 @@
                 }
             </div>
 
-            <div (click)="openCreateContactForm()" class="show-info">
-                <img src="assets/icons/icon-add-person.png" alt="" />
+        <div (click)="showContactDetails(item)" class="contact">
+          <div class="contact-mb">
+            <div class="contactcircle">XX</div>
+            <div class="contactright">
+              <span class="name">{{ item.firstname }} {{ item.lastname }}</span>
+              <span class="mail">{{ item.email }}</span>
             </div>
+          </div>
+          <span class="mail-mb">{{ item.email }}</span>
         </div>
+        }
+      </div>
 
-        <!-- CONTACT INFO AREA: always visible on desktop, overlay below 945px -->
-        <div class="contactinfo" [class.visible]="isOverlayActive || isDetailsVisible">
-            <!-- Headline only shown on desktop -->
-            <div class="headline" *ngIf="!isOverlayActive">
-                <h2>Contacts</h2>
-                <div class="blueline"></div>
-                <span>Better with a team</span>
-                <div class="blueline-mb"></div>
-            </div>
-
-            <!-- Contact Details Component -->
-            <app-contact-details [contact]="selectedContact" [isVisible]="isDetailsVisible || isOverlayActive"
-                (openEditContactForm)="openEditContactFormINFather()"></app-contact-details>
-
-            <!-- Go Back image: only for mobile overlay -->
-            <div class="goback" *ngIf="isOverlayActive" (click)="closeOverlay()">
-                <img src="assets/icons/icon-go-back.png" alt="Go back" />
-            </div>
-        </div>
-
-        <!-- Create Contact Component -->
-        <app-create-contact #createContact></app-create-contact>
-
-        <!-- Edit Contact Component -->
-        <app-edit-contact #editContact></app-edit-contact>
+      <div (click)="openCreateContactForm()" class="show-info">
+        <img src="assets/icons/icon-add-person.png" alt="" />
+      </div>
     </div>
+
+    <!-- CONTACT INFO AREA: always visible on desktop, overlay below 945px -->
+
+    <div
+        class="contactinfo"
+        [class.visible]="isOverlayActive || isDetailsVisible"
+    >
+        <div class="goback ">
+            <img *ngIf="!isOverlayActive"  (click)="closeOverlay()" src="assets/icons/icon-go-back.png" alt="Go back" />
+        </div>
+        
+        <div class="headline" *ngIf="!isOverlayActive">
+            <h2>Contacts</h2>
+            <div class="blueline"></div>
+            <span>Better with a team</span>
+            <div class="blueline-mb"></div>
+        </div>
+
+        <!-- Contact Details Component -->
+        <app-contact-details
+            [contact]="selectedContact"
+            [isVisible]="isDetailsVisible || isOverlayActive"
+            (openEditContactForm)="openEditContactFormINFather()"
+        ></app-contact-details>
+
+        <!-- Go Back image: only for mobile overlay -->
+        
+        <div id="mobile-edit-btn" (click)="openEditMenuMobile()">
+          <img src="assets/icons/mobile-edit-menu-btn.png" alt="">
+        </div>
+
+        @if (isEditVisible) {
+          <div id="mobile-edit-overlay">
+            <div>
+              <div id="edit-img"></div> <!-- TO-DO: function to open EditContactForm -->
+              <span>Edit</span>
+            </div>
+            <div>
+              <div id="delete-img"></div>
+              <span>Delete</span>
+            </div>
+          </div>
+        }
+    </div>
+
+    <!-- Create Contact Component -->
+    <app-create-contact #createContact></app-create-contact>
+
+    <!-- Edit Contact Component -->
+    <app-edit-contact #editContact></app-edit-contact>
+  </div>
 </section>

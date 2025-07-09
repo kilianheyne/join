@@ -4,35 +4,37 @@
     overflow-x: hidden;
 
     .content {
+    display: flex;
+
+    .contactlist {
+        height: 100%;
+        max-height: calc(100dvh - 96px);
+        width: 30%;
+        background-color: white;
         display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        z-index: 2;
+        box-shadow: 5px 1px 1px rgba(202, 202, 202, 0.171);
+        border-top: solid 2px rgba(202, 202, 202, 0.171);
+        padding: 30px 0px 10px 0px;
 
-        .contactlist {
-            height: 100%;
-            max-height: calc(100dvh - 96px);
-            width: 30%;
-            background-color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            z-index: 2;
-            box-shadow: 5px 1px 1px rgba(202, 202, 202, 0.171);
-            border-top: solid 2px rgba(202, 202, 202, 0.171);
-            padding: 30px 0px 10px 0px;
+        @media (max-width: 1470px) {
+            width: 50%;
+        }
 
-            @media (max-width: 1470px) {
-                width: 50%;
-            }
+        @media (max-width: 945px) {
+            width: 100%;
+            padding-left: 30px;
+            align-items: flex-start;
+             z-index: 0;
+        }
 
-            @media (max-width: 945px) {
-                width: 100%;
-                padding-left: 30px;
-                align-items: flex-start;
-            }
-
-            @media (max-width: 820px) {
-                padding-left: 10px;
-            }
+        @media (max-width: 820px) {
+            padding-left: 10px;
+           
+        }
 
             @media (max-width: 411px) {
                 padding-left: 0px;
@@ -258,10 +260,10 @@
 
         @media (max-width: 1000px) {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
+            top: 96px;
+            left: 232px;
+            width: calc(100% - 232px);
+            height: calc(100vh - 96px);
             z-index: 100;
             transform: translateX(100%);
             opacity: 0;
@@ -272,6 +274,17 @@
                 opacity: 1;
                 pointer-events: auto;
             }
+        }
+
+        @media (max-width: 820px){
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 96px - 96px);
+        }
+
+        @media (max-width: 640px){
+            top: 80px;
+            height: calc(100vh - 80px - 80px);
         }
 
         .headline {
@@ -345,26 +358,129 @@
                     font-size: 27px;
                     display: flex;
                     align-items: center;
-
-                    @media (max-width: 1200px) {
-                        font-size: 20px;
-                    }
-
-                }
             }
 
             .goback {
-                position: absolute;
-                z-index: 20;
-                top: 50px;
-                right: 50px;
+            position: absolute;
+            display: none;
+            z-index: 20;
+            top: 50px;
+            right: 50px;
+              
+            @media (max-width: 1200px) {
+                        font-size: 20px;
+                    }
 
-                @media (min-width: 945px) {
-                    display: none;
+            @media (max-width: 945px) {
+                display: flex;
                 }
+              
 
                 &:hover {
                     cursor: pointer;
+                }
+            }
+        }
+
+        #mobile-edit-btn {
+            position: absolute; 
+            bottom: 28px;
+            right: 14px; 
+
+            display: none; 
+            justify-content: center;
+            align-items: center;
+
+            width: 56px; 
+            height: 56px;
+
+            border: 1px solid #2A3647;
+            border-radius: 100%;
+
+            background: #2A3647;
+
+            box-shadow: 0 4px 4px #00000040;
+
+            cursor: pointer;
+
+            @media (max-width: 640px) {
+                display: flex;
+            }
+
+            &:active {
+                background: #29ABE2;
+                border: 1px solid #29ABE2;
+            }
+        }
+
+        #mobile-edit-overlay {
+            position: absolute; 
+            bottom: 14px;
+            right: 14px;
+            width: 116px;
+            height: 100px;
+            padding: 10px;
+
+            display: none; 
+            flex-direction: column; 
+            justify-content: center;
+            align-items: start;
+
+            background: white;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            border-bottom-left-radius: 20px;
+
+            box-shadow: 0 4px 4px #00000040;
+
+            @media (max-width: 640px) {
+                display: flex;
+            }
+
+            div {
+                display: flex; 
+                align-items: center;
+                width: 100%;
+                gap: 8px;
+                padding: 8px;
+                cursor: pointer;
+
+                &:active {
+                    color: #29ABE2;
+                    font-weight: bold;
+                    background: #ededed;
+                    border-radius: 8px;
+
+                    #edit-img {
+                        background: url(../../../public/assets/icons/icon-edit-blue.png);
+                        background-repeat: no-repeat;
+                        background-size: contain;
+                        background-position: center;
+                    }
+                    #delete-img {
+                        background: url(../../../public/assets/icons/icon-delete-blue.png);
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                        background-position: center;
+                    }
+                }
+
+                #edit-img {
+                    width: 24px;
+                    height: 24px;
+                    background: url(../../../public/assets/icons/icon-edit.png);
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    background-position: center;
+                }
+
+                #delete-img {
+                    width: 24px;
+                    height: 24px;
+                    background: url(../../../public/assets/icons/icon-delete.png);
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    background-position: center;
                 }
             }
         }
