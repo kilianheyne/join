@@ -16,5 +16,7 @@ export class BlackButtonComponent {
 
   @Input() padding: string = '16px'
 
+  @Input() gap: string = '10px'
+
   @Input() iconFontSize: string = '15px'
 }
