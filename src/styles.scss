@@ -71,4 +71,13 @@ h2 {
     flex-direction: column;
 }
 
+.contentRestriction{
+    width: 100%;
+    max-width: 1920px;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+}
 // #endregion
