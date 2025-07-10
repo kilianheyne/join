@@ -1,24 +1,17 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { EditContactComponent } from "../edit-contact/edit-contact.component";
 import { FirebaseService } from '../../shared/services/firebase.service';
+import { getContactInitials } from '../../utils/helpers';
 
 @Component({
   selector: 'app-contact-details',
-  imports: [EditContactComponent],
+  imports: [],
   templateUrl: './contact-details.component.html',
   styleUrl: './contact-details.component.scss'
 })
 export class ContactDetailsComponent {
 
   firebaseService = inject(FirebaseService)
-  isEdited = false;
-  selectedContactIndex: number | null = null;
   contactId?: string = '';
-  editedContact = {
-    name: '',
-    email: '',
-    phone: ''    
-  };
   
   @Input() contact: any;
 
@@ -33,15 +26,7 @@ export class ContactDetailsComponent {
   }
 
   getContactInitials(fullName: string) {
-    const names = fullName.trim().split(' ');
-
-    if (names.length === 1) {
-      return names[0].charAt(0).toUpperCase();
-    }
-
-    const firstInitial = names[0].charAt(0).toUpperCase();
-    const lastInitial = names[names.length - 1].charAt(0).toUpperCase();
-    return firstInitial + lastInitial;
+    return getContactInitials(fullName);
   }
 
   deleteContact(contactId: string) {
