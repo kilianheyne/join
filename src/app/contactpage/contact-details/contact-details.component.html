@@ -3,16 +3,16 @@
 <div class="contact-details" [class.visible]="isVisible">
     <div class="detail-top">
         <div class="circle">
-            XX
+            {{ getContactInitials(contact.name) }}
         </div>
         <div class="top-right">
-            <h3>Anton Mayer</h3>
+            <h3>{{ contact.name }}</h3>
             <div class="buttons">
                 <button class="button-edit">
                     <div class="icon-edit"></div>
                     <span (click)="openEditForm()">Edit</span>
                 </button>
-                <button class="button-delete">
+                <button class="button-delete" (click)="deleteContact(contact.id)">
                     <div class="icon-delete"></div>
                     <span>Delete</span>
                 </button>
@@ -22,9 +22,9 @@
     <h4>Contact Information</h4>
     <div class="details">
         <h5>Email</h5>
-        <span class="mail">beispielmail&amp;example.com</span>
+        <span class="mail">{{contact.email}}</span>
         <h5>Phone</h5>
-        <span class="phone">+49 000000000</span>
+        <span class="phone">{{contact.phone}}</span>
     </div>
 </div>
 </section>

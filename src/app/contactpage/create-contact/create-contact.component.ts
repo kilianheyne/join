@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WhiteButtonComponent } from "../../general/white-button/white-button.component";
 import { BlackButtonComponent } from '../../general/black-button/black-button.component';
@@ -32,6 +32,22 @@ import {
 })
 export class CreateContactComponent {
   @Input() isVisible = false;
+
+  @ViewChild('nameInput') nameInput!: InputComponent;
+  @ViewChild('emailInput') emailInput!: InputComponent;
+  @ViewChild('phoneInput') phoneInput!: InputComponent;
+
+  @Output() contactCreated = new EventEmitter<any>();
+
+  createContact() {
+    const name = this.nameInput.value;
+    const email = this.emailInput.value;
+    const phone = this.phoneInput.value;
+
+    const newContact = {name, email, phone};
+    this.contactCreated.emit(newContact);
+    this.closeForm();
+  }
 
   closeForm() {
     this.isVisible = false;

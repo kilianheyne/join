@@ -1,10 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { CreateContactComponent } from "./create-contact/create-contact.component";
 import { Contacts } from '../shared/interfaces/contacts';
 import { ContactDetailsComponent } from "./contact-details/contact-details.component";
 import { CommonModule } from '@angular/common';
 import { BlackButtonComponent } from "../general/black-button/black-button.component";
 import { EditContactComponent } from './edit-contact/edit-contact.component';
+import { FirebaseService } from '../shared/services/firebase.service';
 
 @Component({
   selector: 'app-contactpage',
@@ -14,6 +15,10 @@ import { EditContactComponent } from './edit-contact/edit-contact.component';
 })
 
 export class ContactpageComponent {
+
+  // #region attributes
+  firebaseService = inject(FirebaseService);
+  
   @ViewChild('createContact') private createContact!: CreateContactComponent;
 
   @ViewChild('editContact') private editContact!: EditContactComponent;
@@ -23,69 +28,14 @@ export class ContactpageComponent {
   isOverlayActive: boolean = false;
   isEditVisible:boolean = false;
 
-  contacts: Array<Contacts> = [
-    {
-      firstname: 'Liam',
-      lastname: 'Walker',
-      phone: '+1-202-555-0143',
-      email: 'liam.walker@example.com'
-    },
-    {
-      firstname: 'Sofia',
-      lastname: 'Martinez',
-      phone: '+44-7900-123456',
-      email: 'sofia.martinez@example.co.uk'
-    },
-    {
-      firstname: 'Noah',
-      lastname: 'Kim',
-      phone: '+49-151-12345678',
-      email: 'noah.kim@example.de'
-    },
-    {
-      firstname: 'Emily',
-      lastname: 'Dubois',
-      phone: '+33-6-12-34-56-78',
-      email: 'emily.dubois@example.fr'
-    },
-    {
-      firstname: 'Mateo',
-      lastname: 'Silva',
-      phone: '+34-612-345-678',
-      email: 'mateo.silva@example.es'
-    },
-    {
-      firstname: 'Ava',
-      lastname: 'Nguyen',
-      phone: '+61-412-345-678',
-      email: 'ava.nguyen@example.com.au'
-    },
-    {
-      firstname: 'Lucas',
-      lastname: 'Schneider',
-      phone: '+49-160-98765432',
-      email: 'lucas.schneider@example.de'
-    },
-    {
-      firstname: 'Isabella',
-      lastname: 'Rossi',
-      phone: '+39-320-123-4567',
-      email: 'isabella.rossi@example.it'
-    },
-    {
-      firstname: 'Oliver',
-      lastname: 'Chen',
-      phone: '+86-138-00138000',
-      email: 'oliver.chen@example.cn'
-    },
-    {
-      firstname: 'Chloe',
-      lastname: 'Peterson',
-      phone: '+1-303-555-0187',
-      email: 'chloe.peterson@example.com'
-    }
-  ];
+  backgroundColors: string[] = [
+    '#0038FF', '#00BEE8', '#1FD7C1', '#6E52FF', '#9327FF',
+    '#C3FF2B', '#FC71FF', '#FF4646', '#FF5EB3', '#FF745E',
+    '#FF7A00', '#FFA35E', '#FFBB2B', '#FFC701', '#FFE62B'
+  ]
+  // #endregion
 
+  // #region methods
   openCreateContactForm() {
     this.createContact.isVisible = true;
   }
@@ -106,4 +56,44 @@ export class ContactpageComponent {
   openEditMenuMobile() {
     this.isEditVisible = !this.isEditVisible;
   }
+
+  getContactInitials(fullName: string) {
+    const names = fullName.trim().split(' ');
+
+    if (names.length === 1) {
+      return names[0].charAt(0).toUpperCase();
+    }
+
+    const firstInitial = names[0].charAt(0).toUpperCase();
+    const lastInitial = names[names.length - 1].charAt(0).toUpperCase();
+    return firstInitial + lastInitial;
+  }
+
+  getBgColorForCircle(name: string) {
+    let cache = 0;
+    for (let i = 0; i < name.length; i++){
+      cache = name.charCodeAt(i) + ((cache << 5) - cache);
+    }
+    const index = Math.abs(cache) % this.backgroundColors.length;
+    return this.backgroundColors[index];
+  }
+
+  sortContactList(): void {
+    this.firebaseService.contactsList.sort((a, b) => 
+      a.name.localeCompare(b.name, 'de', {sensitivity: 'base'})
+    );
+  }
+
+  addNewContact(newContact: Contacts): void {
+    this.firebaseService.addContactToDatabase(newContact);
+    this.sortContactList();
+  }
+
+  handleContactDeleted() {
+    this.isDetailsVisible = false;
+    this.isOverlayActive = false;
+    this.selectedContact = null;
+    this.sortContactList();
+  }
+  // #endregion
 }

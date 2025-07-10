@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-input',
@@ -8,10 +8,12 @@ import { Component, Input } from '@angular/core';
 })
 export class InputComponent {
   @Input() placeHolder: string = '';
-
   @Input() inputId: string = '';
-
   @Input() type: string = 'text';
 
-  @Input() value: string = '';
+  @ViewChild('inputElement') inputRef!: ElementRef<HTMLInputElement>;
+
+  get value(): string {
+    return this.inputRef.nativeElement.value;
+  }
 }
