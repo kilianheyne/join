@@ -64,8 +64,8 @@
 
       <!-- Contact Details Component -->
       <app-contact-details [contact]="selectedContact" [isVisible]="isDetailsVisible || isOverlayActive"
-        (openEditContactForm)="openEditContactFormINFather()"
-        (contactDeleted)="handleContactDeleted()"></app-contact-details>
+        (openEditContactForm)="openEditContactForm(selectedContact.id)"
+        (contactDeleted)="showDeleteContactNotification()"></app-contact-details>
 
       <!-- Go Back image: only for mobile overlay -->
 
@@ -89,9 +89,12 @@
     </div>
 
     <!-- Create Contact Component -->
-    <app-create-contact #createContact (contactCreated)="addNewContact($event)"></app-create-contact>
+    <app-create-contact #createContact (contactCreated)="showCreateContactNotification()"></app-create-contact>
 
     <!-- Edit Contact Component -->
-    <app-edit-contact #editContact></app-edit-contact>
+    <app-edit-contact #editContact (contactUpdated)="showUpdateContactNotification()" (contactDeleted)="showDeleteContactNotification()"></app-edit-contact>
+
+    <!-- Contact page notification Component -->
+    <app-contact-page-notification #contactPageNotification></app-contact-page-notification>
   </div>
 </section>

@@ -1,19 +1,20 @@
-import { Component, Input, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WhiteButtonComponent } from "../../general/white-button/white-button.component";
 import { BlackButtonComponent } from '../../general/black-button/black-button.component';
-import { InputComponent } from "../../general/input/input.component";
+import { FormsModule, NgForm } from '@angular/forms';
 import {
   trigger,
-  state,
   style,
   animate,
   transition
 } from '@angular/animations';
+import { Contact } from '../../shared/interfaces/contact';
+import { FirebaseService } from '../../shared/services/firebase.service';
 
 @Component({
   selector: 'app-create-contact',
-  imports: [CommonModule, WhiteButtonComponent, BlackButtonComponent, InputComponent],
+  imports: [CommonModule, FormsModule, WhiteButtonComponent, BlackButtonComponent],
   templateUrl: './create-contact.component.html',
   styleUrl: './create-contact.component.scss',
   animations: [
@@ -31,21 +32,29 @@ import {
   ]
 })
 export class CreateContactComponent {
+  firebaseService = inject(FirebaseService)
+
   @Input() isVisible = false;
 
-  @ViewChild('nameInput') nameInput!: InputComponent;
-  @ViewChild('emailInput') emailInput!: InputComponent;
-  @ViewChild('phoneInput') phoneInput!: InputComponent;
+  @Output() contactCreated = new EventEmitter();
 
-  @Output() contactCreated = new EventEmitter<any>();
+  contactFormData: Contact = {
+    name: '',
+    email: '',
+    phone: '',
+  }
 
-  createContact() {
-    const name = this.nameInput.value;
-    const email = this.emailInput.value;
-    const phone = this.phoneInput.value;
+  createContact(createContactForm: NgForm) {
+    if (createContactForm.valid && createContactForm.submitted) {
+      this.firebaseService.addContactToDatabase(this.contactFormData);
+      createContactForm.resetForm();
+      this.closeForm();
+      this.contactCreated.emit();
+    }
+  }
 
-    const newContact = {name, email, phone};
-    this.contactCreated.emit(newContact);
+  cancelForm(createContactForm: NgForm) {
+    createContactForm.resetForm();
     this.closeForm();
   }
 

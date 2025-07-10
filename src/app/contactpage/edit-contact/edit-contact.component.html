@@ -8,24 +8,33 @@
         <div>
             <div>
                 <div [ngStyle]="{'background-color': '#FF7A00'}">
-                    <span>{{ getContactInitials(editedContact.name) }}</span>
+                    <span>{{ getContactInitials(contactFormData.name) }}</span>
                 </div>
             </div>
             <div>
                 <div>
                     <span (click)="closeForm()" class="icon icon-close"></span>
                 </div>
-                <form>
+                <form (ngSubmit)="editContact(editContactForm)" #editContactForm="ngForm">
                     <div>
-                        <app-input placeHolder="Name" inputId="name" value="Anton Mayer"></app-input>
+                        <label class="form-label" for="name">
+                            <input [class.error]="!name.valid && (name.touched || editContactForm.submitted)" #name="ngModel" type="text" placeholder="Name" id="name" name="name" [(ngModel)]="contactFormData.name" required>
+                            <span *ngIf="!name.valid && (name.touched || editContactForm.submitted)">Please Enter name & surname.</span>
+                        </label>
 
-                        <app-input placeHolder="Email" inputId="email" type="email" value="antom@gmail.com"></app-input>
+                        <label class="form-label" for="email">
+                            <input [class.error]="!email.valid && (email.touched || editContactForm.submitted)" #email="ngModel" type="email" placeholder="Email" id="email" name="email" [(ngModel)]="contactFormData.email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" required>
+                            <span *ngIf="!email.valid && (email.touched || editContactForm.submitted)">Please Enter a valid email address.</span>
+                        </label>
 
-                        <app-input placeHolder="Phone" inputId="phone" value="+49 1111 11111"></app-input>
+                        <label class="form-label" for="phone">
+                            <input [class.error]="!phone.valid && (phone.touched || editContactForm.submitted)" #phone="ngModel" type="tel" placeholder="Phone" id="phone" name="phone" [(ngModel)]="contactFormData.phone" pattern="^\+?[0-9]*$" required>
+                            <span *ngIf="!phone.valid && (phone.touched || editContactForm.submitted)">Please Enter a valid email address.</span>
+                        </label>
                     </div>
                     <div>
-                        <app-white-button title="Delete" padding="15px 25px"></app-white-button>
-                        <app-black-button (click)="saveEdit()"  title="Save" icon="icon-check"></app-black-button>
+                        <app-white-button title="Delete" padding="15px 25px" (click)="deleteContact(contactFormData.id ?? '')"></app-white-button>
+                        <app-black-button title="Save" icon="icon-check" type="submit"></app-black-button>
                     </div>
                 </form>
             </div>
