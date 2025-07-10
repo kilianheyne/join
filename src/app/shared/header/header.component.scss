@@ -110,5 +110,45 @@ header {
                 background: #0C2E621F;
             }
         }
+
+        #user-menu {
+            position: absolute; 
+            top: 76px;
+            right: 14px;
+
+            padding: 10px;
+            background: #2A3647;
+            border-top-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            border-bottom-left-radius: 20px;
+
+            box-shadow: 0 0 4px #0000001A;
+
+            @media (max-width: 640px) {
+                top: 60px;
+            }
+
+            ul {
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+
+                li {
+                    padding: 8px 16px;
+                    width: 100%;
+
+                    &:hover {
+                        background: #2A3D59;
+                        border-radius: 4px;
+                    }
+
+                    a {
+                        color: #CDCDCD;
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
     }
 }
