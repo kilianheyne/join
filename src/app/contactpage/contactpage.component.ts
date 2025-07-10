@@ -18,7 +18,7 @@ export class ContactpageComponent {
 
   // #region attributes
   firebaseService = inject(FirebaseService);
-  
+
   @ViewChild('createContact') private createContact!: CreateContactComponent;
 
   @ViewChild('editContact') private editContact!: EditContactComponent;
@@ -26,7 +26,7 @@ export class ContactpageComponent {
   isDetailsVisible = false;
   selectedContact: any = null;
   isOverlayActive: boolean = false;
-  isEditVisible:boolean = false;
+  isEditVisible: boolean = false;
 
   backgroundColors: string[] = [
     '#0038FF', '#00BEE8', '#1FD7C1', '#6E52FF', '#9327FF',
@@ -71,7 +71,7 @@ export class ContactpageComponent {
 
   getBgColorForCircle(name: string) {
     let cache = 0;
-    for (let i = 0; i < name.length; i++){
+    for (let i = 0; i < name.length; i++) {
       cache = name.charCodeAt(i) + ((cache << 5) - cache);
     }
     const index = Math.abs(cache) % this.backgroundColors.length;
@@ -79,8 +79,8 @@ export class ContactpageComponent {
   }
 
   sortContactList(): void {
-    this.firebaseService.contactsList.sort((a, b) => 
-      a.name.localeCompare(b.name, 'de', {sensitivity: 'base'})
+    this.firebaseService.contactsList.sort((a, b) =>
+      a.name.localeCompare(b.name, 'de', { sensitivity: 'base' })
     );
   }
 
@@ -95,5 +95,25 @@ export class ContactpageComponent {
     this.selectedContact = null;
     this.sortContactList();
   }
+
+get uniqueInitials(): string[] {
+  const initialsSet = new Set<string>();
+  for (const contact of this.firebaseService.contactsList) {
+    const initial = contact.name.charAt(0).toUpperCase();
+    initialsSet.add(initial);
+  }
+
+  return Array.from(initialsSet).sort((a, b) =>
+    a.localeCompare(b, 'de', { sensitivity: 'base' })
+  );
+}
+
+
+  getContactsByInitial(initial: string): Contacts[] {
+    return this.firebaseService.contactsList.filter(contact =>
+      contact.name.charAt(0).toUpperCase() === initial
+    );
+  }
+
   // #endregion
 }
