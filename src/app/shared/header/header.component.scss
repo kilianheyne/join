@@ -124,6 +124,10 @@ header {
 
             box-shadow: 0 0 4px #0000001A;
 
+            @media (max-width: 640px) {
+                top: 60px;
+            }
+
             ul {
                 list-style: none;
                 display: flex;
