@@ -2,7 +2,7 @@
 <section>
 <div class="contact-details" [class.visible]="isVisible">
     <div class="detail-top">
-        <div class="circle">
+        <div class="circle" [style.background-color]="getBgColorForCircle(contact.name)">
             {{ getContactInitials(contact.name) }}
         </div>
         <div class="top-right">

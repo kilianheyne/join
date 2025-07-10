@@ -19,6 +19,12 @@ export class ContactDetailsComponent {
     email: '',
     phone: ''    
   };
+
+  backgroundColors: string[] = [
+    '#0038FF', '#00BEE8', '#1FD7C1', '#6E52FF', '#9327FF',
+    '#C3FF2B', '#FC71FF', '#FF4646', '#FF5EB3', '#FF745E',
+    '#FF7A00', '#FFA35E', '#FFBB2B', '#FFC701', '#FFE62B'
+  ];
   
   @Input() contact: any;
 
@@ -49,5 +55,14 @@ export class ContactDetailsComponent {
       this.firebaseService.deleteContactFromDatabase(contactId);
       this.contactDeleted.emit();
     }
+  }
+
+  getBgColorForCircle(name: string) {
+    let cache = 0;
+    for (let i = 0; i < name.length; i++){
+      cache = name.charCodeAt(i) + ((cache << 5) - cache);
+    }
+    const index = Math.abs(cache) % this.backgroundColors.length;
+    return this.backgroundColors[index];
   }
 }
