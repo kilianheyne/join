@@ -89,7 +89,7 @@
     </div>
 
     <!-- Create Contact Component -->
-    <app-create-contact #createContact (contactCreated)="showCreateContactNotification()"></app-create-contact>
+    <app-create-contact #createContact (contactCreated)="onContactCreated($event)"></app-create-contact>
 
     <!-- Edit Contact Component -->
     <app-edit-contact #editContact (contactUpdated)="showUpdateContactNotification()" (contactDeleted)="showDeleteContactNotification()"></app-edit-contact>

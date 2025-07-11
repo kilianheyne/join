@@ -11,6 +11,7 @@ import {
 } from '@angular/animations';
 import { Contact } from '../../shared/interfaces/contact';
 import { FirebaseService } from '../../shared/services/firebase.service';
+import { getDoc, DocumentReference } from 'firebase/firestore';
 
 @Component({
   selector: 'app-create-contact',
@@ -46,10 +47,15 @@ export class CreateContactComponent {
 
   createContact(createContactForm: NgForm) {
     if (createContactForm.valid && createContactForm.submitted) {
-      this.firebaseService.addContactToDatabase(this.contactFormData);
-      createContactForm.resetForm();
-      this.closeForm();
-      this.contactCreated.emit();
+      this.firebaseService.addContactToDatabase(this.contactFormData).then(async (docRef) => {
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const newContact = { id: docSnap.id, ...docSnap.data() };
+          this.closeForm();
+          createContactForm.resetForm();
+          this.contactCreated.emit(newContact);
+        }
+      });
     }
   }
 

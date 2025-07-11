@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { Firestore, collection, onSnapshot, addDoc, updateDoc, doc, deleteDoc } from '@angular/fire/firestore';
+import { Firestore, collection, onSnapshot, addDoc, updateDoc, doc, deleteDoc, serverTimestamp, DocumentReference } from '@angular/fire/firestore';
 import { Contact } from '../interfaces/contact';
 
 @Injectable({
@@ -32,9 +32,12 @@ export class FirebaseService implements OnDestroy {
     };
   }
 
-  async addContactToDatabase(contact: Contact) {
-    await addDoc(collection(this.firestore, 'contacts'), contact);
-  }
+  async addContactToDatabase(contact: Contact): Promise<DocumentReference> {
+  return await addDoc(collection(this.firestore, 'contacts'), {
+    ...contact,
+    timestamp: serverTimestamp()
+  });
+}
 
   async updateContactInDatabase(id: string, contact: Contact) {
     await updateDoc(doc(this.firestore, 'contacts', id), {

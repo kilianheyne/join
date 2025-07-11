@@ -97,6 +97,17 @@ export class ContactpageComponent {
     );
   }
 
+  onContactCreated(contact: Contact) {
+    const found = this.firebaseService.contactsList.find(newContact => newContact.id === contact.id);
+    if (found) {
+      this.selectedContact = found;
+    } else {
+      this.selectedContact = contact;
+    }
+    this.isDetailsVisible = true;
+    this.showCreateContactNotification();
+  }
+
   showCreateContactNotification() {
     showContactNotification(this.contactPageNotification, 'Contact successfully created');
   }
