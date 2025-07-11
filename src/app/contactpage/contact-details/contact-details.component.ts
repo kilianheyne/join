@@ -12,6 +12,7 @@ export class ContactDetailsComponent {
 
   firebaseService = inject(FirebaseService)
   contactId?: string = '';
+  isEditVisible: boolean = false;
 
   editedContact = {
     name: '',
@@ -56,5 +57,9 @@ export class ContactDetailsComponent {
     }
     const index = Math.abs(cache) % this.backgroundColors.length;
     return this.backgroundColors[index];
+  }
+
+  openEditMenuMobile() {
+    this.isEditVisible = !this.isEditVisible;
   }
 }
