@@ -18,7 +18,7 @@
                 <form (ngSubmit)="editContact(editContactForm)" #editContactForm="ngForm">
                     <div>
                         <label class="form-label" for="name">
-                            <input [class.error]="!name.valid && (name.touched || editContactForm.submitted)" #name="ngModel" type="text" placeholder="Name" id="name" name="name" [(ngModel)]="contactFormData.name" required>
+                            <input [class.error]="!name.valid && (name.touched || editContactForm.submitted)" #name="ngModel" type="text" placeholder="Name" id="name" name="name" [(ngModel)]="contactFormData.name" pattern="^[a-z]+ [a-z]+$" required>
                             <span *ngIf="!name.valid && (name.touched || editContactForm.submitted)">Please Enter name & surname.</span>
                         </label>
 
