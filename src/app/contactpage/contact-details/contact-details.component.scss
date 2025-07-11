@@ -51,9 +51,11 @@
                 width: 80px;
                 font-size: 30px;
             }
+
             @media (max-width: 640px) {
                 font-size: 27px;
             }
+
             @media (max-width: 370px) {
                 height: 50px;
                 width: 50px;
@@ -73,13 +75,16 @@
                 @media (max-width: 1200px) {
                     font-size: 30px;
                 }
+
                 @media (max-width: 640px) {
                     font-weight: 700;
                     font-size: 36px;
                 }
+
                 @media (max-width: 428px) {
                     font-size: 27px;
                 }
+
                 @media (max-width: 370px) {
                     font-size: 24px;
                 }
@@ -106,18 +111,7 @@
                         color: #29ABE2;
                         font-weight: 700;
 
-                        .icon-edit {
-                            height: 24px;
-                            width: 24px;
-                            background-image: url(../../../../public/assets/icons/icon-edit-blue.png);
-                            background-repeat: no-repeat;
-                        }
-                    }
 
-                    .icon-edit {
-                        height: 24px;
-                        width: 24px;
-                        background-image: url(../../../../public/assets/icons/icon-edit.png);
                     }
 
                 }
@@ -136,18 +130,10 @@
                         color: #29ABE2;
                         font-weight: 700;
 
-                        .icon-delete {
-                            height: 16px;
-                            width: 24px;
-                            background-image: url(../../../../public/assets/icons/icon-delete-blue.png);
-                        }
+
                     }
 
-                    .icon-delete {
-                        height: 24px;
-                        width: 24px;
-                        background-image: url(../../../../public/assets/icons/icon-delete.png);
-                    }
+
                 }
             }
         }
