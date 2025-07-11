@@ -30,7 +30,7 @@
 
                         <label class="form-label" for="phone">
                             <input [class.error]="!phone.valid && (phone.touched || createContactForm.submitted)" #phone="ngModel" type="tel" placeholder="Phone" id="phone" name="phone" [(ngModel)]="contactFormData.phone" pattern="^\+?[0-9]*$" required>
-                            <span *ngIf="!phone.valid && (phone.touched || createContactForm.submitted)">Please Enter a valid email address.</span>
+                            <span *ngIf="!phone.valid && (phone.touched || createContactForm.submitted)">Please Enter a valid phone number.</span>
                         </label>
                     </div>
                     <div>
