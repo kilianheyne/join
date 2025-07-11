@@ -1,15 +1,17 @@
 import { Component, inject, ViewChild } from '@angular/core';
 import { CreateContactComponent } from "./create-contact/create-contact.component";
-import { Contacts } from '../shared/interfaces/contacts';
+import { Contact } from '../shared/interfaces/contact';
 import { ContactDetailsComponent } from "./contact-details/contact-details.component";
 import { CommonModule } from '@angular/common';
 import { BlackButtonComponent } from "../general/black-button/black-button.component";
 import { EditContactComponent } from './edit-contact/edit-contact.component';
 import { FirebaseService } from '../shared/services/firebase.service';
+import { ContactPageNotificationComponent } from "../general/contact-page-notification/contact-page-notification.component";
+import { getContactInitials, showContactNotification } from '../utils/helpers';
 
 @Component({
   selector: 'app-contactpage',
-  imports: [ContactDetailsComponent, CreateContactComponent, CommonModule, BlackButtonComponent, EditContactComponent],
+  imports: [ContactDetailsComponent, CreateContactComponent, CommonModule, BlackButtonComponent, EditContactComponent, ContactPageNotificationComponent],
   templateUrl: './contactpage.component.html',
   styleUrl: './contactpage.component.scss'
 })
@@ -18,15 +20,22 @@ export class ContactpageComponent {
 
   // #region attributes
   firebaseService = inject(FirebaseService);
-  
+
   @ViewChild('createContact') private createContact!: CreateContactComponent;
 
   @ViewChild('editContact') private editContact!: EditContactComponent;
 
+  @ViewChild('contactPageNotification') private contactPageNotification!: ContactPageNotificationComponent;
+
   isDetailsVisible = false;
-  selectedContact: any = null;
+  selectedContact: any = {
+    id: '',
+    name: '',
+    email: '',
+    phone: ''
+  };
   isOverlayActive: boolean = false;
-  isEditVisible:boolean = false;
+  isEditVisible: boolean = false;
 
   backgroundColors: string[] = [
     '#0038FF', '#00BEE8', '#1FD7C1', '#6E52FF', '#9327FF',
@@ -40,8 +49,8 @@ export class ContactpageComponent {
     this.createContact.isVisible = true;
   }
 
-  openEditContactFormINFather() {
-    this.editContact.isVisible = true;
+  openEditContactForm(contactId: string) {    
+    this.editContact.openForm(contactId)
   }
 
   showContactDetails(contact: any) {
@@ -58,42 +67,48 @@ export class ContactpageComponent {
   }
 
   getContactInitials(fullName: string) {
-    const names = fullName.trim().split(' ');
-
-    if (names.length === 1) {
-      return names[0].charAt(0).toUpperCase();
-    }
-
-    const firstInitial = names[0].charAt(0).toUpperCase();
-    const lastInitial = names[names.length - 1].charAt(0).toUpperCase();
-    return firstInitial + lastInitial;
+    return getContactInitials(fullName);
   }
 
   getBgColorForCircle(name: string) {
     let cache = 0;
-    for (let i = 0; i < name.length; i++){
+    for (let i = 0; i < name.length; i++) {
       cache = name.charCodeAt(i) + ((cache << 5) - cache);
     }
     const index = Math.abs(cache) % this.backgroundColors.length;
     return this.backgroundColors[index];
   }
 
-  sortContactList(): void {
-    this.firebaseService.contactsList.sort((a, b) => 
-      a.name.localeCompare(b.name, 'de', {sensitivity: 'base'})
+  get uniqueInitials(): string[] {
+    const initialsSet = new Set<string>();
+    for (const contact of this.firebaseService.contactsList) {
+      const initial = contact.name.charAt(0).toUpperCase();
+      initialsSet.add(initial);
+    }
+
+    return Array.from(initialsSet).sort((a, b) =>
+      a.localeCompare(b, 'de', { sensitivity: 'base' })
     );
   }
 
-  addNewContact(newContact: Contacts): void {
-    this.firebaseService.addContactToDatabase(newContact);
-    this.sortContactList();
+  getContactsByInitial(initial: string): Contact[] {
+    return this.firebaseService.contactsList.filter(contact =>
+      contact.name.charAt(0).toUpperCase() === initial
+    );
   }
 
-  handleContactDeleted() {
-    this.isDetailsVisible = false;
-    this.isOverlayActive = false;
-    this.selectedContact = null;
-    this.sortContactList();
+  showCreateContactNotification() {
+    showContactNotification(this.contactPageNotification, 'Contact successfully created');
   }
+
+  showUpdateContactNotification() {
+    showContactNotification(this.contactPageNotification, 'Contact successfully updated');
+  }
+
+  showDeleteContactNotification() {
+    this.isDetailsVisible = false;
+    showContactNotification(this.contactPageNotification, 'Contact successfully deleted');
+  }
+
   // #endregion
 }

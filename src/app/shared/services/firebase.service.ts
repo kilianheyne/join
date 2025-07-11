@@ -1,41 +1,42 @@
-import { inject, Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Firestore, collection, onSnapshot, addDoc, updateDoc, doc, deleteDoc } from '@angular/fire/firestore';
-import { Contacts } from '../interfaces/contacts';
+import { Contact } from '../interfaces/contact';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService implements OnDestroy {
 
-  firestore = inject(Firestore);
   unsubscribe: () => void;
-  contactsList: Contacts[] = [];
-  
-  constructor() {
-    this.unsubscribe = onSnapshot(collection(this.firestore, 'contacts'), (contact) => {
+  contactsList: Contact[] = [];
+
+  constructor(
+    private firestore: Firestore
+  ) {
+    const contactsRef = collection(this.firestore, 'contacts');
+
+    this.unsubscribe = onSnapshot(contactsRef, (snapshot) => {
       this.contactsList = [];
-      contact.forEach((element) => {
-        this.contactsList.push(this.setContactObject(element.id, element.data()));
+      snapshot.forEach((doc) => {
+        this.contactsList.push(this.setContactObject(doc.id, doc.data()));
       });
-      console.log(this.contactsList);
     });
   }
 
-  setContactObject(id: string, obj: any): Contacts {
+  setContactObject(id: string, obj: any): Contact {
     return {
       id: id,
       name: obj.name,
       email: obj.email,
       phone: obj.phone
-      
     };
   }
 
-  async addContactToDatabase(contact: Contacts) {
+  async addContactToDatabase(contact: Contact) {
     await addDoc(collection(this.firestore, 'contacts'), contact);
   }
 
-  async updateContactInDatabase(id: string, contact: Contacts) {
+  async updateContactInDatabase(id: string, contact: Contact) {
     await updateDoc(doc(this.firestore, 'contacts', id), {
       name: contact.name,
       email: contact.email,

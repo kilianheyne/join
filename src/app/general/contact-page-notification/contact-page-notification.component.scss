@@ -1,0 +1,14 @@
+@use 'styles/variables' as *;
+
+div {
+    position: absolute;
+    right: 300px;
+    padding: 25px 30px;
+    background: #2A3647;
+    color: white;
+    border-radius: 20px;
+    font-size: 20px;
+    text-wrap-mode: nowrap;
+    bottom: 200px;
+    z-index: 20;
+}

@@ -1,20 +1,21 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WhiteButtonComponent } from "../../general/white-button/white-button.component";
 import { BlackButtonComponent } from '../../general/black-button/black-button.component';
-import { InputComponent } from "../../general/input/input.component";
+import { FormsModule, NgForm } from '@angular/forms';
+import { getContactInitials } from "../../utils/helpers"
 import {
   trigger,
-  state,
   style,
   animate,
   transition
 } from '@angular/animations';
 import { FirebaseService } from '../../shared/services/firebase.service';
+import { Contact } from '../../shared/interfaces/contact';
 
 @Component({
   selector: 'app-edit-contact',
-  imports: [CommonModule, WhiteButtonComponent, BlackButtonComponent, InputComponent],
+  imports: [CommonModule, FormsModule, WhiteButtonComponent, BlackButtonComponent],
   templateUrl: './edit-contact.component.html',
   styleUrl: './edit-contact.component.scss',
   animations: [
@@ -32,57 +33,52 @@ import { FirebaseService } from '../../shared/services/firebase.service';
   ]
 })
 export class EditContactComponent {
-
   firebaseService = inject(FirebaseService)
-  isEdited = false;
-  selectedContactIndex: number | null = null;
-  contactId?: string = '';
-  editedContact = {
+
+  contactFormData: Contact = {
+    id: '',
     name: '',
     email: '',
-    phone: ''
-  };
-  
+    phone: '',
+  }
+
   @Input() isVisible = false;
 
+  @Output() contactUpdated = new EventEmitter();
+
+  @Output() contactDeleted = new EventEmitter();
+
+  openForm(contactId: string) {
+    const findData = this.firebaseService.contactsList.filter(contact => contact.id === contactId);
+
+    if (findData.length > 0) {
+      const selectedContact = findData[0];
+      this.contactFormData = selectedContact;
+      this.isVisible = true;
+    }
+  }
+
   closeForm() {
-    this.cancelEdit();
     this.isVisible = false;
   }
 
-  editContact(index: number) {
-    this.isEdited = true;
-    this.selectedContactIndex = index;
-    this.contactId = this.firebaseService.contactsList[index].id;
-    this.editedContact = {
-      name: this.firebaseService.contactsList[index].name,
-      phone: this.firebaseService.contactsList[index].phone,
-      email: this.firebaseService.contactsList[index].email
-    };
-  }
-
-  saveEdit() {
-    if (this.contactId) {
-      this.firebaseService.updateContactInDatabase(this.contactId, this.editedContact);
+  editContact(editContactForm: NgForm) {
+    if (editContactForm.valid && editContactForm.submitted) {
+      this.firebaseService.updateContactInDatabase(this.contactFormData.id ?? '', this.contactFormData);
+      this.closeForm();
+      this.contactUpdated.emit();
     }
-    this.cancelEdit();
   }
 
-  cancelEdit() {
-    this.isEdited = false;
-    this.selectedContactIndex = null;
-    this.contactId = '';
+  getContactInitials(fullName: string): string {
+    return getContactInitials(fullName);
   }
 
-  getContactInitials(fullName: string) {
-    const names = fullName.trim().split(' ');
-
-    if (names.length === 1) {
-      return names[0].charAt(0).toUpperCase();
+  deleteContact(contactId: string) {
+    if (contactId) {
+      this.firebaseService.deleteContactFromDatabase(contactId);
+      this.closeForm();
+      this.contactDeleted.emit();
     }
-
-    const firstInitial = names[0].charAt(0).toUpperCase();
-    const lastInitial = names[names.length - 1].charAt(0).toUpperCase();
-    return firstInitial + lastInitial;
   }
 }
