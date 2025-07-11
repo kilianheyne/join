@@ -206,7 +206,8 @@ section {
                     >div:first-child {
                         display: flex;
                         flex-direction: column;
-                        gap: 32px;
+                        height: 200px;
+                        gap: 20px;
                         width: 400px;
 
                         @media(max-width: 1350px) {
@@ -219,6 +220,7 @@ section {
                     }
 
                     >div:last-child {
+                        margin-top: 20px;
                         display: flex;
                         gap: 24px;
 
