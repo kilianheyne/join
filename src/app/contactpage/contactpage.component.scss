@@ -84,7 +84,7 @@
 
 
                 @media (max-width: 1150px) {
-                  padding: 10px 20px;
+                    padding: 10px 20px;
 
                 }
 
@@ -445,14 +445,12 @@
                     border-radius: 8px;
 
                     #edit-img {
-                        _background: url(../../../public/assets/icons/icon-edit-blue.png);
                         background-repeat: no-repeat;
                         background-size: contain;
                         background-position: center;
                     }
 
                     #delete-img {
-                        _background: url(../../../public/assets/icons/icon-delete-blue.png);
                         background-repeat: no-repeat;
                         background-size: cover;
                         background-position: center;
@@ -462,7 +460,6 @@
                 #edit-img {
                     width: 24px;
                     height: 24px;
-                    _background: url(../../../public/assets/icons/icon-edit.png);
                     background-repeat: no-repeat;
                     background-size: contain;
                     background-position: center;
@@ -471,7 +468,6 @@
                 #delete-img {
                     width: 24px;
                     height: 24px;
-                    _background: url(../../../public/assets/icons/icon-delete.png);
                     background-repeat: no-repeat;
                     background-size: contain;
                     background-position: center;
