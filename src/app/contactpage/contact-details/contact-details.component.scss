@@ -160,8 +160,8 @@
 #mobile-edit-btn {
 
     position: fixed; 
-    bottom: 14px; 
-    right: 14px;  
+    bottom: 21px; 
+    right: 8px;  
     z-index: 110;
 
     display: none;
@@ -192,32 +192,31 @@
 
 #mobile-edit-overlay {
     position: fixed; 
-    bottom: 8px; 
-    right: 14px; 
+    bottom: 14px; 
+    right: 8px; 
     z-index: 115;
     width: 116px;
     height: 100px;
     padding: 10px;
 
-    transform: translateX(100%);
+    transform: translateX(150%);
     opacity: 0;
     transition: transform 300ms ease, opacity 300ms ease;
+    pointer-events: none;
 
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: start;
 
     background: white;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-left-radius: 20px;
+    border-radius: 20px 20px 0 20px;
 
     box-shadow: 0 4px 4px #00000040;
 
-    @media (max-width: 640px) {
-        display: flex;
-    }
+    // @media (max-width: 640px) {
+    //     display: flex;
+    // }
 
     &.visible {
         transform: translateX(0);
