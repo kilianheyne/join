@@ -59,7 +59,13 @@ export class ContactDetailsComponent {
     return this.backgroundColors[index];
   }
 
-  openEditMenuMobile() {
+  changeEditMenuMobile() {
     this.isEditVisible = !this.isEditVisible;
+  }
+
+  closeEditMenuMobile() {
+    if (this.isEditVisible) {
+      this.isEditVisible = !this.isEditVisible;
+    }
   }
 }
