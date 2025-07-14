@@ -44,7 +44,7 @@ section {
                 padding: 100px 48px;
             }
 
-            @media(max-height: 800px) {
+            @media(max-height: 800px) and (max-width: 1350px) {
                 padding: 50px 48px;
             }
 
@@ -113,7 +113,7 @@ section {
                 position: static;
             }
 
-            @media(max-height: 800px) {
+            @media (max-height: 800px) and (max-width: 1350px) {
                 padding: 55px 15px 15px;
             }
 
@@ -207,11 +207,11 @@ section {
                         display: flex;
                         flex-direction: column;
                         height: 200px;
-                        gap: 20px;
+                        gap: 32px;
                         width: 400px;
 
                         @media(max-width: 1350px) {
-                            gap: 15px;
+                            gap: 30px;
                         }
 
                         @media(max-width: 450px) {
