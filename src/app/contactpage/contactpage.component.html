@@ -48,7 +48,7 @@
       </div>
     </div>
 
-    <!-- CONTACT INFO AREA: always visible on desktop, overlay below 945px -->
+  
 
     <div class="contactinfo" [class.visible]="isOverlayActive || isDetailsVisible">
       <div class="goback">
@@ -69,23 +69,7 @@
 
       <!-- Go Back image: only for mobile overlay -->
 
-      <div id="mobile-edit-btn" (click)="openEditMenuMobile()">
-        <img src="assets/icons/mobile-edit-menu-btn.png" alt="" />
-      </div>
-
-      @if (isEditVisible) {
-      <div id="mobile-edit-overlay">
-        <div>
-          <div id="edit-img"></div>
-          <!-- TO-DO: function to open EditContactForm -->
-          <span>Edit</span>
-        </div>
-        <div>
-          <div id="delete-img"></div>
-          <span>Delete</span>
-        </div>
-      </div>
-      }
+      
     </div>
 
     <!-- Create Contact Component -->

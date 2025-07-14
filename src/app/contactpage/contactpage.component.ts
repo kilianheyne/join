@@ -35,7 +35,6 @@ export class ContactpageComponent {
     phone: ''
   };
   isOverlayActive: boolean = false;
-  isEditVisible: boolean = false;
 
   backgroundColors: string[] = [
     '#0038FF', '#00BEE8', '#1FD7C1', '#6E52FF', '#9327FF',
@@ -60,10 +59,6 @@ export class ContactpageComponent {
 
   closeOverlay() {
     this.isDetailsVisible = !this.isDetailsVisible;
-  }
-
-  openEditMenuMobile() {
-    this.isEditVisible = !this.isEditVisible;
   }
 
   getContactInitials(fullName: string) {
