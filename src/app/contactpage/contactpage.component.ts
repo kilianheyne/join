@@ -113,6 +113,7 @@ export class ContactpageComponent {
   }
 
   showUpdateContactNotification() {
+    this.isDetailsVisible = false;
     showContactNotification(this.contactPageNotification, 'Contact successfully updated');
   }
 
