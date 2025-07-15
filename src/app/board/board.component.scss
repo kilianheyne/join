@@ -9,7 +9,7 @@ section {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 79.5px 64px;
+        padding: 80px 64px 48px 64px;
 
         @media (max-width: 950px) {
             padding: 48px 32px;
@@ -112,13 +112,16 @@ section {
         }
     }
     #lists {
+        flex: 1;
         display: flex;
         justify-content: space-between;
-        gap: 26px;
+        gap: 24px;
         padding: 0 64px;
+        height: 100%;
 
         @media (max-width: 1100px) {
             flex-direction: column;
+            overflow: scroll;
         }
 
         @media (max-width: 950px) {
@@ -134,14 +137,11 @@ section {
             flex-direction: column;
             gap: 16px;
             flex: 1;
-            min-height: 100%;
-            overflow-y: auto;
 
             @media (max-width: 1100px) {
                 overflow-x: auto;
                 flex-wrap: nowrap;
             }
-            
 
             >div:nth-child(1) {
                 display: flex;
@@ -162,7 +162,7 @@ section {
                     font-size: 8px;
                 }
             }
-            >div:nth-child(2){
+            .no-tasks{
                 display: flex;
                 flex-direction: column;
                 align-items: center;
