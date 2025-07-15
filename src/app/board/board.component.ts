@@ -1,9 +1,10 @@
 import { Component, HostListener } from '@angular/core';
 import { BlackButtonComponent } from "../general/black-button/black-button.component";
+import { TaskCardComponent } from "./task-card/task-card.component";
 
 @Component({
   selector: 'app-board',
-  imports: [BlackButtonComponent],
+  imports: [BlackButtonComponent, TaskCardComponent],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
