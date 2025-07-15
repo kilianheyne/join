@@ -5,54 +5,48 @@
             <div id="input-area">
                 <input type="text" placeholder="Find Task"> <!-- TO-DO: placeholder needs align-center -->
                 <div id="grey-line"></div>
-                <div></div>
+                <div class="icon-search"></div> <!-- TO-DO: hover & active? & padding -->
             </div>
             <div>
                 <app-black-button title="Add task" icon="icon-add" padding="8px 16px" iconFontSize="21px"></app-black-button> <!-- TO-DO: icon-add needs align-center -->
             </div>
         </div>
     </div>
-    <div>
-        <div>
+    <div id="lists">
+        <div class="column">
             <div>
                 <span>To do</span>
-                <button></button>
+                <div class="icon-add"></div>
             </div>
             <div>
-                <div>No tasks To do</div>
+                <div>No tasks To do</div> <!-- if-condition, whenn array is empty -->
             </div>
         </div>
-    </div>
-    <div>
-        <div>
+        <div class="column">
             <div>
                 <span>In progress</span>
-                <button></button>
+                <div class="icon-add"></div>
             </div>
             <div>
-                <div>No tasks In progress</div>
+                <div>No tasks In progress</div> <!-- if-condition, whenn array is empty -->
             </div>
         </div>
-    </div>
-    <div>
-        <div>
+        <div class="column">
             <div>
                 <span>Await feedback</span>
-                <button></button>
+                <div class="icon-add"></div>
             </div>
             <div>
-                <div>No tasks Await feedback</div>
+                <div>No tasks Await feedback</div> <!-- if-condition, whenn array is empty -->
             </div>
         </div>
-    </div>
-    <div>
-        <div>
+        <div class="column">
             <div>
                 <span>Done</span>
-                <button></button>
+                <div class="icon-add"></div>
             </div>
             <div>
-                <div>No tasks Done</div>
+                <div>No tasks Done</div> <!-- if-condition, whenn array is empty -->
             </div>
         </div>
     </div>
