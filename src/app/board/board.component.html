@@ -1,14 +1,14 @@
 <section>
-    <div>
+    <div id="board-header">
         <h2>Board</h2>
         <div>
-            <div>
-                <input type="text" name="" id="" placeholder="Find task">
-                <div>Lupe</div>
+            <div id="input-area">
+                <input type="text" placeholder="Find Task"> <!-- TO-DO: placeholder needs align-center -->
+                <div id="grey-line"></div>
+                <div></div>
             </div>
             <div>
-                <span>Add task</span>
-                <div>+</div>
+                <app-black-button title="Add task" icon="icon-add" padding="8px 16px" iconFontSize="21px"></app-black-button> <!-- TO-DO: icon-add needs align-center -->
             </div>
         </div>
     </div>
@@ -20,6 +20,39 @@
             </div>
             <div>
                 <div>No tasks To do</div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div>
+            <div>
+                <span>In progress</span>
+                <button></button>
+            </div>
+            <div>
+                <div>No tasks In progress</div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div>
+            <div>
+                <span>Await feedback</span>
+                <button></button>
+            </div>
+            <div>
+                <div>No tasks Await feedback</div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div>
+            <div>
+                <span>Done</span>
+                <button></button>
+            </div>
+            <div>
+                <div>No tasks Done</div>
             </div>
         </div>
     </div>
