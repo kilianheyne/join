@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { BlackButtonComponent } from "../general/black-button/black-button.component";
 
 @Component({
@@ -9,4 +9,25 @@ import { BlackButtonComponent } from "../general/black-button/black-button.compo
 })
 export class BoardComponent {
 
+  showTitle:boolean = false;
+  buttonPadding = '8px 16px';
+
+  ngOnInit() {
+    this.checkScreenSize();
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.checkScreenSize();
+  }
+
+  private checkScreenSize() {
+    this.showTitle = window.innerWidth > 640;
+    if (window.innerWidth > 640) {
+      this.showTitle = true;
+    } else {
+      this.showTitle = false;
+      this.buttonPadding = '8px';
+    }
+  }
 }
