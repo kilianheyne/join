@@ -10,5 +10,8 @@ import { FirebaseService } from '../../shared/services/firebase.service';
 })
 export class TaskComponent {
 
-
+  closeTaskDetails() {
+    const overlay = document.getElementById('taskOverlay');
+    if (overlay) overlay.style.display = 'none';
+  }
 }
