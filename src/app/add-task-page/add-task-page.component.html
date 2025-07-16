@@ -2,16 +2,18 @@
     <h1>Add Task</h1>
     <div>
         <div>
-            
+
             <label class="form-label" for="title">
                 <span class="label">Title<span>*</span></span>
-                <input type="text" id="title" name="title" placeholder="Enter a title" [(ngModel)]="createTaskData.title" trimOnBlur required>
+                <input type="text" id="title" name="title" placeholder="Enter a title"
+                    [(ngModel)]="createTaskData.title" trimOnBlur required>
                 <span>This field is required</span>
             </label>
 
             <label class="form-label" for="description">
                 <span class="label">Description</span>
-                <textarea name="description" id="description" placeholder="Enter a description" [(ngModel)]="createTaskData.description" trimOnBlur required></textarea>
+                <textarea name="description" id="description" placeholder="Enter a description"
+                    [(ngModel)]="createTaskData.description" trimOnBlur required></textarea>
             </label>
 
             <label class="form-label" for="date">
@@ -27,7 +29,46 @@
             <button (click)="sumbitForm()">Test</button>
 
         </div>
-        <div>right</div>
+        <div>
+            <label class="form-label" for="priority">
+                <span class="label">Priority</span>
+                <div>
+                    <label for="urgent">
+                        <div>Urgent <span class="icon icon-urgent"></span></div>
+                        <input type="radio" name="priority" value="urgent" id="urgent">
+                    </label>
+                    <label for="medium">
+                        <div>Medium <span class="icon icon-medium"></span></div>
+                        <input type="radio" name="priority" value="medium" id="medium" checked>
+                    </label>
+                    <label for="low">
+                        <div>Low <span class="icon icon-low"></span></div>
+                        <input type="radio" name="priority" value="low" id="low">
+                    </label>
+                </div>
+            </label>
+
+            <label class="form-label select-contact">
+                <span class="label">Assigned to</span>
+                <input type="text" name="contact" value="Select contacts to assign">
+
+                <div>
+                    @for (contact of getContacts(); track contact.id) {
+                        <label>
+                            <div>
+                                <div>{{ getContactInitials(contact.name) }}</div>
+                                <div>{{ contact.name }}</div>
+                            </div>
+                            <div>
+                                <div>
+                                    <input type="checkbox">
+                                </div>
+                            </div>
+                        </label>
+                    }
+                </div>
+            </label>
+        </div>
     </div>
     <div>test3</div>
 </section>
