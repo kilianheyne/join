@@ -1,10 +1,11 @@
 import { Component, HostListener } from '@angular/core';
 import { BlackButtonComponent } from "../general/black-button/black-button.component";
 import { TaskCardComponent } from "./task-card/task-card.component";
+import { TaskComponent } from './task/task.component';
 
 @Component({
   selector: 'app-board',
-  imports: [BlackButtonComponent, TaskCardComponent],
+  imports: [TaskComponent, BlackButtonComponent, TaskCardComponent],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
@@ -31,4 +32,9 @@ export class BoardComponent {
       this.buttonPadding = '8px';
     }
   }
+
+  // showTaskDetails(task: any) {
+  //   this.selectedTask = task;
+  //   this.isTaskVisible = true;
+  // }
 }
