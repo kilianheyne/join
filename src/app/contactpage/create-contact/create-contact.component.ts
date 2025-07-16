@@ -12,10 +12,11 @@ import {
 import { Contact } from '../../shared/interfaces/contact';
 import { FirebaseService } from '../../shared/services/firebase.service';
 import { getDoc, DocumentReference } from 'firebase/firestore';
+import { TrimOnBlurDirective } from '../../directives/trim-on-blur.directive';
 
 @Component({
   selector: 'app-create-contact',
-  imports: [CommonModule, FormsModule, WhiteButtonComponent, BlackButtonComponent],
+  imports: [CommonModule, FormsModule, TrimOnBlurDirective, WhiteButtonComponent, BlackButtonComponent],
   templateUrl: './create-contact.component.html',
   styleUrl: './create-contact.component.scss',
   animations: [

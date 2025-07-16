@@ -1,6 +1,5 @@
-
 <section>
-<div class="contact-details" [class.visible]="isVisible">
+<div class="contact-details" [class.visible]="isVisible" (click)="closeEditMenuMobile()">
     <div class="detail-top">
         <div class="circle" [style.background-color]="getBgColorForCircle(contact.name)">
             {{ getContactInitials(contact.name) }}
@@ -27,4 +26,19 @@
         <span class="phone">{{contact.phone}}</span>
     </div>
 </div>
+<div id="mobile-edit-btn" (click)="changeEditMenuMobile()">
+    <img src="assets/icons/mobile-edit-menu-btn.png" alt="" />
+</div>
+<!-- @if (isEditVisible) { -->
+    <div id="mobile-edit-overlay" [class.visible]="isEditVisible">
+        <div (click)="openEditForm()" (click)="changeEditMenuMobile()">
+            <div class="icon-edit"></div>
+            <span>Edit</span>
+        </div>
+        <div (click)="deleteContact(contact.id)" (click)="changeEditMenuMobile()">
+            <div class="icon-delete"></div>
+            <span>Delete</span>
+        </div>
+    </div>
+<!-- } -->
 </section>

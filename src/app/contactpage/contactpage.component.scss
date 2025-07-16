@@ -84,7 +84,7 @@
 
 
                 @media (max-width: 1150px) {
-                  padding: 10px 20px;
+                    padding: 10px 20px;
 
                 }
 
@@ -372,110 +372,6 @@
 
             &:hover {
                 cursor: pointer;
-            }
-        }
-
-        #mobile-edit-btn {
-            position: absolute;
-            bottom: 28px;
-            right: 14px;
-
-            display: none;
-            justify-content: center;
-            align-items: center;
-
-            width: 56px;
-            height: 56px;
-
-            border: 1px solid #2A3647;
-            border-radius: 100%;
-
-            background: #2A3647;
-
-            box-shadow: 0 4px 4px #00000040;
-
-            cursor: pointer;
-
-            @media (max-width: 640px) {
-                display: flex;
-            }
-
-            &:active {
-                background: #29ABE2;
-                border: 1px solid #29ABE2;
-            }
-        }
-
-        #mobile-edit-overlay {
-            position: absolute;
-            bottom: 14px;
-            right: 14px;
-            width: 116px;
-            height: 100px;
-            padding: 10px;
-
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: start;
-
-            background: white;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
-            border-bottom-left-radius: 20px;
-
-            box-shadow: 0 4px 4px #00000040;
-
-            @media (max-width: 640px) {
-                display: flex;
-            }
-
-            div {
-                display: flex;
-                align-items: center;
-                width: 100%;
-                gap: 8px;
-                padding: 8px;
-                cursor: pointer;
-
-                &:active {
-                    color: #29ABE2;
-                    font-weight: bold;
-                    background: #ededed;
-                    border-radius: 8px;
-
-                    #edit-img {
-                        _background: url(../../../public/assets/icons/icon-edit-blue.png);
-                        background-repeat: no-repeat;
-                        background-size: contain;
-                        background-position: center;
-                    }
-
-                    #delete-img {
-                        _background: url(../../../public/assets/icons/icon-delete-blue.png);
-                        background-repeat: no-repeat;
-                        background-size: cover;
-                        background-position: center;
-                    }
-                }
-
-                #edit-img {
-                    width: 24px;
-                    height: 24px;
-                    _background: url(../../../public/assets/icons/icon-edit.png);
-                    background-repeat: no-repeat;
-                    background-size: contain;
-                    background-position: center;
-                }
-
-                #delete-img {
-                    width: 24px;
-                    height: 24px;
-                    _background: url(../../../public/assets/icons/icon-delete.png);
-                    background-repeat: no-repeat;
-                    background-size: contain;
-                    background-position: center;
-                }
             }
         }
     }

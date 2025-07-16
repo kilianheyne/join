@@ -1,13 +1,13 @@
 @use 'styles/variables' as *;
 
 label.form-label {
-    font-family: "join-icon";
     position: relative;
     display: flex;
     flex-direction: column;
     gap: 8px;
 
     &::after {
+        font-family: "join-icon";
         position: absolute;
         top: 17px;
         right: 25px;
@@ -32,6 +32,15 @@ label.form-label {
         }
     }
 
+    >span.label {
+        font-size: 20px;
+        color: $primaryColor;
+
+        >span {
+            color: $pinkError;
+        }
+    }
+
     >input {
         font-size: 20px;
         padding: 13px 61px 13px 21px;
@@ -41,7 +50,7 @@ label.form-label {
         outline: none;
 
         &.error {
-            border-color: #FF8190;
+            border-color: $pinkError;
         }
 
         &:focus {
@@ -53,8 +62,10 @@ label.form-label {
         }
     }
 
-    >span {
-        color: #FF8190;
+    >span:last-child {
+        color: $pinkError;
         font-size: 12px;
+        position: absolute;
+        bottom: -20px;
     }
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, inject, Input, Output } from '@angular/core';
 import { FirebaseService } from '../../shared/services/firebase.service';
 import { getContactInitials } from '../../utils/helpers';
 
@@ -12,6 +12,7 @@ export class ContactDetailsComponent {
 
   firebaseService = inject(FirebaseService)
   contactId?: string = '';
+  isEditVisible: boolean = false;
 
   editedContact = {
     name: '',
@@ -33,6 +34,8 @@ export class ContactDetailsComponent {
   @Output() openEditContactForm = new EventEmitter();
 
   @Output() contactDeleted = new EventEmitter();
+
+  constructor(private eRef: ElementRef) {}
 
   openEditForm() {
     this.openEditContactForm.emit();
@@ -56,5 +59,22 @@ export class ContactDetailsComponent {
     }
     const index = Math.abs(cache) % this.backgroundColors.length;
     return this.backgroundColors[index];
+  }
+
+  changeEditMenuMobile() {
+    this.isEditVisible = !this.isEditVisible;
+  }
+
+  closeEditMenuMobile() {
+    if (this.isEditVisible) {
+      this.isEditVisible = !this.isEditVisible;
+    }
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: MouseEvent) {
+    if (this.isEditVisible && !this.eRef.nativeElement.contains(event.target)) {
+      this.changeEditMenuMobile();
+    }
   }
 }

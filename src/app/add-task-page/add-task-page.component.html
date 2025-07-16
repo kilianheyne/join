@@ -1,0 +1,33 @@
+<section>
+    <h1>Add Task</h1>
+    <div>
+        <div>
+            
+            <label class="form-label" for="title">
+                <span class="label">Title<span>*</span></span>
+                <input type="text" id="title" name="title" placeholder="Enter a title" [(ngModel)]="createTaskData.title" trimOnBlur required>
+                <span>This field is required</span>
+            </label>
+
+            <label class="form-label" for="description">
+                <span class="label">Description</span>
+                <textarea name="description" id="description" placeholder="Enter a description" [(ngModel)]="createTaskData.description" trimOnBlur required></textarea>
+            </label>
+
+            <label class="form-label" for="date">
+                <span class="label">Due date<span>*</span></span>
+                <mat-form-field class="custom-date-field">
+                    <input matInput [matDatepicker]="picker" placeholder="dd/mm/yyyy" [(ngModel)]="createTaskData.date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <span>This field is required</span>
+            </label>
+
+            <button (click)="sumbitForm()">Test</button>
+
+        </div>
+        <div>right</div>
+    </div>
+    <div>test3</div>
+</section>

@@ -12,10 +12,11 @@ import {
 } from '@angular/animations';
 import { FirebaseService } from '../../shared/services/firebase.service';
 import { Contact } from '../../shared/interfaces/contact';
+import { TrimOnBlurDirective } from '../../directives/trim-on-blur.directive';
 
 @Component({
   selector: 'app-edit-contact',
-  imports: [CommonModule, FormsModule, WhiteButtonComponent, BlackButtonComponent],
+  imports: [CommonModule, FormsModule, TrimOnBlurDirective, WhiteButtonComponent, BlackButtonComponent],
   templateUrl: './edit-contact.component.html',
   styleUrl: './edit-contact.component.scss',
   animations: [
@@ -53,7 +54,7 @@ export class EditContactComponent {
 
     if (findData.length > 0) {
       const selectedContact = findData[0];
-      this.contactFormData = selectedContact;
+      this.contactFormData = { ...selectedContact };
       this.isVisible = true;
     }
   }
