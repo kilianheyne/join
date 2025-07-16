@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FirebaseService } from '../shared/services/firebase.service';
 
 @Component({
   selector: 'app-task',
@@ -8,5 +9,6 @@ import { CommonModule } from '@angular/common';
   styleUrl: './task.component.scss'
 })
 export class TaskComponent {
+
 
 }
