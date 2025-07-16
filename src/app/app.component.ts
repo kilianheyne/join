@@ -5,10 +5,11 @@ import { SidebarComponent } from "./shared/sidebar/sidebar.component";
 import { ContactpageComponent } from "./contactpage/contactpage.component";
 import { SidebarMobileComponent } from "./shared/sidebar-mobile/sidebar-mobile.component";
 import { FirebaseService } from './shared/services/firebase.service';
+import { TaskComponent } from './task/task.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ContactpageComponent, HeaderComponent, SidebarComponent, SidebarMobileComponent],
+  imports: [TaskComponent, RouterOutlet, ContactpageComponent, HeaderComponent, SidebarComponent, SidebarMobileComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
