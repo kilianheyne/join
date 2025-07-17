@@ -35,7 +35,10 @@ export class BoardComponent {
   }
 
   showTaskDetails() {
-    const overlay = document.getElementById('taskOverlay');
-    if (overlay) overlay.style.display = 'flex';
+    this.isTaskVisible = true;
+  }
+
+  onTaskClosed() {
+    this.isTaskVisible = false;
   }
 }

@@ -1,5 +1,5 @@
-<section id="taskOverlay" style="display: none">
-    <div>
+<section *ngIf="isVisible">
+    <div @slideInFromRight>
         <div class="top-card">
             <div class="task-name">
                 <span>ich bins der Task-Name</span>

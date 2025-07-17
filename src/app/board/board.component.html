@@ -60,6 +60,6 @@
                 <app-task-card (click)="showTaskDetails()"></app-task-card>
             </div>
         </div>
-        <app-task></app-task>
+        <app-task [isVisible]="isTaskVisible" (closed)="onTaskClosed()"></app-task>
     </div>
 </section>
