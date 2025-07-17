@@ -7,8 +7,8 @@
         </div>
         <div>
             <div>
-                <div [ngStyle]="{'background-color': '#FF7A00'}">
-                    <span>{{ getContactInitials(contactFormData.name) }}</span>
+                <div [ngStyle]="{'background-color': contactFormData.color}">
+                    <span>{{ contactFormData.avatar }}</span>
                 </div>
             </div>
             <div>

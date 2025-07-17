@@ -1,8 +1,8 @@
 <section>
 <div class="contact-details" [class.visible]="isVisible" (click)="closeEditMenuMobile()">
     <div class="detail-top">
-        <div class="circle" [style.background-color]="getBgColorForCircle(contact.name)">
-            {{ getContactInitials(contact.name) }}
+        <div class="circle" [style.background-color]="contact.color">
+            {{ contact.avatar }}
         </div>
         <div class="top-right">
             <h3>{{ contact.name }}</h3>

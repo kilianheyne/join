@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { WhiteButtonComponent } from "../../general/white-button/white-button.component";
 import { BlackButtonComponent } from '../../general/black-button/black-button.component';
 import { FormsModule, NgForm } from '@angular/forms';
-import { getContactInitials } from "../../utils/helpers"
+import { getBgColorForCircle, getContactInitials } from "../../utils/helpers"
 import {
   trigger,
   style,
@@ -53,7 +53,7 @@ export class EditContactComponent {
     const findData = this.firebaseService.contactsList.filter(contact => contact.id === contactId);
 
     if (findData.length > 0) {
-      const selectedContact = findData[0];
+      const selectedContact = findData[0];      
       this.contactFormData = { ...selectedContact };
       this.isVisible = true;
     }
@@ -65,14 +65,21 @@ export class EditContactComponent {
 
   editContact(editContactForm: NgForm) {
     if (editContactForm.valid && editContactForm.submitted) {
+      this.contactFormData.color = this.getBgColorForCircle(this.contactFormData.name);
+      this.contactFormData.avatar = this.getContactInitials(this.contactFormData.name);
+
       this.firebaseService.updateContactInDatabase(this.contactFormData.id ?? '', this.contactFormData);
       this.closeForm();
       this.contactUpdated.emit();
     }
   }
 
-  getContactInitials(fullName: string): string {
+  getContactInitials(fullName: string) {
     return getContactInitials(fullName);
+  }
+
+  getBgColorForCircle(name: string) {
+    return getBgColorForCircle(name);
   }
 
   deleteContact(contactId: string) {
