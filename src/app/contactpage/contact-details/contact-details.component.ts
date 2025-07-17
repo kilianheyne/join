@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, HostListener, inject, Input, Output } from '@angular/core';
-import { FirebaseService } from '../../shared/services/firebase.service';
+import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
   selector: 'app-contact-details',
@@ -16,7 +16,7 @@ export class ContactDetailsComponent {
   editedContact = {
     name: '',
     email: '',
-    phone: ''    
+    phone: ''
   };
 
   @Input() contact: any;
@@ -27,7 +27,7 @@ export class ContactDetailsComponent {
 
   @Output() contactDeleted = new EventEmitter();
 
-  constructor(private eRef: ElementRef) {}
+  constructor(private eRef: ElementRef) { }
 
   openEditForm() {
     this.openEditContactForm.emit();
@@ -35,7 +35,7 @@ export class ContactDetailsComponent {
 
   deleteContact(contactId: string) {
     if (contactId) {
-      this.firebaseService.deleteContactFromDatabase(contactId);
+      this.firebaseService.deleteDataFromDatabase('contacts', contactId);
       this.contactDeleted.emit();
     }
   }
