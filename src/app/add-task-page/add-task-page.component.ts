@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TrimOnBlurDirective } from '../directives/trim-on-blur.directive';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -8,6 +8,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE, DateAdapter } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { CUSTOM_DATE_FORMATS } from '../utils/custom-date-formats';
+import { FirebaseService } from '../shared/services/firebase.service';
+import { Contact } from '../shared/interfaces/contact';
+import { getContactInitials } from '../utils/helpers';
 
 @Component({
   selector: 'app-add-task-page',
@@ -28,15 +31,24 @@ import { CUSTOM_DATE_FORMATS } from '../utils/custom-date-formats';
   styleUrl: './add-task-page.component.scss'
 })
 export class AddTaskPageComponent {
+  firebaseService = inject(FirebaseService);
 
-  createTaskData : {
+  createTaskData: {
     title: string,
     description: string,
     date: moment.Moment | null
   } = {
-    title: '',
-    description: '',
-    date: null
+      title: '',
+      description: '',
+      date: null
+    }
+
+  getContacts(): Contact[] {
+    return this.firebaseService.contactsList;
+  }
+
+  getContactInitials(fullName: string) {
+    return getContactInitials(fullName);
   }
 
   sumbitForm() {
