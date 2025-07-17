@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterLink} from '@angular/router';
 import { HeaderComponent } from "./shared/header/header.component";
 import { SidebarComponent } from "./shared/sidebar/sidebar.component";
 import { ContactpageComponent } from "./contactpage/contactpage.component";
@@ -8,7 +8,7 @@ import { FirebaseService } from './shared/services/firebase.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ContactpageComponent, HeaderComponent, SidebarComponent, SidebarMobileComponent],
+  imports: [RouterLink, RouterOutlet, ContactpageComponent, HeaderComponent, SidebarComponent, SidebarMobileComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
