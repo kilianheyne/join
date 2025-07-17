@@ -1,14 +1,43 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FirebaseService } from '../../shared/services/firebase.service';
+import {
+  trigger,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 
 @Component({
   selector: 'app-task',
   imports: [CommonModule],
   templateUrl: './task.component.html',
-  styleUrl: './task.component.scss'
+  styleUrl: './task.component.scss',
+  animations: [
+    trigger('slideInFromRight', [
+      transition(':enter', [
+        style({ transform: 'translateX(100%)', opacity: 0 }),
+        animate('300ms ease-out',
+          style({ transform: 'translateX(0)', opacity: 1 }))
+      ]),
+      transition(':leave', [
+        animate('300ms ease-in',
+          style({ transform: 'translateX(100%)', opacity: 0 }))
+      ])
+    ])
+  ]
 })
 export class TaskComponent {
 
+  @Input() isVisible: boolean = false;
 
+  @Output() closed = new EventEmitter<void>();
+
+  closing = false;
+
+  closeTaskDetails() {
+    this.closing = true;
+    this.closed.emit();
+    this.closing = false;
+  }
 }

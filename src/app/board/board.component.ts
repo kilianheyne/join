@@ -11,6 +11,7 @@ import { TaskComponent } from './task/task.component';
 })
 export class BoardComponent {
 
+  isTaskVisible = false;
   showTitle:boolean = false;
   buttonPadding = '8px 16px';
 
@@ -33,8 +34,11 @@ export class BoardComponent {
     }
   }
 
-  // showTaskDetails(task: any) {
-  //   this.selectedTask = task;
-  //   this.isTaskVisible = true;
-  // }
+  showTaskDetails() {
+    this.isTaskVisible = true;
+  }
+
+  onTaskClosed() {
+    this.isTaskVisible = false;
+  }
 }
