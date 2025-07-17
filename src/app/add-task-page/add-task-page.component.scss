@@ -77,15 +77,15 @@ section {
                         transition: all 0.2s ease;
                         box-shadow: 0px 0px 6px 1px #ededed;
 
-                        &[for=urgent]:has(input:checked) {
+                        &[for=Urgent]:has(input:checked) {
                             background: #FF3D00;
                         }
 
-                        &[for=medium]:has(input:checked) {
+                        &[for=Medium]:has(input:checked) {
                             background: #FFA800;
                         }
 
-                        &[for=low]:has(input:checked) {
+                        &[for=Low]:has(input:checked) {
                             background: #7AE229;
                         }
 
@@ -147,6 +147,11 @@ section {
                     padding: 8px 8px 6px;
                     border-radius: 50%;
                     z-index: 2;
+                    cursor: pointer;
+                }
+
+                &.open::after {
+                    content: "\65";
                 }
 
                 >span:nth-child(1) {
@@ -161,6 +166,10 @@ section {
                     &:hover {
                         box-shadow: inset -2px 2px 0px 0px #c1c1c1;
                     }
+
+                    &::placeholder {
+                        color: black;
+                    }
                 }
 
                 >div {
@@ -168,12 +177,40 @@ section {
                     flex-direction: column;
                     gap: 3px;
                     background: white;
-                    position: relative;
-                    top: -10px;
-                    padding-top: 10px;
+                    position: static;
+                    top: 0;
+                    padding-top: 3px;
                     border-radius: 0 0 10px 10px;
                     max-height: 250px;
-                    overflow-y: scroll;
+                    overflow-y: auto;
+
+                    &::before {
+                        content: "s";
+                        background: #ffffff;
+                        position: absolute;
+                        top: 50px;
+                        z-index: -1;
+                        left: 0;
+                        right: 0;
+                        color: white;
+                        height: 50px;
+                    }
+
+                    &::-webkit-scrollbar {
+                        width: 6px;
+                    }
+
+                    &::-webkit-scrollbar-track {
+                        background: white;
+                        border-radius: 10px;
+                    }
+
+                    &::-webkit-scrollbar-thumb {
+                        background-color: #A8A8A8;
+                        border-radius: 3px;
+                        background-clip: content-box;
+                        min-height: 53px;
+                    }
 
                     >label {
                         display: flex;

@@ -11,6 +11,8 @@ import { CUSTOM_DATE_FORMATS } from '../utils/custom-date-formats';
 import { FirebaseService } from '../services/firebase.service';
 import { Contact } from '../interfaces/contact';
 import { getContactInitials } from '../utils/helpers';
+import { Priority } from '../interfaces/priority';
+import { PriorityModel } from '../models/priority.model';
 
 @Component({
   selector: 'app-add-task-page',
@@ -33,18 +35,29 @@ import { getContactInitials } from '../utils/helpers';
 export class AddTaskPageComponent {
   firebaseService = inject(FirebaseService);
 
+  isContactListOpen = false;
+  searchContactInput: string = '';
+
   createTaskData: {
     title: string,
     description: string,
     date: moment.Moment | null
   } = {
-      title: '',
-      description: '',
-      date: null
-    }
+    title: '',
+    description: '',
+    date: null
+  }
 
   getContacts(): Contact[] {
-    return this.firebaseService.contactsList;
+    return this.firebaseService.contactsList.filter(
+      contact => contact.name.toLowerCase().includes(
+        this.searchContactInput.toLowerCase()
+      )
+    );;
+  }
+
+  getPriorities(): Priority[] {
+    return this.firebaseService.prioritiesList.slice().sort(PriorityModel.sort);
   }
 
   getContactInitials(fullName: string) {
