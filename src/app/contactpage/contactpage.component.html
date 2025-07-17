@@ -16,8 +16,8 @@
         @for (contact of getContactsByInitial(initial); track contact.id) {
         <div (click)="showContactDetails(contact)" class="contact" [ngStyle]="{ 'background-color': selectedContact === contact ? '#2A3647' : '' }">
           <div class="contact-mb">
-            <div class="contactcircle" [ngStyle]="{ 'background-color': getBgColorForCircle(contact.name) }">
-              {{ getContactInitials(contact.name) }}
+            <div class="contactcircle" [ngStyle]="{ 'background-color': contact.color }">
+              {{ contact.avatar }}
             </div>
             <div class="contactright">
               <span class="name" [ngStyle]="{ 'color': selectedContact === contact ? 'white' : '' }">{{ contact.name }}</span>

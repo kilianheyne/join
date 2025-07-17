@@ -7,7 +7,7 @@ import { BlackButtonComponent } from "../general/black-button/black-button.compo
 import { EditContactComponent } from './edit-contact/edit-contact.component';
 import { FirebaseService } from '../shared/services/firebase.service';
 import { ContactPageNotificationComponent } from "../general/contact-page-notification/contact-page-notification.component";
-import { getContactInitials, showContactNotification } from '../utils/helpers';
+import { showContactNotification } from '../utils/helpers';
 
 @Component({
   selector: 'app-contactpage',
@@ -35,12 +35,6 @@ export class ContactpageComponent {
     phone: ''
   };
   isOverlayActive: boolean = false;
-
-  backgroundColors: string[] = [
-    '#0038FF', '#00BEE8', '#1FD7C1', '#6E52FF', '#9327FF',
-    '#C3FF2B', '#FC71FF', '#FF4646', '#FF5EB3', '#FF745E',
-    '#FF7A00', '#FFA35E', '#FFBB2B', '#FFC701', '#FFE62B'
-  ]
   // #endregion
 
   // #region methods
@@ -59,19 +53,6 @@ export class ContactpageComponent {
 
   closeOverlay() {
     this.isDetailsVisible = !this.isDetailsVisible;
-  }
-
-  getContactInitials(fullName: string) {
-    return getContactInitials(fullName);
-  }
-
-  getBgColorForCircle(name: string) {
-    let cache = 0;
-    for (let i = 0; i < name.length; i++) {
-      cache = name.charCodeAt(i) + ((cache << 5) - cache);
-    }
-    const index = Math.abs(cache) % this.backgroundColors.length;
-    return this.backgroundColors[index];
   }
 
   get uniqueInitials(): string[] {

@@ -13,6 +13,7 @@ import { Contact } from '../../shared/interfaces/contact';
 import { FirebaseService } from '../../shared/services/firebase.service';
 import { getDoc, DocumentReference } from 'firebase/firestore';
 import { TrimOnBlurDirective } from '../../directives/trim-on-blur.directive';
+import { getBgColorForCircle, getContactInitials } from '../../utils/helpers';
 
 @Component({
   selector: 'app-create-contact',
@@ -48,6 +49,9 @@ export class CreateContactComponent {
 
   createContact(createContactForm: NgForm) {
     if (createContactForm.valid && createContactForm.submitted) {
+      this.contactFormData.color = this.getBgColorForCircle(this.contactFormData.name);
+      this.contactFormData.avatar = this.getContactInitials(this.contactFormData.name);
+
       this.firebaseService.addContactToDatabase(this.contactFormData).then(async (docRef) => {
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
@@ -58,6 +62,14 @@ export class CreateContactComponent {
         }
       });
     }
+  }
+
+  getContactInitials(fullName: string) {
+    return getContactInitials(fullName);
+  }
+
+  getBgColorForCircle(name: string) {
+    return getBgColorForCircle(name);
   }
 
   cancelForm(createContactForm: NgForm) {
