@@ -33,11 +33,20 @@ export class TaskComponent {
 
   @Output() closed = new EventEmitter<void>();
 
-  closing = false;
+  
+  isTaskVisible: boolean = false;
+
+  ngOnChanges() {
+    if (this.isVisible) {
+      this.isTaskVisible = true;
+    }
+  }
 
   closeTaskDetails() {
-    this.closing = true;
-    this.closed.emit();
-    this.closing = false;
+    this.isVisible = false;
+    setTimeout(() => {
+      this.isTaskVisible = false;
+      this.closed.emit();
+    }, 300);
   }
 }
