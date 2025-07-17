@@ -1,11 +1,11 @@
 import { Component, inject, ViewChild } from '@angular/core';
 import { CreateContactComponent } from "./create-contact/create-contact.component";
-import { Contact } from '../shared/interfaces/contact';
+import { Contact } from '../interfaces/contact';
 import { ContactDetailsComponent } from "./contact-details/contact-details.component";
 import { CommonModule } from '@angular/common';
 import { BlackButtonComponent } from "../general/black-button/black-button.component";
 import { EditContactComponent } from './edit-contact/edit-contact.component';
-import { FirebaseService } from '../shared/services/firebase.service';
+import { FirebaseService } from '../services/firebase.service';
 import { ContactPageNotificationComponent } from "../general/contact-page-notification/contact-page-notification.component";
 import { showContactNotification } from '../utils/helpers';
 

@@ -8,8 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE, DateAdapter } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { CUSTOM_DATE_FORMATS } from '../utils/custom-date-formats';
-import { FirebaseService } from '../shared/services/firebase.service';
-import { Contact } from '../shared/interfaces/contact';
+import { FirebaseService } from '../services/firebase.service';
+import { Contact } from '../interfaces/contact';
 import { getContactInitials } from '../utils/helpers';
 
 @Component({

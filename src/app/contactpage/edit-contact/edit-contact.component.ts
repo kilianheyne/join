@@ -10,8 +10,8 @@ import {
   animate,
   transition
 } from '@angular/animations';
-import { FirebaseService } from '../../shared/services/firebase.service';
-import { Contact } from '../../shared/interfaces/contact';
+import { FirebaseService } from '../../services/firebase.service';
+import { Contact } from '../../interfaces/contact';
 import { TrimOnBlurDirective } from '../../directives/trim-on-blur.directive';
 
 @Component({
@@ -53,7 +53,7 @@ export class EditContactComponent {
     const findData = this.firebaseService.contactsList.filter(contact => contact.id === contactId);
 
     if (findData.length > 0) {
-      const selectedContact = findData[0];      
+      const selectedContact = findData[0];
       this.contactFormData = { ...selectedContact };
       this.isVisible = true;
     }
@@ -68,7 +68,7 @@ export class EditContactComponent {
       this.contactFormData.color = this.getBgColorForCircle(this.contactFormData.name);
       this.contactFormData.avatar = this.getContactInitials(this.contactFormData.name);
 
-      this.firebaseService.updateContactInDatabase(this.contactFormData.id ?? '', this.contactFormData);
+      this.firebaseService.updateDataInDatabase<Contact>('contacts', this.contactFormData.id ?? '', this.contactFormData);
       this.closeForm();
       this.contactUpdated.emit();
     }
@@ -84,7 +84,7 @@ export class EditContactComponent {
 
   deleteContact(contactId: string) {
     if (contactId) {
-      this.firebaseService.deleteContactFromDatabase(contactId);
+      this.firebaseService.deleteDataFromDatabase('contacts', contactId);
       this.closeForm();
       this.contactDeleted.emit();
     }

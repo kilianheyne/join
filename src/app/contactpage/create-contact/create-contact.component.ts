@@ -9,8 +9,8 @@ import {
   animate,
   transition
 } from '@angular/animations';
-import { Contact } from '../../shared/interfaces/contact';
-import { FirebaseService } from '../../shared/services/firebase.service';
+import { Contact } from '../../interfaces/contact';
+import { FirebaseService } from '../../services/firebase.service';
 import { getDoc, DocumentReference } from 'firebase/firestore';
 import { TrimOnBlurDirective } from '../../directives/trim-on-blur.directive';
 import { getBgColorForCircle, getContactInitials } from '../../utils/helpers';
@@ -52,7 +52,7 @@ export class CreateContactComponent {
       this.contactFormData.color = this.getBgColorForCircle(this.contactFormData.name);
       this.contactFormData.avatar = this.getContactInitials(this.contactFormData.name);
 
-      this.firebaseService.addContactToDatabase(this.contactFormData).then(async (docRef) => {
+      this.firebaseService.addDataToDatabase<Contact>('contacts', this.contactFormData).then(async (docRef) => {
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           const newContact = { id: docSnap.id, ...docSnap.data() };
