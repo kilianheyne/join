@@ -1,5 +1,5 @@
-<section *ngIf="isVisible">
-    <div @slideInFromRight>
+<section [class.hidden]="!isTaskVisible">
+    <div *ngIf="isVisible" @slideInFromRight>
         <div class="top-card">
             <div class="task-name">
                 <span>ich bins der Task-Name</span>
