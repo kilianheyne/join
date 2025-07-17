@@ -6,7 +6,12 @@ export class PriorityModel {
       id,
       title: data.title,
       icon: data.icon,
-      color: data.color
+      color: data.color,
+      order: data.order,
     };
+  }
+
+  static sort(a: Priority, b: Priority): number {
+    return a.order - b.order;
   }
 }
