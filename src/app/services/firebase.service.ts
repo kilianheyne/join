@@ -4,6 +4,8 @@ import { Contact } from '../interfaces/contact';
 import { Priority } from '../interfaces/priority';
 import { ContactModel } from '../models/contact.model';
 import { PriorityModel } from '../models/priority.model';
+import { Task } from '../interfaces/task';
+import { TaskModel } from '../models/task.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +15,12 @@ export class FirebaseService implements OnDestroy {
   unsubscribeAll: (() => void)[] = [];
   contactsList: Contact[] = [];
   prioritiesList: Priority[] = [];
+  tasksList: Task[] = [];
 
   constructor(private firestore: Firestore) {
     this.subscribeToCollection<Contact>('contacts', this.contactsList, ContactModel.fromFirestore);
     this.subscribeToCollection<Priority>('categories', this.prioritiesList, PriorityModel.fromFirestore);
+    this.subscribeToCollection<Task>('tasks', this.tasksList, TaskModel.fromFirestore)
   }
 
   private subscribeToCollection<T>(
