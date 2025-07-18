@@ -26,7 +26,12 @@
                 <div class="icon-add"></div>
             </div>
             <div class="task-area">
-                <div class="no-tasks">No tasks To do</div> <!-- TO-DO: if-condition, whenn array is empty -->
+                @for (task of getTaskByStatus('to-do'); track task.id) {
+                    <app-task-card [task]="task" (click)="showTaskDetails()"></app-task-card>
+                }
+                @if (getTaskByStatus('to-do').length === 0) {
+                    <div class="no-tasks">No tasks To do</div>
+                }
             </div>
         </div>
         <div class="column">
@@ -35,8 +40,12 @@
                 <div class="icon-add"></div>
             </div>
             <div class="task-area">
-                <!--  <div>No tasks In progress</div> TO-DO: if-condition, whenn array is empty -->
-                <app-task-card (click)="showTaskDetails()"></app-task-card>
+                @for (task of getTaskByStatus('in-progress'); track task.id) {
+                    <app-task-card [task]="task" (click)="showTaskDetails()"></app-task-card>
+                }
+                @if (getTaskByStatus('in-progress').length === 0) {
+                    <div class="no-tasks">No tasks To do</div>
+                }
             </div>
         </div>
         <div class="column">
@@ -45,9 +54,12 @@
                 <div class="icon-add"></div>
             </div>
             <div class="task-area">
-                <!-- <div>No tasks Await feedback</div> TO-DO: if-condition, whenn array is empty -->
-                <app-task-card (click)="showTaskDetails()"></app-task-card>
-                <app-task-card (click)="showTaskDetails()"></app-task-card>
+                @for (task of getTaskByStatus('await-feedback'); track task.id) {
+                    <app-task-card [task]="task" (click)="showTaskDetails()"></app-task-card>
+                }
+                @if (getTaskByStatus('await-feedback').length === 0) {
+                    <div class="no-tasks">No tasks To do</div>
+                }
             </div>
         </div>
         <div class="column">
@@ -56,8 +68,12 @@
                 <div class="icon-add"></div>
             </div>
             <div class="task-area">
-                <!-- <div>No tasks Done</div> TO-DO: if-condition, whenn array is empty -->
-                <app-task-card (click)="showTaskDetails()"></app-task-card>
+                @for (task of getTaskByStatus('done'); track task.id) {
+                    <app-task-card [task]="task" (click)="showTaskDetails()"></app-task-card>
+                }
+                @if (getTaskByStatus('done').length === 0) {
+                    <div class="no-tasks">No tasks To do</div>
+                }
             </div>
         </div>
         <app-task [isVisible]="isTaskVisible" (closed)="onTaskClosed()"></app-task>
