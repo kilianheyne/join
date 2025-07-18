@@ -1,11 +1,11 @@
 export interface Task {
     id?: string;
     category: string;
-    date: string;
+    date: Date;
     description: string;
     priority: string;
     status: string;
-    subtasks: string[];
+    subtasks: { title: string, done: boolean }[];
     title: string;
     users:[];
 }
