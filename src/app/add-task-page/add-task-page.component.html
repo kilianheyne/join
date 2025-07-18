@@ -33,26 +33,20 @@
             <label class="form-label" for="priority">
                 <span class="label">Priority</span>
                 <div>
-                    <label for="urgent">
-                        <div>Urgent <span class="icon icon-urgent"></span></div>
-                        <input type="radio" name="priority" value="urgent" id="urgent">
-                    </label>
-                    <label for="medium">
-                        <div>Medium <span class="icon icon-medium"></span></div>
-                        <input type="radio" name="priority" value="medium" id="medium" checked>
-                    </label>
-                    <label for="low">
-                        <div>Low <span class="icon icon-low"></span></div>
-                        <input type="radio" name="priority" value="low" id="low">
-                    </label>
+                    @for (priority of getPriorities(); track priority.id) {
+                        <label for="{{priority.title}}">
+                            <div>{{priority.title}} <span class="icon" [className]="priority.icon"></span></div>
+                            <input type="radio" name="priority" [value]="priority.title" [id]="priority.title" [checked]="priority.title === 'Medium'">
+                        </label>
+                    }
                 </div>
             </label>
 
-            <label class="form-label select-contact">
+            <label class="form-label select-contact" [class.open]="isContactListOpen">
                 <span class="label">Assigned to</span>
-                <input type="text" name="contact" value="Select contacts to assign">
+                <input type="text" name="contact" [(ngModel)]="searchContactInput" [placeholder]="isContactListOpen ? '' : 'Select contacts to assign'" (click)="isContactListOpen = !isContactListOpen">
 
-                <div>
+                <div *ngIf="isContactListOpen">
                     @for (contact of getContacts(); track contact.id) {
                         <label>
                             <div>

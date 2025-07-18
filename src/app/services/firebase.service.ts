@@ -19,7 +19,7 @@ export class FirebaseService implements OnDestroy {
 
   constructor(private firestore: Firestore) {
     this.subscribeToCollection<Contact>('contacts', this.contactsList, ContactModel.fromFirestore);
-    this.subscribeToCollection<Priority>('categories', this.prioritiesList, PriorityModel.fromFirestore);
+    this.subscribeToCollection<Priority>('priorities', this.prioritiesList, PriorityModel.fromFirestore);
     this.subscribeToCollection<Task>('tasks', this.tasksList, TaskModel.fromFirestore)
   }
 
