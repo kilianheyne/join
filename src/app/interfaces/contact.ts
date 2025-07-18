@@ -5,4 +5,5 @@ export interface Contact {
     phone: string;
     color?: string;
     avatar?: string;
+    checked?: boolean
 }
