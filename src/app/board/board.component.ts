@@ -4,6 +4,7 @@ import { TaskCardComponent } from "./task-card/task-card.component";
 import { TaskComponent } from './task/task.component';
 import { Task } from '../interfaces/task';
 import { FirebaseService } from '../services/firebase.service';
+import { Category } from '../interfaces/category';
 
 @Component({
   selector: 'app-board',
@@ -16,13 +17,16 @@ export class BoardComponent {
   isTaskVisible = false;
   showTitle:boolean = false;
   buttonPadding = '8px 16px';
+
   tasks: Task[] = [];
+  categories: Category[] = [];
 
   constructor(private firebaseService: FirebaseService) {}
 
   ngOnInit() {
     this.checkScreenSize();
     this.tasks = this.firebaseService.tasksList;
+    this.categories = this.firebaseService.categoriesList;
   }
 
   @HostListener('window:resize')

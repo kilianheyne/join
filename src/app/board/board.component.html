@@ -27,7 +27,7 @@
             </div>
             <div class="task-area">
                 @for (task of getTaskByStatus('to-do'); track task.id) {
-                    <app-task-card [task]="task" (click)="showTaskDetails()"></app-task-card>
+                    <app-task-card [task]="task" [categories]="categories" (click)="showTaskDetails()"></app-task-card>
                 }
                 @if (getTaskByStatus('to-do').length === 0) {
                     <div class="no-tasks">No tasks To do</div>
@@ -41,7 +41,7 @@
             </div>
             <div class="task-area">
                 @for (task of getTaskByStatus('in-progress'); track task.id) {
-                    <app-task-card [task]="task" (click)="showTaskDetails()"></app-task-card>
+                    <app-task-card [task]="task" [categories]="categories" (click)="showTaskDetails()"></app-task-card>
                 }
                 @if (getTaskByStatus('in-progress').length === 0) {
                     <div class="no-tasks">No tasks To do</div>
@@ -55,7 +55,7 @@
             </div>
             <div class="task-area">
                 @for (task of getTaskByStatus('await-feedback'); track task.id) {
-                    <app-task-card [task]="task" (click)="showTaskDetails()"></app-task-card>
+                    <app-task-card [task]="task" [categories]="categories" (click)="showTaskDetails()"></app-task-card>
                 }
                 @if (getTaskByStatus('await-feedback').length === 0) {
                     <div class="no-tasks">No tasks To do</div>
@@ -69,7 +69,7 @@
             </div>
             <div class="task-area">
                 @for (task of getTaskByStatus('done'); track task.id) {
-                    <app-task-card [task]="task" (click)="showTaskDetails()"></app-task-card>
+                    <app-task-card [task]="task" [categories]="categories" (click)="showTaskDetails()"></app-task-card>
                 }
                 @if (getTaskByStatus('done').length === 0) {
                     <div class="no-tasks">No tasks To do</div>
