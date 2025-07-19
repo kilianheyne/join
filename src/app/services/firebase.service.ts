@@ -7,6 +7,8 @@ import { PriorityModel } from '../models/priority.model';
 import { Task } from '../interfaces/task';
 import { TaskModel } from '../models/task.model';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { Category } from '../interfaces/category';
+import { CategoryModel } from '../models/category.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +25,10 @@ export class FirebaseService implements OnDestroy {
   public prioritiesList$ = this._prioritiesList.asObservable();
   prioritiesList: Priority[] = [];
 
+  private _categoriesList = new BehaviorSubject<Category[]>([]);
+  public categoriesList$ = this._categoriesList.asObservable();
+  categoriesList: Category[] = [];
+
   private _tasksList = new BehaviorSubject<Task[]>([]);
   public tasksList$ = this._tasksList.asObservable();
   tasksList: Task[] = [];
@@ -30,6 +36,7 @@ export class FirebaseService implements OnDestroy {
   constructor(private firestore: Firestore) {
     this.subscribeToCollection<Contact>('contacts', this._contactsList, this.contactsList, ContactModel.fromFirestore);
     this.subscribeToCollection<Priority>('priorities', this._prioritiesList, this.prioritiesList, PriorityModel.fromFirestore);
+    this.subscribeToCollection<Category>('categories', this._categoriesList, this.categoriesList, CategoryModel.fromFirestore);
     this.subscribeToCollection<Task>('tasks', this._tasksList, this.tasksList, TaskModel.fromFirestore)
   }
 
