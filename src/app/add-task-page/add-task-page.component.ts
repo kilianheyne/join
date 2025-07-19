@@ -13,6 +13,9 @@ import { Contact } from '../interfaces/contact';
 import { Priority } from '../interfaces/priority';
 import { PriorityModel } from '../models/priority.model';
 import { trigger, style, animate, transition } from '@angular/animations';
+import { Category } from '../interfaces/category';
+import { CategoryModel } from '../models/category.model';
+import { Subtask } from '../interfaces/subtask';
 
 @Component({
   selector: 'app-add-task-page',
@@ -49,24 +52,30 @@ export class AddTaskPageComponent {
   firebaseService = inject(FirebaseService);
 
   isContactListOpen = false;
+  isCategoryListOpen = false;
+  categoryTitle = '';
   searchContactInput: string = '';
   contactList: Contact[] = [];
+  subtaskTitle = '';
+  subtasks: Subtask[] = [];
 
-  createTaskData: {
+  taskData: {
     title: string,
     description: string,
-    date: moment.Moment | null
+    date: moment.Moment | null,
+    category: string
   } = {
       title: '',
       description: '',
-      date: null
+      date: null,
+      category: ''
     }
 
   constructor() {
     this.firebaseService.contactsList$.subscribe(contacts => {
       for (const [i, contact] of contacts.entries()) {
         this.contactList.push(contact)
-        this.contactList[i].checked = false; 
+        this.contactList[i].checked = false;
       }
     });
   }
@@ -89,8 +98,25 @@ export class AddTaskPageComponent {
     return this.firebaseService.prioritiesList.slice().sort(PriorityModel.sort);
   }
 
+  getCategories(): Category[] {
+    return this.firebaseService.categoriesList.slice().sort(CategoryModel.sort);
+  }
+
+  addSubtask() {
+    this.subtasks.push({
+      'title': this.subtaskTitle,
+      'done': false,
+      'edit': false
+    });
+    this.subtaskTitle = '';
+  }
+
+  deleteSubtask(index: number) {
+    this.subtasks.splice(index, 1);
+  }
+
   sumbitForm() {
-    console.log(this.createTaskData.date ? this.createTaskData.date.format('DD-MM-YYYY') : '');
+    console.log(this.taskData.date ? this.taskData.date.format('DD-MM-YYYY') : '');
   }
 
 }
