@@ -11,7 +11,18 @@
         <div>1/2 Subtasks</div>
     </div>
     <div class="overview">
-        <div>{{ task.users }}</div>
+        <div class="user-icons">
+            @for (user of assignedContacts; track user.id) {
+                <div class="user-circle" [style.background]="user.color">
+                    {{ user.avatar }}
+                </div>
+            }
+            @if (remainingUsers > 0) {
+                <div class="user-circle extra">
+                    +{{ remainingUsers }}
+                </div>
+            }
+        </div>
         <div>{{ task.priority }}</div>
     </div>
 </div>

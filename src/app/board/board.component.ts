@@ -67,7 +67,6 @@ export class BoardComponent {
     }
     if (task.status !== targetStatus) {
       task.status = targetStatus;
-      console.log(`Task ${task.title} verschoben nach ${targetStatus}`);
       this.firebaseService.updateDataInDatabase('tasks', task.id, { status: targetStatus });
     }
     this.tasks = [...this.tasks]; // lokale Liste wird neu gerendert

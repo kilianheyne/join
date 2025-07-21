@@ -9,7 +9,6 @@
     box-shadow: 0 0 10px 3px #00000014;
     margin-bottom: 16px;
     font-size: 16px;
-    cursor: grab;
 
     @media (max-width: 1100px) {
         width: 252px;
@@ -51,5 +50,24 @@
     }
     .overview {
         display: flex;
+        justify-content: space-between;
+
+        .user-icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: grey; // Fallback, wird überschrieben
+            color: white;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
     }
 }
