@@ -172,7 +172,7 @@ section {
                     }
                 }
 
-                >div {
+                >div.contact-list {
                     display: flex;
                     flex-direction: column;
                     gap: 3px;
@@ -183,6 +183,8 @@ section {
                     border-radius: 0 0 10px 10px;
                     max-height: 250px;
                     overflow-y: auto;
+                    height: auto;
+                    opacity: 1;
 
                     &::before {
                         content: "s";
@@ -277,12 +279,194 @@ section {
                         }
                     }
                 }
+
+                >div.contact-avatars {
+                    display: flex;
+                    gap: 5px;
+                    margin-top: 5px;
+
+                    >div {
+                        width: 39px;
+                        height: 39px;
+                        border-radius: 50%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border: solid 3px white;
+                        background: #D1D1D1;
+
+                        >span {
+                            color: white;
+                            font-size: 12px;
+                        }
+                    }
+                }
+            }
+
+            label.select-category {
+                gap: 0;
+
+                &::after {
+                    content: "\63";
+                    top: 46px;
+                    right: 20px;
+                    color: black;
+                    font-size: 10px;
+                    padding: 8px 8px 6px;
+                    border-radius: 50%;
+                    z-index: 2;
+                    cursor: pointer;
+                }
+
+                &.open::after {
+                    content: "\65";
+                }
+
+                >span:nth-child(1) {
+                    margin-bottom: 8px;
+                }
+
+                >input {
+                    cursor: pointer;
+                    box-shadow: inset -1px 1px 0px 0px #c8c8c8;
+                    z-index: 1;
+
+                    &:hover {
+                        box-shadow: inset -2px 2px 0px 0px #c1c1c1;
+                    }
+
+                    &::placeholder {
+                        color: black;
+                    }
+                }
+
+                >div.category-list {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 3px;
+                    background: white;
+                    position: static;
+                    top: 0;
+                    padding-top: 3px;
+                    border-radius: 0 0 10px 10px;
+                    max-height: 250px;
+                    height: auto;
+                    opacity: 1;
+
+                    &::before {
+                        content: "s";
+                        background: #ffffff;
+                        position: absolute;
+                        top: 50px;
+                        z-index: -1;
+                        left: 0;
+                        right: 0;
+                        color: white;
+                        height: 50px;
+                    }
+
+                    >label {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding: 12px 20px;
+                        border-radius: 10px;
+                        cursor: pointer;
+
+                        &:hover {
+                            background: #ebebeb;
+                        }
+
+                        >div {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            gap: 15px;
+                            font-size: 20px;
+                        }
+
+                        >input {
+                            display: none;
+                        }
+                    }
+                }
+            }
+
+            label.subtasks {
+                >div:nth-child(3) {
+                    position: absolute;
+                    top: 48px;
+                    right: 25px;
+
+                    span {
+                        &::before {
+                            vertical-align: middle;
+                        }
+                    }
+                }
+
+                >ul {
+                    display: flex;
+                    flex-direction: column;
+
+                    >li {
+                        margin: 15px 25px 15px 50px;
+                        font-size: 16px;
+
+                        &.editable {
+                            margin: 5px 0 5px;
+                            list-style-type: none;
+                        }
+
+                        >div.no-input {
+                            display: flex;
+                            justify-content: space-between;
+                        }
+
+                        >div.with-input {
+                            position: relative;
+
+                            >input {
+                                width: 100%;
+                                padding: 12px 16px;
+                                font-size: 16px;
+                                outline: none;
+                                border: none;
+                                border-bottom: solid 1px $lightBlue;
+                            }
+
+                            >div {
+                                position: absolute;
+                                top: 13px;
+                                right: 25px;
+                            }
+                        }
+                    }
+
+
+                }
             }
         }
     }
 
     >div:nth-child(3) {
         color: green;
+    }
+}
+
+div.icon-with-separate {
+    display: flex;
+    gap: 7px;
+    justify-content: center;
+    align-items: center;
+
+    span {
+        cursor: pointer;
+    }
+
+    span.separate {
+        color: #D1D1D1;
+        cursor: default;
     }
 }
 

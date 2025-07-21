@@ -6,6 +6,7 @@ import { ContactModel } from '../models/contact.model';
 import { PriorityModel } from '../models/priority.model';
 import { Task } from '../interfaces/task';
 import { TaskModel } from '../models/task.model';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Category } from '../interfaces/category';
 import { CategoryModel } from '../models/category.model';
 
@@ -15,30 +16,48 @@ import { CategoryModel } from '../models/category.model';
 export class FirebaseService implements OnDestroy {
 
   unsubscribeAll: (() => void)[] = [];
+
+  private _contactsList = new BehaviorSubject<Contact[]>([]);
+  public contactsList$ = this._contactsList.asObservable();
   contactsList: Contact[] = [];
+
+  private _prioritiesList = new BehaviorSubject<Priority[]>([]);
+  public prioritiesList$ = this._prioritiesList.asObservable();
   prioritiesList: Priority[] = [];
+
+  private _categoriesList = new BehaviorSubject<Category[]>([]);
+  public categoriesList$ = this._categoriesList.asObservable();
+  categoriesList: Category[] = [];
+
+  private _tasksList = new BehaviorSubject<Task[]>([]);
+  public tasksList$ = this._tasksList.asObservable();
   tasksList: Task[] = [];
   categoriesList: Category[] = [];
 
   constructor(private firestore: Firestore) {
-    this.subscribeToCollection<Contact>('contacts', this.contactsList, ContactModel.fromFirestore);
-    this.subscribeToCollection<Priority>('priorities', this.prioritiesList, PriorityModel.fromFirestore);
-    this.subscribeToCollection<Task>('tasks', this.tasksList, TaskModel.fromFirestore);
-    this.subscribeToCollection<Category>('categories', this.categoriesList, CategoryModel.fromFirestore);
+    this.subscribeToCollection<Contact>('contacts', this._contactsList, this.contactsList, ContactModel.fromFirestore);
+    this.subscribeToCollection<Priority>('priorities', this._prioritiesList, this.prioritiesList, PriorityModel.fromFirestore);
+    this.subscribeToCollection<Category>('categories', this._categoriesList, this.categoriesList, CategoryModel.fromFirestore);
+    this.subscribeToCollection<Task>('tasks', this._tasksList, this.tasksList, TaskModel.fromFirestore)
   }
 
   private subscribeToCollection<T>(
     collectionName: string,
+    subject: BehaviorSubject<T[]>,
     targetArray: T[],
     transform: (id: string, data: any) => T
   ): void {
     const colRef = collection(this.firestore, collectionName);
 
     const unsubscribe = onSnapshot(colRef, (snapshot) => {
-      targetArray.length = 0;
+      const newItems: T[] = [];
       snapshot.forEach((doc) => {
-        targetArray.push(transform(doc.id, doc.data()));
+        newItems.push(transform(doc.id, doc.data()));
       });
+
+      targetArray.length = 0;
+      targetArray.push(...newItems);
+      subject.next([...newItems]);
     });
 
     this.unsubscribeAll.push(unsubscribe);

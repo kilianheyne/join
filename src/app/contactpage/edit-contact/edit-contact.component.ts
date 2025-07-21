@@ -4,12 +4,7 @@ import { WhiteButtonComponent } from "../../general/white-button/white-button.co
 import { BlackButtonComponent } from '../../general/black-button/black-button.component';
 import { FormsModule, NgForm } from '@angular/forms';
 import { getBgColorForCircle, getContactInitials } from "../../utils/helpers"
-import {
-  trigger,
-  style,
-  animate,
-  transition
-} from '@angular/animations';
+import { trigger, style, animate, transition } from '@angular/animations';
 import { FirebaseService } from '../../services/firebase.service';
 import { Contact } from '../../interfaces/contact';
 import { TrimOnBlurDirective } from '../../directives/trim-on-blur.directive';

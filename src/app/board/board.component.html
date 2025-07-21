@@ -1,27 +1,31 @@
 <section>
-    <div id="board-header">
-        <h2>Board</h2>
-        <div>
-            <div id="input-area">
+    <div class="content">
+        <div class="board-header">
+            <h2>Board</h2>
+            <div>
+                <div id="input-area">
+                    <input type="text" placeholder="Find Task"> <!-- TO-DO: placeholder needs align-center -->
+                    <div id="grey-line"></div>
+                    <div class="icon-search"></div> <!-- TO-DO: hover & active? & padding -->
+                </div>
+                <div>
+                    <app-black-button [title]="showTitle ? 'Add task' : ''" icon="icon-add" [padding]="buttonPadding"
+                        iconFontSize="21px"></app-black-button> <!-- TO-DO: icon-add needs align-center -->
+                </div>
+            </div>
+        </div>
+
+        <div class="search-mobile">
+            <div class="input-area-mobile">
                 <input type="text" placeholder="Find Task"> <!-- TO-DO: placeholder needs align-center -->
                 <div id="grey-line"></div>
                 <div class="icon-search"></div> <!-- TO-DO: hover & active? & padding -->
             </div>
-            <div>
-                <app-black-button [title]="showTitle ? 'Add task' : ''" icon="icon-add" [padding]="buttonPadding" iconFontSize="21px"></app-black-button> <!-- TO-DO: icon-add needs align-center -->
-            </div>
         </div>
-    </div>
-    <div id="mobile-input">   
-        <div id="mobile-input-area">
-            <input type="text" placeholder="Find Task"> <!-- TO-DO: placeholder needs align-center -->
-            <div id="grey-line"></div>
-            <div class="icon-search"></div> <!-- TO-DO: hover & active? & padding -->
-        </div>
-    </div>
-    <div id="lists">
-        <div class="column">
-            <div>
+
+
+        <div class="lists">
+            <div class="headline">
                 <span>To do</span>
                 <div class="icon-add"></div>
             </div>
@@ -74,8 +78,10 @@
                 @if (getTaskByStatus('done').length === 0) {
                     <div class="no-tasks">No tasks To do</div>
                 }
+
+                <app-task [isVisible]="isTaskVisible" (closed)="onTaskClosed()"></app-task>
+
             </div>
         </div>
-        <app-task [isVisible]="isTaskVisible" (closed)="onTaskClosed()"></app-task>
     </div>
 </section>
