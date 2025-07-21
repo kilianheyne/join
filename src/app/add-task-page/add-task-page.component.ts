@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { TrimOnBlurDirective } from '../directives/trim-on-blur.directive';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,6 +16,10 @@ import { trigger, style, animate, transition } from '@angular/animations';
 import { Category } from '../interfaces/category';
 import { CategoryModel } from '../models/category.model';
 import { Subtask } from '../interfaces/subtask';
+import { WhiteButtonComponent } from "../general/white-button/white-button.component";
+import { BlackButtonComponent } from "../general/black-button/black-button.component";
+import { Task } from '../interfaces/task';
+import { getDoc } from 'firebase/firestore';
 
 @Component({
   selector: 'app-add-task-page',
@@ -26,7 +30,9 @@ import { Subtask } from '../interfaces/subtask';
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    WhiteButtonComponent,
+    BlackButtonComponent
   ],
   providers: [
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
@@ -58,20 +64,34 @@ export class AddTaskPageComponent {
   contactList: Contact[] = [];
   subtaskTitle = '';
   subtasks: Subtask[] = [];
+  momentDate: moment.Moment | null = null;
 
-  taskData: {
-    title: string,
-    description: string,
-    date: moment.Moment | null,
-    category: string
-  } = {
-      title: '',
-      description: '',
-      date: null,
-      category: ''
-    }
+  taskData: Task = {
+    title: '',
+    description: '',
+    date: new Date(),
+    priority: '',
+    category: '',
+    users: [],
+    subtasks: [],
+    status: 'to-do'
+  }
 
   constructor() {
+    this.selectMediumPriorityAsDefault();
+    this.assignCheckedValueToContacts();
+  }
+
+  selectMediumPriorityAsDefault() {
+    this.firebaseService.prioritiesList$.subscribe(priorities => {
+      const MediumPriority = priorities.filter(priority => priority.title === 'Medium');
+      if (MediumPriority.length) {
+        this.taskData.priority = MediumPriority[0].id
+      }
+    })
+  }
+
+  assignCheckedValueToContacts() {
     this.firebaseService.contactsList$.subscribe(contacts => {
       for (const [i, contact] of contacts.entries()) {
         this.contactList.push(contact)
@@ -103,20 +123,49 @@ export class AddTaskPageComponent {
   }
 
   addSubtask() {
-    this.subtasks.push({
-      'title': this.subtaskTitle,
-      'done': false,
-      'edit': false
-    });
-    this.subtaskTitle = '';
+    if (this.subtaskTitle.length > 0) {
+      this.subtasks.push({
+        'title': this.subtaskTitle,
+        'done': false,
+        'edit': false
+      });
+      this.subtaskTitle = '';
+    }
+
   }
 
   deleteSubtask(index: number) {
     this.subtasks.splice(index, 1);
   }
 
-  sumbitForm() {
-    console.log(this.taskData.date ? this.taskData.date.format('DD-MM-YYYY') : '');
+  submitForm(taskForm: NgForm) {
+    if (taskForm.valid && taskForm.submitted) {
+      this.taskData.users = this.getSelectedContacts().map(contact => contact.id);
+      this.taskData.subtasks = this.subtasks.map(subtask => ({
+        title: subtask.title,
+        done: subtask.done
+      }));
+      this.taskData.date = this.momentDate ? this.momentDate.toDate() : new Date();
+      this.firebaseService.addDataToDatabase<Task>('tasks', this.taskData).then(async (docRef) => {
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          this.cancelForm(taskForm);
+        }
+      });
+    }
   }
 
+  cancelForm(taskForm: NgForm) {
+    taskForm.resetForm();
+    setTimeout(() => {
+      for (const contact of this.contactList) {
+        contact.checked = false;
+      }
+      this.searchContactInput = '';
+      this.selectMediumPriorityAsDefault();
+      this.subtaskTitle = ''
+      this.subtasks = [];
+    }, 200);
+
+  }
 }

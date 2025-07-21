@@ -1,11 +1,13 @@
+import { Subtask } from "./subtask";
+
 export interface Task {
     id?: string;
-    category: string;
-    date: Date;
-    description: string;
-    priority: string;
-    status: string;
-    subtasks: { title: string, done: boolean }[];
     title: string;
-    users:[];
+    description: string;
+    date: Date;
+    category?: string;
+    priority?: string;
+    subtasks: Subtask[];
+    users: (string | undefined)[];
+    status: 'to-do' | 'in-progress' | 'await-feedback' | 'done';
 }
