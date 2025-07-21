@@ -5,10 +5,12 @@ import { TaskComponent } from './task/task.component';
 import { Task } from '../interfaces/task';
 import { FirebaseService } from '../services/firebase.service';
 import { Category } from '../interfaces/category';
+import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
+
 
 @Component({
   selector: 'app-board',
-  imports: [TaskComponent, BlackButtonComponent, TaskCardComponent],
+  imports: [TaskComponent, BlackButtonComponent, TaskCardComponent, DragDropModule],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
@@ -54,5 +56,19 @@ export class BoardComponent {
 
   getTaskByStatus(status: string): Task[] {
     return this.tasks.filter(task => task.status === status);
+  }
+
+  onTaskDrop(event: CdkDragDrop<Task[]>, targetStatus: string) {
+    const task = event.item.data as Task;
+    if (!task.id) { // task-interface nutzt id? - verhindert Probleme mit updateDataInDatabase
+      console.error('Task ID fehlt, kann nicht gespeichert werden.');
+      return;
+    }
+    if (task.status !== targetStatus) {
+      task.status = targetStatus;
+      console.log(`Task ${task.title} verschoben nach ${targetStatus}`);
+      this.firebaseService.updateDataInDatabase('tasks', task.id, { status: targetStatus });
+    }
+    this.tasks = [...this.tasks]; // lokale Liste wird neu gerendert
   }
 }

@@ -3,7 +3,7 @@
         <h2>Board</h2>
         <div>
             <div id="input-area">
-                <input type="text" placeholder="Find Task"> <!-- TO-DO: placeholder needs align-center -->
+                <input type="text" placeholder="Find Task"> <!-- in-progress: placeholder needs align-center -->
                 <div id="grey-line"></div>
                 <div class="icon-search"></div> <!-- TO-DO: hover & active? & padding -->
             </div>
@@ -25,9 +25,11 @@
                 <span>To do</span>
                 <div class="icon-add"></div>
             </div>
-            <div class="task-area">
+            <div class="task-area" cdkDropList [cdkDropListData]="getTaskByStatus('to-do')" (cdkDropListDropped)="onTaskDrop($event, 'to-do')" [cdkDropListConnectedTo]="['inProgressList', 'awaitFeedbackList', 'doneList']" id="toDoList">
                 @for (task of getTaskByStatus('to-do'); track task.id) {
-                    <app-task-card [task]="task" [categories]="categories" (click)="showTaskDetails()"></app-task-card>
+                    <div cdkDrag [cdkDragData]="task">
+                        <app-task-card [task]="task" [categories]="categories" (click)="showTaskDetails()"></app-task-card>
+                    </div>
                 }
                 @if (getTaskByStatus('to-do').length === 0) {
                     <div class="no-tasks">No tasks To do</div>
@@ -39,7 +41,7 @@
                 <span>In progress</span>
                 <div class="icon-add"></div>
             </div>
-            <div class="task-area">
+            <div class="task-area" cdkDropList [cdkDropListData]="getTaskByStatus('in-progress')" (cdkDropListDropped)="onTaskDrop($event, 'in-progress')" [cdkDropListConnectedTo]="['toDoList', 'awaitFeedbackList', 'doneList']" id="inProgressList">
                 @for (task of getTaskByStatus('in-progress'); track task.id) {
                     <app-task-card [task]="task" [categories]="categories" (click)="showTaskDetails()"></app-task-card>
                 }
@@ -53,7 +55,7 @@
                 <span>Await feedback</span>
                 <div class="icon-add"></div>
             </div>
-            <div class="task-area">
+            <div class="task-area" cdkDropList [cdkDropListData]="getTaskByStatus('await-feedback')" (cdkDropListDropped)="onTaskDrop($event, 'await-feedback')" [cdkDropListConnectedTo]="['inProgressList', 'toDoList', 'doneList']" id="awaitFeedbackList">
                 @for (task of getTaskByStatus('await-feedback'); track task.id) {
                     <app-task-card [task]="task" [categories]="categories" (click)="showTaskDetails()"></app-task-card>
                 }
@@ -67,7 +69,7 @@
                 <span>Done</span>
                 <div class="icon-add"></div>
             </div>
-            <div class="task-area">
+            <div class="task-area" cdkDropList [cdkDropListData]="getTaskByStatus('done')" (cdkDropListDropped)="onTaskDrop($event, 'done')" [cdkDropListConnectedTo]="['inProgressList', 'awaitFeedbackList', 'toDoList']" id="doneList">
                 @for (task of getTaskByStatus('done'); track task.id) {
                     <app-task-card [task]="task" [categories]="categories" (click)="showTaskDetails()"></app-task-card>
                 }
