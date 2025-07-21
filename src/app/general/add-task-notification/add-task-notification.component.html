@@ -1,0 +1,5 @@
+<section [class.visible]="isVisible">
+    <div *ngIf="isVisible" @slideInFromBottom>
+        {{ notificationText }} <span class="icon icon-board"></span>
+    </div>
+</section>

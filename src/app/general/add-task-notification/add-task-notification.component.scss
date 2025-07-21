@@ -1,0 +1,39 @@
+@use 'styles/variables' as *;
+
+section {
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 200ms ease,;
+    pointer-events: none;
+
+    &.visible {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    >div {
+        padding: 25px 45px;
+        background: #2A3647;
+        color: white;
+        border-radius: 20px;
+        font-size: 20px;
+        text-wrap-mode: nowrap;
+
+        >span {
+            font-size: 28px;
+            margin-left: 15px;
+
+            &::before {
+                vertical-align: middle;
+            }
+        }
+    }
+}
