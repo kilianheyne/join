@@ -1,43 +1,35 @@
 <section [class.visible]="isTaskVisible">
     <div *ngIf="isVisible" @slideInFromRight>
         <div class="top-card">
-            <div class="task-name">
-                <span>ich bins der Task-Name</span>
+            <div class="task-name" [style.background]="task.category">
+                <span>{{ task.category }}</span>
             </div>
             <button (click)="closeTaskDetails()" class="icon icon-close"></button>
         </div>
-        <h2>Überschrift der Task hier einfügen</h2>
-        <span>Beschreibung der Task hier einfügen</span>
+        <h2>{{ task.title }}</h2>
+        <span>{{task.description }}</span>
         <div class="task-date">
             <span>Due date:</span>
-            <span>01/01/2000</span>
+            <span>{{ task.date }}</span>
         </div>
         <div class="task-priority">
             <span>Priority:</span>
-            <span>Medium =</span>
+            <span>{{ task.priority }}</span>
         </div>
         <span class="title">Assigned To:</span>
-        <div class="task-worker">
-            <div class="circle">MN</div>
-            <span>Manuel Neuer</span>
-        </div>
-        <div class="task-worker">
-            <div class="circle">DB</div>
-            <span>Dieter Bohlen</span>
-        </div>
-        <div class="task-worker">
-            <div class="circle">TD</div>
-            <span>Tonald Drump</span>
-        </div>
+        @for (user of task.users; track task.id) {
+            <div class="task-worker">
+                <div class="circle">MN</div>
+                <span>Manuel Neuer</span>
+            </div>
+        }
         <span class="title">Subtasks</span>
-        <div class="subtask">
-            <input type="checkbox">
-            <span>hier könnte ihre Werbung stehen</span>
-        </div>
-        <div class="subtask">
-            <input type="checkbox">
-            <span>nur 3.50€ pro Sekunde</span>
-        </div>
+        @for (subtask of task.subtasks; track task.id) {
+            <div class="subtask">
+                <input type="checkbox">
+                <span>hier könnte ihre Aufgabe stehen</span>
+            </div>
+        }
         <div class="task-buttons">
             <button>
                 <div class="icon-delete"></div>

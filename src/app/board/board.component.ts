@@ -2,6 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { BlackButtonComponent } from "../general/black-button/black-button.component";
 import { TaskCardComponent } from "./task-card/task-card.component";
 import { TaskComponent } from './task/task.component';
+import { Task } from '../interfaces/task';
 
 @Component({
   selector: 'app-board',
@@ -12,6 +13,7 @@ import { TaskComponent } from './task/task.component';
 export class BoardComponent {
 
   isTaskVisible = false;
+  selectedTask!: Task;
   showTitle:boolean = false;
   buttonPadding = '8px 16px';
 
@@ -34,7 +36,8 @@ export class BoardComponent {
     }
   }
 
-  showTaskDetails() {
+  showTaskDetails(task: Task) {
+    this.selectedTask = task;
     this.isTaskVisible = true;
   }
 

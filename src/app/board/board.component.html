@@ -36,7 +36,7 @@
             </div>
             <div class="task-area">
                 <!--  <div>No tasks In progress</div> TO-DO: if-condition, whenn array is empty -->
-                <app-task-card (click)="showTaskDetails()"></app-task-card>
+                <app-task-card></app-task-card>
             </div>
         </div>
         <div class="column">
@@ -46,8 +46,8 @@
             </div>
             <div class="task-area">
                 <!-- <div>No tasks Await feedback</div> TO-DO: if-condition, whenn array is empty -->
-                <app-task-card (click)="showTaskDetails()"></app-task-card>
-                <app-task-card (click)="showTaskDetails()"></app-task-card>
+                <app-task-card></app-task-card>
+                <app-task-card></app-task-card>
             </div>
         </div>
         <div class="column">
@@ -57,9 +57,10 @@
             </div>
             <div class="task-area">
                 <!-- <div>No tasks Done</div> TO-DO: if-condition, whenn array is empty -->
-                <app-task-card (click)="showTaskDetails()"></app-task-card>
+                <app-task-card></app-task-card>
             </div>
         </div>
-        <app-task [isVisible]="isTaskVisible" (closed)="onTaskClosed()"></app-task>
+        <app-task [isVisible]="isTaskVisible" [task]="selectedTask" (closed)="onTaskClosed()"></app-task>
+        <!-- (click)="showTaskDetails(task)" -->
     </div>
 </section>
