@@ -61,6 +61,7 @@
             width: 32px;
             height: 32px;
             border-radius: 50%;
+            border: solid 1px white;
             background: grey; // Fallback, wird überschrieben
             color: white;
             font-weight: bold;
@@ -68,6 +69,11 @@
             align-items: center;
             justify-content: center;
             font-size: 12px;
+            margin-left: -10px;
+
+            &:first-child {
+                margin-left: 0;
+            }
         }
     }
 }

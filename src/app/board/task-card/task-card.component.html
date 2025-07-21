@@ -23,6 +23,8 @@
                 </div>
             }
         </div>
-        <div>{{ task.priority }}</div>
+        @if (priorityData){
+            <div [class]="priorityData.icon" [style.color]="priorityData.color"></div>
+        }
     </div>
 </div>

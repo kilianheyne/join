@@ -2,6 +2,7 @@ import { Component, Input, SimpleChanges } from '@angular/core';
 import { Task } from '../../interfaces/task';
 import { Category } from '../../interfaces/category';
 import { Contact } from '../../interfaces/contact';
+import { Priority } from '../../interfaces/priority';
 
 @Component({
   selector: 'app-task-card',
@@ -13,11 +14,14 @@ export class TaskCardComponent {
   @Input() task!: Task;
   @Input() categories!: Category[];
   @Input() contacts!: Contact[];
+  @Input() priorities!: Priority[];
 
   categoryData: Category | undefined;
 
   assignedContacts: Contact[] = [];
   remainingUsers: number = 0;
+
+  priorityData: Priority | undefined;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['categories'] || changes['task']) {
@@ -25,6 +29,9 @@ export class TaskCardComponent {
     }
     if (changes['contacts'] || changes['task']) {
       this.setAssignedContacts();
+    }
+    if (changes['priorities'] || changes['task']) {
+      this.setPriorityData();
     }
   }
 
@@ -48,6 +55,14 @@ export class TaskCardComponent {
         this.assignedContacts = matchedContacts;
         this.remainingUsers = 0;
       }
+    }
+  }
+
+  private setPriorityData(): void {
+    console.log('Die priorityData enthält' + this.priorityData);
+    this.priorityData = this.priorities.find(p => p.id === this.task.priority);
+    if (this.priorityData) {
+      console.warn(`Priority mit ID ${this.task.priority} nicht gefunden!`)
     }
   }
 }

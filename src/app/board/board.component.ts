@@ -7,6 +7,7 @@ import { FirebaseService } from '../services/firebase.service';
 import { Category } from '../interfaces/category';
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 import { Contact } from '../interfaces/contact';
+import { Priority } from '../interfaces/priority';
 
 @Component({
   selector: 'app-board',
@@ -24,6 +25,7 @@ export class BoardComponent {
   tasks: Task[] = [];
   categories: Category[] = [];
   contacts: Contact[] = [];
+  priorities: Priority[] = [];
 
   constructor(private firebaseService: FirebaseService) {}
 
@@ -32,6 +34,7 @@ export class BoardComponent {
     this.tasks = this.firebaseService.tasksList;
     this.categories = this.firebaseService.categoriesList;
     this.contacts = this.firebaseService.contactsList;
+    this.priorities = this.firebaseService.prioritiesList;
   }
 
   @HostListener('window:resize')
