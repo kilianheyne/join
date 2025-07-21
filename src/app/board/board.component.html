@@ -43,10 +43,12 @@
             </div>
             <div class="task-area" cdkDropList [cdkDropListData]="getTaskByStatus('in-progress')" (cdkDropListDropped)="onTaskDrop($event, 'in-progress')" [cdkDropListConnectedTo]="['toDoList', 'awaitFeedbackList', 'doneList']" id="inProgressList">
                 @for (task of getTaskByStatus('in-progress'); track task.id) {
-                    <app-task-card [task]="task" [categories]="categories" (click)="showTaskDetails()"></app-task-card>
+                    <div cdkDrag [cdkDragData]="task">
+                        <app-task-card [task]="task" [categories]="categories" (click)="showTaskDetails()"></app-task-card>
+                    </div>
                 }
                 @if (getTaskByStatus('in-progress').length === 0) {
-                    <div class="no-tasks">No tasks To do</div>
+                    <div class="no-tasks">No tasks In progress</div>
                 }
             </div>
         </div>
@@ -57,10 +59,12 @@
             </div>
             <div class="task-area" cdkDropList [cdkDropListData]="getTaskByStatus('await-feedback')" (cdkDropListDropped)="onTaskDrop($event, 'await-feedback')" [cdkDropListConnectedTo]="['inProgressList', 'toDoList', 'doneList']" id="awaitFeedbackList">
                 @for (task of getTaskByStatus('await-feedback'); track task.id) {
-                    <app-task-card [task]="task" [categories]="categories" (click)="showTaskDetails()"></app-task-card>
+                    <div cdkDrag [cdkDragData]="task">
+                        <app-task-card [task]="task" [categories]="categories" (click)="showTaskDetails()"></app-task-card>
+                    </div>
                 }
                 @if (getTaskByStatus('await-feedback').length === 0) {
-                    <div class="no-tasks">No tasks To do</div>
+                    <div class="no-tasks">No tasks Await feedback</div>
                 }
             </div>
         </div>
@@ -71,10 +75,12 @@
             </div>
             <div class="task-area" cdkDropList [cdkDropListData]="getTaskByStatus('done')" (cdkDropListDropped)="onTaskDrop($event, 'done')" [cdkDropListConnectedTo]="['inProgressList', 'awaitFeedbackList', 'toDoList']" id="doneList">
                 @for (task of getTaskByStatus('done'); track task.id) {
-                    <app-task-card [task]="task" [categories]="categories" (click)="showTaskDetails()"></app-task-card>
+                    <div cdkDrag [cdkDragData]="task">
+                        <app-task-card [task]="task" [categories]="categories" (click)="showTaskDetails()"></app-task-card>
+                    </div>
                 }
                 @if (getTaskByStatus('done').length === 0) {
-                    <div class="no-tasks">No tasks To do</div>
+                    <div class="no-tasks">No tasks Done</div>
                 }
             </div>
         </div>
