@@ -6,6 +6,7 @@ import { Task } from '../interfaces/task';
 import { FirebaseService } from '../services/firebase.service';
 import { Category } from '../interfaces/category';
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
+import { Contact } from '../interfaces/contact';
 
 @Component({
   selector: 'app-board',
@@ -22,6 +23,7 @@ export class BoardComponent {
 
   tasks: Task[] = [];
   categories: Category[] = [];
+  contacts: Contact[] = [];
 
   constructor(private firebaseService: FirebaseService) {}
 
@@ -29,6 +31,7 @@ export class BoardComponent {
     this.checkScreenSize();
     this.tasks = this.firebaseService.tasksList;
     this.categories = this.firebaseService.categoriesList;
+    this.contacts = this.firebaseService.contactsList;
   }
 
   @HostListener('window:resize')
