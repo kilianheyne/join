@@ -32,7 +32,6 @@ export class FirebaseService implements OnDestroy {
   private _tasksList = new BehaviorSubject<Task[]>([]);
   public tasksList$ = this._tasksList.asObservable();
   tasksList: Task[] = [];
-  categoriesList: Category[] = [];
 
   constructor(private firestore: Firestore) {
     this.subscribeToCollection<Contact>('contacts', this._contactsList, this.contactsList, ContactModel.fromFirestore);
