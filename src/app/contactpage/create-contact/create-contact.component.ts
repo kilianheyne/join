@@ -3,12 +3,7 @@ import { CommonModule } from '@angular/common';
 import { WhiteButtonComponent } from "../../general/white-button/white-button.component";
 import { BlackButtonComponent } from '../../general/black-button/black-button.component';
 import { FormsModule, NgForm } from '@angular/forms';
-import {
-  trigger,
-  style,
-  animate,
-  transition
-} from '@angular/animations';
+import { trigger, style, animate, transition } from '@angular/animations';
 import { Contact } from '../../interfaces/contact';
 import { FirebaseService } from '../../services/firebase.service';
 import { getDoc, DocumentReference } from 'firebase/firestore';
