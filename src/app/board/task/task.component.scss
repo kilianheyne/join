@@ -15,9 +15,10 @@ section{
     opacity: 0;
     pointer-events: none;
 
-    &.visible {
-        opacity: 1;
-        pointer-events: auto;
+    &.hidden {
+        opacity: 0;
+        z-index: -10;
+        pointer-events: none;
     }
 
     >div{

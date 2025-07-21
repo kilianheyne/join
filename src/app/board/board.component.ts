@@ -2,6 +2,9 @@ import { Component, HostListener } from '@angular/core';
 import { BlackButtonComponent } from "../general/black-button/black-button.component";
 import { TaskCardComponent } from "./task-card/task-card.component";
 import { TaskComponent } from './task/task.component';
+import { Task } from '../interfaces/task';
+import { FirebaseService } from '../services/firebase.service';
+import { Category } from '../interfaces/category';
 
 @Component({
   selector: 'app-board',
@@ -15,8 +18,15 @@ export class BoardComponent {
   showTitle:boolean = false;
   buttonPadding = '8px 16px';
 
+  tasks: Task[] = [];
+  categories: Category[] = [];
+
+  constructor(private firebaseService: FirebaseService) {}
+
   ngOnInit() {
     this.checkScreenSize();
+    this.tasks = this.firebaseService.tasksList;
+    this.categories = this.firebaseService.categoriesList;
   }
 
   @HostListener('window:resize')
@@ -40,5 +50,9 @@ export class BoardComponent {
 
   onTaskClosed() {
     this.isTaskVisible = false;
+  }
+
+  getTaskByStatus(status: string): Task[] {
+    return this.tasks.filter(task => task.status === status);
   }
 }
