@@ -62,6 +62,7 @@
                 <span>Await feedback</span>
                 <div class="icon-add"></div>
             </div>
+
             <div class="task-area" cdkDropList [cdkDropListData]="getTaskByStatus('await-feedback')" (cdkDropListDropped)="onTaskDrop($event, 'await-feedback')" [cdkDropListConnectedTo]="['inProgressList', 'toDoList', 'doneList']" id="awaitFeedbackList">
                 @for (task of getTaskByStatus('await-feedback'); track task.id) {
                     <div cdkDrag [cdkDragData]="task">

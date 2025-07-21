@@ -7,7 +7,6 @@ import { FirebaseService } from '../services/firebase.service';
 import { Category } from '../interfaces/category';
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 
-
 @Component({
   selector: 'app-board',
   imports: [TaskComponent, BlackButtonComponent, TaskCardComponent, DragDropModule],
@@ -17,6 +16,7 @@ import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 export class BoardComponent {
 
   isTaskVisible = false;
+  selectedTask!: Task;
   showTitle:boolean = false;
   buttonPadding = '8px 16px';
 
@@ -46,7 +46,8 @@ export class BoardComponent {
     }
   }
 
-  showTaskDetails() {
+  showTaskDetails(task: Task) {
+    this.selectedTask = task;
     this.isTaskVisible = true;
   }
 
