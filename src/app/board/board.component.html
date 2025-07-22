@@ -33,7 +33,7 @@
             <div class="task-area" cdkDropList [cdkDropListData]="getTaskByStatus('to-do')" (cdkDropListDropped)="onTaskDrop($event, 'to-do')" [cdkDropListConnectedTo]="['inProgressList', 'awaitFeedbackList', 'doneList']" id="toDoList">
                 @for (task of getTaskByStatus('to-do'); track task.id) {
                     <div cdkDrag [cdkDragData]="task">
-                        <app-task-card [task]="task" [categories]="categories" (click)="showTaskDetails(task)"></app-task-card>
+                        <app-task-card [task]="task" [categories]="categories" [contacts]="contacts" [priorities]="priorities" (click)="showTaskDetails(task)"></app-task-card>
                     </div>
                 }
                 @if (getTaskByStatus('to-do').length === 0) {
@@ -49,7 +49,7 @@
             <div class="task-area" cdkDropList [cdkDropListData]="getTaskByStatus('in-progress')" (cdkDropListDropped)="onTaskDrop($event, 'in-progress')" [cdkDropListConnectedTo]="['toDoList', 'awaitFeedbackList', 'doneList']" id="inProgressList">
                 @for (task of getTaskByStatus('in-progress'); track task.id) {
                     <div cdkDrag [cdkDragData]="task">
-                        <app-task-card [task]="task" [categories]="categories" (click)="showTaskDetails(task)"></app-task-card>
+                        <app-task-card [task]="task" [categories]="categories" [contacts]="contacts" [priorities]="priorities" (click)="showTaskDetails(task)"></app-task-card>
                     </div>
                 }
                 @if (getTaskByStatus('in-progress').length === 0) {
@@ -66,7 +66,7 @@
             <div class="task-area" cdkDropList [cdkDropListData]="getTaskByStatus('await-feedback')" (cdkDropListDropped)="onTaskDrop($event, 'await-feedback')" [cdkDropListConnectedTo]="['inProgressList', 'toDoList', 'doneList']" id="awaitFeedbackList">
                 @for (task of getTaskByStatus('await-feedback'); track task.id) {
                     <div cdkDrag [cdkDragData]="task">
-                        <app-task-card [task]="task" [categories]="categories" (click)="showTaskDetails(task)"></app-task-card>
+                        <app-task-card [task]="task" [categories]="categories" [contacts]="contacts" [priorities]="priorities" (click)="showTaskDetails(task)"></app-task-card>
                     </div>
                 }
                 @if (getTaskByStatus('await-feedback').length === 0) {
@@ -82,7 +82,7 @@
             <div class="task-area" cdkDropList [cdkDropListData]="getTaskByStatus('done')" (cdkDropListDropped)="onTaskDrop($event, 'done')" [cdkDropListConnectedTo]="['inProgressList', 'awaitFeedbackList', 'toDoList']" id="doneList">
                 @for (task of getTaskByStatus('done'); track task.id) {
                     <div cdkDrag [cdkDragData]="task">
-                        <app-task-card [task]="task" [categories]="categories" (click)="showTaskDetails(task)"></app-task-card>
+                        <app-task-card [task]="task" [categories]="categories" [contacts]="contacts" [priorities]="priorities" (click)="showTaskDetails(task)"></app-task-card>
                     </div>
                 }
                 @if (getTaskByStatus('done').length === 0) {
