@@ -6,10 +6,16 @@
         <h4>{{ task.title }}</h4>
         <span>{{ task.description }}</span>
     </div>
-    <div class="progression"> <!-- TO-DO: if-condition when there is more than 1 subtask 🦆 -->
-        <div>Progressbar</div>
-        <div>1/2 Subtasks</div>
-    </div>
+    @if (totalSubtasks > 1) {
+        <div class="progression"> <!-- TO-DO: if-condition when there is more than 1 subtask 🦆 -->
+            <div class="progress-bar">
+                <div class="progress-fill" [style.width.%]="progressPercent"></div>
+            </div>
+            <div class="subtasks-text">
+                {{ completedSubtasks }}/{{ totalSubtasks }} Subtasks
+            </div>
+        </div>
+    }
     <div class="overview">
         <div class="user-icons">
             @for (user of assignedContacts; track user.id) {

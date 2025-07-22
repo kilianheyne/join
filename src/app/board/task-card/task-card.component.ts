@@ -11,6 +11,7 @@ import { Priority } from '../../interfaces/priority';
   styleUrl: './task-card.component.scss'
 })
 export class TaskCardComponent {
+  // #region attributes
   @Input() task!: Task;
   @Input() categories!: Category[];
   @Input() contacts!: Contact[];
@@ -23,6 +24,11 @@ export class TaskCardComponent {
 
   priorityData: Priority | undefined;
 
+  completedSubtasks: number = 0;
+  totalSubtasks: number = 0;
+  progressPercent: number = 0;
+  // #endregion
+  // #region methods
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['categories'] || changes['task']) {
       this.setCategoryData();
@@ -32,6 +38,9 @@ export class TaskCardComponent {
     }
     if (changes['priorities'] || changes['task']) {
       this.setPriorityData();
+    }
+    if (changes ['task']) {
+      this.setProgress();
     }
   }
 
@@ -65,4 +74,17 @@ export class TaskCardComponent {
       console.warn(`Priority mit ID ${this.task.priority} nicht gefunden!`)
     }
   }
+
+  private setProgress(): void {
+    if (this.task.subtasks && this.task.subtasks.length > 0) {
+      this.totalSubtasks = this.task.subtasks.length;
+      this.completedSubtasks = this.task.subtasks.filter(s => s.done).length;
+      this.progressPercent = (this.completedSubtasks / this.totalSubtasks) * 100;
+    } else {
+      this.totalSubtasks = 0;
+      this.completedSubtasks = 0;
+      this.progressPercent = 0;
+    }
+  }
+  // #endregion
 }

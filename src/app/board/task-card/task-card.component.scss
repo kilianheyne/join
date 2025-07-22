@@ -43,8 +43,23 @@
     }
     .progression {
         display: flex;
+        align-items: center;
+        gap: 8px;
 
-        div {
+        .progress-bar {
+            flex: 1;
+            height: 8px;
+            border-radius: 16px;
+            overflow: hidden;
+
+            .progress-fill {
+                height: 100%;
+                background: #4589FF;
+                transition: width 0.3s ease;
+            }
+        }
+
+        .subtasks-text {
             font-size: 12px;
         }
     }
