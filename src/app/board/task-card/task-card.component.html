@@ -1,17 +1,36 @@
 <div class="task-card">
-    <div class="category">
-        <span>User Story</span>
+    <div class="category" [style.background]="categoryData?.color || '#0038FF'">
+        <span>{{ categoryData?.title || 'Unbekannt'}}</span>
     </div>
     <div class="description">
-        <h4>Kochwelt Page & Recipe Recommender</h4>
-        <span>Build start page with recipe recommendation ...</span>
+        <h4>{{ task.title }}</h4>
+        <span>{{ task.description }}</span>
     </div>
-    <div class="progression"> <!-- TO-DO: if-condition when there is more than 1 subtask 🦆 -->
-        <div>Progressbar</div>
-        <div>1/2 Subtasks</div>
-    </div>
+    @if (totalSubtasks > 1) {
+        <div class="progression"> <!-- TO-DO: if-condition when there is more than 1 subtask 🦆 -->
+            <div class="progress-bar">
+                <div class="progress-fill" [style.width.%]="progressPercent"></div>
+            </div>
+            <div class="subtasks-text">
+                {{ completedSubtasks }}/{{ totalSubtasks }} Subtasks
+            </div>
+        </div>
+    }
     <div class="overview">
-        <div>AM EM MB</div>
-        <div>=</div>
+        <div class="user-icons">
+            @for (user of assignedContacts; track user.id) {
+                <div class="user-circle" [style.background]="user.color">
+                    {{ user.avatar }}
+                </div>
+            }
+            @if (remainingUsers > 0) {
+                <div class="user-circle extra">
+                    +{{ remainingUsers }}
+                </div>
+            }
+        </div>
+        @if (priorityData){
+            <div [class]="priorityData.icon" [style.color]="priorityData.color"></div>
+        }
     </div>
 </div>

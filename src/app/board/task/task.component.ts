@@ -7,6 +7,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
+import { Task } from '../../interfaces/task';
 
 @Component({
   selector: 'app-task',
@@ -31,9 +32,11 @@ export class TaskComponent {
 
   @Input() isVisible: boolean = false;
 
+  @Input() task!: Task;
+
   @Output() closed = new EventEmitter<void>();
 
-  
+
   isTaskVisible: boolean = false;
 
   ngOnChanges() {

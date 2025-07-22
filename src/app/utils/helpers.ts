@@ -1,3 +1,4 @@
+import { AddTaskNotificationComponent } from "../general/add-task-notification/add-task-notification.component";
 import { ContactPageNotificationComponent } from "../general/contact-page-notification/contact-page-notification.component";
 
 export function getContactInitials(fullName: string) {
@@ -19,6 +20,19 @@ export function showContactNotification(notification: ContactPageNotificationCom
     setTimeout(() => {
         notification.isVisible = false;
         notification.notificationText = '';
+    }, 2000);
+}
+
+export function showAddTaskNotification(notification: AddTaskNotificationComponent, text?: string) {
+    notification.isVisible = true;
+    if (text) {
+        notification.notificationText = text;
+    }
+    setTimeout(() => {
+        notification.isVisible = false;
+        if (text) {
+            notification.notificationText = '';
+        }
     }, 2000);
 }
 
