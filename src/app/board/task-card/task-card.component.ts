@@ -39,7 +39,7 @@ export class TaskCardComponent {
     if (changes['priorities'] || changes['task']) {
       this.setPriorityData();
     }
-    if (changes ['task']) {
+    if (changes['task']) {
       this.setProgress();
     }
   }
