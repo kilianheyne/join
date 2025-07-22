@@ -54,6 +54,7 @@ export class TaskCardComponent {
   private setAssignedContacts(): void {
     if (this.contacts && this.task?.users) {
       const matchedContacts = this.task.users
+        .filter((userId): userId is string => typeof userId === 'string')
         .map((userId: string) => this.contacts.find(c => c.id === userId))
         .filter(Boolean) as Contact[];
 
@@ -70,7 +71,7 @@ export class TaskCardComponent {
   private setPriorityData(): void {
     console.log('Die priorityData enthält' + this.priorityData);
     this.priorityData = this.priorities.find(p => p.id === this.task.priority);
-    if (this.priorityData) {
+    if (!this.priorityData) {
       console.warn(`Priority mit ID ${this.task.priority} nicht gefunden!`)
     }
   }
