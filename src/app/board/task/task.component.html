@@ -1,10 +1,10 @@
-<section [class.visible]="isTaskVisible">
-    <div *ngIf="isVisible" @slideInFromRight>
+<section [class.visible]="isVisible" (click)="closeTask()">
+    <div *ngIf="isVisible" @slideInFromRight (click)="$event.stopPropagation()">
         <div class="top-card">
-            <div class="task-name" [style.background]="task.category">
-                <span>{{ task.category }}</span>
+            <div class="task-name" [style.background]="categoryData?.color || '#0038FF'">
+                <span>{{ categoryData?.title || 'Unbekannt'}}</span>
             </div>
-            <button (click)="closeTaskDetails()" class="icon icon-close"></button>
+            <button (click)="closeTask()" class="icon icon-close"></button>
         </div>
         <h2>{{ task.title }}</h2>
         <span>{{task.description }}</span>
@@ -14,20 +14,21 @@
         </div>
         <div class="task-priority">
             <span>Priority:</span>
-            <span>{{ task.priority }}</span>
+            <span>{{ priorityData?.title }}</span>
+            <div [class]="priorityData?.icon" [style.color]="priorityData?.color"></div>
         </div>
         <span class="title">Assigned To:</span>
-        @for (user of task.users; track task.id) {
+        @for (user of assignedContacts; track $index) {
             <div class="task-worker">
-                <div class="circle">MN</div>
-                <span>Manuel Neuer</span>
+                <div class="circle" [style.background]="user.color">{{ user.avatar }}</div>
+                <span>{{ user.name }}</span>
             </div>
         }
         <span class="title">Subtasks</span>
-        @for (subtask of task.subtasks; track task.id) {
+        @for (subtask of task.subtasks; track $index) {
             <div class="subtask">
                 <input type="checkbox">
-                <span>hier könnte ihre Aufgabe stehen</span>
+                <span>{{ subtask.title }}</span>
             </div>
         }
         <div class="task-buttons">
