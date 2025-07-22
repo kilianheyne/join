@@ -39,7 +39,7 @@ export class TaskCardComponent {
     if (changes['priorities'] || changes['task']) {
       this.setPriorityData();
     }
-    if (changes ['task']) {
+    if (changes['task']) {
       this.setProgress();
     }
   }
@@ -54,6 +54,7 @@ export class TaskCardComponent {
   private setAssignedContacts(): void {
     if (this.contacts && this.task?.users) {
       const matchedContacts = this.task.users
+        .filter((userId): userId is string => typeof userId === 'string')
         .map((userId: string) => this.contacts.find(c => c.id === userId))
         .filter(Boolean) as Contact[];
 
