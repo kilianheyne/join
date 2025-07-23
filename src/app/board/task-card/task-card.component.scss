@@ -97,5 +97,10 @@
                 margin-left: 0;
             }
         }
+
+        .icon-low, .icon-medium, .icon-urgent {
+            display: flex; 
+            align-items: center;
+        }
     }
 }
