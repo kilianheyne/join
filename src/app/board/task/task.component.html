@@ -25,9 +25,9 @@
             </div>
         }
         <span class="title">Subtasks</span>
-        @for (subtask of task.subtasks; track $index) {
+        @for (subtask of task.subtasks; let i = $index; track $index) {
             <div class="subtask">
-                <input type="checkbox">
+                <input type="checkbox" [checked]="subtask.done" (change)="toggleSubtask(i, $event)">
                 <span>{{ subtask.title }}</span>
             </div>
         }
