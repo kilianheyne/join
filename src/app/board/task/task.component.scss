@@ -7,7 +7,7 @@ section{
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 110;
+    z-index: 1000;
     position: fixed;
     top: 0;
     left: 0;
@@ -15,10 +15,9 @@ section{
     opacity: 0;
     pointer-events: none;
 
-    &.hidden {
-        opacity: 0;
-        z-index: -10;
-        pointer-events: none;
+    &.visible {
+        opacity: 1;
+        pointer-events: auto;
     }
 
     >div{
@@ -90,6 +89,7 @@ section{
         .task-date{
             margin-top: 15px;
             display: flex;
+            gap: 10px;
 
             span:first-child{
                 width: 100px;
@@ -99,12 +99,17 @@ section{
 
         .task-priority{
             margin-top: 15px;
-
             display: flex;
+            gap: 10px;
 
             span:first-child{
                 width: 100px;
                 color: $primaryColor;
+            }
+
+            >div{
+                display: flex;
+                align-items: center;
             }
         }
 

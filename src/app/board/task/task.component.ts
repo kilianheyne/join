@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FirebaseService } from '../../services/firebase.service';
 import {
@@ -8,6 +8,9 @@ import {
   transition
 } from '@angular/animations';
 import { Task } from '../../interfaces/task';
+import { Category } from '../../interfaces/category';
+import { Contact } from '../../interfaces/contact';
+import { Priority } from '../../interfaces/priority';
 
 @Component({
   selector: 'app-task',
@@ -28,28 +31,61 @@ import { Task } from '../../interfaces/task';
     ])
   ]
 })
-export class TaskComponent {
+export class TaskComponent{
 
-  @Input() isVisible: boolean = false;
-
-  @Input() task!: Task;
+  firebaseService = inject(FirebaseService)
 
   @Output() closed = new EventEmitter<void>();
 
+  @Input() isVisible = false;
+  @Input() task!: Task;
+  @Input() categories!: Category[];
+  @Input() contacts!: Contact[];
+  @Input() priorities!: Priority[];
 
-  isTaskVisible: boolean = false;
+  priorityData: Priority | undefined;
+  categoryData: Category | undefined;
 
-  ngOnChanges() {
-    if (this.isVisible) {
-      this.isTaskVisible = true;
+  assignedContacts: Contact[] = [];
+
+  closeTask() {
+    this.closed.emit();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['categories'] || changes['task']) {
+      this.setCategoryData();
+    }
+    if (changes['contacts'] || changes['task']) {
+      this.setAssignedContacts();
+    }
+    if (changes['priorities'] || changes['task']) {
+      this.setPriorityData();
     }
   }
 
-  closeTaskDetails() {
-    this.isVisible = false;
-    setTimeout(() => {
-      this.isTaskVisible = false;
-      this.closed.emit();
-    }, 300);
+  private setCategoryData(): void {
+    this.categoryData = this.categories.find(c => c.id === this.task.category);
+    if (!this.categoryData) {
+      console.warn(`Kategorie mit ID ${this.task.category} nicht gefunden!`);
+    }
+  }
+
+  private setAssignedContacts(): void {
+    if (this.contacts && this.task?.users) {
+      const matchedContacts = this.task.users
+      .filter((userId): userId is string => typeof userId === 'string')
+      .map((userId: string) => this.contacts.find(c => c.id === userId))
+      .filter(Boolean) as Contact[];
+        this.assignedContacts = matchedContacts;
+    }
+  }
+
+  private setPriorityData(): void {
+    console.log('Die priorityData enthält' + this.priorityData);
+    this.priorityData = this.priorities.find(p => p.id === this.task.priority);
+    if (this.priorityData) {
+      console.warn(`Priority mit ID ${this.task.priority} nicht gefunden!`)
+    }
   }
 }

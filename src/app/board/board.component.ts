@@ -8,19 +8,21 @@ import { Category } from '../interfaces/category';
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 import { Contact } from '../interfaces/contact';
 import { Priority } from '../interfaces/priority';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-board',
-  imports: [TaskComponent, BlackButtonComponent, TaskCardComponent, DragDropModule],
+  imports: [CommonModule, TaskComponent, BlackButtonComponent, TaskCardComponent, DragDropModule],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
 export class BoardComponent {
 
-  isTaskVisible = false;
-  selectedTask!: Task;
   showTitle:boolean = false;
   buttonPadding = '8px 16px';
+  selectedTask: Task | null = null;
+  isTaskDetailsVisible = false;
+  isOverlayActive: boolean = false;
 
   tasks: Task[] = [];
   categories: Category[] = [];
@@ -52,15 +54,6 @@ export class BoardComponent {
     }
   }
 
-  showTaskDetails(task: Task) {
-    this.selectedTask = task;
-    this.isTaskVisible = true;
-  }
-
-  onTaskClosed() {
-    this.isTaskVisible = false;
-  }
-
   getTaskByStatus(status: string): Task[] {
     return this.tasks.filter(task => task.status === status);
   }
@@ -76,5 +69,15 @@ export class BoardComponent {
       this.firebaseService.updateDataInDatabase('tasks', task.id, { status: targetStatus });
     }
     this.tasks = [...this.tasks]; // lokale Liste wird neu gerendert
+  }
+
+  openTaskDetails(task: Task) {
+    this.selectedTask = task;
+    this.isTaskDetailsVisible = true;
+  }
+
+  closeOverlay() {
+    this.isTaskDetailsVisible = false;
+    this.selectedTask = null;
   }
 }
