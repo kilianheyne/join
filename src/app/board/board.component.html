@@ -35,9 +35,22 @@
                     (cdkDropListDropped)="onTaskDrop($event, 'to-do')"
                     [cdkDropListConnectedTo]="['inProgressList', 'awaitFeedbackList', 'doneList']" id="toDoList">
                     @for (task of getTaskByStatus('to-do'); track task.id) {
+
+<!--                     <div cdkDrag [cdkDragData]="task">
+                        <app-task-card [task]="task" [categories]="categories" [contacts]="contacts" [priorities]="priorities" (click)="showTaskDetails(task)"></app-task-card>
+                        <ng-template cdkDragPlaceholder>
+                            <div class="placeholder"></div>
+                        </ng-template>
+                    
+                        <ng-template cdkDragPreview>
+                            <app-task-card [task]="task" [categories]="categories" [contacts]="contacts"
+                                [priorities]="priorities"></app-task-card>
+                        </ng-template> -->
+
                     <div cdkDrag [cdkDragData]="task" (click)="openTaskDetails(task)">
                         <app-task-card [task]="task" [categories]="categories" [contacts]="contacts"
                             [priorities]="priorities"></app-task-card>
+
                     </div>
                     }
                     @if (getTaskByStatus('to-do').length === 0) {
@@ -55,9 +68,22 @@
                     (cdkDropListDropped)="onTaskDrop($event, 'in-progress')"
                     [cdkDropListConnectedTo]="['toDoList', 'awaitFeedbackList', 'doneList']" id="inProgressList">
                     @for (task of getTaskByStatus('in-progress'); track task.id) {
+
+<!--                     <div cdkDrag [cdkDragData]="task">
+                        <app-task-card [task]="task" [categories]="categories" [contacts]="contacts" [priorities]="priorities" (click)="showTaskDetails(task)"></app-task-card>
+                        <ng-template cdkDragPlaceholder>
+                            <div class="placeholder"></div>
+                        </ng-template>
+                    
+                        <ng-template cdkDragPreview>
+                            <app-task-card [task]="task" [categories]="categories" [contacts]="contacts"
+                                [priorities]="priorities"></app-task-card>
+                        </ng-template> -->
+
                     <div cdkDrag [cdkDragData]="task" (click)="openTaskDetails(task)">
                         <app-task-card [task]="task" [categories]="categories" [contacts]="contacts"
                             [priorities]="priorities"></app-task-card>
+
                     </div>
                     }
                     @if (getTaskByStatus('in-progress').length === 0) {
@@ -76,9 +102,22 @@
                     (cdkDropListDropped)="onTaskDrop($event, 'await-feedback')"
                     [cdkDropListConnectedTo]="['inProgressList', 'toDoList', 'doneList']" id="awaitFeedbackList">
                     @for (task of getTaskByStatus('await-feedback'); track task.id) {
+
+<!--                     <div cdkDrag [cdkDragData]="task">
+                        <app-task-card [task]="task" [categories]="categories" [contacts]="contacts" [priorities]="priorities" (click)="showTaskDetails(task)"></app-task-card>
+                        <ng-template cdkDragPlaceholder>
+                            <div class="placeholder"></div>
+                        </ng-template>
+                    
+                        <ng-template cdkDragPreview>
+                            <app-task-card [task]="task" [categories]="categories" [contacts]="contacts"
+                                [priorities]="priorities"></app-task-card>
+                        </ng-template> -->
+
                     <div cdkDrag [cdkDragData]="task" (click)="openTaskDetails(task)">
                         <app-task-card [task]="task" [categories]="categories" [contacts]="contacts"
                             [priorities]="priorities"></app-task-card>
+
                     </div>
                     }
                     @if (getTaskByStatus('await-feedback').length === 0) {
@@ -96,14 +135,28 @@
                     (cdkDropListDropped)="onTaskDrop($event, 'done')"
                     [cdkDropListConnectedTo]="['inProgressList', 'awaitFeedbackList', 'toDoList']" id="doneList">
                     @for (task of getTaskByStatus('done'); track task.id) {
+
+<!--                     <div cdkDrag [cdkDragData]="task">
+                        <app-task-card [task]="task" [categories]="categories" [contacts]="contacts" [priorities]="priorities" (click)="showTaskDetails(task)"></app-task-card>
+                        <ng-template cdkDragPlaceholder>
+                            <div class="placeholder"></div>
+                        </ng-template>
+                    
+                        <ng-template cdkDragPreview>
+                            <app-task-card [task]="task" [categories]="categories" [contacts]="contacts"
+                                [priorities]="priorities"></app-task-card>
+                        </ng-template> -->
+
                     <div cdkDrag [cdkDragData]="task" (click)="openTaskDetails(task)">
                         <app-task-card [task]="task" [categories]="categories" [contacts]="contacts"
                             [priorities]="priorities"></app-task-card>
+
                     </div>
                     }
                     @if (getTaskByStatus('done').length === 0) {
                     <div class="no-tasks">No tasks Done</div>
                     }
+
 
                 </div>
             </div>
