@@ -53,7 +53,10 @@ export class TaskComponent{
   taskId?: string = '';
 
   closeTask() {
-    this.closed.emit();
+    this.isVisible = false;
+    setTimeout(() => {
+      this.closed.emit();
+    }, 300);
   }
 
   deleteTask(taskId: string) {
