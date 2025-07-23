@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, ViewChild } from '@angular/core';
 import { BlackButtonComponent } from "../general/black-button/black-button.component";
 import { TaskCardComponent } from "./task-card/task-card.component";
 import { TaskComponent } from './task/task.component';
@@ -9,14 +9,16 @@ import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 import { Contact } from '../interfaces/contact';
 import { Priority } from '../interfaces/priority';
 import { CommonModule } from '@angular/common';
+import { AddTaskComponent } from "./add-task/add-task.component";
 
 @Component({
   selector: 'app-board',
-  imports: [CommonModule, TaskComponent, BlackButtonComponent, TaskCardComponent, DragDropModule],
+  imports: [CommonModule, TaskComponent, BlackButtonComponent, TaskCardComponent, DragDropModule, AddTaskComponent],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
 export class BoardComponent {
+  @ViewChild('addTaskOverlay') private addTaskOverlay!: AddTaskComponent;
 
   showTitle:boolean = false;
   buttonPadding = '8px 16px';
@@ -79,5 +81,9 @@ export class BoardComponent {
   closeOverlay() {
     this.isTaskDetailsVisible = false;
     this.selectedTask = null;
+  }
+
+  openAddTaskOverlay() {
+    this.addTaskOverlay.isVisible = true;
   }
 }

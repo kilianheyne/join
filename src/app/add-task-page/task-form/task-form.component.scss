@@ -2,7 +2,7 @@
 
 form {
     @media (max-width:820px) {
-        max-height: calc(100vh - (94px + 96px + 75px + 50px));
+        max-height: calc(100vh - (94px + 96px + 75px + 100px));
         overflow-y: auto;
 
         &::-webkit-scrollbar {
@@ -11,7 +11,7 @@ form {
     }
 
     @media (max-width:640px) {
-        max-height: calc(100vh - (80px + 80px + 60px + 50px));
+        max-height: calc(100vh - (80px + 80px + 60px + 100px));
         overflow-y: auto;
 
         &::-webkit-scrollbar {
@@ -23,7 +23,6 @@ form {
         display: flex;
         justify-content: space-between;
         align-items: stretch;
-        margin-top: 50px;
 
         @media (max-width:1250px) {
             flex-direction: column;
@@ -53,6 +52,10 @@ form {
                 outline: none;
                 resize: vertical;
                 max-height: 200px;
+
+                @media (max-width:400px) {
+                    font-size: 16px;
+                }
 
                 &.error {
                     border-color: $pinkError;
@@ -100,7 +103,7 @@ form {
                     justify-content: center;
                     align-items: center;
 
-                    @media (max-width:400px) {
+                    @media (max-width:420px) {
                         align-items: stretch;
                         flex-direction: column;
                     }
@@ -192,6 +195,18 @@ form {
                     content: "\65";
                 }
 
+                &.opened-list::before {
+                    content: "s";
+                    background: #ffffff;
+                    position: absolute;
+                    bottom: 0;
+                    z-index: -1;
+                    left: 0;
+                    right: 0;
+                    color: white;
+                    height: 20px;
+                }
+
                 >span:nth-child(1) {
                     margin-bottom: 8px;
                 }
@@ -211,107 +226,108 @@ form {
                 }
 
                 >div.contact-list {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 3px;
-                    background: white;
-                    position: static;
-                    top: 0;
-                    padding-top: 3px;
-                    border-radius: 0 0 10px 10px;
-                    max-height: 250px;
-                    overflow-y: auto;
-                    height: auto;
+                    position: relative;
                     opacity: 1;
+                    pointer-events: none;
 
-                    &::before {
-                        content: "s";
-                        background: #ffffff;
+                    &.visible {
+                        pointer-events: auto;
+                    }
+
+                    >div {
                         position: absolute;
-                        top: 50px;
-                        z-index: -1;
+                        top: 0;
                         left: 0;
                         right: 0;
-                        color: white;
-                        height: 50px;
-                    }
-
-                    &::-webkit-scrollbar {
-                        width: 6px;
-                    }
-
-                    &::-webkit-scrollbar-track {
                         background: white;
-                        border-radius: 10px;
-                    }
-
-                    &::-webkit-scrollbar-thumb {
-                        background-color: #A8A8A8;
-                        border-radius: 3px;
-                        background-clip: content-box;
-                        min-height: 53px;
-                    }
-
-                    >label {
+                        border-radius: 0 0 10px 10px;
+                        z-index: 100;
                         display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        padding: 12px 20px;
-                        border-radius: 10px;
-                        cursor: pointer;
+                        flex-direction: column;
+                        gap: 3px;
+                        padding-top: 3px;
+                        max-height: 250px;
+                        overflow-y: auto;
+                        opacity: 1;
+                        height: auto;
 
-                        &:hover {
-                            background: #ebebeb;
+                        &::-webkit-scrollbar {
+                            width: 6px;
                         }
 
-                        &:has(input:checked):hover {
-                            color: white;
-                            background: #091931;
+                        &::-webkit-scrollbar-track {
+                            background: white;
+                            border-radius: 10px;
                         }
 
-                        &:has(input:checked) {
-                            color: white;
-                            background: $primaryColor;
+                        &::-webkit-scrollbar-thumb {
+                            background-color: #A8A8A8;
+                            border-radius: 3px;
+                            background-clip: content-box;
+                            min-height: 53px;
                         }
 
-                        >div:first-child {
+                        >label {
                             display: flex;
-                            justify-content: center;
+                            justify-content: space-between;
                             align-items: center;
-                            gap: 15px;
+                            padding: 12px 20px;
+                            border-radius: 10px;
+                            cursor: pointer;
+
+                            &:hover {
+                                background: #ebebeb;
+                            }
+
+                            &:has(input:checked):hover {
+                                color: white;
+                                background: #091931;
+                            }
+
+                            &:has(input:checked) {
+                                color: white;
+                                background: $primaryColor;
+                            }
 
                             >div:first-child {
-                                width: 42px;
-                                height: 42px;
-                                background-color: orange;
-                                border-radius: 50%;
                                 display: flex;
-                                align-items: center;
                                 justify-content: center;
-                                color: white;
-                                font-size: 13px;
+                                align-items: center;
+                                gap: 15px;
+
+                                >div:first-child {
+                                    width: 42px;
+                                    height: 42px;
+                                    background-color: orange;
+                                    border-radius: 50%;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    color: white;
+                                    font-size: 13px;
+                                }
+
+                                >div:last-child {
+                                    font-size: 20px;
+                                }
                             }
 
                             >div:last-child {
-                                font-size: 20px;
-                            }
-                        }
+                                >div {
+                                    width: 16px;
+                                    height: 16px;
+                                    display: inline-block;
+                                    background-size: contain;
+                                    background-repeat: no-repeat;
+                                    background-image: url('/assets/icons/checkbox.svg');
 
-                        >div:last-child {
-                            >div {
-                                width: 16px;
-                                height: 16px;
-                                display: inline-block;
-                                background-size: contain;
-                                background-repeat: no-repeat;
-                                background-image: url('/assets/icons/checkbox.svg');
+                                    &:has(input:checked) {
+                                        background-image: url('/assets/icons/checkbox-checked-white.svg');
+                                    }
 
-                                &:has(input:checked) {
-                                    background-image: url('/assets/icons/checkbox-checked-white.svg');
-                                }
-
-                                >input {
-                                    display: none;
+                                    >input {
+                                        display: none;
+                                    }
                                 }
                             }
                         }
@@ -361,6 +377,18 @@ form {
                     content: "\65";
                 }
 
+                &.opened-list::before {
+                    content: "s";
+                    background: #ffffff;
+                    position: absolute;
+                    bottom: 0;
+                    z-index: -1;
+                    left: 0;
+                    right: 0;
+                    color: white;
+                    height: 20px;
+                }
+
                 >span:nth-child(1) {
                     margin-bottom: 8px;
                 }
@@ -380,52 +408,53 @@ form {
                 }
 
                 >div.category-list {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 3px;
-                    background: white;
-                    position: static;
-                    top: 0;
-                    padding-top: 3px;
-                    border-radius: 0 0 10px 10px;
-                    max-height: 250px;
-                    height: auto;
+                    position: relative;
                     opacity: 1;
+                    pointer-events: none;
 
-                    &::before {
-                        content: "s";
-                        background: #ffffff;
-                        position: absolute;
-                        top: 50px;
-                        z-index: -1;
-                        left: 0;
-                        right: 0;
-                        color: white;
-                        height: 50px;
+                    &.visible {
+                        pointer-events: auto;
                     }
 
-                    >label {
+                    >div {
                         display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        padding: 12px 20px;
-                        border-radius: 10px;
-                        cursor: pointer;
+                        flex-direction: column;
+                        gap: 3px;
+                        background: white;
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        left: 0;
+                        padding-top: 3px;
+                        border-radius: 0 0 10px 10px;
+                        max-height: 250px;
+                        height: auto;
+                        opacity: 1;
+                        z-index: 100;
 
-                        &:hover {
-                            background: #ebebeb;
-                        }
-
-                        >div {
+                        >label {
                             display: flex;
-                            justify-content: center;
+                            justify-content: space-between;
                             align-items: center;
-                            gap: 15px;
-                            font-size: 20px;
-                        }
+                            padding: 12px 20px;
+                            border-radius: 10px;
+                            cursor: pointer;
 
-                        >input {
-                            display: none;
+                            &:hover {
+                                background: #ebebeb;
+                            }
+
+                            >div {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                gap: 15px;
+                                font-size: 20px;
+                            }
+
+                            >input {
+                                display: none;
+                            }
                         }
                     }
                 }
@@ -497,24 +526,23 @@ form {
         @media (max-width:820px) {
             position: sticky;
             bottom: 0;
-            background: #f6f7f8;
             padding: 15px 0;
             z-index: 100;
             margin-top: 10px;
         }
 
-        @media (max-width:550px) {
+        @media (max-width:600px) {
             justify-content: end;
         }
 
-        @media (max-width:400px) {
+        @media (max-width:420px) {
             justify-content: center;
         }
 
         >div:first-child {
             font-size: 16px;
 
-            @media (max-width:550px) {
+            @media (max-width:600px) {
                 display: none;
             }
 
@@ -527,7 +555,7 @@ form {
             display: flex;
             gap: 20px;
 
-            @media (max-width:400px) {
+            @media (max-width:420px) {
                 flex-direction: column-reverse;
                 justify-content: center;
                 align-items: center;
@@ -554,6 +582,10 @@ div.icon-with-separate {
 
 ::ng-deep .custom-date-field .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
     font-size: 20px;
+
+    @media (max-width:400px) {
+        font-size: 16px;
+    }
 
     &::placeholder {
         color: #D1D1D1;
