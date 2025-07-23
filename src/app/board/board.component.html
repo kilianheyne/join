@@ -8,7 +8,7 @@
                 <div class="icon-search"></div> <!-- TO-DO: hover & active? & padding -->
             </div>
             <div>
-                <app-black-button [title]="showTitle ? 'Add task' : ''" icon="icon-add" [padding]="buttonPadding"
+                <app-black-button (click)="openAddTaskOverlay()" [title]="showTitle ? 'Add task' : ''" icon="icon-add" [padding]="buttonPadding"
                     iconFontSize="21px"></app-black-button> <!-- TO-DO: icon-add needs align-center -->
             </div>
         </div>
@@ -36,7 +36,7 @@
                     [cdkDropListConnectedTo]="['inProgressList', 'awaitFeedbackList', 'doneList']" id="toDoList">
                     @for (task of getTaskByStatus('to-do'); track task.id) {
 
-<!--                     <div cdkDrag [cdkDragData]="task">
+                    <!--                     <div cdkDrag [cdkDragData]="task">
                         <app-task-card [task]="task" [categories]="categories" [contacts]="contacts" [priorities]="priorities" (click)="showTaskDetails(task)"></app-task-card>
                         <ng-template cdkDragPlaceholder>
                             <div class="placeholder"></div>
@@ -69,7 +69,7 @@
                     [cdkDropListConnectedTo]="['toDoList', 'awaitFeedbackList', 'doneList']" id="inProgressList">
                     @for (task of getTaskByStatus('in-progress'); track task.id) {
 
-<!--                     <div cdkDrag [cdkDragData]="task">
+                    <!--                     <div cdkDrag [cdkDragData]="task">
                         <app-task-card [task]="task" [categories]="categories" [contacts]="contacts" [priorities]="priorities" (click)="showTaskDetails(task)"></app-task-card>
                         <ng-template cdkDragPlaceholder>
                             <div class="placeholder"></div>
@@ -103,7 +103,7 @@
                     [cdkDropListConnectedTo]="['inProgressList', 'toDoList', 'doneList']" id="awaitFeedbackList">
                     @for (task of getTaskByStatus('await-feedback'); track task.id) {
 
-<!--                     <div cdkDrag [cdkDragData]="task">
+                    <!--                     <div cdkDrag [cdkDragData]="task">
                         <app-task-card [task]="task" [categories]="categories" [contacts]="contacts" [priorities]="priorities" (click)="showTaskDetails(task)"></app-task-card>
                         <ng-template cdkDragPlaceholder>
                             <div class="placeholder"></div>
@@ -136,7 +136,7 @@
                     [cdkDropListConnectedTo]="['inProgressList', 'awaitFeedbackList', 'toDoList']" id="doneList">
                     @for (task of getTaskByStatus('done'); track task.id) {
 
-<!--                     <div cdkDrag [cdkDragData]="task">
+                    <!--                     <div cdkDrag [cdkDragData]="task">
                         <app-task-card [task]="task" [categories]="categories" [contacts]="contacts" [priorities]="priorities" (click)="showTaskDetails(task)"></app-task-card>
                         <ng-template cdkDragPlaceholder>
                             <div class="placeholder"></div>
@@ -162,7 +162,9 @@
             </div>
         </div>
 
-        <app-task *ngIf="selectedTask" [categories]="categories" [contacts]="contacts" [priorities]="priorities" [task]="selectedTask!"
-                    [isVisible]="isTaskDetailsVisible" (closed)="closeOverlay()"></app-task>
+        <app-task *ngIf="selectedTask" [categories]="categories" [contacts]="contacts" [priorities]="priorities"
+            [task]="selectedTask!" [isVisible]="isTaskDetailsVisible" (closed)="closeOverlay()"></app-task>
     </div>
+
+    <app-add-task #addTaskOverlay></app-add-task>
 </section>

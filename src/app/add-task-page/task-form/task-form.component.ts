@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { TrimOnBlurDirective } from '../../directives/trim-on-blur.directive';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -79,6 +79,8 @@ export class TaskFormComponent {
     subtasks: [],
     status: 'to-do'
   }
+  
+  @Input() bottomSectionBackground: string = 'white';
 
   @Output() taskAdded = new EventEmitter();
 
