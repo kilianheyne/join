@@ -18,10 +18,11 @@ import { CategoryModel } from '../../models/category.model';
 import { Subtask } from '../../interfaces/subtask';
 import { WhiteButtonComponent } from "../../general/white-button/white-button.component";
 import { BlackButtonComponent } from "../../general/black-button/black-button.component";
-import { Task } from '../../interfaces/task';
+import { Task, TaskStatus } from '../../interfaces/task';
 import { getDoc } from 'firebase/firestore';
 import { Router } from '@angular/router';
 import moment from 'moment';
+import { DataService } from '../../services/data-service.service';
 
 @Component({
   selector: 'app-task-form',
@@ -57,6 +58,8 @@ import moment from 'moment';
   ]
 })
 export class TaskFormComponent {
+  @Input() bottomSectionBackground: string = 'white';
+
   firebaseService = inject(FirebaseService);
 
   isContactListOpen = false;
@@ -69,6 +72,11 @@ export class TaskFormComponent {
   minDate = moment().startOf('day');
   momentDate: moment.Moment | null = null;
 
+  constructor(private router: Router, private dataService: DataService) {
+    this.selectMediumPriorityAsDefault();
+    this.assignCheckedValueToContacts();
+  }
+
   taskData: Task = {
     title: '',
     description: '',
@@ -77,17 +85,19 @@ export class TaskFormComponent {
     category: '',
     users: [],
     subtasks: [],
-    status: 'to-do'
+    status: TaskStatus.ToDo,
   }
-  
-  @Input() bottomSectionBackground: string = 'white';
+
+  ngOnInit() {
+    const current = this.dataService.value();
+    if (current) {
+      this.taskData.status = current;
+    }
+  }
 
   @Output() taskAdded = new EventEmitter();
 
-  constructor(private router: Router) {
-    this.selectMediumPriorityAsDefault();
-    this.assignCheckedValueToContacts();
-  }
+  @Output() formCancelled = new EventEmitter();
 
   selectMediumPriorityAsDefault() {
     this.firebaseService.prioritiesList$.subscribe(priorities => {
@@ -152,7 +162,7 @@ export class TaskFormComponent {
         title: subtask.title,
         done: subtask.done
       }));
-      this.taskData.date = this.momentDate ? this.momentDate.toDate() : new Date();
+      this.taskData.date = this.momentDate ? this.momentDate.toDate() : new Date();      
       this.firebaseService.addDataToDatabase<Task>('tasks', this.taskData).then(async (docRef) => {
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
@@ -167,6 +177,7 @@ export class TaskFormComponent {
   }
 
   cancelForm(taskForm: NgForm) {
+    this.formCancelled.emit();
     taskForm.resetForm();
     setTimeout(() => {
       for (const contact of this.contactList) {
