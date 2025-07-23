@@ -21,6 +21,7 @@ import { BlackButtonComponent } from "../../general/black-button/black-button.co
 import { Task } from '../../interfaces/task';
 import { getDoc } from 'firebase/firestore';
 import { Router } from '@angular/router';
+import moment from 'moment';
 
 @Component({
   selector: 'app-task-form',
@@ -65,6 +66,7 @@ export class TaskFormComponent {
   contactList: Contact[] = [];
   subtaskTitle = '';
   subtasks: Subtask[] = [];
+  minDate = moment().startOf('day');
   momentDate: moment.Moment | null = null;
 
   taskData: Task = {
@@ -149,12 +151,12 @@ export class TaskFormComponent {
         done: subtask.done
       }));
       this.taskData.date = this.momentDate ? this.momentDate.toDate() : new Date();
-      // this.firebaseService.addDataToDatabase<Task>('tasks', this.taskData).then(async (docRef) => {
-      //   const docSnap = await getDoc(docRef);
-      //   if (docSnap.exists()) {
-      //     this.cancelForm(taskForm);
-      //   }
-      // });
+      this.firebaseService.addDataToDatabase<Task>('tasks', this.taskData).then(async (docRef) => {
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          this.cancelForm(taskForm);
+        }
+      });
       this.taskAdded.emit();
       setTimeout(() => {
         this.router.navigate(['/board']);
