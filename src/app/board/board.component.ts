@@ -2,7 +2,7 @@ import { Component, HostListener, ViewChild } from '@angular/core';
 import { BlackButtonComponent } from "../general/black-button/black-button.component";
 import { TaskCardComponent } from "./task-card/task-card.component";
 import { TaskComponent } from './task/task.component';
-import { Task } from '../interfaces/task';
+import { Task, TaskStatus } from '../interfaces/task';
 import { FirebaseService } from '../services/firebase.service';
 import { Category } from '../interfaces/category';
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
@@ -10,12 +10,14 @@ import { Contact } from '../interfaces/contact';
 import { Priority } from '../interfaces/priority';
 import { CommonModule } from '@angular/common';
 import { AddTaskComponent } from "./add-task/add-task.component";
+import { DataService } from '../services/data-service.service';
 
 @Component({
   selector: 'app-board',
   imports: [CommonModule, TaskComponent, BlackButtonComponent, TaskCardComponent, DragDropModule, AddTaskComponent],
   templateUrl: './board.component.html',
-  styleUrl: './board.component.scss'
+  styleUrl: './board.component.scss',
+  providers: [DataService]
 })
 export class BoardComponent {
   @ViewChild('addTaskOverlay') private addTaskOverlay!: AddTaskComponent;
@@ -25,13 +27,17 @@ export class BoardComponent {
   selectedTask: Task | null = null;
   isTaskDetailsVisible = false;
   isOverlayActive: boolean = false;
+  TaskStatus = TaskStatus;
 
   tasks: Task[] = [];
   categories: Category[] = [];
   contacts: Contact[] = [];
   priorities: Priority[] = [];
 
-  constructor(private firebaseService: FirebaseService) {}
+  constructor(
+    private firebaseService: FirebaseService,
+    private dataService: DataService
+  ) {}
 
   ngOnInit() {
     this.checkScreenSize();
@@ -60,7 +66,7 @@ export class BoardComponent {
     return this.tasks.filter(task => task.status === status);
   }
 
-  onTaskDrop(event: CdkDragDrop<Task[]>, targetStatus: 'to-do' | 'in-progress' | 'await-feedback' | 'done') {
+  onTaskDrop(event: CdkDragDrop<Task[]>, targetStatus: TaskStatus) {
     const task = event.item.data as Task;
     if (!task.id) { // task-interface nutzt id? - verhindert Probleme mit updateDataInDatabase
       console.error('Task ID fehlt, kann nicht gespeichert werden.');
@@ -83,7 +89,8 @@ export class BoardComponent {
     this.selectedTask = null;
   }
 
-  openAddTaskOverlay() {
+  openAddTaskOverlay(status: TaskStatus = TaskStatus.ToDo) {
     this.addTaskOverlay.isVisible = true;
+    this.dataService.setValue(status);
   }
 }
