@@ -1,6 +1,10 @@
 section {
     height: calc(100dvh - 94px);
 
+    @media (max-width: 820px){
+        padding-bottom: 100px;
+    }
+
     @media (max-width: 640px) {
         height: calc(100dvh - 80px);
     }
@@ -232,35 +236,99 @@ section {
                         overflow-x: auto;
                         width: 100%;
                     }
+                }
 
-                    .no-tasks {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        justify-content: center;
+                .task-area :-webkit-scrollbar {
+                    width: 8px;
+                    /* Width of vertical scrollbar */
+                    height: 8px;
+                    /* Height of horizontal scrollbar */
+                }
 
-                        width: 100%;
-                        height: 48px;
+                .task-area::-webkit-scrollbar-track {
+                    background: #f0f0f0;
+                    /* Track background */
+                    border-radius: 10px;
+                }
 
-                        border: dashed 1px #A8A8A8;
-                        border-radius: 10px;
+                .task-area::-webkit-scrollbar-thumb {
+                    background-color: #A8A8A8;
+                    /* Thumb color */
+                    border-radius: 10px;
+                    border: 2px solid #f0f0f0;
+                    /* Optional space around thumb */
+                }
 
-                        color: #A8A8A8;
-
-                        background: #E7E7E7;
-                    }
+                .task-area::-webkit-scrollbar-thumb:hover {
+                    background-color: #888;
+                    /* Darker on hover */
                 }
             }
         }
+
+        .list-columns::-webkit-scrollbar {
+            width: 8px;
+            /* Width of vertical scrollbar */
+            height: 8px;
+            /* Height of horizontal scrollbar */
+        }
+
+        .list-columns::-webkit-scrollbar-track {
+            background: #f0f0f0;
+            /* Track background */
+            border-radius: 10px;
+        }
+
+        .list-columns::-webkit-scrollbar-thumb {
+            background-color: #A8A8A8;
+            /* Thumb color */
+            border-radius: 10px;
+            border: 2px solid #f0f0f0;
+            /* Optional space around thumb */
+        }
+
+        .list-columns::-webkit-scrollbar-thumb:hover {
+            background-color: #888;
+            /* Darker on hover */
+        }
     }
 }
+
+@media (max-width: 1100px) {
+    .task-area {
+        flex-direction: row;
+        padding-top: 0px;
+        overflow-x: auto;
+        width: 100%;
+    }
+
+    .task-area::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .task-area::-webkit-scrollbar-track {
+        background: #f0f0f0;
+        border-radius: 10px;
+    }
+
+    .task-area::-webkit-scrollbar-thumb {
+        background-color: #A8A8A8;
+        border-radius: 10px;
+        border: 2px solid #f0f0f0;
+    }
+
+    .task-area::-webkit-scrollbar-thumb:hover {
+        background-color: #888;
+    }
+}
+
 
 /* Animate items as they're being sorted. */
 .cdk-drop-list-dragging .cdk-drag {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-  /* Animate an item that has been dropped. */
+/* Animate an item that has been dropped. */
 .cdk-drag-animating {
     transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
 }
