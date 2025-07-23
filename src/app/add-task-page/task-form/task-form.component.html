@@ -19,7 +19,7 @@
                 <span class="label">Due date<span>*</span></span>
                 <mat-form-field class="custom-date-field"
                     [class.error]="!date.valid && (date.touched || taskForm.submitted)">
-                    <input #date="ngModel" matInput [matDatepicker]="picker" placeholder="dd/mm/yyyy" name="date"
+                    <input #date="ngModel" matInput [matDatepicker]="picker" [min]="minDate" placeholder="dd/mm/yyyy" name="date"
                         [(ngModel)]="momentDate" required>
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>

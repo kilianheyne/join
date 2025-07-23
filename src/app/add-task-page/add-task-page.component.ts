@@ -11,7 +11,7 @@ import { TaskFormComponent } from "./task-form/task-form.component";
   
 })
 export class AddTaskPageComponent {
-  // @ViewChild('taskForm') private taskForm!: TaskFormComponent;
+  @ViewChild('taskForm') private taskForm!: TaskFormComponent;
 
   @ViewChild('addTaskNotification') private addTaskNotification!: AddTaskNotificationComponent;
 
@@ -19,7 +19,8 @@ export class AddTaskPageComponent {
     showAddTaskNotification(this.addTaskNotification);
   }
 
-  closeContactList() {
-    // this.taskForm.isContactListOpen = false;
+  closeAllFormList() {
+    this.taskForm.isContactListOpen = false;
+    this.taskForm.isCategoryListOpen = false;
   }
 }
