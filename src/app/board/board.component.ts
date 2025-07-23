@@ -80,4 +80,11 @@ export class BoardComponent {
     this.isTaskDetailsVisible = false;
     this.selectedTask = null;
   }
+
+  handleTaskDeleted() {
+    if (this.selectedTask?.id) {
+      this.tasks = this.tasks.filter(task => task.id !== this.selectedTask!.id);
+    }
+    this.closeOverlay();
+  }
 }

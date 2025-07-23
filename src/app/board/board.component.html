@@ -163,6 +163,6 @@
         </div>
 
         <app-task *ngIf="selectedTask" [categories]="categories" [contacts]="contacts" [priorities]="priorities" [task]="selectedTask!"
-                    [isVisible]="isTaskDetailsVisible" (closed)="closeOverlay()"></app-task>
+                    [isVisible]="isTaskDetailsVisible" (closed)="closeOverlay()" (taskDeleted)="handleTaskDeleted()"></app-task>
     </div>
 </section>

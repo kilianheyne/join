@@ -36,6 +36,7 @@ export class TaskComponent{
   firebaseService = inject(FirebaseService)
 
   @Output() closed = new EventEmitter<void>();
+  @Output() taskDeleted = new EventEmitter();
 
   @Input() isVisible = false;
   @Input() task!: Task;
@@ -47,9 +48,17 @@ export class TaskComponent{
   categoryData: Category | undefined;
 
   assignedContacts: Contact[] = [];
+  taskId?: string = '';
 
   closeTask() {
     this.closed.emit();
+  }
+
+  deleteTask(taskId: string) {
+    if (taskId) {
+      this.firebaseService.deleteDataFromDatabase('tasks', taskId);
+      this.taskDeleted.emit();
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {

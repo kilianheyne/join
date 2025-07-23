@@ -5,7 +5,7 @@ export class TaskModel {
         return {
         id,
         category: data.category,
-        date: data.date,
+        date: data.date?.toDate?.() || new Date(),
         title: data.title,
         description: data.description,
         priority: data.priority,
