@@ -12,7 +12,6 @@ section {
         height: calc(100dvh - 80px);
     }
 
-
     .board-header {
         display: flex;
         justify-content: space-between;
@@ -24,8 +23,6 @@ section {
         @media (max-width: 950px) {
             padding: 48px 32px;
         }
-
-
 
         @media (max-width: 640px) {
             padding: 48px 16px;
@@ -39,9 +36,7 @@ section {
             #input-area {
                 display: flex;
                 align-items: center;
-                gap: 10px;
-                width: 312px;
-                height: 48px;
+                gap: 16px;
                 padding: 8px 16px;
                 background: white;
                 border: solid 1px #A8A8A8;
@@ -49,7 +44,6 @@ section {
                 cursor: pointer;
 
                 @media (max-width: 1100px) {
-                    width: 212px;
                 }
 
                 @media (max-width: 520px) {
@@ -59,10 +53,9 @@ section {
                 input {
                     border: none;
                     outline: none;
-                    height: 100%;
-                    width: 100%;
+                    height: 32px;
+                    flex: 1;
                     cursor: pointer;
-                    line-height: 48px;
 
                     &::placeholder {
                         font-size: 20px;
@@ -73,13 +66,25 @@ section {
                 #grey-line {
                     width: 1px;
                     height: 31px;
-
                     background: #D1D1D1;
                 }
 
                 .icon-search {
                     display: flex;
                     align-items: center;
+                    justify-content: center;
+                    width: 32px;
+                    height: 32px;
+
+                    &:hover {
+                        background: #D9D9D9;
+                        border-radius: 100%;
+                    }
+
+                    &:active {
+                        color: #29ABE2;
+                        background: white;
+                    }
                 }
             }
         }
@@ -91,9 +96,7 @@ section {
         .input-area-mobile {
             display: flex;
             align-items: center;
-            gap: 10px;
-            width: 100%;
-            height: 48px;
+            gap: 16px;
             padding: 8px 16px;
             background: white;
             border: solid 1px #A8A8A8;
@@ -107,8 +110,9 @@ section {
 
             input {
                 border: none;
-                height: 100%;
-                width: 100%;
+                outline: none;
+                height: 32px;
+                flex: 1;
                 cursor: pointer;
 
                 &::placeholder {
@@ -127,6 +131,19 @@ section {
             .icon-search {
                 display: flex;
                 align-items: center;
+                justify-content: center;
+                width: 32px;
+                height: 32px;
+
+                &:hover {
+                    background: #D9D9D9;
+                    border-radius: 100%;
+                }
+
+                &:active {
+                    color: #29ABE2;
+                    background: white;
+                }
             }
         }
     }

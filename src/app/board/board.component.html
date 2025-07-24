@@ -2,11 +2,11 @@
     <div class="board-header">
         <h2>Board</h2>
         <div>
-            <div id="input-area">
-                <input type="text" placeholder="Find Task" [formControl]="searchControl"> <!-- TO-DO: placeholder needs align-center -->
+            <label for="" id="input-area">
+                <input type="text" placeholder="Find Task" [formControl]="searchControl">
                 <div id="grey-line"></div>
-                <div class="icon-search"></div> <!-- TO-DO: hover & active? & padding -->
-            </div>
+                <div class="icon-search"></div>
+            </label>
             <div>
                 <app-black-button (click)="openAddTaskOverlay()" [title]="showTitle ? 'Add task' : ''" icon="icon-add" [padding]="buttonPadding"
                     iconFontSize="21px"></app-black-button> <!-- TO-DO: icon-add needs align-center -->
@@ -15,11 +15,11 @@
     </div>
 
     <div class="search-mobile">
-        <div class="input-area-mobile">
-            <input type="text" placeholder="Find Task"> <!-- TO-DO: placeholder needs align-center -->
+        <label class="input-area-mobile">
+            <input type="text" placeholder="Find Task" [formControl]="searchControl"> <!-- TO-DO: placeholder needs align-center -->
             <div id="grey-line"></div>
-            <div class="icon-search"></div> <!-- TO-DO: hover & active? & padding -->
-        </div>
+            <div class="icon-search"></div> 
+        </label>
     </div>
 
     <div class="lists">
