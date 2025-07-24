@@ -1,5 +1,7 @@
-<section (click)="closeContactList()">
-    <h1>Add Task</h1>
-    <app-task-form (taskAdded)="showAddTaskNotification()"></app-task-form>
-    <app-add-task-notification #addTaskNotification></app-add-task-notification>
+<section (click)="closeAllFormList()">
+    <div class="container">
+        <h1>Add Task</h1>
+        <app-task-form #taskForm (taskAdded)="showAddTaskNotification()" bottomSectionBackground="#f6f7f8"></app-task-form>
+        <app-add-task-notification #addTaskNotification></app-add-task-notification>
+    </div>
 </section>

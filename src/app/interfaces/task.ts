@@ -1,5 +1,12 @@
 import { Subtask } from "./subtask";
 
+export enum TaskStatus {
+    ToDo = 'to-do',
+    InProgress = 'in-progress',
+    AwaitFeedback = 'await-feedback',
+    Done = 'done'
+}
+
 export interface Task {
     id?: string;
     title: string;
@@ -9,5 +16,5 @@ export interface Task {
     priority?: string;
     subtasks: Subtask[];
     users: (string | undefined)[];
-    status: 'to-do' | 'in-progress' | 'await-feedback' | 'done';
+    status: TaskStatus;
 }
