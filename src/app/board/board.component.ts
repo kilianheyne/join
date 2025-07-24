@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AddTaskComponent } from "./add-task/add-task.component";
 import { DataService } from '../services/data-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-board',
@@ -23,7 +24,7 @@ import { DataService } from '../services/data-service.service';
 export class BoardComponent {
   @ViewChild('addTaskOverlay') private addTaskOverlay!: AddTaskComponent;
 
-  showTitle:boolean = false;
+  showTitle: boolean = false;
   buttonPadding = '8px 16px';
   selectedTask: Task | null = null;
   isTaskDetailsVisible = false;
@@ -42,8 +43,9 @@ export class BoardComponent {
 
   constructor(
     private firebaseService: FirebaseService,
-    private dataService: DataService
-  ) {}
+    private dataService: DataService,
+    private router: Router,
+  ) { }
 
   ngOnInit() {
     this.checkScreenSize();
@@ -58,7 +60,7 @@ export class BoardComponent {
       if (!search) {
         this.filteredTasks = this.tasks;
       } else {
-        this.filteredTasks = this.tasks.filter(task => 
+        this.filteredTasks = this.tasks.filter(task =>
           task.title?.toLowerCase().includes(search) ||
           task.description?.toLowerCase().includes(search)
         );
@@ -118,5 +120,11 @@ export class BoardComponent {
   openAddTaskOverlay(status: TaskStatus = TaskStatus.ToDo) {
     this.addTaskOverlay.isVisible = true;
     this.dataService.setValue(status);
+  }
+
+  openAddTaskPageWithStatus(status: TaskStatus = TaskStatus.ToDo) {
+    this.router.navigate(['/add-task'], {
+      state: { status: status }
+    });
   }
 }

@@ -566,6 +566,63 @@ form {
     }
 }
 
+form.edit {
+    max-height: calc(100vh - (80px + 80px + 60px + 100px));
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    >div:first-child {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 32px;
+
+        >div:nth-child(1) {
+            padding-right: 0;
+
+            textarea {
+                font-size: 16px;
+            }
+        }
+
+        >div:nth-child(2) {
+            display: none;
+        }
+
+        >div:nth-child(3) {
+            margin-left: 0;
+        }
+    }
+
+    >div:last-child {
+        position: sticky;
+        bottom: 0;
+        padding: 15px 0 0;
+        z-index: 100;
+        margin-top: 10px;
+        justify-content: end;
+
+        @media (max-width:420px) {
+            justify-content: center;
+        }
+
+        >div:first-child {
+            display: none;
+        }
+
+        >div:last-child {
+            @media (max-width:420px) {
+                flex-direction: column-reverse;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+}
+
 div.icon-with-separate {
     display: flex;
     gap: 7px;
@@ -584,6 +641,10 @@ div.icon-with-separate {
 
 ::ng-deep .custom-date-field .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
     font-size: 20px;
+
+    &.edit {
+        font-size: 16px;
+    }
 
     @media (max-width:400px) {
         font-size: 16px;

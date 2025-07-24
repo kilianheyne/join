@@ -12,10 +12,11 @@ import { Category } from '../../interfaces/category';
 import { Contact } from '../../interfaces/contact';
 import { Priority } from '../../interfaces/priority';
 import { FormsModule } from '@angular/forms';
+import { TaskFormComponent } from "../../add-task-page/task-form/task-form.component";
 
 @Component({
   selector: 'app-task',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TaskFormComponent],
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss',
   animations: [
@@ -52,6 +53,8 @@ export class TaskComponent{
   assignedContacts: Contact[] = [];
   taskId?: string = '';
 
+  showEditPage = false
+
   closeTask() {
     this.isVisible = false;
     setTimeout(() => {
@@ -85,6 +88,11 @@ export class TaskComponent{
     if (changes['priorities'] || changes['task']) {
       this.setPriorityData();
     }
+  }
+
+  returnToDetailPage(taskData: Task) {
+    this.task = taskData;
+    this.showEditPage = false;
   }
 
   private setCategoryData(): void {

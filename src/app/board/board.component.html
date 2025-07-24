@@ -28,7 +28,7 @@
             <div class="column">
                 <div class="headline-responsive">
                     <span>To do</span>
-                    <div class="icon-add" (click)="openAddTaskOverlay()"></div>
+                    <div class="icon-add" (click)="openAddTaskPageWithStatus()"></div>
                 </div>
 
                 <div class="task-area" cdkDropList [cdkDropListData]="getTaskByStatus(TaskStatus.ToDo)"
@@ -62,7 +62,7 @@
             <div class="column">
                 <div class="headline-responsive">
                     <span>In progress</span>
-                    <div class="icon-add" (click)="openAddTaskOverlay(TaskStatus.InProgress)"></div>
+                    <div class="icon-add" (click)="openAddTaskPageWithStatus(TaskStatus.InProgress)"></div>
                 </div>
                 <div class="task-area" cdkDropList [cdkDropListData]="getTaskByStatus(TaskStatus.InProgress)"
                     (cdkDropListDropped)="onTaskDrop($event, TaskStatus.InProgress)"
@@ -95,7 +95,7 @@
             <div class="column">
                 <div class="headline-responsive">
                     <span>Await feedback</span>
-                    <div class="icon-add" (click)="openAddTaskOverlay(TaskStatus.AwaitFeedback)"></div>
+                    <div class="icon-add" (click)="openAddTaskPageWithStatus(TaskStatus.AwaitFeedback)"></div>
                 </div>
 
                 <div class="task-area" cdkDropList [cdkDropListData]="getTaskByStatus(TaskStatus.AwaitFeedback)"
@@ -129,7 +129,7 @@
             <div class="column">
                 <div class="headline-responsive">
                     <span>Done</span>
-                    <div class="icon-add" (click)="openAddTaskOverlay(TaskStatus.Done)"></div>
+                    <div class="icon-add" (click)="openAddTaskPageWithStatus(TaskStatus.Done)"></div>
                 </div>
                 <div class="task-area" cdkDropList [cdkDropListData]="getTaskByStatus(TaskStatus.Done)"
                     (cdkDropListDropped)="onTaskDrop($event, TaskStatus.Done)"

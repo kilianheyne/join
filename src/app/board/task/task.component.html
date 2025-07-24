@@ -1,45 +1,54 @@
 <section [class.visible]="isVisible" (click)="closeTask()">
     <div *ngIf="isVisible" @slideInFromRight (click)="$event.stopPropagation()">
-        <div class="top-card">
-            <div class="task-name" [style.background]="categoryData?.color || '#0038FF'">
-                <span>{{ categoryData?.title || 'Unbekannt'}}</span>
+        <div *ngIf="!showEditPage">
+            <div class="top-card">
+                <div class="task-name" [style.background]="categoryData?.color || '#0038FF'">
+                    <span>{{ categoryData?.title || 'Unbekannt'}}</span>
+                </div>
+                <button (click)="closeTask()" class="icon icon-close"></button>
             </div>
-            <button (click)="closeTask()" class="icon icon-close"></button>
-        </div>
-        <h2>{{ task.title }}</h2>
-        <span>{{task.description }}</span>
-        <div class="task-date">
-            <span>Due date:</span>
-            <span>{{ task.date | date: 'dd/MM/yyyy' }}</span>
-        </div>
-        <div class="task-priority">
-            <span>Priority:</span>
-            <span>{{ priorityData?.title }}</span>
-            <div [class]="priorityData?.icon" [style.color]="priorityData?.color"></div>
-        </div>
-        <span class="title">Assigned To:</span>
-        @for (user of assignedContacts; track $index) {
+            <h2>{{ task.title }}</h2>
+            <span>{{task.description }}</span>
+            <div class="task-date">
+                <span>Due date:</span>
+                <span>{{ task.date | date: 'dd/MM/yyyy' }}</span>
+            </div>
+            <div class="task-priority">
+                <span>Priority:</span>
+                <span>{{ priorityData?.title }}</span>
+                <div [class]="priorityData?.icon" [style.color]="priorityData?.color"></div>
+            </div>
+            <span class="title">Assigned To:</span>
+            @for (user of assignedContacts; track $index) {
             <div class="task-worker">
                 <div class="circle" [style.background]="user.color">{{ user.avatar }}</div>
                 <span>{{ user.name }}</span>
             </div>
-        }
-        <span class="title">Subtasks</span>
-        @for (subtask of task.subtasks; let i = $index; track $index) {
+            }
+            <span class="title">Subtasks</span>
+            @for (subtask of task.subtasks; let i = $index; track $index) {
             <div class="subtask">
                 <input type="checkbox" [checked]="subtask.done" (change)="toggleSubtask(i, $event)">
                 <span>{{ subtask.title }}</span>
             </div>
-        }
-        <div class="task-buttons">
-            <button (click)="deleteTask(task.id!)">
-                <div class="icon-delete"></div>
-                <span>Delete</span>
-            </button>
-            <button>
-                <div class="icon-edit"></div>
-                <span>Edit</span>
-            </button>
+            }
+            <div class="task-buttons">
+                <button (click)="deleteTask(task.id!)">
+                    <div class="icon-delete"></div>
+                    <span>Delete</span>
+                </button>
+                <button (click)="showEditPage = true">
+                    <div class="icon-edit"></div>
+                    <span>Edit</span>
+                </button>
+            </div>
+        </div>
+        <div class="edit-page" *ngIf="showEditPage">
+            <div>
+                <span class="icon icon-close" (click)="closeTask()"></span>
+            </div>
+            <app-task-form #taskForm editPage="true" [editTaskData]="task" (taskUpdated)="returnToDetailPage($event)"></app-task-form>
         </div>
     </div>
+
 </section>
