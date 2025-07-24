@@ -9,12 +9,13 @@ import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 import { Contact } from '../interfaces/contact';
 import { Priority } from '../interfaces/priority';
 import { CommonModule } from '@angular/common';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AddTaskComponent } from "./add-task/add-task.component";
 import { DataService } from '../services/data-service.service';
 
 @Component({
   selector: 'app-board',
-  imports: [CommonModule, TaskComponent, BlackButtonComponent, TaskCardComponent, DragDropModule, AddTaskComponent],
+  imports: [CommonModule, TaskComponent, BlackButtonComponent, TaskCardComponent, DragDropModule, AddTaskComponent, ReactiveFormsModule],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
   providers: [DataService]
@@ -27,9 +28,14 @@ export class BoardComponent {
   selectedTask: Task | null = null;
   isTaskDetailsVisible = false;
   isOverlayActive: boolean = false;
+
+  searchControl = new FormControl('');
+
   TaskStatus = TaskStatus;
 
+
   tasks: Task[] = [];
+  filteredTasks: Task[] = [];
   categories: Category[] = [];
   contacts: Contact[] = [];
   priorities: Priority[] = [];
@@ -42,9 +48,22 @@ export class BoardComponent {
   ngOnInit() {
     this.checkScreenSize();
     this.tasks = this.firebaseService.tasksList;
+    this.filteredTasks = this.tasks;
     this.categories = this.firebaseService.categoriesList;
     this.contacts = this.firebaseService.contactsList;
     this.priorities = this.firebaseService.prioritiesList;
+
+    this.searchControl.valueChanges.subscribe(term => {
+      const search = term?.toLowerCase().trim() || '';
+      if (!search) {
+        this.filteredTasks = this.tasks;
+      } else {
+        this.filteredTasks = this.tasks.filter(task => 
+          task.title?.toLowerCase().includes(search) ||
+          task.description?.toLowerCase().includes(search)
+        );
+      }
+    });
   }
 
   @HostListener('window:resize')
@@ -63,7 +82,7 @@ export class BoardComponent {
   }
 
   getTaskByStatus(status: string): Task[] {
-    return this.tasks.filter(task => task.status === status);
+    return this.filteredTasks.filter(task => task.status === status);
   }
 
   onTaskDrop(event: CdkDragDrop<Task[]>, targetStatus: TaskStatus) {
