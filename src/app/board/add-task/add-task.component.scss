@@ -34,6 +34,11 @@ section {
             display: none;
         }
 
+        @media (max-height:850px) {
+            padding: 30px 70px;
+            max-height: 800px;
+        }
+
         @media (max-width:1250px) {
             padding: 30px 20px;
         }

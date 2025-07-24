@@ -11,10 +11,11 @@ import { Task } from '../../interfaces/task';
 import { Category } from '../../interfaces/category';
 import { Contact } from '../../interfaces/contact';
 import { Priority } from '../../interfaces/priority';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-task',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss',
   animations: [
@@ -36,6 +37,8 @@ export class TaskComponent{
   firebaseService = inject(FirebaseService)
 
   @Output() closed = new EventEmitter<void>();
+  @Output() taskDeleted = new EventEmitter();
+  @Output() subtaskChanged = new EventEmitter<void>();
 
   @Input() isVisible = false;
   @Input() task!: Task;
@@ -47,9 +50,29 @@ export class TaskComponent{
   categoryData: Category | undefined;
 
   assignedContacts: Contact[] = [];
+  taskId?: string = '';
 
   closeTask() {
-    this.closed.emit();
+    this.isVisible = false;
+    setTimeout(() => {
+      this.closed.emit();
+    }, 300);
+  }
+
+  deleteTask(taskId: string) {
+    if (taskId) {
+      this.firebaseService.deleteDataFromDatabase('tasks', taskId);
+      this.taskDeleted.emit();
+    }
+  }
+
+  toggleSubtask(index: number, event: Event) {
+    const input = event.target as HTMLInputElement;
+    const isDone = input.checked;
+    this.task.subtasks[index].done = isDone;
+    if (this.task.id) {
+      this.firebaseService.updateDataInDatabase('tasks', this.task.id, {subtasks: this.task.subtasks});
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
