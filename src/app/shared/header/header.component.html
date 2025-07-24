@@ -1,26 +1,28 @@
 <section>
-    <header class="content-limit">
-        <div id="header-content">
-            <span>Kanban Project Management Tool</span>
-            <img src="assets/images/favoicon-dark.png" alt="">
-            <div>
-                <img src="assets/icons/help.png" alt="help-center">
-                <div id="user" (click)="toggleMenu()">
-                    <span>YY</span>
+    <header>
+        <div class="contentRestriction">
+            <div id="header-content">
+                <span>Kanban Project Management Tool</span>
+                <img src="assets/images/favoicon-dark.png" alt="">
+                <div>
+                    <img src="assets/icons/help.png" alt="help-center">
+                    <div id="user" (click)="toggleMenu()">
+                        <span>YY</span>
+                    </div>
                 </div>
+                @if (showMenu) {
+                    <div id="user-menu">
+                        <ul>
+                            @if (isMobile) {
+                                <li><a href="">Help</a></li> <!-- TO-DO: href durch routerLink ersetzen -->
+                            }
+                            <li><a href="">Legal Notice</a></li> <!-- TO-DO: href durch routerLink ersetzen -->
+                            <li><a href="">Privacy Policy</a></li> <!-- TO-DO: href durch routerLink ersetzen -->
+                            <li><a href="">Log Out</a></li> <!-- TO-DO: href durch routerLink ersetzen -->
+                        </ul>
+                    </div>
+                }
             </div>
-            @if (showMenu) {
-                <div id="user-menu">
-                    <ul>
-                        @if (isMobile) {
-                            <li><a href="">Help</a></li> <!-- TO-DO: href durch routerLink ersetzen -->
-                        }
-                        <li><a href="">Legal Notice</a></li> <!-- TO-DO: href durch routerLink ersetzen -->
-                        <li><a href="">Privacy Policy</a></li> <!-- TO-DO: href durch routerLink ersetzen -->
-                        <li><a href="">Log Out</a></li> <!-- TO-DO: href durch routerLink ersetzen -->
-                    </ul>
-                </div>
-            }
         </div>
     </header>
 </section>
