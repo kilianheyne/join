@@ -266,6 +266,16 @@ section {
                         overflow-x: auto;
                         width: 100%;
                     }
+
+                    >div[cdkDrag] {
+                        width: 100%;
+                        max-width: 252px;
+                    }
+
+                    // app-task-card {
+                    //     width: 100%;
+                    //     max-width: 252px;
+                    // }
                 }
 
                 .task-area :-webkit-scrollbar {
