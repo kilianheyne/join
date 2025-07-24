@@ -20,7 +20,8 @@ header {
     }
     
     #header-content {
-        width: calc(100% - 232px);
+        width: 100%;
+        max-width: calc(1920px - 232px);
         display: flex;
         justify-content: space-between;
         align-items: center;
