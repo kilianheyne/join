@@ -59,6 +59,12 @@ import { DataService } from '../../services/data-service.service';
 })
 export class TaskFormComponent {
   @Input() bottomSectionBackground: string = 'white';
+  @Input() editPage: string = 'false';
+  @Input() editTaskData?: Task = undefined;
+
+  @Output() taskAdded = new EventEmitter();
+  @Output() taskUpdated = new EventEmitter();
+  @Output() formCancelled = new EventEmitter();
 
   firebaseService = inject(FirebaseService);
 
@@ -88,16 +94,20 @@ export class TaskFormComponent {
     status: TaskStatus.ToDo,
   }
 
-  ngOnInit() {
+  ngOnInit() {    
     const current = this.dataService.value();
     if (current) {
       this.taskData.status = current;
     }
+
+    if (this.editTaskData) {
+      this.taskData = { ...this.editTaskData }; 
+      this.momentDate = moment(this.taskData.date);
+      this.checkSelectedContactInEditPage();
+      this.checkSelectedCategoryInEditPage();
+      this.addSelectedSubtasksInEditPage();
+    }
   }
-
-  @Output() taskAdded = new EventEmitter();
-
-  @Output() formCancelled = new EventEmitter();
 
   selectMediumPriorityAsDefault() {
     this.firebaseService.prioritiesList$.subscribe(priorities => {
@@ -117,6 +127,34 @@ export class TaskFormComponent {
     });
   }
 
+  checkSelectedContactInEditPage() {
+    for (const user of this.taskData.users) {
+      for (const contact of this.contactList) {
+        if (contact.id === user) {
+          contact.checked = true;
+        }
+      }
+    }
+  }
+
+  checkSelectedCategoryInEditPage() {
+    for (const category of this.getCategories()) {
+      if (category.id === this.taskData.category) {
+        this.categoryTitle = category.title;
+      }
+    }
+  }
+
+  addSelectedSubtasksInEditPage() {
+    for (const subtask of this.taskData.subtasks) {
+      this.subtasks.push({
+        'title': subtask.title,
+        'done': subtask.done,
+        'edit': false
+      })
+    }
+  }
+
   getContacts(): Contact[] {
     return this.contactList.filter(
       contact => contact.name.toLowerCase().includes(
@@ -125,7 +163,7 @@ export class TaskFormComponent {
     );
   }
 
-  getSelectedContacts(): Contact[] {    
+  getSelectedContacts(): Contact[] {
     return this.contactList.filter(
       contact => contact.checked === true
     );
@@ -148,7 +186,6 @@ export class TaskFormComponent {
       });
       this.subtaskTitle = '';
     }
-
   }
 
   deleteSubtask(index: number) {
@@ -162,18 +199,32 @@ export class TaskFormComponent {
         title: subtask.title,
         done: subtask.done
       }));
-      this.taskData.date = this.momentDate ? this.momentDate.toDate() : new Date();      
-      this.firebaseService.addDataToDatabase<Task>('tasks', this.taskData).then(async (docRef) => {
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          this.cancelForm(taskForm);
-        }
-      });
-      this.taskAdded.emit();
-      setTimeout(() => {
-        this.router.navigate(['/board']);
-      }, 3000);
+      this.taskData.date = this.momentDate ? this.momentDate.toDate() : new Date();
+
+      if (this.editTaskData) {
+        this.updateTask();
+      } else {
+        this.createNewTask(taskForm);
+      }
     }
+  }
+
+  createNewTask(taskForm: NgForm) {
+    this.firebaseService.addDataToDatabase<Task>('tasks', this.taskData).then(async (docRef) => {
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        this.cancelForm(taskForm);
+      }
+    });
+    this.taskAdded.emit();
+    setTimeout(() => {
+      this.router.navigate(['/board']);
+    }, 3000);
+  }
+
+  updateTask() {
+    this.firebaseService.updateDataInDatabase<Task>('tasks', this.taskData.id ?? '', this.taskData);
+    this.taskUpdated.emit(this.taskData);
   }
 
   cancelForm(taskForm: NgForm) {

@@ -1,7 +1,7 @@
-import { Injectable, Signal, signal } from '@angular/core';
+import { Injectable, signal, Signal } from '@angular/core';
 import { TaskStatus } from '../interfaces/task';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class DataService {
   private _value = signal<TaskStatus | null>(null);
   value: Signal<TaskStatus | null> = this._value.asReadonly();

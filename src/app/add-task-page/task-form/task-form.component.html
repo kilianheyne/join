@@ -1,4 +1,5 @@
-<form (keydown.enter)="$event.preventDefault()" (ngSubmit)="submitForm(taskForm)" #taskForm="ngForm">
+<form (keydown.enter)="$event.preventDefault()" (ngSubmit)="submitForm(taskForm)" #taskForm="ngForm"
+    [class.edit]="editPage ==='true'">
     <div class="form-div">
         <div>
             <label class="form-label" for="title">
@@ -17,7 +18,7 @@
 
             <label class="form-label" for="date">
                 <span class="label">Due date<span>*</span></span>
-                <mat-form-field class="custom-date-field"
+                <mat-form-field [class.edit]="editPage ==='true'" class="custom-date-field"
                     [class.error]="!date.valid && (date.touched || taskForm.submitted)">
                     <input #date="ngModel" matInput [matDatepicker]="picker" [min]="minDate" placeholder="dd/mm/yyyy"
                         name="date" [(ngModel)]="momentDate" required>
@@ -80,8 +81,8 @@
                 </div>
             </label>
 
-            <label (click)="$event.stopPropagation()" [class.opened-list]="isCategoryListOpen" class="form-label select-category"
-                [class.open]="isCategoryListOpen">
+            <label (click)="$event.stopPropagation()" [class.opened-list]="isCategoryListOpen"
+                class="form-label select-category" [class.open]="isCategoryListOpen">
                 <span class="label">Category<span>*</span></span>
                 <input type="text" name="categoryTitle" [(ngModel)]="categoryTitle"
                     [class.error]="!categoryId.valid && (categoryId.touched || taskForm.submitted)"
@@ -148,9 +149,14 @@
             <span>*</span>
             This field is required
         </div>
-        <div>
-            <app-white-button title="Cancel" icon="icon-close" (click)="cancelForm(taskForm)"></app-white-button>
+        <div *ngIf="editPage ==='false'">
+            <app-white-button title="Clear" icon="icon-close" (click)="cancelForm(taskForm)"></app-white-button>
             <app-black-button title="Create Task" icon="icon-check" type="submit" iconFontSize="18px"
+                (click)="$event.stopPropagation()"></app-black-button>
+        </div>
+
+        <div *ngIf="editPage ==='true'">
+            <app-black-button title="Ok" icon="icon-check" type="submit" iconFontSize="18px"
                 (click)="$event.stopPropagation()"></app-black-button>
         </div>
     </div>
