@@ -54,7 +54,9 @@ section {
                     border: none;
                     outline: none;
                     height: 32px;
+                    padding-top: 3px;
                     flex: 1;
+                    line-height: 32px;
                     cursor: pointer;
 
                     &::placeholder {
@@ -112,7 +114,9 @@ section {
                 border: none;
                 outline: none;
                 height: 32px;
+                padding-top: 3px;
                 flex: 1;
+                line-height: 32px;
                 cursor: pointer;
 
                 &::placeholder {
@@ -241,6 +245,8 @@ section {
                         display: flex;
                         justify-content: center;
                         align-items: center;
+                        line-height: 1;
+                        vertical-align: middle;
                         width: 24px;
                         height: 24px;
                         font-size: 8px;
