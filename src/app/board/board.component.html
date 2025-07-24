@@ -161,9 +161,8 @@
                 </div>
             </div>
         </div>
-
-        <app-task *ngIf="selectedTask" [categories]="categories" [contacts]="contacts" [priorities]="priorities"
-            [task]="selectedTask!" [isVisible]="isTaskDetailsVisible" (closed)="closeOverlay()"></app-task>
+        <app-task *ngIf="selectedTask" [categories]="categories" [contacts]="contacts" [priorities]="priorities" [task]="selectedTask!"
+                    [isVisible]="isTaskDetailsVisible" (closed)="closeOverlay()" (taskDeleted)="handleTaskDeleted()"></app-task>
     </div>
 
     <app-add-task #addTaskOverlay></app-add-task>

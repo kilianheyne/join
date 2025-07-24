@@ -89,8 +89,10 @@ export class BoardComponent {
     this.selectedTask = null;
   }
 
-  openAddTaskOverlay(status: TaskStatus = TaskStatus.ToDo) {
-    this.addTaskOverlay.isVisible = true;
-    this.dataService.setValue(status);
+  handleTaskDeleted() {
+    if (this.selectedTask?.id) {
+      this.tasks = this.tasks.filter(task => task.id !== this.selectedTask!.id);
+    }
+    this.closeOverlay();
   }
 }
