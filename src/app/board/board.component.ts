@@ -86,4 +86,9 @@ export class BoardComponent {
   openAddTaskOverlay() {
     this.addTaskOverlay.isVisible = true;
   }
+
+  openAddTaskOverlay(status: TaskStatus = TaskStatus.ToDo) {
+    this.addTaskOverlay.isVisible = true;
+    this.dataService.setValue(status);
+  }
 }
