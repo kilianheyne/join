@@ -1,5 +1,5 @@
 <form (keydown.enter)="$event.preventDefault()" (ngSubmit)="submitForm(taskForm)" #taskForm="ngForm">
-    <div>
+    <div class="form-div">
         <div>
             <label class="form-label" for="title">
                 <span class="label">Title<span>*</span></span>
@@ -19,8 +19,8 @@
                 <span class="label">Due date<span>*</span></span>
                 <mat-form-field class="custom-date-field"
                     [class.error]="!date.valid && (date.touched || taskForm.submitted)">
-                    <input #date="ngModel" matInput [matDatepicker]="picker" placeholder="dd/mm/yyyy" name="date"
-                        [(ngModel)]="momentDate" required>
+                    <input #date="ngModel" matInput [matDatepicker]="picker" [min]="minDate" placeholder="dd/mm/yyyy"
+                        name="date" [(ngModel)]="momentDate" required>
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
@@ -42,33 +42,36 @@
                 </div>
             </label>
 
-            <label (click)="$event.stopPropagation()" class="form-label select-contact"
-                [class.open]="isContactListOpen">
+            <label (click)="$event.stopPropagation()" [class.opened-list]="isContactListOpen"
+                class="form-label select-contact" [class.open]="isContactListOpen">
                 <span class="label">Assigned to</span>
                 <input type="text" name="contact" [(ngModel)]="searchContactInput"
                     [placeholder]="isContactListOpen ? '' : 'Select contacts to assign'"
                     [value]="isContactListOpen ? searchContactInput : ''"
                     (click)="isContactListOpen = !isContactListOpen">
 
-                <div *ngIf="isContactListOpen" @slideInFromTop class="contact-list">
-                    @for (contact of getContacts(); track contact.id) {
-                    <label>
-                        <div>
-                            <div [ngStyle]="{'background-color': contact.color}">
-                                {{ contact.avatar }}
-                            </div>
-                            <div>{{ contact.name }}</div>
-                        </div>
-                        <div>
+                <div [class.visible]="isContactListOpen" class="contact-list">
+                    <div *ngIf="isContactListOpen" @slideInFromTop>
+                        @for (contact of getContacts(); track contact.id) {
+                        <label>
                             <div>
-                                <input type="checkbox" [name]="'contactChecked'+contact.id" [(ngModel)]="contact.checked">
+                                <div [ngStyle]="{'background-color': contact.color}">
+                                    {{ contact.avatar }}
+                                </div>
+                                <div>{{ contact.name }}</div>
                             </div>
-                        </div>
-                    </label>
-                    }
+                            <div>
+                                <div>
+                                    <input type="checkbox" [name]="'contactChecked'+contact.id"
+                                        [(ngModel)]="contact.checked">
+                                </div>
+                            </div>
+                        </label>
+                        }
+                    </div>
                 </div>
 
-                <div *ngIf="!isContactListOpen" class="contact-avatars">
+                <div *ngIf="getSelectedContacts().length > 0" class="contact-avatars">
                     @for (contact of getSelectedContacts(); track contact.id) {
                     <div [ngStyle]="{'background-color': contact.color}">
                         <span>{{ contact.avatar }}</span>
@@ -77,7 +80,7 @@
                 </div>
             </label>
 
-            <label (click)="$event.stopPropagation()" class="form-label select-category"
+            <label (click)="$event.stopPropagation()" [class.opened-list]="isCategoryListOpen" class="form-label select-category"
                 [class.open]="isCategoryListOpen">
                 <span class="label">Category<span>*</span></span>
                 <input type="text" name="categoryTitle" [(ngModel)]="categoryTitle"
@@ -86,14 +89,16 @@
                     (click)="isCategoryListOpen = !isCategoryListOpen" required readonly>
                 <input type="hidden" #categoryId="ngModel" name="categoryId" [(ngModel)]="taskData.category" required>
 
-                <div *ngIf="isCategoryListOpen" @slideInFromTop class="category-list">
-                    @for (category of getCategories(); track category.id) {
-                    <label>
-                        <div>{{ category.title }}</div>
-                        <input type="radio" name="category" [value]="category.id"
-                            (click)="categoryTitle=category.title;taskData.category=category.id;isCategoryListOpen=false;">
-                    </label>
-                    }
+                <div [class.visible]="isCategoryListOpen" class="category-list">
+                    <div *ngIf="isCategoryListOpen" @slideInFromTop>
+                        @for (category of getCategories(); track category.id) {
+                        <label>
+                            <div>{{ category.title }}</div>
+                            <input type="radio" name="category" [value]="category.id"
+                                (click)="categoryTitle=category.title;taskData.category=category.id;isCategoryListOpen=false;">
+                        </label>
+                        }
+                    </div>
                 </div>
                 <span *ngIf="!categoryId.valid && (categoryId.touched || taskForm.submitted)">This field is
                     required</span>
@@ -138,7 +143,7 @@
             </label>
         </div>
     </div>
-    <div>
+    <div [ngStyle]="{'background-color': bottomSectionBackground}">
         <div>
             <span>*</span>
             This field is required

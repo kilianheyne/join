@@ -10,7 +10,7 @@
         <span>{{task.description }}</span>
         <div class="task-date">
             <span>Due date:</span>
-            <span>{{ task.date }}</span>
+            <span>{{ task.date | date: 'dd/MM/yyyy' }}</span>
         </div>
         <div class="task-priority">
             <span>Priority:</span>
@@ -25,14 +25,14 @@
             </div>
         }
         <span class="title">Subtasks</span>
-        @for (subtask of task.subtasks; track $index) {
+        @for (subtask of task.subtasks; let i = $index; track $index) {
             <div class="subtask">
-                <input type="checkbox">
+                <input type="checkbox" [checked]="subtask.done" (change)="toggleSubtask(i, $event)">
                 <span>{{ subtask.title }}</span>
             </div>
         }
         <div class="task-buttons">
-            <button>
+            <button (click)="deleteTask(task.id!)">
                 <div class="icon-delete"></div>
                 <span>Delete</span>
             </button>
