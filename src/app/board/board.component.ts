@@ -29,10 +29,9 @@ export class BoardComponent {
   selectedTask: Task | null = null;
   isTaskDetailsVisible = false;
   isOverlayActive: boolean = false;
-
   searchControl = new FormControl('');
-
   TaskStatus = TaskStatus;
+  isMobile: boolean = false;
 
 
   tasks: Task[] = [];
@@ -54,18 +53,7 @@ export class BoardComponent {
     this.categories = this.firebaseService.categoriesList;
     this.contacts = this.firebaseService.contactsList;
     this.priorities = this.firebaseService.prioritiesList;
-
-    this.searchControl.valueChanges.subscribe(term => {
-      const search = term?.toLowerCase().trim() || '';
-      if (!search) {
-        this.filteredTasks = this.tasks;
-      } else {
-        this.filteredTasks = this.tasks.filter(task =>
-          task.title?.toLowerCase().includes(search) ||
-          task.description?.toLowerCase().includes(search)
-        );
-      }
-    });
+    this.initSearchFilter();
   }
 
   @HostListener('window:resize')
@@ -74,13 +62,18 @@ export class BoardComponent {
   }
 
   private checkScreenSize() {
-    this.showTitle = window.innerWidth > 640;
-    if (window.innerWidth > 640) {
-      this.showTitle = true;
-    } else {
-      this.showTitle = false;
-      this.buttonPadding = '8px';
-    }
+    // this.showTitle = window.innerWidth > 640;
+    // if (window.innerWidth > 640) {
+    //   this.showTitle = true;
+    // } else {
+    //   this.showTitle = false;
+    //   this.buttonPadding = '8px';
+    // }
+
+    const width = window.innerWidth;
+    this.showTitle = width > 640;
+    this.buttonPadding = this.showTitle ? '8px 16px' : '8px';
+    this.isMobile = width <= 820;
   }
 
   getTaskByStatus(status: string): Task[] {
@@ -126,5 +119,27 @@ export class BoardComponent {
     this.router.navigate(['/add-task'], {
       state: { status: status }
     });
+  }
+
+  private initSearchFilter(): void {
+    this.searchControl.valueChanges.subscribe(term => {
+      const search = term?.toLowerCase().trim() || '';
+      if (!search) {
+        this.filteredTasks = this.tasks;
+      } else {
+        this.filteredTasks = this.tasks.filter(task =>
+          task.title?.toLowerCase().includes(search) ||
+          task.description?.toLowerCase().includes(search)
+        );
+      }
+    });
+  }
+
+  handleAddTaskClick(status: TaskStatus = TaskStatus.ToDo) {
+    if (this.isMobile) {
+      this.openAddTaskPageWithStatus(status);
+    } else {
+      this.openAddTaskOverlay(status);
+    }
   }
 }
