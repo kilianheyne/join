@@ -1,6 +1,7 @@
 section {
     height: calc(100dvh - 94px);
     width: calc(100dvw - 232px);
+    max-width:  calc(1920px - 232px);
 
 
     @media (max-width: 820px){

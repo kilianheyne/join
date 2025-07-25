@@ -21,6 +21,7 @@ header {
     
     #header-content {
         width: 100%;
+        max-width: calc(1920px - 232px);
         display: flex;
         justify-content: space-between;
         align-items: center;
