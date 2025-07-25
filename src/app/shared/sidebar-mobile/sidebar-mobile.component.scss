@@ -26,9 +26,15 @@ section {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        width: 80px;
+        height: 80px;
         gap: 12px;
-
         cursor: pointer;
+
+        @media (max-width: 640px) {
+            width: 70px;
+            height: 70px;
+        }
 
         .default-icon {
             display: flex;
