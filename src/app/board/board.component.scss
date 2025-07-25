@@ -259,7 +259,7 @@ section {
                 .task-area {
                     display: flex;
                     flex-direction: column;
-                    height: auto;
+                    height: 100%;
                     padding-top: 60px;
 
                     @media (max-width: 1470px) {
@@ -391,11 +391,12 @@ section {
 
 .cdk-drag {
     cursor: grab;
+    scrollbar-width: none;
+}
 
-    &.cdk-drag-dragging {
-        cursor: grabbing;
-        // transform: rotate(-5deg) scale(1.02);
-        // box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        // transition: transform 200ms easse, box-shadow 200ms ease;
-    }
+.cdk-drag-placeholder {
+    cursor: grabbing;
+    // transform: rotate(-5deg) scale(1.02);
+    // box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    // transition: transform 200ms easse, box-shadow 200ms ease;
 }
