@@ -46,9 +46,6 @@ export class TaskCardComponent {
 
   private setCategoryData(): void {
     this.categoryData = this.categories.find(c => c.id === this.task.category);
-    if (!this.categoryData) {
-      console.warn(`Kategorie mit ID ${this.task.category} nicht gefunden!`);
-    }
   }
 
   private setAssignedContacts(): void {
@@ -69,11 +66,7 @@ export class TaskCardComponent {
   }
 
   private setPriorityData(): void {
-    console.log('Die priorityData enthält' + this.priorityData);
     this.priorityData = this.priorities.find(p => p.id === this.task.priority);
-    if (!this.priorityData) {
-      console.warn(`Priority mit ID ${this.task.priority} nicht gefunden!`)
-    }
   }
 
   private setProgress(): void {

@@ -82,8 +82,7 @@ export class BoardComponent {
 
   onTaskDrop(event: CdkDragDrop<Task[]>, targetStatus: TaskStatus) {
     const task = event.item.data as Task;
-    if (!task.id) { // task-interface nutzt id? - verhindert Probleme mit updateDataInDatabase
-      console.error('Task ID fehlt, kann nicht gespeichert werden.');
+    if (!task.id) {
       return;
     }
     if (task.status !== targetStatus) {
