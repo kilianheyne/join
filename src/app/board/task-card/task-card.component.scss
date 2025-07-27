@@ -25,6 +25,18 @@
         // margin-bottom: 11px;
     }
 
+    .flex {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+
+        button {
+            border-radius: 8px;
+            color: white;
+            border: none;
+        }
+    }
+
     .category {
         background: #0038FF;
         border-radius: 8px;

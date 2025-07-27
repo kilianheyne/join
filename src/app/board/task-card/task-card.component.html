@@ -1,10 +1,10 @@
 <div class="task-card">
-    <div>
+    <div class="flex">
         <div class="category" [style.background]="categoryData?.color || '#0038FF'">
             <span>{{ categoryData?.title || 'Unbekannt'}}</span>
         </div>
         @if (isMobile) {
-            <button mat-icon-button (click)="openMoveMenu(task)">
+            <button mat-icon-button (click)="openMoveMenu(task, $event)" [style.background]="categoryData?.color || '#0038FF'">
                 <mat-icon>more_vert</mat-icon>
             </button>
         }

@@ -89,7 +89,8 @@ export class TaskCardComponent {
     }
   }
 
-  openMoveMenu( task: Task) {
+  openMoveMenu( task: Task, event: MouseEvent) {
+    event.stopPropagation();
     this.openMoveSheet.emit(task);
   }
   // #endregion
