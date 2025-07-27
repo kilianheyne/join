@@ -22,7 +22,7 @@ section {
 
     >div {
         width: 450px;
-        max-height: 740px;
+        max-height: 80%;
         background: white;
         border-radius: 20px;
         padding: 40px;
@@ -154,6 +154,12 @@ section {
                 display: flex;
                 width: fit-content;
                 gap: 10px;
+
+                input{
+                    cursor: pointer;
+                    height: 15px;
+                    width: 15px;
+                }
 
                 &:hover {
                     background: #0C2E621F;
