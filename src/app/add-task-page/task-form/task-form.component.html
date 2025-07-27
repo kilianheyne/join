@@ -131,11 +131,11 @@
 
                         <div class="with-input" *ngIf="subtask.edit === true">
                             <input type="text" [name]="'subtask'+$index" [(ngModel)]="subtask.title"
-                                (keydown.enter)="subtask.edit = false">
+                                (keydown.enter)="deleteEmptySubtask($index)">
                             <div class="icon-with-separate">
                                 <span class="icon icon-delete" (click)="deleteSubtask($index)"></span>
                                 <span class="separate">|</span>
-                                <span class="icon icon-check" (click)="subtask.edit = false"></span>
+                                <span class="icon icon-check" (click)="deleteEmptySubtask($index)"></span>
                             </div>
                         </div>
                     </li>

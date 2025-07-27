@@ -108,7 +108,9 @@ export class TaskComponent{
       .filter((userId): userId is string => typeof userId === 'string')
       .map((userId: string) => this.contacts.find(c => c.id === userId))
       .filter(Boolean) as Contact[];
+      if (matchedContacts.length >= 1) {
         this.assignedContacts = matchedContacts;
+      }
     }
   }
 
