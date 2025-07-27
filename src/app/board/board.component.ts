@@ -13,10 +13,14 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AddTaskComponent } from "./add-task/add-task.component";
 import { DataService } from '../services/data-service.service';
 import { Router } from '@angular/router';
+import { MatBottomSheet, MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MoveTaskSheetComponent } from './move-task-sheet/move-task-sheet.component';
 
 @Component({
   selector: 'app-board',
-  imports: [CommonModule, TaskComponent, BlackButtonComponent, TaskCardComponent, DragDropModule, AddTaskComponent, ReactiveFormsModule],
+  imports: [CommonModule, TaskComponent, BlackButtonComponent, TaskCardComponent, DragDropModule, AddTaskComponent, ReactiveFormsModule, MatBottomSheetModule, MatIconModule, MatButtonModule, MoveTaskSheetComponent],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
   providers: [DataService]
@@ -45,6 +49,7 @@ export class BoardComponent {
     private firebaseService: FirebaseService,
     private dataService: DataService,
     private router: Router,
+    private bottomSheet: MatBottomSheet
   ) { }
 
   ngOnInit() {
@@ -153,5 +158,17 @@ export class BoardComponent {
     } else {
       this.openAddTaskOverlay(status);
     }
+  }
+
+  openMoveTaskMenu(task: Task): void {
+    const ref = this.bottomSheet.open(MoveTaskSheetComponent, { data: { task }});
+
+    ref.afterDismissed().subscribe((newStatus: TaskStatus) => {
+      if (newStatus && task.id) {
+        task.status = newStatus;
+        this.firebaseService.updateDataInDatabase('task', task.id!, { status: newStatus });
+        this.refreshTaskList();
+      }
+    });
   }
 }

@@ -1,7 +1,15 @@
 <div class="task-card">
-    <div class="category" [style.background]="categoryData?.color || '#0038FF'">
-        <span>{{ categoryData?.title || 'Unbekannt'}}</span>
+    <div>
+        <div class="category" [style.background]="categoryData?.color || '#0038FF'">
+            <span>{{ categoryData?.title || 'Unbekannt'}}</span>
+        </div>
+        @if (isMobile) {
+            <button mat-icon-button (click)="openMoveMenu(task)">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+        }
     </div>
+
     <div class="description">
         <h4>{{ task.title }}</h4>
         <span>{{ task.description }}</span>

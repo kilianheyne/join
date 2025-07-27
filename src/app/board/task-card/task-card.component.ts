@@ -1,12 +1,13 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, SimpleChanges, Output } from '@angular/core';
 import { Task } from '../../interfaces/task';
 import { Category } from '../../interfaces/category';
 import { Contact } from '../../interfaces/contact';
 import { Priority } from '../../interfaces/priority';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-task-card',
-  imports: [],
+  imports: [MatIconModule],
   templateUrl: './task-card.component.html',
   styleUrl: './task-card.component.scss'
 })
@@ -16,14 +17,14 @@ export class TaskCardComponent {
   @Input() categories!: Category[];
   @Input() contacts!: Contact[];
   @Input() priorities!: Priority[];
+  @Input() isMobile: boolean = false;
+
+  @Output() openMoveSheet = new EventEmitter<Task>();
 
   categoryData: Category | undefined;
-
   assignedContacts: Contact[] = [];
   remainingUsers: number = 0;
-
   priorityData: Priority | undefined;
-
   completedSubtasks: number = 0;
   totalSubtasks: number = 0;
   progressPercent: number = 0;
@@ -86,6 +87,10 @@ export class TaskCardComponent {
       this.completedSubtasks = 0;
       this.progressPercent = 0;
     }
+  }
+
+  openMoveMenu( task: Task) {
+    this.openMoveSheet.emit(task);
   }
   // #endregion
 }
