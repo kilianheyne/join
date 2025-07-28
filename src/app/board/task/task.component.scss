@@ -125,7 +125,6 @@ section {
             }
 
             .task-worker {
-                padding-bottom: 10px;
                 margin-left: 15px;
                 display: flex;
                 gap: 15px;
@@ -133,7 +132,7 @@ section {
                 align-items: center;
 
                 .circle {
-                    background-color: orange;
+                    background-color: grey;
                     height: 30px;
                     width: 30px;
                     border-radius: 50%;
