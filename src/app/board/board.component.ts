@@ -37,6 +37,7 @@ export class BoardComponent {
   searchControl = new FormControl('');
   TaskStatus = TaskStatus;
   isMobile: boolean = false;
+  isDragging: boolean = false;
 
   tasks: Task[] = [];
   filteredTasks: Task[] = [];
@@ -169,5 +170,13 @@ export class BoardComponent {
         this.refreshTaskList();
       }
     });
+  }
+
+  onDragStart(): void {
+    this.isDragging = true;
+  }
+
+  onDragEnd(): void {
+    this.isDragging = false;
   }
 }
