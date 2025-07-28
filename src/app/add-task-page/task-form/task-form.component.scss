@@ -2,7 +2,7 @@
 
 form {
     @media (max-width:820px) or (max-height:800px) {
-        max-height: calc(100vh - (94px + 96px + 75px + 100px));
+        max-height: calc(100vh - (94px + 96px + 75px + 10px));
         overflow-y: auto;
 
         &::-webkit-scrollbar {
@@ -11,7 +11,7 @@ form {
     }
 
     @media (max-width:640px) {
-        max-height: calc(100vh - (80px + 80px + 60px + 100px));
+        max-height: calc(100vh - (80px + 80px + 60px + 60px));
         overflow-y: auto;
 
         &::-webkit-scrollbar {
@@ -522,7 +522,7 @@ form {
     >div:last-child {
         display: flex;
         justify-content: space-between;
-        align-items: end;
+        align-items: start;
         margin-top: 100px;
 
         @media (max-width:820px) {
@@ -534,18 +534,22 @@ form {
         }
 
         @media (max-width:600px) {
-            justify-content: end;
+            justify-content: center;
+            height: 100px;
         }
 
         @media (max-width:420px) {
-            justify-content: center;
+            _height: 200px;
         }
 
         >div:first-child {
             font-size: 16px;
 
             @media (max-width:600px) {
-                display: none;
+                _display: none;
+                position: absolute;
+                bottom: 0;
+                left: 0;
             }
 
             >span {
@@ -558,7 +562,7 @@ form {
             gap: 20px;
 
             @media (max-width:420px) {
-                flex-direction: column-reverse;
+                _flex-direction: column-reverse;
                 justify-content: center;
                 align-items: center;
             }
