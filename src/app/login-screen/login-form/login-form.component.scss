@@ -12,6 +12,17 @@
     justify-content: space-between;
     gap: 32px;
 
+    @media (max-width: 1200px) {
+        width: 60dvw;
+    }
+
+    @media (max-width: 800px) {
+        width: 80dvw;
+    }
+
+    @media (max-width: 560px) {
+        width: 95dvw;
+    }
 
     .headline {
         display: flex;
@@ -21,6 +32,10 @@
 
         h2 {
             font-size: 61px;
+
+            @media (max-width: 560px) {
+                font-size: 47px;
+            }
         }
 
         .blueline {
@@ -28,6 +43,10 @@
             height: 4px;
             width: 160px;
             border-radius: 10px;
+
+            @media (max-width: 560px) {
+                width: 100px;
+            }
         }
     }
 
@@ -40,6 +59,7 @@
             flex-direction: column;
             margin-bottom: 40px;
             gap: 20px;
+            width: 100%;
 
             input {
                 width: 422px;
@@ -49,6 +69,14 @@
                 padding-left: 20px;
                 display: flex;
                 align-items: center;
+
+                @media (max-width: 560px) {
+                    width: 400px;
+                }
+
+                @media (max-width: 450px) {
+                    width: 300px;
+                }
             }
 
             input::placeholder {
@@ -65,8 +93,14 @@
             width: 100%;
             justify-content: center;
             gap: 35px;
+
+            @media (max-width: 560px) {
+                flex-direction: column;
+                align-items: center;
+                gap: 21px;
+            }
         }
     }
 
-    
+
 }
