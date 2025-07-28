@@ -93,13 +93,13 @@ export class TaskComponent{
   returnToDetailPage(taskData: Task) {
     this.task = taskData;
     this.showEditPage = false;
+    this.setCategoryData();
+    this.setAssignedContacts();
+    this.setPriorityData();
   }
 
   private setCategoryData(): void {
     this.categoryData = this.categories.find(c => c.id === this.task.category);
-    if (!this.categoryData) {
-      console.warn(`Kategorie mit ID ${this.task.category} nicht gefunden!`);
-    }
   }
 
   private setAssignedContacts(): void {
@@ -108,15 +108,13 @@ export class TaskComponent{
       .filter((userId): userId is string => typeof userId === 'string')
       .map((userId: string) => this.contacts.find(c => c.id === userId))
       .filter(Boolean) as Contact[];
+      if (matchedContacts.length >= 1) {
         this.assignedContacts = matchedContacts;
+      }
     }
   }
 
   private setPriorityData(): void {
-    console.log('Die priorityData enthält' + this.priorityData);
     this.priorityData = this.priorities.find(p => p.id === this.task.priority);
-    if (this.priorityData) {
-      console.warn(`Priority mit ID ${this.task.priority} nicht gefunden!`)
-    }
   }
 }

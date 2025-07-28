@@ -96,7 +96,6 @@ export class BoardComponent {
     const task = event.item.data as Task;
     const isSameList = event.previousContainer === event.container;
     if (!task.id) { // task-interface nutzt id? - verhindert Probleme mit updateDataInDatabase
-      console.error('Task ID fehlt, kann nicht gespeichert werden.');
       return;
     }
     if (isSameList) {

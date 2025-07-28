@@ -240,4 +240,13 @@ export class TaskFormComponent {
       this.subtasks = [];
     }, 200);
   }
+
+  deleteEmptySubtask(index: number) {
+    const subtask = this.subtasks[index];
+    if (subtask.title.trim() === '') {
+      this.deleteSubtask(index);
+    } else {
+      subtask.edit = false;
+    }
+  }
 }
