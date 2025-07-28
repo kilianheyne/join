@@ -1,59 +1,59 @@
 <section>
     <div id="summary-header">
-        <h3>Join 360</h3>
+        <h2>Join 360</h2>
         <div class="blue-hyphen"></div>
         <span>Key Metrics at a Glance</span>
     </div>
-    <div> 
-        <div>
-            <div>
-                <div>
-                    <div class="icon-note"></div>
-                    <div>
-                        <span>1</span> <!-- TO-DO: dynamic render of amount of array-length -->
+    <div id="summary-content" class="flex"> 
+        <div id="overview">
+            <div id="first-row" class="flex">
+                <div class="medium-bubble">
+                    <div class="icon-edit"></div>
+                    <div class="flex-col">
+                        <span class="dynamic-number">1</span> <!-- TO-DO: dynamic render of amount of array-length -->
                         <span>To-do</span>
                     </div>
                 </div>
-                <div>
+                <div class="medium-bubble">
                     <div class="icon-check"></div>
-                    <div>
-                        <span>1</span> <!-- TO-DO: dynamic render of amount of array-length -->
+                    <div class="flex-col">
+                        <span class="dynamic-number">1</span> <!-- TO-DO: dynamic render of amount of array-length -->
                         <span>Done</span>
                     </div>
                 </div>
             </div>
-            <div>
-                <div>
+            <div id="second-row">
+                <div id="urgent-box">
                     <div class="icon-urgent"></div>
-                    <div>
-                        <span>1</span> <!-- TO-DO: dynamic render of amount of urgent tasks -->
+                    <div class="flex-col">
+                        <span class="dynamic-number">1</span> <!-- TO-DO: dynamic render of amount of urgent tasks -->
                         <span>Urgent</span>
                     </div>
                 </div>
                 <div class="grey-hyphen"></div>
-                <div>
-                    <span>October 16, 2022</span> <!-- TO-DO: dynamic render of next deadline -->
+                <div id="date-box">
+                    <b>October 16, 2022</b> <!-- TO-DO: dynamic render of next deadline -->
                     <span>Upcoming Deadline</span>
                 </div>
             </div>
-            <div>
-                <div>
-                    <span>5</span> <!-- TO-DO: dynamic render of array.length -->
-                    <span>Tasks in Board</span>
+            <div id="third-row">
+                <div class="flex-col small-bubble">
+                    <span class="dynamic-number">5</span> <!-- TO-DO: dynamic render of array.length -->
+                    <span>Tasks in <br> Board</span>
                 </div>
-                <div>
-                    <span>2</span> <!-- TO-DO: dynamic render of array.length -->
-                    <span>Tasks In Progress</span>
+                <div class="flex-col small-bubble">
+                    <span class="dynamic-number">2</span> <!-- TO-DO: dynamic render of array.length -->
+                    <span>Tasks In <br> Progress</span>
                 </div>
-                <div>
-                    <span>2</span> <!-- TO-DO: dynamic render of array.length -->
-                    <span>Awaiting Feedback</span>
+                <div class="flex-col small-bubble">
+                    <span class="dynamic-number">2</span> <!-- TO-DO: dynamic render of array.length -->
+                    <span>Awaiting <br> Feedback</span>
                 </div>
             </div>
         </div>
         <div id="greeting">
             <span>Good morning!</span> <!-- TO-DO: if(guest login) -->
-            <div> <!-- TO-DO: if(login with username) -->
+            <div class="flex-col"> <!-- TO-DO: if(login with username) -->
                 <span>Good morning,</span> 
                 <span id="username">Sofia Müller</span>
             </div>
