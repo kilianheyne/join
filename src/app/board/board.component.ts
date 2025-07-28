@@ -5,7 +5,7 @@ import { TaskComponent } from './task/task.component';
 import { Task, TaskStatus } from '../interfaces/task';
 import { FirebaseService } from '../services/firebase.service';
 import { Category } from '../interfaces/category';
-import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Contact } from '../interfaces/contact';
 import { Priority } from '../interfaces/priority';
 import { CommonModule } from '@angular/common';
@@ -13,15 +13,20 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AddTaskComponent } from "./add-task/add-task.component";
 import { DataService } from '../services/data-service.service';
 import { Router } from '@angular/router';
+import { MatBottomSheet, MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MoveTaskSheetComponent } from './move-task-sheet/move-task-sheet.component';
 
 @Component({
   selector: 'app-board',
-  imports: [CommonModule, TaskComponent, BlackButtonComponent, TaskCardComponent, DragDropModule, AddTaskComponent, ReactiveFormsModule],
+  imports: [CommonModule, TaskComponent, BlackButtonComponent, TaskCardComponent, DragDropModule, AddTaskComponent, ReactiveFormsModule, MatBottomSheetModule, MatIconModule, MatButtonModule, MoveTaskSheetComponent],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
   providers: [DataService]
 })
 export class BoardComponent {
+  // #region attributes
   @ViewChild('addTaskOverlay') private addTaskOverlay!: AddTaskComponent;
 
   showTitle: boolean = false;
@@ -33,17 +38,18 @@ export class BoardComponent {
   TaskStatus = TaskStatus;
   isMobile: boolean = false;
 
-
   tasks: Task[] = [];
   filteredTasks: Task[] = [];
   categories: Category[] = [];
   contacts: Contact[] = [];
   priorities: Priority[] = [];
+  // #endregion
 
   constructor(
     private firebaseService: FirebaseService,
     private dataService: DataService,
     private router: Router,
+    private bottomSheet: MatBottomSheet
   ) { }
 
   ngOnInit() {
@@ -62,18 +68,24 @@ export class BoardComponent {
   }
 
   private checkScreenSize() {
-    // this.showTitle = window.innerWidth > 640;
-    // if (window.innerWidth > 640) {
-    //   this.showTitle = true;
-    // } else {
-    //   this.showTitle = false;
-    //   this.buttonPadding = '8px';
-    // }
-
     const width = window.innerWidth;
     this.showTitle = width > 640;
     this.buttonPadding = this.showTitle ? '8px 16px' : '8px';
     this.isMobile = width <= 820;
+  }
+
+  private initSearchFilter(): void {
+    this.searchControl.valueChanges.subscribe(term => {
+      const search = term?.toLowerCase().trim() || '';
+      if (!search) {
+        this.filteredTasks = this.tasks;
+      } else {
+        this.filteredTasks = this.tasks.filter(task =>
+          task.title?.toLowerCase().includes(search) ||
+          task.description?.toLowerCase().includes(search)
+        );
+      }
+    });
   }
 
   getTaskByStatus(status: string): Task[] {
@@ -82,15 +94,34 @@ export class BoardComponent {
 
   onTaskDrop(event: CdkDragDrop<Task[]>, targetStatus: TaskStatus) {
     const task = event.item.data as Task;
+    const isSameList = event.previousContainer === event.container;
     if (!task.id) { // task-interface nutzt id? - verhindert Probleme mit updateDataInDatabase
       console.error('Task ID fehlt, kann nicht gespeichert werden.');
       return;
     }
-    if (task.status !== targetStatus) {
-      task.status = targetStatus;
-      this.firebaseService.updateDataInDatabase('tasks', task.id, { status: targetStatus });
+    if (isSameList) {
+      this.handleSameListDrop(event);
+    } else {
+      this.handleCrossListDrop(event, task, targetStatus);
     }
-    this.tasks = [...this.tasks]; // lokale Liste wird neu gerendert
+    this.refreshTaskList();
+  }
+
+  private handleSameListDrop(event: CdkDragDrop<Task[]>) {
+    moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+  }
+
+  private handleCrossListDrop(event: CdkDragDrop<Task[]>, task: Task, targetStatus: TaskStatus) {
+    const previousList = event.previousContainer.data;
+    const currentList = event.container.data;
+    previousList.splice(event.previousIndex, 1);
+    task.status = targetStatus;
+    currentList.splice(event.currentIndex, 0, task);
+    this.firebaseService.updateDataInDatabase('tasks', task.id!, { status: targetStatus })
+  }
+
+  private refreshTaskList() {
+    this.tasks = [...this.tasks];
   }
 
   openTaskDetails(task: Task) {
@@ -121,25 +152,23 @@ export class BoardComponent {
     });
   }
 
-  private initSearchFilter(): void {
-    this.searchControl.valueChanges.subscribe(term => {
-      const search = term?.toLowerCase().trim() || '';
-      if (!search) {
-        this.filteredTasks = this.tasks;
-      } else {
-        this.filteredTasks = this.tasks.filter(task =>
-          task.title?.toLowerCase().includes(search) ||
-          task.description?.toLowerCase().includes(search)
-        );
-      }
-    });
-  }
-
   handleAddTaskClick(status: TaskStatus = TaskStatus.ToDo) {
     if (this.isMobile) {
       this.openAddTaskPageWithStatus(status);
     } else {
       this.openAddTaskOverlay(status);
     }
+  }
+
+  openMoveTaskMenu(task: Task): void {
+    const ref = this.bottomSheet.open(MoveTaskSheetComponent, { data: { task }});
+
+    ref.afterDismissed().subscribe((newStatus: TaskStatus) => {
+      if (newStatus && task.id) {
+        task.status = newStatus;
+        this.firebaseService.updateDataInDatabase('task', task.id!, { status: newStatus });
+        this.refreshTaskList();
+      }
+    });
   }
 }

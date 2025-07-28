@@ -416,3 +416,13 @@ section {
     // box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     // transition: transform 200ms easse, box-shadow 200ms ease;
 }
+
+.cdk-drag-preview {
+    opacity: 0.5;
+}
+
+.cdk-drag-placeholder {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: grabbing;
+}
