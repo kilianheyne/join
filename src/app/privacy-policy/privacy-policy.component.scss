@@ -1,0 +1,37 @@
+section {
+    height: calc(100dvh - 94px);
+        overflow-y: auto;
+    >div.container {
+        max-width: 1300px;
+        
+        padding: 100px;
+
+        >h1 {
+            font-size: 61px;
+        }
+
+        >h2 {
+            font-size: 27px;
+            margin-top: 35px;
+        }
+
+        >h3 {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+
+        >h4 {
+            font-size: 16px;
+            margin-top: 15px;
+        }
+
+        >p {
+            font-size: 16px;
+        }
+
+        >ul {
+            margin-left: 40px;
+            margin-top: 10px;
+        }
+    }
+}
