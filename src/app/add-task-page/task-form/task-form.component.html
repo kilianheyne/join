@@ -73,9 +73,14 @@
                 </div>
 
                 <div *ngIf="getSelectedContacts().length > 0" class="contact-avatars">
-                    @for (contact of getSelectedContacts(); track contact.id) {
+                    @for (contact of getVisibleSelectedContacts(); track contact.id) {
                     <div [ngStyle]="{'background-color': contact.color}">
                         <span>{{ contact.avatar }}</span>
+                    </div>
+                    }
+                    @if (getRemainingUserCount() > 0) {
+                    <div class="contact-avatars">
+                        +{{ getRemainingUserCount() }}
                     </div>
                     }
                 </div>

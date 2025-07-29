@@ -183,6 +183,15 @@ export class TaskFormComponent {
     );
   }
 
+  getVisibleSelectedContacts(): Contact[] {
+    return this.getSelectedContacts().slice(0, 3);
+  }
+
+  getRemainingUserCount(): number {
+    const selected = this.getSelectedContacts();
+    return selected.length > 3 ? selected.length - 3 : 0;
+  }
+
   getPriorities(): Priority[] {
     return this.firebaseService.prioritiesList.slice().sort(PriorityModel.sort);
   }
