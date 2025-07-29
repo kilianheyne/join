@@ -3,6 +3,7 @@
 section {
     height: calc(100dvh - 94px - 80px);
     overflow: auto;
+;
 
     >div.container {
         max-height: calc(100dvh - 94px - 80px);
@@ -14,9 +15,13 @@ section {
             padding: 40px 20px;
         }
 
-          @media (max-width:640px) {
-               padding: 20px 20px 0px 20px;
-            }
+        @media (max-width:820px) {
+            margin-bottom: 50px;
+        }
+
+        @media (max-width:640px) {
+            padding: 20px 20px 0px 20px;
+        }
 
         >h1 {
             font-weight: 700;
