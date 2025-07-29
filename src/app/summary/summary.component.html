@@ -9,14 +9,14 @@
     <div id="summary-content" class="flex"> 
         <div id="overview">
             <div id="first-row" class="flex">
-                <div class="medium-bubble">
+                <div class="medium-bubble" [routerLink]="['/board']">
                     <div class="icon-edit"></div>
                     <div class="flex-col">
                         <span class="dynamic-number">{{ toDoCount }}</span> <!-- TO-DO: dynamic render of amount of array-length -->
                         <span>To-do</span>
                     </div>
                 </div>
-                <div class="medium-bubble">
+                <div class="medium-bubble" [routerLink]="['/board']">
                     <div class="icon-check"></div>
                     <div class="flex-col">
                         <span class="dynamic-number">{{ doneCount }}</span> <!-- TO-DO: dynamic render of amount of array-length -->
@@ -24,7 +24,7 @@
                     </div>
                 </div>
             </div>
-            <div id="second-row">
+            <div id="second-row" [routerLink]="['/board']">
                 <div id="urgent-box">
                     <div class="icon-urgent"></div>
                     <div class="flex-col">
@@ -41,15 +41,15 @@
                 }
             </div>
             <div id="third-row">
-                <div class="flex-col small-bubble">
+                <div class="flex-col small-bubble" [routerLink]="['/board']">
                     <span class="dynamic-number">{{ taskCount }}</span> <!-- TO-DO: dynamic render of array.length -->
                     <span>Tasks in <br> Board</span>
                 </div>
-                <div class="flex-col small-bubble">
+                <div class="flex-col small-bubble" [routerLink]="['/board']">
                     <span class="dynamic-number">{{ inProgressCount }}</span> <!-- TO-DO: dynamic render of array.length -->
                     <span>Tasks In <br> Progress</span>
                 </div>
-                <div class="flex-col small-bubble">
+                <div class="flex-col small-bubble" [routerLink]="['/board']">
                     <span class="dynamic-number">{{ awaitingFeedbackCount }}</span> <!-- TO-DO: dynamic render of array.length -->
                     <span>Awaiting <br> Feedback</span>
                 </div>
