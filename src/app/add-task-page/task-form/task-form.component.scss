@@ -27,7 +27,7 @@ form {
         @media (max-width:1250px) {
             flex-direction: column;
             justify-content: center;
-            align-items: center;
+            align-items: start;
             gap: 32px;
         }
 
@@ -544,12 +544,25 @@ form {
                 }
             }
         }
+
+        >div.require {
+            display: none;
+            font-size: 16px;
+
+            @media (max-width:820px) {
+                display: block;
+            }
+
+            >span {
+                color: $pinkError;
+            }
+        }
     }
 
     >div:last-child {
         display: flex;
         justify-content: space-between;
-        align-items: start;
+        align-items: end;
         margin-top: 100px;
 
         @media (max-width:820px) {
@@ -559,16 +572,15 @@ form {
             z-index: 50;
             margin-top: 10px;
             align-items: end;
-        }
-
-        @media (max-width:440px) {
-            align-items: center;
-            flex-direction: column-reverse;
-            gap: 20px;
+            justify-content: end;
         }
 
         >div:first-child {
             font-size: 16px;
+
+            @media (max-width:820px) {
+                display: none;
+            }
 
             >span {
                 color: $pinkError;
