@@ -73,9 +73,14 @@
                 </div>
 
                 <div *ngIf="getSelectedContacts().length > 0" class="contact-avatars">
-                    @for (contact of getSelectedContacts(); track contact.id) {
+                    @for (contact of getVisibleSelectedContacts(); track contact.id) {
                     <div [ngStyle]="{'background-color': contact.color}">
                         <span>{{ contact.avatar }}</span>
+                    </div>
+                    }
+                    @if (getRemainingUserCount() > 0) {
+                    <div class="contact-avatars">
+                        +{{ getRemainingUserCount() }}
                     </div>
                     }
                 </div>
@@ -150,8 +155,8 @@
             This field is required
         </div>
         <div *ngIf="editPage ==='false'">
-            <app-white-button title="Clear" icon="icon-close" (click)="cancelForm(taskForm)"></app-white-button>
-            <app-black-button title="Create Task" icon="icon-check" type="submit" iconFontSize="18px"
+            <app-white-button [title]="showTitle ? 'Clear' : 'Clear'" [padding]="buttonPadding" icon="icon-close" (click)="cancelForm(taskForm)"></app-white-button>
+            <app-black-button [title]="showTitle ? 'Create Task' : 'Create'" [padding]="buttonPadding" icon="icon-check" type="submit" iconFontSize="18px" 
                 (click)="$event.stopPropagation()"></app-black-button>
         </div>
 

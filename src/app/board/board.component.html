@@ -8,17 +8,19 @@
                 <div class="icon-search"></div>
             </label>
             <div>
-                <app-black-button (click)="handleAddTaskClick(TaskStatus.ToDo)" [title]="showTitle ? 'Add task' : ''" icon="icon-add" [padding]="buttonPadding"
-                    iconFontSize="21px"></app-black-button> <!-- TO-DO: icon-add needs align-center -->
+                <app-black-button (click)="handleAddTaskClick(TaskStatus.ToDo)" [title]="showTitle ? 'Add task' : ''"
+                    icon="icon-add" [padding]="buttonPadding" iconFontSize="21px"></app-black-button>
+                <!-- TO-DO: icon-add needs align-center -->
             </div>
         </div>
     </div>
 
     <div class="search-mobile">
         <label class="input-area-mobile">
-            <input type="text" placeholder="Find Task" [formControl]="searchControl"> <!-- TO-DO: placeholder needs align-center -->
+            <input type="text" placeholder="Find Task" [formControl]="searchControl">
+            <!-- TO-DO: placeholder needs align-center -->
             <div id="grey-line"></div>
-            <div class="icon-search"></div> 
+            <div class="icon-search"></div>
         </label>
     </div>
 
@@ -31,19 +33,25 @@
                     <div class="icon-add" (click)="handleAddTaskClick(TaskStatus.ToDo)"></div>
                 </div>
 
-                <div class="task-area" cdkDropList [cdkDropListData]="getTaskByStatus(TaskStatus.ToDo)"
+                <div class="task-area" cdkDropList [cdkDropListData]="getTaskByStatus(TaskStatus.ToDo) "
                     (cdkDropListDropped)="onTaskDrop($event, TaskStatus.ToDo)"
                     [cdkDropListConnectedTo]="['inProgressList', 'awaitFeedbackList', 'doneList']" [cdkDropListDisabled]="isMobile" [class.highlight-dropzone]="isDragging" id="toDoList">
 
+                
+
                     @for (task of getTaskByStatus(TaskStatus.ToDo); track task.id) {
-                        <div cdkDrag [cdkDragData]="task" (cdkDragStarted)="onDragStart()" (cdkDragEnded)="onDragEnd()" (click)="openTaskDetails(task)">
-                            <app-task-card [task]="task" [categories]="categories" [contacts]="contacts"
-                                [priorities]="priorities" [isMobile]="isMobile"  (openMoveSheet)="openMoveTaskMenu($event)"></app-task-card>
-                        </div>
+                    <div cdkDrag [cdkDragData]="task" (cdkDragStarted)="onDragStart()" (cdkDragEnded)="onDragEnd()" class="draggable-task" (mousedown)="handleMouseDown(task)"
+                        (touchstart)="handleMouseDown(task)" (mouseup)="handleMouseUp()" (mouseleave)="handleMouseUp()"
+                        (touchend)="handleMouseUp()" (click)="handleClick(task)">
+                        <app-task-card [task]="task" [categories]="categories" [contacts]="contacts"
+                            [priorities]="priorities" [isMobile]="isMobile" (openMoveSheet)="openMoveTaskMenu($event)">
+                        </app-task-card>
+                    </div>
+
                     }
 
                     @if (getTaskByStatus(TaskStatus.ToDo).length === 0) {
-                        <div class="no-tasks">No tasks To do</div>
+                    <div class="no-tasks">No tasks To do</div>
                     }
                 </div>
             </div>
@@ -55,18 +63,22 @@
                 </div>
                 <div class="task-area" cdkDropList [cdkDropListData]="getTaskByStatus(TaskStatus.InProgress)"
                     (cdkDropListDropped)="onTaskDrop($event, TaskStatus.InProgress)"
+
                     [cdkDropListConnectedTo]="['toDoList', 'awaitFeedbackList', 'doneList']" [cdkDropListDisabled]="isMobile" [class.highlight-dropzone]="isDragging" id="inProgressList">
 
-                    @for (task of getTaskByStatus(TaskStatus.InProgress); track task.id) {
 
-                        <div cdkDrag [cdkDragData]="task" (cdkDragStarted)="onDragStart()" (cdkDragEnded)="onDragEnd()" (click)="openTaskDetails(task)">
-                            <app-task-card [task]="task" [categories]="categories" [contacts]="contacts"
-                                [priorities]="priorities" [isMobile]="isMobile" (openMoveSheet)="openMoveTaskMenu($event)"></app-task-card>
-                        </div>
+                    @for (task of getTaskByStatus(TaskStatus.InProgress); track task.id) {
+                    <div cdkDrag [cdkDragData]="task" (cdkDragStarted)="onDragStart()" (cdkDragEnded)="onDragEnd()" class="draggable-task" (mousedown)="handleMouseDown(task)"
+                        (touchstart)="handleMouseDown(task)" (mouseup)="handleMouseUp()" (mouseleave)="handleMouseUp()"
+                        (touchend)="handleMouseUp()" (click)="handleClick(task)">
+                        <app-task-card [task]="task" [categories]="categories" [contacts]="contacts"
+                            [priorities]="priorities" [isMobile]="isMobile" (openMoveSheet)="openMoveTaskMenu($event)">
+                        </app-task-card>
+                    </div>
                     }
 
                     @if (getTaskByStatus(TaskStatus.InProgress).length === 0) {
-                        <div class="no-tasks">No tasks In progress</div>
+                    <div class="no-tasks">No tasks In progress</div>
                     }
                 </div>
             </div>
@@ -79,16 +91,24 @@
 
                 <div class="task-area" cdkDropList [cdkDropListData]="getTaskByStatus(TaskStatus.AwaitFeedback)"
                     (cdkDropListDropped)="onTaskDrop($event, TaskStatus.AwaitFeedback)"
+
                     [cdkDropListConnectedTo]="['inProgressList', 'toDoList', 'doneList']" [cdkDropListDisabled]="isMobile" [class.highlight-dropzone]="isDragging" id="awaitFeedbackList">
+
+
                     @for (task of getTaskByStatus(TaskStatus.AwaitFeedback); track task.id) {
 
-                        <div cdkDrag [cdkDragData]="task" (cdkDragStarted)="onDragStart()" (cdkDragEnded)="onDragEnd()" (click)="openTaskDetails(task)">
-                            <app-task-card [task]="task" [categories]="categories" [contacts]="contacts"
-                                [priorities]="priorities" [isMobile]="isMobile" (openMoveSheet)="openMoveTaskMenu($event)"></app-task-card>
-                        </div>
+                    <div cdkDrag [cdkDragData]="task" (cdkDragStarted)="onDragStart()" (cdkDragEnded)="onDragEnd()" class="draggable-task" (mousedown)="handleMouseDown(task)"
+                        (touchstart)="handleMouseDown(task)" (mouseup)="handleMouseUp()" (mouseleave)="handleMouseUp()"
+                        (touchend)="handleMouseUp()" (click)="handleClick(task)">
+                        <app-task-card [task]="task" [categories]="categories" [contacts]="contacts"
+                            [priorities]="priorities" [isMobile]="isMobile" (openMoveSheet)="openMoveTaskMenu($event)">
+                        </app-task-card>
+                    </div>
+
+
                     }
                     @if (getTaskByStatus(TaskStatus.AwaitFeedback).length === 0) {
-                        <div class="no-tasks">No tasks Await feedback</div>
+                    <div class="no-tasks">No tasks Await feedback</div>
                     }
                 </div>
             </div>
@@ -99,22 +119,31 @@
                 </div>
                 <div class="task-area" cdkDropList [cdkDropListData]="getTaskByStatus(TaskStatus.Done)"
                     (cdkDropListDropped)="onTaskDrop($event, TaskStatus.Done)"
+
                     [cdkDropListConnectedTo]="['inProgressList', 'awaitFeedbackList', 'toDoList']" [cdkDropListDisabled]="isMobile" [class.highlight-dropzone]="isDragging" id="doneList">
+
+
                     @for (task of getTaskByStatus(TaskStatus.Done); track task.id) {
 
-                        <div cdkDrag [cdkDragData]="task" (cdkDragStarted)="onDragStart()" (cdkDragEnded)="onDragEnd()" (click)="openTaskDetails(task)">
-                            <app-task-card [task]="task" [categories]="categories" [contacts]="contacts"
-                                [priorities]="priorities" [isMobile]="isMobile" (openMoveSheet)="openMoveTaskMenu($event)"></app-task-card>
-                        </div>
+                    <div cdkDrag [cdkDragData]="task" (cdkDragStarted)="onDragStart()" (cdkDragEnded)="onDragEnd()" class="draggable-task" (mousedown)="handleMouseDown(task)"
+                        (touchstart)="handleMouseDown(task)" (mouseup)="handleMouseUp()" (mouseleave)="handleMouseUp()"
+                        (touchend)="handleMouseUp()" (click)="handleClick(task)">
+                        <app-task-card [task]="task" [categories]="categories" [contacts]="contacts"
+                            [priorities]="priorities" [isMobile]="isMobile" (openMoveSheet)="openMoveTaskMenu($event)">
+                        </app-task-card>
+                    </div>
+
+
                     }
                     @if (getTaskByStatus(TaskStatus.Done).length === 0) {
-                        <div class="no-tasks">No tasks Done</div>
+                    <div class="no-tasks">No tasks Done</div>
                     }
                 </div>
             </div>
         </div>
-        <app-task *ngIf="selectedTask" [categories]="categories" [contacts]="contacts" [priorities]="priorities" [task]="selectedTask!"
-                    [isVisible]="isTaskDetailsVisible" (closed)="closeOverlay()" (taskDeleted)="handleTaskDeleted()"></app-task>
+        <app-task *ngIf="selectedTask" [categories]="categories" [contacts]="contacts" [priorities]="priorities"
+            [task]="selectedTask!" [isVisible]="isTaskDetailsVisible" (closed)="closeOverlay()"
+            (taskDeleted)="handleTaskDeleted()"></app-task>
     </div>
 
     <app-add-task #addTaskOverlay></app-add-task>
