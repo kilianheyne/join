@@ -35,28 +35,23 @@ export class SummaryComponent {
       this.awaitingFeedbackCount = tasks.filter(task => task.status === 'await-feedback').length;
 
       const urgentTasks = tasks
-        .filter(task => task.priority === 'Cswm909cWSJhKcu5vB14' && task.date && typeof (task.date as any).toDate === 'function')
-        .map(task => ({
-          ...task,
-          date: (task.date as any).toDate()
-        }))
+        .filter(task =>
+          task.priority === 'Cswm909cWSJhKcu5vB14' &&
+          task.date instanceof Date &&
+          !isNaN(task.date.getTime())
+        )
         .sort((a, b) => a.date.getTime() - b.date.getTime());
 
         if (urgentTasks.length > 0) {
           const nextDate = urgentTasks[0].date;
-          this.nextDeadline = nextDate.toLocaleDateString('de-DE', {
-            weekday: 'long',
-            day: 'numeric',
+          this.nextDeadline = nextDate.toLocaleDateString('en-US', {
+            year: 'numeric',
             month: 'long',
-            year: 'numeric'
+            day: 'numeric'
           });
         } else {
           this.nextDeadline = null;
         }
     });
   }
-
-  // loadNextDeadline() {
-
-  // }
 }
