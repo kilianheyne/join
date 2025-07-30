@@ -1,4 +1,15 @@
 section {
+    height: calc(100dvh - 96px);
+    overflow-y: auto;
+
+    @media (max-width: 820px) {
+        padding-bottom: 124px;
+    }
+
+    @media (max-width: 640px) {
+        height: calc(100dvh - 80px);
+        padding-bottom: 108px;
+    }
 
     #summary-header {
         display: flex;
