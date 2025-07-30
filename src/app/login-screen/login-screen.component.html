@@ -2,20 +2,20 @@
     <div class="content">
         <div class="login-top">
             <img src="assets/images/logo/logo-dark-big.png" alt="">
-            <div class="top-right">
+            <div class="top-right" *ngIf="!showSignUp">
                 <span>Not a Join user?</span>
-                <app-black-button title="Sign up"></app-black-button>
+                <app-black-button title="Sign up" (click)="toggleForm()"></app-black-button>
             </div>
         </div>
 
         <div class="login-center">
-            <app-login-form></app-login-form>
-            <app-sign-up-form></app-sign-up-form>
+            <app-login-form *ngIf="!showSignUp"></app-login-form>
+            <app-sign-up-form *ngIf="showSignUp" (goBack)="toggleForm()"></app-sign-up-form>
         </div>
 
-        <div class="top-right-mobile">
+        <div class="top-right-mobile" *ngIf="!showSignUp">
             <span>Not a Join user?</span>
-            <app-black-button title="Sign up"></app-black-button>
+            <app-black-button title="Sign up" (click)="toggleForm()"></app-black-button>
         </div>
         <div class="login-bottom">
             <div class="links">
