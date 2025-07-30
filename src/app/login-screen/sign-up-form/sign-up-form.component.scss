@@ -24,6 +24,17 @@
         width: 95dvw;
     }
 
+    img {
+        position: absolute;
+        z-index: 10;
+        top: 60px;
+        left: 40px;
+
+        &:hover{
+            cursor: pointer;
+        }
+    }
+
     .headline {
         display: flex;
         flex-direction: column;
