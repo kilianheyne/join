@@ -1,4 +1,13 @@
 <section>
+    @if (showGreeting) {
+        <div id="mobile-greeting">
+            <!-- <span>Good morning!</span>  TO-DO: if(guest login) -->
+            <div class="flex-col"> <!-- TO-DO: if(login with username) -->
+                <span>Good morning,</span> 
+                <span id="mobile-username">Sofia Müller</span>
+            </div>
+        </div>
+    }
     <div id="summary-header">
         <h2>Join 360</h2>
         <div id="header-twist">

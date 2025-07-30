@@ -20,6 +20,7 @@ export class SummaryComponent {
   inProgressCount: number = 0;
   awaitingFeedbackCount: number = 0;
   nextDeadline: string | null = null;
+  showGreeting: boolean = false;
   // #endregion
 
   constructor(private firebaseService: FirebaseService) {}
@@ -27,6 +28,7 @@ export class SummaryComponent {
   // #region methods
   ngOnInit(): void {
     this.loadTaskSummary();
+    this.handleMobileGreeting();
   }
 
   loadTaskSummary() {
@@ -72,5 +74,17 @@ export class SummaryComponent {
       month: 'long',
       day: 'numeric'
     });
+  }
+
+  private handleMobileGreeting(): void {
+    const greeted = localStorage.getItem('greetingSeen');
+
+    if (!greeted && window.innerWidth < 980) {
+      this.showGreeting = true;
+      setTimeout(() => {
+        this.showGreeting = false;
+      }, 1500);
+      localStorage.setItem('greetingSeen', 'true');
+    }
   }
 }
