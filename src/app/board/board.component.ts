@@ -132,7 +132,7 @@ export class BoardComponent {
       this.longPressTimer = setTimeout(() => {
         this.isLongPress = true;
         this.openTaskDetails(task);
-      }, 300);
+      }, 700);
     }
   }
 
