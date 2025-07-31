@@ -72,7 +72,8 @@ export class SignUpFormComponent {
     } else {
       console.log('Form is invalid');
     }
-
+  }
+  
   hidePassword() {
     this.showPassword = false;
     this.inputInFocus = false;
