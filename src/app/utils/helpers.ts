@@ -1,5 +1,5 @@
-import { AddTaskNotificationComponent } from "../general/add-task-notification/add-task-notification.component";
-import { ContactPageNotificationComponent } from "../general/contact-page-notification/contact-page-notification.component";
+import { AddTaskNotificationComponent } from "../components/general/add-task-notification/add-task-notification.component";
+import { ContactPageNotificationComponent } from "../components/general/contact-page-notification/contact-page-notification.component";
 
 export function getContactInitials(fullName: string) {
     const names = fullName.trim().split(' ');
