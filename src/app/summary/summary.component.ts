@@ -21,6 +21,7 @@ export class SummaryComponent {
   awaitingFeedbackCount: number = 0;
   nextDeadline: string | null = null;
   showGreeting: boolean = false;
+  greetingMessage: string = '';
   // #endregion
 
   constructor(private firebaseService: FirebaseService) {}
@@ -29,6 +30,7 @@ export class SummaryComponent {
   ngOnInit(): void {
     this.loadTaskSummary();
     this.handleMobileGreeting();
+    this.greetingMessage = this.getGreeting();
   }
 
   loadTaskSummary() {
@@ -87,4 +89,19 @@ export class SummaryComponent {
       localStorage.setItem('greetingSeen', 'true');
     }
   }
+
+  private getGreeting(): string {
+  const currentHour = new Date().getHours();
+
+  if (currentHour < 11) {
+    return 'Good morning';
+  } else if (currentHour < 14) {
+    return 'Hello';
+  } else if (currentHour < 18) {
+    return 'Good afternoon';
+  } else {
+    return 'Good evening';
+  }
+}
+
 }
