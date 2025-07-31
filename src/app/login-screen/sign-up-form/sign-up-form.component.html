@@ -7,11 +7,41 @@
 
     <form action="">
         <div class="input-field">
-            
-            <input type="text" placeholder="Name">
-            <input type="text" placeholder="Email">
-            <input type="text" placeholder="Password">
-            <input type="text" placeholder="Confirm password">
+            <div class="input-wrapper">
+                <input type="text" placeholder="Name">
+                <i class="icon-person"></i>
+            </div>
+            <div class="input-wrapper">
+                <input type="text" placeholder="Email">
+                <i class="icon-mail"></i>
+            </div>
+            <div class="input-wrapper">
+                <input
+                    [type]="showPassword ? 'text' : 'password'" 
+                    placeholder="Password"
+                    (focus)="inputInFocus = true"
+                    (blur)="hidePassword()"
+                    >
+                <i
+                    [class.icon-lock]="!inputInFocus"
+                    [class.icon-visibility-off]="inputInFocus && !showPassword"
+                    [class.icon-visibility]="inputInFocus && showPassword"
+                    (mousedown)="togglePassword($event)">
+                </i>
+            </div>
+            <div class="input-wrapper">
+                <input 
+                    [type]="showConPassword ? 'text' : 'password'" 
+                    placeholder="Confirm password"
+                    (focus)="conInputInFocus = true"
+                    (blur)="hideConPassword()">
+                <i
+                    [class.icon-lock]="!conInputInFocus"
+                    [class.icon-visibility-off]="conInputInFocus && !showConPassword"
+                    [class.icon-visibility]="conInputInFocus && showConPassword"
+                    (mousedown)="toggleConPassword($event)">
+                </i>
+            </div>
         </div>
         <div class="check">
             <input type="checkbox" name="" id="">

@@ -10,8 +10,35 @@ import { Component, Output, EventEmitter } from '@angular/core';
   styleUrl: './sign-up-form.component.scss'
 })
 export class SignUpFormComponent {
-   @Output() goBack = new EventEmitter<void>();
-   triggerGoBack() {
+  @Output() goBack = new EventEmitter<void>();
+
+  showPassword: boolean = false;
+  inputInFocus: boolean = false;
+
+  showConPassword:boolean = false;
+  conInputInFocus:boolean = false;
+  
+  triggerGoBack() {
     this.goBack.emit();
+  }
+
+  hidePassword() {
+    this.showPassword = false;
+    this.inputInFocus = false;
+  }
+
+  togglePassword(event: MouseEvent) {
+    event.preventDefault();
+    this.showPassword = !this.showPassword;
+  }
+
+  hideConPassword() {
+    this.showConPassword = false;
+    this.conInputInFocus = false;
+  }
+
+  toggleConPassword(event: MouseEvent) {
+    event.preventDefault();
+    this.showConPassword = !this.showConPassword;
   }
 }
