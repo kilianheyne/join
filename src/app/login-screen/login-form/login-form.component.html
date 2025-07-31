@@ -17,12 +17,12 @@
                     [type]="showPassword ? 'text' : 'password'"
                     placeholder="Password"
                     (focus)="inputInFocus = true"
-                    (blur)="inputInFocus = false">
+                    (blur)="hidePassword()">
                 <i
                     [class.icon-lock]="!inputInFocus"
                     [class.icon-visibility-off]="inputInFocus && !showPassword"
                     [class.icon-visibility]="inputInFocus && showPassword"
-                    (click)="togglePassword()"
+                    (mousedown)="togglePassword($event)"
                 ></i>
             </div>
             

@@ -12,10 +12,15 @@ export class LoginFormComponent {
   showPassword: boolean = false;
   inputInFocus: boolean = false;
 
-  togglePassword() {
+  togglePassword(event: MouseEvent) {
     if (this.inputInFocus) {
+      event.preventDefault();
       this.showPassword = !this.showPassword;
     }
   }
 
+  hidePassword() {
+    this.showPassword = false;
+    this.inputInFocus = false;
+  }
 }
