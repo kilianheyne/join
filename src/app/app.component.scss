@@ -3,6 +3,9 @@ div {
     height: 100dvh;
 }
 
+.login-screen {
+    z-index: 20000;
+
 app-header {
     position: sticky;
     top: 0;
