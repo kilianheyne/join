@@ -32,6 +32,7 @@ export function strictEmailValidator(control: AbstractControl): ValidationErrors
   styleUrl: './sign-up-form.component.scss'
 })
 export class SignUpFormComponent {
+
   signupForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
@@ -52,6 +53,14 @@ export class SignUpFormComponent {
 
   @Output() goBack = new EventEmitter<void>();
 
+
+  showPassword: boolean = false;
+  inputInFocus: boolean = false;
+
+  showConPassword:boolean = false;
+  conInputInFocus:boolean = false;
+  
+
   triggerGoBack() {
     this.goBack.emit();
   }
@@ -64,6 +73,24 @@ export class SignUpFormComponent {
       console.log('Form is invalid');
     }
 
-    //TO-DO: What happens with the data? It should go to firebase, but how?
+  hidePassword() {
+    this.showPassword = false;
+    this.inputInFocus = false;
+  }
+
+  togglePassword(event: MouseEvent) {
+    event.preventDefault();
+    this.showPassword = !this.showPassword;
+  }
+
+  hideConPassword() {
+    this.showConPassword = false;
+    this.conInputInFocus = false;
+  }
+
+  toggleConPassword(event: MouseEvent) {
+    event.preventDefault();
+    this.showConPassword = !this.showConPassword;
+
   }
 }

@@ -9,5 +9,18 @@ import { WhiteButtonComponent } from "../../general/white-button/white-button.co
   styleUrl: './login-form.component.scss'
 })
 export class LoginFormComponent {
+  showPassword: boolean = false;
+  inputInFocus: boolean = false;
 
+  togglePassword(event: MouseEvent) {
+    if (this.inputInFocus) {
+      event.preventDefault();
+      this.showPassword = !this.showPassword;
+    }
+  }
+
+  hidePassword() {
+    this.showPassword = false;
+    this.inputInFocus = false;
+  }
 }

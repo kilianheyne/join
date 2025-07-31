@@ -8,21 +8,60 @@
 
     <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
         <div class="input-field">
-            <input type="text" placeholder="Name" formControlName="name">
-            <div *ngIf="signupForm.controls['name'].errors?.['fullName'] && signupForm.controls['name'].touched"
+
+            <div class="input-wrapper">
+               <input type="text" placeholder="Name" formControlName="name">
+                <i class="icon-person"></i>
+            </div>
+           <div *ngIf="signupForm.controls['name'].errors?.['fullName'] && signupForm.controls['name'].touched"
                 class="error-msg">
                 Please enter your full name.
             </div>
-
-            <input type="email" placeholder="Email" formControlName="email">
+          
+          
+            <div class="input-wrapper">
+               <input type="email" placeholder="Email" formControlName="email">
+                <i class="icon-mail"></i>
+            </div>
             <div *ngIf="signupForm.controls['email'].errors?.['strictEmail'] && signupForm.controls['email'].touched"
                 class="error-msg">
                 Please enter a valid email address.
             </div>
+          
+          
+            <div class="input-wrapper">
+                <input
+                    [type]="showPassword ? 'text' : 'password'" 
+                    placeholder="Password"
+                    (focus)="inputInFocus = true"
+                    (blur)="hidePassword()"
+                       formControlName="password"
+                    >
+                <i
+                    [class.icon-lock]="!inputInFocus"
+                    [class.icon-visibility-off]="inputInFocus && !showPassword"
+                    [class.icon-visibility]="inputInFocus && showPassword"
+                    (mousedown)="togglePassword($event)"
+                   >
+                </i>
+            </div>
+            <div class="input-wrapper">
+                <input 
+                    [type]="showConPassword ? 'text' : 'password'" 
+                    placeholder="Confirm password"
+                    (focus)="conInputInFocus = true"
+                    (blur)="hideConPassword()"
+                       formControlName="confirmPassword"
+                       >
+                <i
+                    [class.icon-lock]="!conInputInFocus"
+                    [class.icon-visibility-off]="conInputInFocus && !showConPassword"
+                    [class.icon-visibility]="conInputInFocus && showConPassword"
+                    (mousedown)="toggleConPassword($event)"
+                   >
+                </i>
+            </div>
 
-
-            <input type="password" placeholder="Password" formControlName="password">
-            <input type="password" placeholder="Confirm password" formControlName="confirmPassword">
         </div>
 
         <div *ngIf="signupForm.errors?.['mismatch']" class="error-msg">
