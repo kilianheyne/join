@@ -1,4 +1,4 @@
-import { Component, HostListener, ViewChild } from '@angular/core';
+import { Component, HostListener, NgZone, ViewChild } from '@angular/core';
 import { BlackButtonComponent } from "../general/black-button/black-button.component";
 import { TaskCardComponent } from "./task-card/task-card.component";
 import { TaskComponent } from './task/task.component';
@@ -50,7 +50,8 @@ export class BoardComponent {
     private firebaseService: FirebaseService,
     private dataService: DataService,
     private router: Router,
-    private bottomSheet: MatBottomSheet
+    private bottomSheet: MatBottomSheet,
+    private ngZone: NgZone
   ) { }
 
   ngOnInit() {
@@ -132,7 +133,7 @@ export class BoardComponent {
       this.longPressTimer = setTimeout(() => {
         this.isLongPress = true;
         this.openTaskDetails(task);
-      }, 300);
+      }, 700);
     }
   }
 
@@ -192,8 +193,10 @@ export class BoardComponent {
     ref.afterDismissed().subscribe((newStatus: TaskStatus) => {
       if (newStatus && task.id) {
         task.status = newStatus;
-        this.firebaseService.updateDataInDatabase('task', task.id!, { status: newStatus });
-        this.refreshTaskList();
+        this.ngZone.run(() => {
+          this.firebaseService.updateDataInDatabase('tasks', task.id!, { status: newStatus });
+          this.refreshTaskList();
+        })      
       }
     });
   }

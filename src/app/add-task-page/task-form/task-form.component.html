@@ -148,6 +148,10 @@
                 </ul>
             </label>
         </div>
+        <div class="require">
+            <span>*</span>
+            This field is required
+        </div>
     </div>
     <div [ngStyle]="{'background-color': bottomSectionBackground}">
         <div>
@@ -155,9 +159,10 @@
             This field is required
         </div>
         <div *ngIf="editPage ==='false'">
-            <app-white-button [title]="showTitle ? 'Clear' : 'Clear'" [padding]="buttonPadding" icon="icon-close" (click)="cancelForm(taskForm)"></app-white-button>
-            <app-black-button [title]="showTitle ? 'Create Task' : 'Create'" [padding]="buttonPadding" icon="icon-check" type="submit" iconFontSize="18px" 
-                (click)="$event.stopPropagation()"></app-black-button>
+            <app-white-button [title]="showTitle ? 'Clear' : 'Clear'" [padding]="buttonPadding" icon="icon-close"
+                (click)="cancelForm(taskForm)"></app-white-button>
+            <app-black-button [title]="showTitle ? 'Create Task' : 'Create'" [padding]="buttonPadding" icon="icon-check"
+                type="submit" iconFontSize="18px" (click)="$event.stopPropagation()"></app-black-button>
         </div>
 
         <div *ngIf="editPage ==='true'">
