@@ -72,6 +72,7 @@ export class SignUpFormComponent {
     } else {
       console.log('Form is invalid');
     }
+  }
 
   hidePassword() {
     this.showPassword = false;
@@ -91,6 +92,5 @@ export class SignUpFormComponent {
   toggleConPassword(event: MouseEvent) {
     event.preventDefault();
     this.showConPassword = !this.showConPassword;
-
   }
 }
