@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, inject, Input, Output } from '@angular/core';
 import { TrimOnBlurDirective } from '../../directives/trim-on-blur.directive';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -68,6 +68,8 @@ export class TaskFormComponent {
 
   firebaseService = inject(FirebaseService);
 
+  showTitle: boolean = false;
+  buttonPadding = '8px 16px';
   isContactListOpen = false;
   isCategoryListOpen = false;
   categoryTitle = '';
@@ -94,19 +96,31 @@ export class TaskFormComponent {
     status: TaskStatus.ToDo,
   }
 
-  ngOnInit() {    
+  ngOnInit() {
+    this.checkScreenSize();
     const current = this.dataService.value();
     if (current) {
       this.taskData.status = current;
     }
 
     if (this.editTaskData) {
-      this.taskData = { ...this.editTaskData }; 
+      this.taskData = { ...this.editTaskData };
       this.momentDate = moment(this.taskData.date);
       this.checkSelectedContactInEditPage();
       this.checkSelectedCategoryInEditPage();
       this.addSelectedSubtasksInEditPage();
     }
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.checkScreenSize();
+  }
+
+  private checkScreenSize() {
+    const width = window.innerWidth;
+    this.showTitle = width > 640;
+    this.buttonPadding = this.showTitle ? '8px 16px' : '8px';
   }
 
   selectMediumPriorityAsDefault() {
@@ -167,6 +181,15 @@ export class TaskFormComponent {
     return this.contactList.filter(
       contact => contact.checked === true
     );
+  }
+
+  getVisibleSelectedContacts(): Contact[] {
+    return this.getSelectedContacts().slice(0, 3);
+  }
+
+  getRemainingUserCount(): number {
+    const selected = this.getSelectedContacts();
+    return selected.length > 3 ? selected.length - 3 : 0;
   }
 
   getPriorities(): Priority[] {

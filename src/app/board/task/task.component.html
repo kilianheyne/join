@@ -25,13 +25,22 @@
                 <span>{{ user.name }}</span>
             </div>
             }
-            <span class="title">Subtasks</span>
-            @for (subtask of task.subtasks; let i = $index; track $index) {
-            <div class="subtask">
-                <input type="checkbox" [checked]="subtask.done" (change)="toggleSubtask(i, $event)">
-                <span>{{ subtask.title }}</span>
+            @if (remainingUsers > 0) {
+            <div class="task-worker">
+                <div class="circle">
+                    +{{ remainingUsers }}
+                </div>
             </div>
             }
+            <span class="title">Subtasks</span>
+            <div class="subtask-list">
+                @for (subtask of task.subtasks; let i = $index; track $index) {
+                <div class="subtask">
+                    <input type="checkbox" [checked]="subtask.done" (change)="toggleSubtask(i, $event)">
+                    <span>{{ subtask.title }}</span>
+                </div>
+            }
+            </div>
             <div class="task-buttons">
                 <button (click)="deleteTask(task.id!)">
                     <div class="icon-delete"></div>

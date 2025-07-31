@@ -130,12 +130,24 @@ section {
                     z-index: 10;
                 }
 
+                @media(max-height: 800px) and (max-width: 1350px){
+                    top: 130px;
+                }
+
                 @media(max-width: 500px) {
                     top: 230px;
                 }
 
+                @media(max-height: 800px) and (max-width: 500px){
+                    top: 110px;
+                }
+
                 @media(max-width: 430px) {
                     top: 200px;
+                }
+
+                @media(max-height: 800px) and (max-width: 430px){
+                    top: 90px;
                 }
 
                 >div {
@@ -153,7 +165,7 @@ section {
                         box-shadow: none;
                     }
 
-                    @media(max-height: 800px) {
+                    @media(max-height: 800px) and (max-width: 1350px){
                         width: 90px;
                         height: 90px;
                     }
