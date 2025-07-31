@@ -19,4 +19,6 @@ export class BlackButtonComponent {
   @Input() gap: string = '10px'
 
   @Input() iconFontSize: string = '15px'
+
+  @Input() disabled: boolean = false;
 }
