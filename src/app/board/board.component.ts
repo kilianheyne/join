@@ -1,4 +1,4 @@
-import { Component, HostListener, ViewChild } from '@angular/core';
+import { Component, HostListener, NgZone, ViewChild } from '@angular/core';
 import { BlackButtonComponent } from "../general/black-button/black-button.component";
 import { TaskCardComponent } from "./task-card/task-card.component";
 import { TaskComponent } from './task/task.component';
@@ -37,6 +37,7 @@ export class BoardComponent {
   searchControl = new FormControl('');
   TaskStatus = TaskStatus;
   isMobile: boolean = false;
+  isDragging: boolean = false;
 
   tasks: Task[] = [];
   filteredTasks: Task[] = [];
@@ -49,7 +50,8 @@ export class BoardComponent {
     private firebaseService: FirebaseService,
     private dataService: DataService,
     private router: Router,
-    private bottomSheet: MatBottomSheet
+    private bottomSheet: MatBottomSheet,
+    private ngZone: NgZone
   ) { }
 
   ngOnInit() {
@@ -123,6 +125,32 @@ export class BoardComponent {
     this.tasks = [...this.tasks];
   }
 
+  private longPressTimer: any;
+  private isLongPress = false;
+
+  handleMouseDown(task: Task): void {
+    if (this.isMobile) {
+      this.longPressTimer = setTimeout(() => {
+        this.isLongPress = true;
+        this.openTaskDetails(task);
+      }, 700);
+    }
+  }
+
+  handleMouseUp(): void {
+    clearTimeout(this.longPressTimer);
+  }
+
+  handleClick(task: Task): void {
+    if (!this.isMobile) {
+      this.openTaskDetails(task);
+    } else if (!this.isLongPress) {
+      // Ignore short tap
+    }
+    this.isLongPress = false;
+  }
+
+
   openTaskDetails(task: Task) {
     this.selectedTask = task;
     this.isTaskDetailsVisible = true;
@@ -160,14 +188,24 @@ export class BoardComponent {
   }
 
   openMoveTaskMenu(task: Task): void {
-    const ref = this.bottomSheet.open(MoveTaskSheetComponent, { data: { task }});
+    const ref = this.bottomSheet.open(MoveTaskSheetComponent, { data: { task } });
 
     ref.afterDismissed().subscribe((newStatus: TaskStatus) => {
       if (newStatus && task.id) {
         task.status = newStatus;
-        this.firebaseService.updateDataInDatabase('task', task.id!, { status: newStatus });
-        this.refreshTaskList();
+        this.ngZone.run(() => {
+          this.firebaseService.updateDataInDatabase('tasks', task.id!, { status: newStatus });
+          this.refreshTaskList();
+        })      
       }
     });
+  }
+
+  onDragStart(): void {
+    this.isDragging = true;
+  }
+
+  onDragEnd(): void {
+    this.isDragging = false;
   }
 }

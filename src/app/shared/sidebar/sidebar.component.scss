@@ -97,16 +97,14 @@ section {
         gap: 16px;
 
         a {
-            span {
-                font-family: 'Inter';
-                font-weight: 400;
-                font-size: 16px;
-                color: #CDCDCD;
+            font-family: 'Inter';
+            font-weight: 400;
+            font-size: 16px;
+            color: #CDCDCD;
 
-                &:hover {
-                    font-weight: 700;
-                    color: #29ABE2;
-                }
+            &.active, &:hover {
+                font-weight: 700;
+                color: #29ABE2;
             }
         }
     }
