@@ -6,8 +6,26 @@
 
     <form action="">
         <div class="input-field">
-            <input type="text" placeholder="Email">
-            <input type="text" placeholder="Password">
+            <div class="input-wrapper">
+                <input 
+                    type="text" 
+                    placeholder="Email">
+                <i class="icon-mail"></i>
+            </div>
+            <div class="input-wrapper">
+                <input 
+                    [type]="showPassword ? 'text' : 'password'"
+                    placeholder="Password"
+                    (focus)="inputInFocus = true"
+                    (blur)="inputInFocus = false">
+                <i
+                    [class.icon-lock]="!inputInFocus"
+                    [class.icon-visibility-off]="inputInFocus && !showPassword"
+                    [class.icon-visibility]="inputInFocus && showPassword"
+                    (click)="togglePassword()"
+                ></i>
+            </div>
+            
         </div>
         <div class="buttons">
             <app-black-button title="Log in"></app-black-button>
