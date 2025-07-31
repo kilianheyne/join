@@ -13,8 +13,8 @@ export const routes: Routes = [
     { path: 'board', component: BoardComponent },
     { path: 'contacts', component: ContactpageComponent },
     { path: 'add-task', component: AddTaskPageComponent },
-    { path: 'summary', component: SummaryComponent }
-    { path: 'help', component: HelpPageComponent}
+    { path: 'summary', component: SummaryComponent },
+    { path: 'help', component: HelpPageComponent},
     { path: 'privacy-policy', component: PrivacyPolicyComponent },
     { path: 'legal-notice', component: LegalNoticeComponent }
 ];

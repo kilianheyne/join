@@ -5,6 +5,8 @@ div {
 
 .login-screen {
     z-index: 20000;
+    display: none;
+}
 
 app-header {
     position: sticky;
