@@ -104,7 +104,7 @@
                 border: 2px solid red;
             }
 
-          
+
 
             i {
                 position: absolute;
@@ -141,9 +141,10 @@
         }
     }
 
-      .error-msg {
-                color: red;
-            }
+    .error-msg {
+        color: red;
+        position: absolute;
+    }
 
 
 }
