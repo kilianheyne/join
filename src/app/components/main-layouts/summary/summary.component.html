@@ -1,0 +1,75 @@
+<section>
+    @if (showGreeting) {
+        <div id="mobile-greeting">
+            <!-- <span>Good morning!</span>  TO-DO: if(guest login) -->
+            <div class="flex-col"> <!-- TO-DO: if(login with username) -->
+                <span>Good morning,</span> 
+                <span id="mobile-username">Sofia Müller</span>
+            </div>
+        </div>
+    }
+    <div id="summary-header">
+        <h2>Join 360</h2>
+        <div id="header-twist">
+            <div class="blue-hyphen"></div>
+            <span>Key Metrics at a Glance</span>
+        </div>
+    </div>
+    <div id="summary-content" class="flex"> 
+        <div id="overview">
+            <div id="first-row" class="flex">
+                <div class="medium-bubble" [routerLink]="['/board']">
+                    <div class="icon-edit"></div>
+                    <div class="flex-col">
+                        <span class="dynamic-number">{{ toDoCount }}</span> <!-- TO-DO: dynamic render of amount of array-length -->
+                        <span>To-do</span>
+                    </div>
+                </div>
+                <div class="medium-bubble" [routerLink]="['/board']">
+                    <div class="icon-check"></div>
+                    <div class="flex-col">
+                        <span class="dynamic-number">{{ doneCount }}</span> <!-- TO-DO: dynamic render of amount of array-length -->
+                        <span>Done</span>
+                    </div>
+                </div>
+            </div>
+            <div id="second-row" [routerLink]="['/board']">
+                <div id="urgent-box">
+                    <div class="icon-urgent"></div>
+                    <div class="flex-col">
+                        <span class="dynamic-number">{{ urgentCount }}</span> <!-- TO-DO: dynamic render of amount of urgent tasks -->
+                        <span>Urgent</span>
+                    </div>
+                </div>
+                <div class="grey-hyphen"></div>
+                @if (nextDeadline) {
+                    <div id="date-box">
+                        <b>{{ nextDeadline }}</b> <!-- TO-DO: dynamic render of next deadline -->
+                        <span>Upcoming Deadline</span>
+                    </div>
+                }
+            </div>
+            <div id="third-row">
+                <div class="flex-col small-bubble" [routerLink]="['/board']">
+                    <span class="dynamic-number">{{ taskCount }}</span> <!-- TO-DO: dynamic render of array.length -->
+                    <span>Tasks in <br> Board</span>
+                </div>
+                <div class="flex-col small-bubble" [routerLink]="['/board']">
+                    <span class="dynamic-number">{{ inProgressCount }}</span> <!-- TO-DO: dynamic render of array.length -->
+                    <span>Tasks In <br> Progress</span>
+                </div>
+                <div class="flex-col small-bubble" [routerLink]="['/board']">
+                    <span class="dynamic-number">{{ awaitingFeedbackCount }}</span> <!-- TO-DO: dynamic render of array.length -->
+                    <span>Awaiting <br> Feedback</span>
+                </div>
+            </div>
+        </div>
+        <div id="greeting">
+            <!-- <span>Good morning!</span>  TO-DO: if(guest login) -->
+            <div class="flex-col"> <!-- TO-DO: if(login with username) -->
+                <span>{{ greetingMessage }}</span> 
+                <span id="username">Sofia Müller</span>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,150 @@
+.form-div {
+    background-color: white;
+    height: auto;
+    width: 40dvw;
+    border-radius: 30px;
+    box-shadow: 0px 0px 15px rgb(212, 212, 212);
+
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+
+    @media (max-width: 1200px) {
+        width: 60dvw;
+    }
+
+    @media (max-width: 800px) {
+        width: 80dvw;
+    }
+
+    @media (max-width: 560px) {
+        width: 95dvw;
+    }
+
+    img {
+        position: absolute;
+        z-index: 10;
+        top: 60px;
+        left: 40px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .headline {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        align-items: center;
+
+        h2 {
+            font-size: 51px;
+
+            @media (max-width: 560px) {
+                font-size: 47px;
+            }
+        }
+
+        .blueline {
+            background-color: #29ABE2;
+            height: 4px;
+            width: 160px;
+            border-radius: 10px;
+
+            @media (max-width: 560px) {
+                width: 100px;
+            }
+        }
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+
+        .input-field {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 40px;
+            gap: 20px;
+            width: 100%;
+
+            input {
+                width: 422px;
+                height: 48px;
+                border-radius: 10px;
+                border: solid 1px #D1D1D1;
+                padding-left: 20px;
+                display: flex;
+                align-items: center;
+                font-size: 20px;
+
+                @media (max-width: 560px) {
+                    width: 400px;
+                }
+
+                @media (max-width: 450px) {
+                    width: 300px;
+                }
+
+
+            }
+
+            input::placeholder {
+                color: #D1D1D1;
+                font-size: 20px;
+                vertical-align: center;
+            }
+
+
+            input.ng-invalid.ng-touched {
+                border: 2px solid red;
+            }
+
+
+
+            i {
+                position: absolute;
+                right: 24px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 18px;
+                cursor: pointer;
+                transition: color 0.2s ease;
+                color: #A8A8A8;
+            }
+
+        }
+
+        .check {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            gap: 35px;
+
+            @media (max-width: 560px) {
+                flex-direction: column;
+                align-items: center;
+                gap: 21px;
+            }
+        }
+    }
+
+    .error-msg {
+        color: red;
+        position: absolute;
+    }
+
+
+}
