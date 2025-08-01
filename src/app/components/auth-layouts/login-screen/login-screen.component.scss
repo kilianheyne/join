@@ -32,8 +32,6 @@ section {
                 }
             }
 
-
-
             .top-right {
                 display: flex;
                 gap: 35px;
@@ -42,6 +40,12 @@ section {
                 @media (max-width: 800px) {
                     display: none;
                 }
+            }
+
+            app-black-button ::ng-deep button {
+                width: 91px;
+                height: 49px;
+                font-size: 16px;
             }
         }
 
@@ -58,6 +62,12 @@ section {
 
             @media (min-width: 800px) {
                 display: none;
+            }
+
+            app-black-button ::ng-deep button {
+                width: 104px;
+                height: 49px;
+                font-size: 16px;
             }
         }
 
