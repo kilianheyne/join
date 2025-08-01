@@ -12,18 +12,18 @@
             <div class="input-wrapper">
                 <input type="text" placeholder="Name" formControlName="name">
                 <i class="icon-person"></i>
-            </div>
-           <div *ngIf="signupForm.controls['name'].errors?.['fullName'] && signupForm.controls['name'].touched"
-                class="error-msg">
-                Please enter your full name.
+                <div *ngIf="signupForm.controls['name'].errors?.['fullName'] && signupForm.controls['name'].touched"
+                    class="error-msg">
+                    Please enter your full name.
+                </div>
             </div>
             <div class="input-wrapper">
                 <input type="email" placeholder="Email" formControlName="email">
                 <i class="icon-mail"></i>
-            </div>
-            <div *ngIf="signupForm.controls['email'].errors?.['strictEmail'] && signupForm.controls['email'].touched"
-                class="error-msg">
-                Please enter a valid email address.
+                <div *ngIf="signupForm.controls['email'].errors?.['strictEmail'] && signupForm.controls['email'].touched"
+                    class="error-msg">
+                    Please enter a valid email address.
+                </div>
             </div>
             <div class="input-wrapper">
                 <input
@@ -56,12 +56,10 @@
                     (mousedown)="toggleConPassword($event)"
                     >
                 </i>
+                <div *ngIf="signupForm.errors?.['mismatch']" class="error-msg">
+                    Passwords do not match. Please try again.
+                </div>
             </div>
-
-        </div>
-
-        <div *ngIf="signupForm.errors?.['mismatch']" class="error-msg">
-            Passwords do not match. Please try again.
         </div>
 
         <div class="check">
