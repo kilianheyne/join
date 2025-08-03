@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { Firestore, collection, onSnapshot, addDoc, updateDoc, doc, deleteDoc, serverTimestamp, DocumentReference } from '@angular/fire/firestore';
+import { Firestore, collection, onSnapshot, addDoc, updateDoc, doc, deleteDoc, DocumentReference, query, getDocs, where } from '@angular/fire/firestore';
 import { Contact } from '../interfaces/contact';
 import { Priority } from '../interfaces/priority';
 import { ContactModel } from '../models/contact.model';
@@ -85,7 +85,27 @@ export class FirebaseService implements OnDestroy {
     await deleteDoc(doc(this.firestore, collectionName, id));
   }
 
+  async getContactByEmail(email: string): Promise<Contact | null> {
+    const colRef = collection(this.firestore, 'contacts');
+    const q = query(colRef, where('email', '==', email));
+    const querySnapshot = await getDocs(q);
+
+    if (!querySnapshot.empty) {
+      const docSnap = querySnapshot.docs[0];
+      return {
+        id: docSnap.id,
+        ...(docSnap.data() as Contact)
+      };
+    }
+
+    return null;
+  }
+
   ngOnDestroy(): void {
     this.unsubscribeAll.forEach(unsub => unsub());
   }
+}
+
+function col(firestore: Firestore, arg1: string) {
+  throw new Error('Function not implemented.');
 }

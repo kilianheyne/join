@@ -6,69 +6,66 @@
         <div class="blueline"></div>
     </div>
 
-    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="signupUser(signupForm)" #signupForm="ngForm">
         <div class="input-field">
 
             <div class="input-wrapper">
-                <input type="text" placeholder="Name" formControlName="name">
+                <input type="text" placeholder="Name" #name="ngModel" name="name" [(ngModel)]="signupFormData.name"
+                    pattern="^[A-Za-zäöüÄÖÜß\-]+ [A-Za-zäöüÄÖÜß\-]+$" trimOnBlur required>
                 <i class="icon-person"></i>
-                <div *ngIf="signupForm.controls['name'].errors?.['fullName'] && signupForm.controls['name'].touched"
-                    class="error-msg">
+                <div *ngIf="!name.valid && (name.touched || signupForm.submitted)" class="error-msg">
                     Please enter your full name.
                 </div>
             </div>
+
             <div class="input-wrapper">
-                <input type="email" placeholder="Email" formControlName="email">
+                <input #email="ngModel" type="email" placeholder="Email" id="email" name="email"
+                    [(ngModel)]="signupFormData.email" trimOnBlur
+                    pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" required>
                 <i class="icon-mail"></i>
-                <div *ngIf="signupForm.controls['email'].errors?.['strictEmail'] && signupForm.controls['email'].touched"
-                    class="error-msg">
+                <div *ngIf="!email.valid && (email.touched || signupForm.submitted)" class="error-msg">
                     Please enter a valid email address.
                 </div>
             </div>
+
             <div class="input-wrapper">
-                <input
-                    [type]="showPassword ? 'text' : 'password'" 
-                    placeholder="Password"
-                    (focus)="inputInFocus = true"
-                    (blur)="hidePassword()"
-                    formControlName="password"
-                    >
-                <i
-                    [class.icon-lock]="!inputInFocus"
-                    [class.icon-visibility-off]="inputInFocus && !showPassword"
-                    [class.icon-visibility]="inputInFocus && showPassword"
-                    (mousedown)="togglePassword($event)"
-                    >
+                <input [type]="showPassword ? 'text' : 'password'" placeholder="Password" (focus)="inputInFocus = true"
+                    (blur)="hidePassword()" #password="ngModel" name="password" [(ngModel)]="signupFormData.password"
+                    trimOnBlur required>
+                <i [class.icon-lock]="!inputInFocus" [class.icon-visibility-off]="inputInFocus && !showPassword"
+                    [class.icon-visibility]="inputInFocus && showPassword" (mousedown)="togglePassword($event)">
                 </i>
+                <div *ngIf="!password.valid && (password.touched || signupForm.submitted)" class="error-msg">
+                    Please enter your password.
+                </div>
             </div>
+
             <div class="input-wrapper">
-                <input 
-                    [type]="showConPassword ? 'text' : 'password'" 
-                    placeholder="Confirm password"
-                    (focus)="conInputInFocus = true"
-                    (blur)="hideConPassword()"
-                    formControlName="confirmPassword"
-                    >
-                <i
-                    [class.icon-lock]="!conInputInFocus"
+                <input [type]="showConPassword ? 'text' : 'password'" placeholder="Confirm password"
+                    (focus)="conInputInFocus = true" (blur)="hideConPassword()" #confirmPassword="ngModel"
+                    [class.error]="(!confirmPassword.valid || !this.checkPasswordMatch()) && (confirmPassword.touched || signupForm.submitted)"
+                    [(ngModel)]="confirmPasswordData" name="confirmPassword" trimOnBlur required>
+                <i [class.icon-lock]="!conInputInFocus"
                     [class.icon-visibility-off]="conInputInFocus && !showConPassword"
                     [class.icon-visibility]="conInputInFocus && showConPassword"
-                    (mousedown)="toggleConPassword($event)"
-                    >
+                    (mousedown)="toggleConPassword($event)">
                 </i>
-                <div *ngIf="signupForm.errors?.['mismatch']" class="error-msg">
+                <div *ngIf="(!confirmPassword.valid || !this.checkPasswordMatch()) && (confirmPassword.touched || signupForm.submitted)"
+                    class="error-msg">
                     Passwords do not match. Please try again.
                 </div>
             </div>
         </div>
 
         <div class="check">
-            <input type="checkbox" formControlName="privacyPolicy">
-            <span>I accept the privacy policy</span>
+            <input type="checkbox" #privacyPolicy="ngModel" [(ngModel)]="privacyPolicyData" name="privacyPolicy"
+                required>
+            <span>I accept the <a routerLink="/privacy-policy">privacy policy</a></span>
         </div>
 
         <div class="buttons">
-            <button type="submit" [disabled]="signupForm.invalid">Sign up</button>
+            <app-black-button title="Sign up" icon="icon-check" type="submit" iconFontSize="18px"
+                [disabled]="signupForm.invalid || !this.checkPasswordMatch()"></app-black-button>
         </div>
     </form>
 </div>

@@ -8,6 +8,8 @@ import { EditContactComponent } from './edit-contact/edit-contact.component';
 import { FirebaseService } from '../../../services/firebase.service';
 import { ContactPageNotificationComponent } from "../../general/contact-page-notification/contact-page-notification.component";
 import { showContactNotification } from '../../../utils/helpers';
+import { AuthService } from '../../../services/auth.service';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-contactpage',
@@ -35,9 +37,21 @@ export class ContactpageComponent {
     phone: ''
   };
   isOverlayActive: boolean = false;
+  sub!: Subscription;
   // #endregion
 
+  constructor(
+    private authService: AuthService
+  ) { }
+
   // #region methods
+  ngOnInit(): void {
+    this.authService.checkAuthenticationValid();
+    this.sub = interval(1000).subscribe(() => {
+      this.authService.checkAuthenticationValid();
+    });
+  }
+
   openCreateContactForm() {
     this.createContact.isVisible = true;
   }

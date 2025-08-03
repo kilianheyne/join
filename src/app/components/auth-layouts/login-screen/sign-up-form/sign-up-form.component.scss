@@ -1,10 +1,11 @@
+@use 'styles/variables' as *;
+
 .form-div {
     background-color: white;
     height: auto;
     width: 40dvw;
     border-radius: 30px;
     box-shadow: 0px 0px 15px rgb(212, 212, 212);
-
     padding: 30px;
     display: flex;
     flex-direction: column;
@@ -68,8 +69,8 @@
         .input-field {
             display: flex;
             flex-direction: column;
-            margin-bottom: 40px;
-            gap: 20px;
+            margin-bottom: 10px;
+            gap: 25px;
             width: 100%;
 
             input {
@@ -99,12 +100,10 @@
                 vertical-align: center;
             }
 
-
-            input.ng-invalid.ng-touched {
-                border: 2px solid red;
+            input.ng-invalid.ng-touched,
+            input.error {
+                border: 2px solid $pinkError;
             }
-
-
 
             i {
                 position: absolute;
@@ -125,6 +124,14 @@
             gap: 10px;
             margin-top: 20px;
             margin-bottom: 20px;
+
+            a {
+                color: $lightBlue;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
         }
 
         .buttons {
@@ -142,9 +149,9 @@
     }
 
     .error-msg {
-        color: red;
+        color: $pinkError;
+        font-size: 12px;
         position: absolute;
+        bottom: -20px;
     }
-
-
 }
