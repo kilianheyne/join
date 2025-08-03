@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AddTaskComponent } from "../board/add-task/add-task.component";
 import { BlackButtonComponent } from "../general/black-button/black-button.component";
 import { LoginFormComponent } from './login-form/login-form.component';
@@ -11,8 +11,22 @@ import { CommonModule } from '@angular/common';
   templateUrl: './login-screen.component.html',
   styleUrl: './login-screen.component.scss'
 })
-export class LoginScreenComponent {
+export class LoginScreenComponent implements OnInit {
   showSignUp = false;
+  showAnimation = true;
+  animateLogo = false;
+
+  ngOnInit() {
+    // Starte Animation nach kleiner Verzögerung
+    setTimeout(() => {
+      this.animateLogo = true;
+    }, 100); // minimale Verzögerung für sauberen Start
+
+    // Beende Animation nach 1 Sekunde
+    setTimeout(() => {
+      this.showAnimation = false;
+    }, 1100);
+  }
 
   toggleForm() {
     this.showSignUp = !this.showSignUp;
