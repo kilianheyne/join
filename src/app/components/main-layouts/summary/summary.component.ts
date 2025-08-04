@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { FirebaseService } from '../../../services/firebase.service';
 import { Task } from '../../../interfaces/task';
-import { Timestamp } from '@angular/fire/firestore';
 import { RouterLink, RouterModule } from '@angular/router';
+import { interval, Subscription } from 'rxjs';
+import { AuthService } from '../../../services/auth.service';
+import { Contact } from '../../../interfaces/contact';
 
 @Component({
   selector: 'app-summary',
@@ -22,15 +24,28 @@ export class SummaryComponent {
   nextDeadline: string | null = null;
   showGreeting: boolean = false;
   greetingMessage: string = '';
+  sub!: Subscription;
+  isGuestUser: boolean = false;
+  userInfo?: Contact;
   // #endregion
 
-  constructor(private firebaseService: FirebaseService) { }
+  constructor(
+    private firebaseService: FirebaseService,
+    private authService: AuthService
+  ) { }
 
   // #region methods
   ngOnInit(): void {
     this.loadTaskSummary();
     this.handleMobileGreeting();
     this.greetingMessage = this.getGreeting();
+
+    this.authService.checkAuthenticationValid();
+    this.sub = interval(1000).subscribe(() => {
+      this.authService.checkAuthenticationValid();
+    });
+    this.isGuestUser = this.authService.isGuestUser();
+    this.userInfo = this.authService.getUserInfoFromLocalStorage();
   }
 
   loadTaskSummary() {
@@ -101,5 +116,9 @@ export class SummaryComponent {
     } else {
       return 'Good evening';
     }
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }

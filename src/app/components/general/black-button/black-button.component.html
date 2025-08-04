@@ -1,4 +1,4 @@
-<button [type]="type" [ngStyle]="{'padding': padding, 'gap': gap}">
+<button [type]="type" [ngStyle]="{'padding': padding, 'gap': gap}" [disabled]="disabled">
     {{title}}
     <span *ngIf="icon" class="icon {{icon}}" [ngStyle]="{'font-size': iconFontSize}"></span>
 </button>

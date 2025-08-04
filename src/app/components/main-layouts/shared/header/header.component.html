@@ -3,26 +3,28 @@
         <div class="contentRestriction">
             <div id="header-content">
                 <span>Kanban Project Management Tool</span>
-                <img src="assets/images/favoicon-dark.png" alt="">
+                <img src="assets/images/favoicon-dark.png" alt="favoicon">
+                @if(userLoggedIn) {
                 <div>
                     <a routerLink="/help" routerLinkActive="active">
                         <img src="assets/icons/help.png" alt="help-center">
                     </a>
                     <div id="user" (click)="toggleMenu()">
-                        <span>YY</span>
+                        <span>{{ userAvatar }}</span>
                     </div>
                 </div>
+                }
                 @if (showMenu) {
-                    <div id="user-menu">
-                        <ul>
-                            @if (isMobile) {
-                                <li><a routerLink="/help" routerLinkActive="active">Help</a></li> <!-- TO-DO: href durch routerLink ersetzen -->
-                            }
-                            <li (click)="toggleMenu()"><a routerLink="/legal-notice">Legal Notice</a></li>
-                            <li (click)="toggleMenu()"><a routerLink="/privacy-policy">Privacy Policy</a></li>
-                            <li (click)="toggleMenu()"><a href="">Log Out</a></li> <!-- TO-DO: href durch routerLink ersetzen -->
-                        </ul>
-                    </div>
+                <div id="user-menu">
+                    <ul>
+                        @if (isMobile) {
+                        <li><a routerLink="/help" routerLinkActive="active">Help</a></li>
+                        }
+                        <li (click)="toggleMenu()"><a routerLink="/legal-notice">Legal Notice</a></li>
+                        <li (click)="toggleMenu()"><a routerLink="/privacy-policy">Privacy Policy</a></li>
+                        <li (click)="toggleMenu();logoutUser()"><a href="#">Log Out</a></li>
+                    </ul>
+                </div>
                 }
             </div>
         </div>

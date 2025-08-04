@@ -1,58 +1,39 @@
 import { CommonModule } from "@angular/common";
-import { Component, Output, EventEmitter } from "@angular/core";
-import {
-  ReactiveFormsModule,
-  FormBuilder,
-  FormGroup,
-  Validators,
-  AbstractControl,
-  ValidationErrors
-} from "@angular/forms";
+import { Component, Output, EventEmitter, inject } from "@angular/core";
+import { FormsModule, NgForm } from "@angular/forms";
 import { BlackButtonComponent } from "../../../../components/general/black-button/black-button.component";
-
-
-export function fullNameValidator(control: AbstractControl): ValidationErrors | null {
-  const value = control.value?.trim();
-  const isValid = /^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:\s+[A-Za-zÀ-ÖØ-öø-ÿ]+)+$/.test(value);
-  return isValid ? null : { fullName: true };
-}
-
-export function strictEmailValidator(control: AbstractControl): ValidationErrors | null {
-  const value = control.value?.trim();
-  const isValid = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i.test(value);
-  return isValid ? null : { strictEmail: true };
-}
-
+import { TrimOnBlurDirective } from '../../../../directives/trim-on-blur.directive';
+import { Contact } from "../../../../interfaces/contact";
+import { Router, RouterLink, RouterModule } from '@angular/router';
+import { getBgColorForCircle, getContactInitials } from "../../../../utils/helpers";
+import { FirebaseService } from "../../../../services/firebase.service";
+import { getDoc } from 'firebase/firestore';
+import CryptoJS from 'crypto-js';
+import { AuthService } from "../../../../services/auth.service";
 
 @Component({
   selector: 'app-sign-up-form',
   standalone: true,
-  imports: [BlackButtonComponent, ReactiveFormsModule, CommonModule],
+  imports: [BlackButtonComponent, CommonModule, FormsModule, TrimOnBlurDirective, RouterLink, RouterModule],
   templateUrl: './sign-up-form.component.html',
   styleUrl: './sign-up-form.component.scss'
 })
 export class SignUpFormComponent {
-
-  signupForm: FormGroup;
-
-  constructor(private fb: FormBuilder) {
-    this.signupForm = this.fb.group({
-      name: ['', [Validators.required, fullNameValidator]],
-      email: ['', [Validators.required, strictEmailValidator]],
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
-      privacyPolicy: [false, Validators.requiredTrue]
-    }, { validator: this.passwordMatchValidator });
-
+  confirmPasswordData = '';
+  privacyPolicyData: boolean = false;
+  signupFormData: Contact = {
+    name: '',
+    email: '',
+    password: '',
   }
 
-  passwordMatchValidator(form: FormGroup) {
-    return form.get('password')?.value === form.get('confirmPassword')?.value
-      ? null : { mismatch: true };
-  }
+  constructor(
+    private firebaseService: FirebaseService,
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   @Output() goBack = new EventEmitter<void>();
-
 
   showPassword: boolean = false;
   inputInFocus: boolean = false;
@@ -60,19 +41,54 @@ export class SignUpFormComponent {
   showConPassword: boolean = false;
   conInputInFocus: boolean = false;
 
-
   triggerGoBack() {
     this.goBack.emit();
   }
 
-  onSubmit() {
-    if (this.signupForm.valid) {
-      console.log('Form submitted', this.signupForm.value);
-      this.triggerGoBack();
-    } else {
-      console.log('Form is invalid');
+  checkPasswordMatch() {
+    return this.signupFormData.password === this.confirmPasswordData
+  }
+
+  getContactInitials(fullName: string) {
+    return getContactInitials(fullName);
+  }
+
+  getBgColorForCircle(name: string) {
+    return getBgColorForCircle(name);
+  }
+
+  signupUser(signupForm: NgForm) {
+    if (signupForm.valid && signupForm.submitted && this.checkPasswordMatch()) {
+      this.signupFormData.color = this.getBgColorForCircle(this.signupFormData.name);
+      this.signupFormData.avatar = this.getContactInitials(this.signupFormData.name);
+      if (this.signupFormData.password) {
+        this.signupFormData.password = CryptoJS.MD5(this.signupFormData.password).toString();
+      }
+
+      this.firebaseService.addDataToDatabase<Contact>('contacts', this.signupFormData).then(async (docRef) => {
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          this.redirectUserToPanel();
+        }
+      });
     }
   }
+<<<<<<< HEAD
+=======
+
+  redirectUserToPanel() {
+    this.authService.setTimestamp(this.authService.timestampName);
+    this.authService.saveInLocalStorage(this.authService.contactInfoName, JSON.stringify({
+      'name': this.signupFormData.name,
+      'email': this.signupFormData.email,
+      'avatar': this.signupFormData.avatar,
+      'color': this.signupFormData.color,
+    }));
+    this.authService.saveInLocalStorage(this.authService.guestCheckName, 'false');
+    this.router.navigate(['/summary']);
+  }
+
+>>>>>>> adcae372b25ef9bbdd14457428f30a9e2d6426f5
   hidePassword() {
     this.showPassword = false;
     this.inputInFocus = false;

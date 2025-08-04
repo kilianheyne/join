@@ -12,6 +12,10 @@ button {
     border-radius: 10px;
     transition: all 0.2s ease;
 
+    &:disabled {
+        background-color: rgb(155, 155, 155);
+    }
+
     span {
         &.icon-person-add::before {
             vertical-align: middle;
@@ -28,6 +32,12 @@ button {
         cursor: pointer;
         background-color: $lightBlue;
         box-shadow: 0px 5px 0px rgba(202, 202, 202, 0.555);
+    }
+
+    &:disabled:hover {
+        cursor: default;
+        background-color: rgb(155, 155, 155);
+        box-shadow: none;
     }
 
     img {

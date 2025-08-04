@@ -4,32 +4,36 @@
         <div class="blueline"></div>
     </div>
 
-    <form action="">
+    <form (ngSubmit)="loginUser(loginForm)" #loginForm="ngForm">
         <div class="input-field">
             <div class="input-wrapper">
-                <input 
-                    type="text" 
-                    placeholder="Email">
+                <input #email="ngModel" type="email" placeholder="Email" id="email" name="email"
+                    [(ngModel)]="loginFormData.email" trimOnBlur (keyup)="infoIsWrong = false"
+                    pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" required [class.error]="infoIsWrong">
                 <i class="icon-mail"></i>
+                <div *ngIf="!email.valid && (email.touched || loginForm.submitted)" class="error-msg">
+                    Please enter a valid email address.
+                </div>
             </div>
             <div class="input-wrapper">
-                <input 
-                    [type]="showPassword ? 'text' : 'password'"
-                    placeholder="Password"
-                    (focus)="inputInFocus = true"
-                    (blur)="hidePassword()">
-                <i
-                    [class.icon-lock]="!inputInFocus"
-                    [class.icon-visibility-off]="inputInFocus && !showPassword"
-                    [class.icon-visibility]="inputInFocus && showPassword"
-                    (mousedown)="togglePassword($event)"
-                ></i>
+                <input [type]="showPassword ? 'text' : 'password'" placeholder="Password" (focus)="inputInFocus = true"
+                    (blur)="hidePassword()" #password="ngModel" name="password" [(ngModel)]="loginFormData.password"
+                    trimOnBlur required (keyup)="infoIsWrong = false" [class.error]="infoIsWrong">
+                <i [class.icon-lock]="!inputInFocus" [class.icon-visibility-off]="inputInFocus && !showPassword"
+                    [class.icon-visibility]="inputInFocus && showPassword" (mousedown)="togglePassword($event)"></i>
+                <div *ngIf="!password.valid && !infoIsWrong && (password.touched || loginForm.submitted)"
+                    class="error-msg">
+                    Please enter your password.
+                </div>
+                <div *ngIf="infoIsWrong" class="error-msg">
+                    Check your email and password. Please try again.
+                </div>
             </div>
-            
+
         </div>
         <div class="buttons">
-            <app-black-button title="Log in"></app-black-button>
-            <app-white-button title="Guest log in"></app-white-button>
+            <app-black-button title="Log in" type="submit"></app-black-button>
+            <app-white-button title="Guest log in" (click)="loginAsGuest()"></app-white-button>
         </div>
     </form>
 </div>
