@@ -2,6 +2,7 @@
 
 #contacts {
     overflow-x: hidden;
+    width: calc(100dvw - 232px);
 
     .content {
         display: flex;
@@ -283,6 +284,10 @@
         position: relative;
         transition: transform 300ms ease, opacity 300ms ease;
 
+        @media (max-width: 1470px) {
+            width: 60%;
+        }
+
         @media (max-width: 1000px) {
             position: fixed;
             top: 96px;
@@ -358,7 +363,7 @@
                 display: flex;
                 align-items: center;
 
-                @media (max-width: 1200px) {
+                @media (max-width: 1290px) {
                     font-size: 20px;
                 }
             }
