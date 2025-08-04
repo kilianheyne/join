@@ -3,10 +3,11 @@ import { BlackButtonComponent } from "../../../components/general/black-button/b
 import { LoginFormComponent } from './login-form/login-form.component';
 import { SignUpFormComponent } from "./sign-up-form/sign-up-form.component";
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login-screen',
-  imports: [BlackButtonComponent, LoginFormComponent, SignUpFormComponent, CommonModule],
+  imports: [BlackButtonComponent, LoginFormComponent, SignUpFormComponent, CommonModule, RouterLink],
   templateUrl: './login-screen.component.html',
   styleUrl: './login-screen.component.scss'
 })
