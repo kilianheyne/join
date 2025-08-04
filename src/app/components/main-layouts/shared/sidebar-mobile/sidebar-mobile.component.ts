@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-sidebar-mobile',
-  imports: [RouterLink, RouterModule],
+  imports: [RouterLink, RouterModule, CommonModule],
   templateUrl: './sidebar-mobile.component.html',
   styleUrl: './sidebar-mobile.component.scss'
 })

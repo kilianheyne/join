@@ -4,33 +4,58 @@
             <img src="assets/images/favicon-white.png" alt="join-logo" />
         </a>
         <div id="menu">
-            @if(userLoggedIn) {
-            <a routerLink="/summary" routerLinkActive="active">
-                <img src="assets/icons/icon-summary.png" alt="summary-icon" class="default-icon" />
-                <img src="assets/icons/icon-summary-active.png" alt="active-summary-icon" class="active-icon" />
-                <span>Summary</span>
-            </a>
+            <ng-container *ngIf="userLoggedIn; else notLoggedIn">
+                <a routerLink="/summary" routerLinkActive="active">
+                    <!-- TO-DO: routerLink zu Summary -->
+                    <img
+                    src="assets/icons/icon-summary.png"
+                    alt="summary-icon"
+                    class="default-icon"
+                    />
+                    <img
+                    src="assets/icons/icon-summary-active.png"
+                    alt="active-summary-icon"
+                    class="active-icon"
+                    />
+                    <span>Summary</span>
+                </a>
 
-            @if(!isGuestUser){
-            <a routerLink="/add-task" routerLinkActive="active">
-                <img src="assets/icons/icon-add.png" alt="add-task-icon" class="default-icon" />
-                <img src="assets/icons/icon-add-active.png" alt="active-add-icon" class="active-icon" />
-                <span>Add Task</span>
-            </a>
-            }
+                <a routerLink="/add-task" routerLinkActive="active">
+                    <!-- TO-DO: routerLink zu Add Task -->
+                    <img src="assets/icons/icon-add.png" alt="add-task-icon" class="default-icon" />
+                    <img src="assets/icons/icon-add-active.png" alt="active-add-icon" class="active-icon"/>
+                    <span>Add Task</span>
+                </a>
 
-            <a routerLink="/board" routerLinkActive="active">
-                <img src="assets/icons/icon-board.png" alt="baord-icon" class="default-icon" />
-                <img src="assets/icons/icon-board-active.png" alt="active-board-icon" class="active-icon" />
-                <span>Board</span>
-            </a>
+                <a routerLink="/board" routerLinkActive="active">
+                    <!-- TO-DO: routerLink zu Board -->
+                    <img src="assets/icons/icon-board.png" alt="baord-icon" class="default-icon" />
+                    <img
+                    src="assets/icons/icon-board-active.png"
+                    alt="active-board-icon"
+                    class="active-icon"
+                    />
+                    <span>Board</span>
+                </a>
 
-            <a routerLink="/contacts" routerLinkActive="active">
-                <img src="assets/icons/icon-contacts.png" alt="contacts-icon" class="default-icon" />
-                <img src="assets/icons/icon-contacts-active.png" alt="active-contatcs-icon" class="active-icon" />
-                <span>Contacts</span>
-            </a>
-            }
+                <a routerLink="/contacts" routerLinkActive="active">
+                    <!-- TO-DO: routerLink zu Contacts -->
+                    <img src="assets/icons/icon-contacts.png" alt="contacts-icon" class="default-icon" />
+                    <img
+                    src="assets/icons/icon-contacts-active.png"
+                    alt="active-contatcs-icon"
+                    class="active-icon"
+                    />
+                    <span>Contacts</span>
+                </a>
+            </ng-container>
+            <ng-template #notLoggedIn>
+                <a routerLink="/login" routerLinkActive="active">
+                    <!-- TO-DO: routerLink zu login -->
+                    <img src="assets/icons/icon-login.png" alt="login-icon">
+                    <span>Log In</span>
+                </a>
+            </ng-template>
         </div>
     </div>
     <div id="policies">
