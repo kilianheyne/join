@@ -30,6 +30,8 @@ section {
         height: 80px;
         gap: 12px;
         cursor: pointer;
+        color: #CDCDCD;
+        text-align: center;
 
         @media (max-width: 640px) {
             width: 70px;
