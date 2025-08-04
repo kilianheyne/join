@@ -1,5 +1,5 @@
 <section>
-    <ng-container *ngIf="isLoggedIn; else notLoggedIn">
+    <ng-container *ngIf="userLoggedIn; else notLoggedIn">
         <!-- TO-DO: if(User oder Gastlogin){} -->
         <a routerLink="/summary" routerLinkActive="active">
             <img src="assets/icons/icon-summary.png" alt="summary-icon" class="default-icon">

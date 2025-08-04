@@ -1,8 +1,10 @@
 <section>
     <div class="sidebar-top">
-        <img src="assets/images/favicon-white.png" alt="join-logo" />
+        <a routerLink="/summary" routerLinkActive="active">
+            <img src="assets/images/favicon-white.png" alt="join-logo" />
+        </a>
         <div id="menu">
-            <ng-container *ngIf="isLoggedIn; else notLoggedIn">
+            <ng-container *ngIf="userLoggedIn; else notLoggedIn">
                 <a routerLink="/summary" routerLinkActive="active">
                     <!-- TO-DO: routerLink zu Summary -->
                     <img

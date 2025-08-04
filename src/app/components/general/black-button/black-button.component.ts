@@ -20,5 +20,5 @@ export class BlackButtonComponent {
 
   @Input() iconFontSize: string = '15px'
 
-  @Input() disabled: boolean = false;
+  @Input() disabled: boolean | null = false;
 }
