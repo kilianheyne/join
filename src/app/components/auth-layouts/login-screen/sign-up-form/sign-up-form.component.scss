@@ -148,6 +148,14 @@
         }
     }
 
+    form.ng-invalid.ng-submitted {
+        .input-field {
+            input.ng-invalid {
+                border: 2px solid $pinkError;
+            }
+        }
+    }
+
     .error-msg {
         color: $pinkError;
         font-size: 12px;

@@ -11,7 +11,6 @@ import { AuthService } from '../../../../services/auth.service';
 })
 export class SidebarMobileComponent {
   userLoggedIn: boolean = false;
-  isGuestUser: boolean = false;
 
   constructor(
     private authService: AuthService
@@ -19,7 +18,6 @@ export class SidebarMobileComponent {
 
   ngOnInit(): void {
     this.checkUserLogin();
-    this.isGuestUser = this.authService.isGuestUser();
   }
 
   checkUserLogin() {

@@ -17,6 +17,8 @@ import { MatBottomSheet, MatBottomSheetModule } from '@angular/material/bottom-s
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MoveTaskSheetComponent } from './move-task-sheet/move-task-sheet.component';
+import { AuthService } from '../../../services/auth.service';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-board',
@@ -44,6 +46,7 @@ export class BoardComponent {
   categories: Category[] = [];
   contacts: Contact[] = [];
   priorities: Priority[] = [];
+  sub!: Subscription;
   // #endregion
 
   constructor(
@@ -51,7 +54,8 @@ export class BoardComponent {
     private dataService: DataService,
     private router: Router,
     private bottomSheet: MatBottomSheet,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -62,6 +66,10 @@ export class BoardComponent {
     this.contacts = this.firebaseService.contactsList;
     this.priorities = this.firebaseService.prioritiesList;
     this.initSearchFilter();
+    this.authService.checkAuthenticationValid();
+    this.sub = interval(1000).subscribe(() => {
+      this.authService.checkAuthenticationValid();
+    });
   }
 
   @HostListener('window:resize')
