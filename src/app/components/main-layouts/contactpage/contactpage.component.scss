@@ -4,6 +4,10 @@
     overflow-x: hidden;
     width: calc(100dvw - 232px);
 
+            @media (max-width: 820px) {
+                width: 100%;
+            }
+
     .content {
         display: flex;
 
