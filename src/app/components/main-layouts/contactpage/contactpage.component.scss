@@ -130,6 +130,7 @@
                         justify-content: flex-start;
                         gap: 35px;
                         border-radius: 10px;
+                        width: 100%;
 
                         @media (max-width: 400px) {
                             display: flex;
@@ -159,6 +160,13 @@
                     .contactright {
                         display: flex;
                         flex-direction: column;
+                        width: 80%;
+
+                        .name, .mail {
+                            width: 100%;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
 
                         .name {
                             font-size: 20px;
@@ -172,6 +180,8 @@
                                 display: none;
                             }
                         }
+
+
                     }
                 }
 
