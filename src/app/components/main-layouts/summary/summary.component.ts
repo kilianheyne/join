@@ -95,7 +95,7 @@ export class SummaryComponent {
 
   private handleMobileGreeting(): void {
     const greeted = localStorage.getItem('greetingSeen');
-
+    console.log(greeted);
     if (!greeted && window.innerWidth < 980) {
       this.showGreeting = true;
       setTimeout(() => {

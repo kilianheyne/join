@@ -17,6 +17,7 @@ section {
         right: 0;
         bottom: 0;
         left: 0;
+        background: #F6F7F8;
 
         z-index: 200;
         animation: fadeOut 1s ease-in-out 1s forwards;
@@ -27,12 +28,17 @@ section {
 
         span {
             font-size: 36px;
+            text-align: center;
         }
 
-        #mobile-usernanme {
+        #mobile-username {
             color: #29ABE2;
             font-size: 47px;
             font-weight: 700;
+        }
+
+        .flex-col {
+            gap: 8px;
         }
     }
 
