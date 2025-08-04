@@ -37,7 +37,7 @@
         .circle {
             background-color: orange;
             height: 120px;
-            width: 120px;
+            min-width: 120px;
             border-radius: 50%;
             border: solid 3px white;
             display: flex;
@@ -48,7 +48,7 @@
 
             @media (max-width: 1200px) {
                 height: 80px;
-                width: 80px;
+                min-width: 80px;
                 font-size: 30px;
             }
 
@@ -58,7 +58,7 @@
 
             @media (max-width: 370px) {
                 height: 50px;
-                width: 50px;
+                min-width: 50px;
                 font-size: 18px;
             }
         }
