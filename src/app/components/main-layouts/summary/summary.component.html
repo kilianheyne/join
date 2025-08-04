@@ -2,12 +2,12 @@
     @if (showGreeting) {
     <div id="mobile-greeting">
         @if(this.isGuestUser) {
-        <span>Good morning!</span>
+        <span>{{ greetingMessage }}!</span>
         }
         @else {
         <div class="flex-col">
-            <span>Good morning,</span>
-            <span id="mobile-username">Sofia Müller</span>
+            <span>{{ greetingMessage }},</span>
+            <span id="mobile-username">{{ userInfo?.name }}</span>
         </div>
         }
     </div>

@@ -21,7 +21,7 @@
             padding: 30px 0px 10px 0px;
 
             @media (max-width: 1470px) {
-                width: 50%;
+                width: 40%;
             }
 
             @media (max-width: 1000px) {
@@ -130,6 +130,7 @@
                         justify-content: flex-start;
                         gap: 35px;
                         border-radius: 10px;
+                        width: 100%;
 
                         @media (max-width: 400px) {
                             display: flex;
@@ -145,7 +146,7 @@
                     }
 
                     .contactcircle {
-                        width: 38px;
+                        min-width: 38px;
                         height: 38px;
                         background-color: orange;
                         border-radius: 50%;
@@ -159,6 +160,13 @@
                     .contactright {
                         display: flex;
                         flex-direction: column;
+                        width: 80%;
+
+                        .name, .mail {
+                            width: 100%;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
 
                         .name {
                             font-size: 20px;
@@ -172,6 +180,8 @@
                                 display: none;
                             }
                         }
+
+
                     }
                 }
 
