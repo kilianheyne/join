@@ -118,6 +118,28 @@
                 gap: 21px;
             }
         }
+
+        app-black-button ::ng-deep button{
+            width: 110px;
+            height: 48px;
+        }
+
+        app-white-button ::ng-deep button{
+            width: 177px;
+            height: 48px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+        }
+
+        @media (max-width: 560px) {
+            app-black-button ::ng-deep button,
+            app-white-button ::ng-deep button {
+                width: 180px;
+                height: 51px;
+            }
+        }
     }
 
     .error-msg {
