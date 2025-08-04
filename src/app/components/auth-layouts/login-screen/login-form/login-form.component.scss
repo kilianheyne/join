@@ -119,12 +119,12 @@
             }
         }
 
-        app-black-button ::ng-deep button{
+        app-black-button ::ng-deep button {
             width: 110px;
             height: 48px;
         }
 
-        app-white-button ::ng-deep button{
+        app-white-button ::ng-deep button {
             width: 177px;
             height: 48px;
             display: flex;
@@ -134,10 +134,19 @@
         }
 
         @media (max-width: 560px) {
+
             app-black-button ::ng-deep button,
             app-white-button ::ng-deep button {
                 width: 180px;
                 height: 51px;
+            }
+        }
+    }
+
+    form.ng-invalid.ng-submitted {
+        .input-field {
+            input.ng-invalid {
+                border: 2px solid $pinkError;
             }
         }
     }
