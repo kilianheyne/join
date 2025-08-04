@@ -73,8 +73,6 @@ export class SignUpFormComponent {
       });
     }
   }
-<<<<<<< HEAD
-=======
 
   redirectUserToPanel() {
     this.authService.setTimestamp(this.authService.timestampName);
@@ -88,7 +86,6 @@ export class SignUpFormComponent {
     this.router.navigate(['/summary']);
   }
 
->>>>>>> adcae372b25ef9bbdd14457428f30a9e2d6426f5
   hidePassword() {
     this.showPassword = false;
     this.inputInFocus = false;

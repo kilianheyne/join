@@ -71,13 +71,14 @@
             </div>
         </div>
         <div id="greeting">
-            <!-- <span>Good morning!</span>  TO-DO: if(guest login) -->
-            <div class="flex-col"> <!-- TO-DO: if(login with username) -->
-                <span>{{ greetingMessage }}</span>
-                @if(!this.isGuestUser) {
-                <span id="username">{{ userInfo?.name }}</span>
-                }
-            </div>
+            @if(this.isGuestUser) {
+                <span>{{ greetingMessage }}!</span>
+            } @else {
+                <div class="flex-col">
+                    <span>{{ greetingMessage }},</span>
+                    <span id="username">{{ userInfo?.name }}</span>
+                </div>
+            }
         </div>
     </div>
 </section>
