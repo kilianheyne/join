@@ -134,7 +134,7 @@ section {
                 .circle {
                     background-color: grey;
                     height: 30px;
-                    width: 30px;
+                    min-width: 30px;
                     border-radius: 50%;
                     border: solid 3px white;
                     display: flex;
@@ -142,6 +142,10 @@ section {
                     justify-content: center;
                     color: white;
                     font-size: 10px;
+                }
+
+                span{
+                    max-width: 300px;
                 }
             }
 

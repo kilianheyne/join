@@ -297,7 +297,7 @@ form {
                                 gap: 15px;
 
                                 >div:first-child {
-                                    width: 42px;
+                                    min-width: 42px;
                                     height: 42px;
                                     background-color: orange;
                                     border-radius: 50%;
@@ -310,6 +310,7 @@ form {
 
                                 >div:last-child {
                                     font-size: 20px;
+                                    max-width: 230px;
                                 }
                             }
 

@@ -71,6 +71,9 @@
             h3 {
                 font-size: 47px;
                 font-weight: 400;
+                word-break: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto;
 
                 @media (max-width: 1200px) {
                     font-size: 30px;
@@ -149,6 +152,9 @@
         .mail {
             color: #007CEE;
             font-size: 16px;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
         }
 
         .phone {
