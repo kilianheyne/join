@@ -14,7 +14,6 @@
             </div>
         </div>
     </div>
-
     <div class="search-mobile">
         <label class="input-area-mobile">
             <input type="text" placeholder="Find Task" [formControl]="searchControl">
@@ -23,22 +22,23 @@
             <div class="icon-search"></div>
         </label>
     </div>
-
     <div class="lists">
         <div class="list-columns">
-
             <div class="column">
                 <div class="headline-responsive">
                     <span>To do</span>
                     <div class="icon-add" (click)="handleAddTaskClick(TaskStatus.ToDo)"></div>
                 </div>
-
-                <div class="task-area" cdkDropList [cdkDropListData]="getTaskByStatus(TaskStatus.ToDo) "
-                    (cdkDropListDropped)="onTaskDrop($event, TaskStatus.ToDo)"
-                    [cdkDropListConnectedTo]="['inProgressList', 'awaitFeedbackList', 'doneList']" [cdkDropListDisabled]="isMobile" [class.highlight-dropzone]="isDragging" id="toDoList">
-
-                
-
+                <div 
+                    class="task-area" 
+                    cdkDropList 
+                    [cdkDropListData]="getTaskByStatus(TaskStatus.ToDo)" 
+                    (cdkDropListDropped)="onTaskDrop($event, TaskStatus.ToDo)" 
+                    [cdkDropListConnectedTo]="['inProgressList', 'awaitFeedbackList', 'doneList']" 
+                    [cdkDropListDisabled]="isMobile"
+                    [class.drag-over]="isDragging"
+                    id="toDoList"
+                >
                     @for (task of getTaskByStatus(TaskStatus.ToDo); track task.id) {
                     <div cdkDrag [cdkDragData]="task" (cdkDragStarted)="onDragStart()" (cdkDragEnded)="onDragEnd()" class="draggable-task" (mousedown)="handleMouseDown(task)"
                         (touchstart)="handleMouseDown(task)" (mouseup)="handleMouseUp()" (mouseleave)="handleMouseUp()"
@@ -49,7 +49,6 @@
                     </div>
 
                     }
-
                     @if (getTaskByStatus(TaskStatus.ToDo).length === 0) {
                     <div class="no-tasks">No tasks To do</div>
                     }
@@ -64,8 +63,7 @@
                 <div class="task-area" cdkDropList [cdkDropListData]="getTaskByStatus(TaskStatus.InProgress)"
                     (cdkDropListDropped)="onTaskDrop($event, TaskStatus.InProgress)"
 
-                    [cdkDropListConnectedTo]="['toDoList', 'awaitFeedbackList', 'doneList']" [cdkDropListDisabled]="isMobile" [class.highlight-dropzone]="isDragging" id="inProgressList">
-
+                    [cdkDropListConnectedTo]="['toDoList', 'awaitFeedbackList', 'doneList']" [cdkDropListDisabled]="isMobile" [class.drag-over]="isDragging" id="inProgressList">
 
                     @for (task of getTaskByStatus(TaskStatus.InProgress); track task.id) {
                     <div cdkDrag [cdkDragData]="task" (cdkDragStarted)="onDragStart()" (cdkDragEnded)="onDragEnd()" class="draggable-task" (mousedown)="handleMouseDown(task)"
@@ -92,7 +90,7 @@
                 <div class="task-area" cdkDropList [cdkDropListData]="getTaskByStatus(TaskStatus.AwaitFeedback)"
                     (cdkDropListDropped)="onTaskDrop($event, TaskStatus.AwaitFeedback)"
 
-                    [cdkDropListConnectedTo]="['inProgressList', 'toDoList', 'doneList']" [cdkDropListDisabled]="isMobile" [class.highlight-dropzone]="isDragging" id="awaitFeedbackList">
+                    [cdkDropListConnectedTo]="['inProgressList', 'toDoList', 'doneList']" [cdkDropListDisabled]="isMobile" [class.drag-over]="isDragging" id="awaitFeedbackList">
 
 
                     @for (task of getTaskByStatus(TaskStatus.AwaitFeedback); track task.id) {
@@ -120,7 +118,7 @@
                 <div class="task-area" cdkDropList [cdkDropListData]="getTaskByStatus(TaskStatus.Done)"
                     (cdkDropListDropped)="onTaskDrop($event, TaskStatus.Done)"
 
-                    [cdkDropListConnectedTo]="['inProgressList', 'awaitFeedbackList', 'toDoList']" [cdkDropListDisabled]="isMobile" [class.highlight-dropzone]="isDragging" id="doneList">
+                    [cdkDropListConnectedTo]="['inProgressList', 'awaitFeedbackList', 'toDoList']" [cdkDropListDisabled]="isMobile" [class.drag-over]="isDragging" id="doneList">
 
 
                     @for (task of getTaskByStatus(TaskStatus.Done); track task.id) {
