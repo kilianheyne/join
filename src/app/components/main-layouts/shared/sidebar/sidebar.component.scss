@@ -87,12 +87,14 @@ section {
                 background: #2A3D59;
             }
         }
+
     }
 
     #policies {
         display: flex;
         flex-direction: column;
         gap: 16px;
+        font-weight: 400;
 
         a {
             font-family: 'Inter';
@@ -101,7 +103,8 @@ section {
             color: #CDCDCD;
 
             &.active, &:hover {
-                font-weight: 700;
+                font-weight: 400;
+                text-shadow: 0 0 1px #29ABE2;
                 color: #29ABE2;
             }
         }
