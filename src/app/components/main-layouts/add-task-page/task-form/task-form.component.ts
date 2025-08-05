@@ -202,7 +202,7 @@ export class TaskFormComponent {
 
   addSubtask() {
     if (this.subtaskTitle.length > 0) {
-      this.subtasks.push({
+      this.subtasks.unshift({
         'title': this.subtaskTitle,
         'done': false,
         'edit': false

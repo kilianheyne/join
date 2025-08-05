@@ -229,6 +229,9 @@ form {
                     position: relative;
                     opacity: 1;
                     pointer-events: none;
+                    word-break: break-word;
+                    hyphens: auto;
+                    overflow-wrap: break-word;
 
                     &.visible {
                         pointer-events: auto;
@@ -482,6 +485,8 @@ form {
                     flex-direction: column;
                     max-height: 200px;
                     overflow: auto;
+                    margin-top: 10px;
+                    box-shadow: inset 1px 1px 1px 1px #c8c8c8;
 
                     &::-webkit-scrollbar {
                         width: 8px;
@@ -492,14 +497,11 @@ form {
 
                     &::-webkit-scrollbar-track {
                         background: #f0f0f0;
-                        /* Track background */
-                        border-radius: 10px;
                     }
 
                     &::-webkit-scrollbar-thumb {
                         background-color: #A8A8A8;
                         /* Thumb color */
-                        border-radius: 10px;
                         border: 2px solid #f0f0f0;
                         /* Optional space around thumb */
                     }
