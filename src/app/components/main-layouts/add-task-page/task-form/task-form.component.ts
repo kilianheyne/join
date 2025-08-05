@@ -273,18 +273,18 @@ export class TaskFormComponent {
     }
   }
 
-  @HostListener('document:click', ['$event'])
-  onClickOutside(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-    const clickInsideAssignedTo = !!target.closest('.select-contact');
-    const clickInsideCategory = !!target.closest('.select-category');
+  // @HostListener('document:click', ['$event'])
+  // onClickOutside(event: MouseEvent) {
+  //   const target = event.target as HTMLElement;
+  //   const clickInsideAssignedTo = target.closest('.select-contact');
+  //   const clickInsideCategory = target.closest('.select-category');
 
-    if (!clickInsideAssignedTo) {
-      this.isContactListOpen = !this.isContactListOpen;
-    }
+  //   if (!clickInsideAssignedTo) {
+  //     this.isContactListOpen = false;
+  //   }
 
-    if (!clickInsideCategory) {
-      this.isCategoryListOpen = !this.isCategoryListOpen;
-    }
-  }
+  //   if (!clickInsideCategory) {
+  //     this.isCategoryListOpen = false;
+  //   }
+  // }
 }
