@@ -1,9 +1,10 @@
 import { Component, ElementRef, EventEmitter, HostListener, inject, Input, Output } from '@angular/core';
 import { FirebaseService } from '../../../../services/firebase.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-contact-details',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './contact-details.component.html',
   styleUrl: './contact-details.component.scss'
 })
@@ -49,6 +50,14 @@ export class ContactDetailsComponent {
       this.isEditVisible = !this.isEditVisible;
     }
   }
+
+  getFontSize(name: string): string {
+  const length = name.length;
+  if (length > 30) return '20px';
+  if (length > 20) return '30px';
+  if (length > 10) return '35px';
+  return '47px';
+}
 
   @HostListener('document:click', ['$event'])
   onClickOutside(event: MouseEvent) {
