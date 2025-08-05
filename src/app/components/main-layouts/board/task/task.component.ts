@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FirebaseService } from '../../../../services/firebase.service';
 import { trigger, style, animate, transition } from '@angular/animations';
@@ -42,6 +42,8 @@ export class TaskComponent {
   @Input() contacts!: Contact[];
   @Input() priorities!: Priority[];
 
+  @ViewChild('taskForm') private taskForm!: TaskFormComponent;
+
   priorityData: Priority | undefined;
   categoryData: Category | undefined;
 
@@ -84,6 +86,12 @@ export class TaskComponent {
     if (changes['priorities'] || changes['task']) {
       this.setPriorityData();
     }
+  }
+
+  closeAllFormList() {
+    this.taskForm.isContactListOpen = false;
+    this.taskForm.isCategoryListOpen = false;
+    this.taskForm.closeAllSubtaskEdit();
   }
 
   returnToDetailPage(taskData: Task) {

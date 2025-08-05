@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, inject, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, inject, Input, Output, ViewChild } from '@angular/core';
 import { TrimOnBlurDirective } from '../../../../directives/trim-on-blur.directive';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -80,7 +80,13 @@ export class TaskFormComponent {
   minDate = moment().startOf('day');
   momentDate: moment.Moment | null = null;
 
-  constructor(private router: Router, private dataService: DataService) {
+  @ViewChild('scrollContainer') private scrollContainer!: ElementRef;
+
+  constructor(
+    private router: Router,
+    private dataService: DataService,
+    private elRef: ElementRef
+  ) {
     this.selectMediumPriorityAsDefault();
     this.assignCheckedValueToContacts();
   }
@@ -202,20 +208,50 @@ export class TaskFormComponent {
 
   addSubtask() {
     if (this.subtaskTitle.length > 0) {
-      this.subtasks.push({
+      this.subtasks.unshift({
         'title': this.subtaskTitle,
         'done': false,
         'edit': false
       });
       this.subtaskTitle = '';
+
+      setTimeout(() => {
+        this.scrollToBottom();
+      });
     }
+  }
+
+  private scrollToBottom(): void {
+    const el = this.scrollContainer.nativeElement;
+    el.scrollTop = el.scrollHeight;
   }
 
   deleteSubtask(index: number) {
     this.subtasks.splice(index, 1);
   }
 
+  deleteEmptySubtask(index: number) {
+    const subtask = this.subtasks[index];
+    if (subtask.title.trim() === '') {
+      this.deleteSubtask(index);
+    } else {
+      subtask.edit = false;
+    }
+  }
+
+  closeAllSubtaskEdit() {
+    for (const [index, subtask] of this.subtasks.entries()) {
+      this.deleteEmptySubtask(index)
+    }
+  }
+
   submitForm(taskForm: NgForm) {
+    if (taskForm.invalid) {
+      setTimeout(() => {
+        this.scrollToFirstError();
+      });
+      return;
+    }
     if (taskForm.valid && taskForm.submitted) {
       this.taskData.users = this.getSelectedContacts().map(contact => contact.id);
       this.taskData.subtasks = this.subtasks.map(subtask => ({
@@ -264,12 +300,13 @@ export class TaskFormComponent {
     }, 200);
   }
 
-  deleteEmptySubtask(index: number) {
-    const subtask = this.subtasks[index];
-    if (subtask.title.trim() === '') {
-      this.deleteSubtask(index);
-    } else {
-      subtask.edit = false;
+  private scrollToFirstError(): void {
+    const firstInvalidControl: HTMLElement | null =
+      this.elRef.nativeElement.querySelector('.error');
+
+    if (firstInvalidControl) {
+      firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      firstInvalidControl.focus(); // Optional: focus the field
     }
   }
 }

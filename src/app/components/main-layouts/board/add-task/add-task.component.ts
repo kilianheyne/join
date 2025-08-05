@@ -38,6 +38,7 @@ export class AddTaskComponent {
   closeAllFormList() {
     this.taskForm.isContactListOpen = false;
     this.taskForm.isCategoryListOpen = false;
+    this.taskForm.closeAllSubtaskEdit();
   }
 
   showNotificationAndCloseForm() {

@@ -19,6 +19,7 @@ import { AuthService } from "../../../../services/auth.service";
   styleUrl: './sign-up-form.component.scss'
 })
 export class SignUpFormComponent {
+  passwordData = '';
   confirmPasswordData = '';
   privacyPolicyData: boolean = false;
   signupFormData: Contact = {
@@ -46,7 +47,7 @@ export class SignUpFormComponent {
   }
 
   checkPasswordMatch() {
-    return this.signupFormData.password === this.confirmPasswordData
+    return this.passwordData === this.confirmPasswordData
   }
 
   getContactInitials(fullName: string) {
@@ -61,8 +62,8 @@ export class SignUpFormComponent {
     if (signupForm.valid && signupForm.submitted && this.checkPasswordMatch()) {
       this.signupFormData.color = this.getBgColorForCircle(this.signupFormData.name);
       this.signupFormData.avatar = this.getContactInitials(this.signupFormData.name);
-      if (this.signupFormData.password) {
-        this.signupFormData.password = CryptoJS.MD5(this.signupFormData.password).toString();
+      if (this.passwordData) {
+        this.signupFormData.password = CryptoJS.MD5(this.passwordData).toString();
       }
 
       this.firebaseService.addDataToDatabase<Contact>('contacts', this.signupFormData).then(async (docRef) => {

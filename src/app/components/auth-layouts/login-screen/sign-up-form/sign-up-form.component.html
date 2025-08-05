@@ -30,8 +30,8 @@
 
             <div class="input-wrapper">
                 <input [type]="showPassword ? 'text' : 'password'" placeholder="Password" (focus)="inputInFocus = true"
-                    (blur)="hidePassword()" #password="ngModel" name="password" [(ngModel)]="signupFormData.password"
-                    trimOnBlur required>
+                    (blur)="hidePassword()" #password="ngModel" name="password" [(ngModel)]="passwordData" trimOnBlur
+                    required>
                 <i [class.icon-lock]="!inputInFocus" [class.icon-visibility-off]="inputInFocus && !showPassword"
                     [class.icon-visibility]="inputInFocus && showPassword" (mousedown)="togglePassword($event)">
                 </i>
