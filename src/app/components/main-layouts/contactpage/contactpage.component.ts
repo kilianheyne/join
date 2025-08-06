@@ -102,8 +102,8 @@ export class ContactpageComponent {
     showContactNotification(this.contactPageNotification, 'Contact successfully created');
   }
 
-  showUpdateContactNotification() {
-    this.isDetailsVisible = false;
+  showUpdateContactNotification(contact: Contact) {
+    this.selectedContact = contact;
     showContactNotification(this.contactPageNotification, 'Contact successfully updated');
   }
 

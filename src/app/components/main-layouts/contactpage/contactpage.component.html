@@ -10,17 +10,19 @@
         @for (initial of uniqueInitials; track $index) {
         <div class="letter-header">
           <span class="letter">{{ initial }}</span>
-        <div class="greyunderline"></div>
+          <div class="greyunderline"></div>
         </div>
 
         @for (contact of getContactsByInitial(initial); track contact.id) {
-        <div (click)="showContactDetails(contact)" class="contact" [ngStyle]="{ 'background-color': selectedContact === contact ? '#2A3647' : '' }">
+        <div (click)="showContactDetails(contact)" class="contact"
+          [ngStyle]="{ 'background-color': selectedContact === contact ? '#2A3647' : '' }">
           <div class="contact-mb">
             <div class="contactcircle" [ngStyle]="{ 'background-color': contact.color }">
               {{ contact.avatar }}
             </div>
             <div class="contactright">
-              <span class="name" [ngStyle]="{ 'color': selectedContact === contact ? 'white' : '' }">{{ contact.name }}</span>
+              <span class="name" [ngStyle]="{ 'color': selectedContact === contact ? 'white' : '' }">{{ contact.name
+                }}</span>
               <span class="mail">{{ contact.email }}</span>
             </div>
           </div>
@@ -36,7 +38,7 @@
       </div>
     </div>
 
-  
+
 
     <div class="contactinfo" [class.visible]="isOverlayActive || isDetailsVisible">
       <div class="goback">
@@ -57,14 +59,15 @@
 
       <!-- Go Back image: only for mobile overlay -->
 
-      
+
     </div>
 
     <!-- Create Contact Component -->
     <app-create-contact #createContact (contactCreated)="onContactCreated($event)"></app-create-contact>
 
     <!-- Edit Contact Component -->
-    <app-edit-contact #editContact (contactUpdated)="showUpdateContactNotification()" (contactDeleted)="showDeleteContactNotification()"></app-edit-contact>
+    <app-edit-contact #editContact (contactUpdated)="showUpdateContactNotification($event)"
+      (contactDeleted)="showDeleteContactNotification()"></app-edit-contact>
 
     <!-- Contact page notification Component -->
     <app-contact-page-notification #contactPageNotification></app-contact-page-notification>

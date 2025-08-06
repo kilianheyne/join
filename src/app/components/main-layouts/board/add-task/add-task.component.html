@@ -1,5 +1,5 @@
-<section [class.visible]="isVisible" (click)="closeForm()">
-    <div *ngIf="isVisible" @slideInFromRight (click)="$event.stopPropagation();closeAllFormList()">
+<section [class.visible]="isVisible" (mousedown)="closeForm()">
+    <div *ngIf="isVisible" @slideInFromRight (mousedown)="$event.stopPropagation();closeAllFormList()">
         <h1>Add Task</h1>
         <div class="icon icon-close" (click)="closeForm()"></div>
         <app-task-form #taskForm (taskAdded)="showNotificationAndCloseForm()"

@@ -65,7 +65,7 @@ export class EditContactComponent {
 
       this.firebaseService.updateDataInDatabase<Contact>('contacts', this.contactFormData.id ?? '', this.contactFormData);
       this.closeForm();
-      this.contactUpdated.emit();
+      this.contactUpdated.emit(this.contactFormData);
     }
   }
 
