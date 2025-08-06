@@ -483,10 +483,15 @@ form {
                 >ul {
                     display: flex;
                     flex-direction: column;
-                    max-height: 90px;
+                    max-height: 190px;
                     overflow: auto;
                     margin-top: 10px;
-                    box-shadow: inset 1px 1px 1px 1px #c8c8c8;
+                    border-top: 0.5px solid  #c8c8c8;
+                    border-left: 0.5px solid  #c8c8c8;
+                    border-bottom: 0.5px solid  #c8c8c8;;
+                    border-top-left-radius: 10px;
+                    border-bottom-left-radius: 10px;
+                    
 
                     &::-webkit-scrollbar {
                         width: 8px;
