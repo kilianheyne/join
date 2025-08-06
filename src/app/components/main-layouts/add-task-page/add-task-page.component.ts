@@ -46,5 +46,6 @@ export class AddTaskPageComponent {
   closeAllFormList() {
     this.taskForm.isContactListOpen = false;
     this.taskForm.isCategoryListOpen = false;
+    this.taskForm.closeAllSubtaskEdit();
   }
 }

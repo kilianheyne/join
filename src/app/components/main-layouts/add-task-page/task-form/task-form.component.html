@@ -1,4 +1,4 @@
-<form (keydown.enter)="$event.preventDefault()" (ngSubmit)="submitForm(taskForm)" #taskForm="ngForm"
+<form #scrollContainer (keydown.enter)="$event.preventDefault()" (ngSubmit)="submitForm(taskForm)" #taskForm="ngForm"
     [class.edit]="editPage ==='true'">
     <div class="form-div">
         <div>
@@ -110,7 +110,7 @@
                     required</span>
             </label>
 
-            <label class="form-label subtasks">
+            <label class="form-label subtasks" (click)="$event.stopPropagation()">
                 <span class="label">Subtasks</span>
                 <input type="text" id="subtask" name="subtask" placeholder="Add new subtask" [(ngModel)]="subtaskTitle"
                     trimOnBlur (keydown.enter)="addSubtask()">

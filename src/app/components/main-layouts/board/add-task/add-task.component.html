@@ -2,7 +2,8 @@
     <div *ngIf="isVisible" @slideInFromRight (click)="$event.stopPropagation();closeAllFormList()">
         <h1>Add Task</h1>
         <div class="icon icon-close" (click)="closeForm()"></div>
-        <app-task-form #taskForm (taskAdded)="showNotificationAndCloseForm()" (formCancelled)="closeForm()"></app-task-form>
+        <app-task-form #taskForm (taskAdded)="showNotificationAndCloseForm()"
+            (formCancelled)="closeForm()"></app-task-form>
     </div>
     <app-add-task-notification #addTaskNotification></app-add-task-notification>
 </section>

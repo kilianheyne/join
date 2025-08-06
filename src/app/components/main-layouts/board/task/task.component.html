@@ -1,5 +1,5 @@
 <section [class.visible]="isVisible" (click)="closeTask()">
-    <div *ngIf="isVisible" @slideInFromRight (click)="$event.stopPropagation()">
+    <div *ngIf="isVisible" @slideInFromRight (click)="$event.stopPropagation();">
         <div *ngIf="!showEditPage">
             <div class="top-card">
                 <div class="task-name" [style.background]="categoryData?.color || '#0038FF'">
@@ -39,7 +39,7 @@
                     <input type="checkbox" [checked]="subtask.done" (change)="toggleSubtask(i, $event)">
                     <span>{{ subtask.title }}</span>
                 </div>
-            }
+                }
             </div>
             <div class="task-buttons">
                 <button (click)="deleteTask(task.id!)">
@@ -52,11 +52,12 @@
                 </button>
             </div>
         </div>
-        <div class="edit-page" *ngIf="showEditPage">
+        <div class="edit-page" *ngIf="showEditPage" (click)="closeAllFormList()">
             <div>
                 <span class="icon icon-close" (click)="closeTask()"></span>
             </div>
-            <app-task-form #taskForm editPage="true" [editTaskData]="task" (taskUpdated)="returnToDetailPage($event)"></app-task-form>
+            <app-task-form #taskForm editPage="true" [editTaskData]="task"
+                (taskUpdated)="returnToDetailPage($event)"></app-task-form>
         </div>
     </div>
 
