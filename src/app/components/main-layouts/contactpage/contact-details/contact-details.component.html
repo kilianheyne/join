@@ -5,7 +5,8 @@
             {{ contact.avatar }}
         </div>
         <div class="top-right">
-            <h3>{{ contact.name }}</h3>
+            <h3 [ngStyle]="{ 'font-size': getFontSize(contact.name) }">{{ contact.name }}</h3>
+
             <div class="buttons">
                 <button class="button-edit">
                     <div class="icon-edit"></div>
