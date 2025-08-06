@@ -282,6 +282,10 @@ section {
                     height: 100%;
                     margin-top: 60px;
 
+                    border: 2px dashed transparent;
+                    border-radius: 12px;
+                    transition: border-color 0.5s ease, background-color 0.5s ease;
+
                     @media (max-width: 1470px) {
                         flex-direction: row;
                         padding: 15px 0 15px 0;
@@ -289,6 +293,11 @@ section {
                         overflow-x: auto;
                         width: 100%;
                         height: auto;
+                    }
+
+                    &.drag-over {
+                        border-color: #5C6BC0;
+                        background: #E8EAF6;
                     }
 
                     >div[cdkDrag] {
@@ -349,12 +358,12 @@ section {
                     }
                 }
 
-                .highlight-dropzone {
-                    border: 2px dashed #5C6BC0;
-                    background: #E8EAF6;
-                    border-radius: 12px;
-                    transition: background-color 0.2s ease, border 0.2s ease;
-                }
+                // .highlight-dropzone {
+
+                //     border-radius: 12px;
+                //     opacity: 1;
+                //     transition: opacity 0.2s ease;
+                // }
             }
         }
 
