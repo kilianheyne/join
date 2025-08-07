@@ -8,7 +8,8 @@ import { BoardComponent } from './components/main-layouts/board/board.component'
 import { AddTaskPageComponent } from './components/main-layouts/add-task-page/add-task-page.component';
 import { ContactpageComponent } from './components/main-layouts/contactpage/contactpage.component';
 import { SummaryComponent } from './components/main-layouts/summary/summary.component';
-import { LoginScreenComponent } from './components/auth-layouts/login-screen/login-screen.component';
+import { LoginFormComponent } from './components/auth-layouts/login-form/login-form.component';
+import { SignUpFormComponent } from './components/auth-layouts/sign-up-form/sign-up-form.component';
 
 export const routes: Routes = [
     {
@@ -29,7 +30,8 @@ export const routes: Routes = [
         path: '',
         component: AuthLayoutsComponent,
         children: [
-            { path: 'login', component: LoginScreenComponent },
+            { path: 'login', component: LoginFormComponent },
+            { path: 'signup', component: SignUpFormComponent },
         ]
     },
     // fallback route

@@ -1,15 +1,16 @@
 import { CommonModule } from "@angular/common";
 import { Component, Output, EventEmitter, inject } from "@angular/core";
 import { FormsModule, NgForm } from "@angular/forms";
-import { BlackButtonComponent } from "../../../../components/general/black-button/black-button.component";
-import { TrimOnBlurDirective } from '../../../../directives/trim-on-blur.directive';
-import { Contact } from "../../../../interfaces/contact";
+import { BlackButtonComponent } from "../../../components/general/black-button/black-button.component";
+import { TrimOnBlurDirective } from '../../../directives/trim-on-blur.directive';
+import { Contact } from "../../../interfaces/contact";
 import { Router, RouterLink, RouterModule } from '@angular/router';
-import { getBgColorForCircle, getContactInitials } from "../../../../utils/helpers";
-import { FirebaseService } from "../../../../services/firebase.service";
+import { getBgColorForCircle, getContactInitials } from "../../../utils/helpers";
+import { FirebaseService } from "../../../services/firebase.service";
 import { getDoc } from 'firebase/firestore';
 import CryptoJS from 'crypto-js';
-import { AuthService } from "../../../../services/auth.service";
+import { AuthService } from "../../../services/auth.service";
+import { FormStateService } from "../../../services/form-state.service";
 
 @Component({
   selector: 'app-sign-up-form',
@@ -22,6 +23,7 @@ export class SignUpFormComponent {
   passwordData = '';
   confirmPasswordData = '';
   privacyPolicyData: boolean = false;
+  removeSaveData: boolean = false;
   signupFormData: Contact = {
     name: '',
     email: '',
@@ -31,7 +33,8 @@ export class SignUpFormComponent {
   constructor(
     private firebaseService: FirebaseService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private formStateService: FormStateService
   ) { }
 
   @Output() goBack = new EventEmitter<void>();
@@ -41,6 +44,18 @@ export class SignUpFormComponent {
 
   showConPassword: boolean = false;
   conInputInFocus: boolean = false;
+
+  ngOnInit(): void {
+    if (this.formStateService.savedSignupFormData) {
+      this.signupFormData = this.formStateService.savedSignupFormData;
+    }
+    if (this.formStateService.savedPassword) {
+      this.passwordData = this.formStateService.savedPassword;
+    }
+    if (this.formStateService.savedPasswordConfirmation) {
+      this.confirmPasswordData = this.formStateService.savedPasswordConfirmation;
+    }
+  }
 
   triggerGoBack() {
     this.goBack.emit();
@@ -84,6 +99,7 @@ export class SignUpFormComponent {
       'color': this.signupFormData.color,
     }));
     this.authService.saveInLocalStorage(this.authService.guestCheckName, 'false');
+    this.removeSaveData = true;
     this.router.navigate(['/summary']);
   }
 
@@ -105,5 +121,16 @@ export class SignUpFormComponent {
   toggleConPassword(event: MouseEvent) {
     event.preventDefault();
     this.showConPassword = !this.showConPassword;
+  }
+
+  ngOnDestroy(): void {
+    this.formStateService.savedSignupFormData = this.signupFormData;
+    this.formStateService.savedPassword = this.passwordData;
+    this.formStateService.savedPasswordConfirmation = this.confirmPasswordData;
+    if (this.removeSaveData) {
+      this.formStateService.savedSignupFormData = null;
+      this.formStateService.savedPassword = null;
+      this.formStateService.savedPasswordConfirmation = null;
+    }
   }
 }

@@ -1,14 +1,15 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { FormsModule, NgForm } from "@angular/forms";
-import { BlackButtonComponent } from "../../../../components/general/black-button/black-button.component";
-import { WhiteButtonComponent } from "../../../../components/general/white-button/white-button.component";
-import { TrimOnBlurDirective } from '../../../../directives/trim-on-blur.directive';
-import { FirebaseService } from '../../../../services/firebase.service';
+import { BlackButtonComponent } from "../../../components/general/black-button/black-button.component";
+import { WhiteButtonComponent } from "../../../components/general/white-button/white-button.component";
+import { TrimOnBlurDirective } from '../../../directives/trim-on-blur.directive';
+import { FirebaseService } from '../../../services/firebase.service';
 import CryptoJS from 'crypto-js';
-import { AuthService } from '../../../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
-import { Contact } from '../../../../interfaces/contact';
+import { Contact } from '../../../interfaces/contact';
+import { FormStateService } from '../../../services/form-state.service';
 
 @Component({
   selector: 'app-login-form',
@@ -20,6 +21,7 @@ export class LoginFormComponent {
   showPassword: boolean = false;
   inputInFocus: boolean = false;
   infoIsWrong: boolean = false;
+  removeSaveData: boolean = false;
 
   loginFormData: {
     email: string,
@@ -32,8 +34,15 @@ export class LoginFormComponent {
   constructor(
     private firebaseService: FirebaseService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private formStateService: FormStateService
   ) { }
+
+  ngOnInit(): void {
+    if (this.formStateService.savedLoginFormData) {
+      this.loginFormData = this.formStateService.savedLoginFormData;
+    }
+  }
 
   async loginUser(loginForm: NgForm) {
     if (loginForm.valid && loginForm.submitted) {
@@ -66,6 +75,7 @@ export class LoginFormComponent {
       'color': userInfo.color,
     }));
     this.authService.saveInLocalStorage(this.authService.guestCheckName, 'false');
+    this.removeSaveData = true;
     this.router.navigate(['/summary']);
   }
 
@@ -73,6 +83,7 @@ export class LoginFormComponent {
     this.authService.removeFromLocalStorage(this.authService.contactInfoName);
     this.authService.setTimestamp(this.authService.timestampName);
     this.authService.saveInLocalStorage(this.authService.guestCheckName, 'true');
+    this.removeSaveData = true;
     this.router.navigate(['/summary']);
   }
 
@@ -86,5 +97,12 @@ export class LoginFormComponent {
   hidePassword() {
     this.showPassword = false;
     this.inputInFocus = false;
+  }
+
+  ngOnDestroy(): void {
+    this.formStateService.savedLoginFormData = this.loginFormData;
+    if (this.removeSaveData) {
+      this.formStateService.savedLoginFormData = null;
+    }
   }
 }
