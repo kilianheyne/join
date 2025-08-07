@@ -19,10 +19,12 @@
                 <form (ngSubmit)="createContact(createContactForm)" #createContactForm="ngForm">
                     <div>
                         <label class="form-label" for="name">
+                           
                             <input [class.error]="!name.valid && (name.touched || createContactForm.submitted)"
                                 #name="ngModel" type="text" placeholder="Name" id="name" name="name"
                                 [(ngModel)]="contactFormData.name" trimOnBlur
-                                pattern="^[A-Za-zäöüÄÖÜß\-]+ [A-Za-zäöüÄÖÜß\-]+$" required>
+                                pattern="^([A-Za-zäöüÄÖÜß\-]+)( [A-Za-zäöüÄÖÜß\-]+)+$" required>
+
                             <span *ngIf="!name.valid && (name.touched || createContactForm.submitted)">Please enter name
                                 & surname.</span>
                         </label>

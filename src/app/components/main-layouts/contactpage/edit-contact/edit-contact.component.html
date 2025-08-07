@@ -21,7 +21,8 @@
                             <input [class.error]="!name.valid && (name.touched || editContactForm.submitted)"
                                 #name="ngModel" type="text" placeholder="Name" id="name" name="name"
                                 [(ngModel)]="contactFormData.name" trimOnBlur
-                                pattern="^[A-Za-zäöüÄÖÜß\-]+ [A-Za-zäöüÄÖÜß\-]+$" required>
+                                pattern="^([A-Za-zäöüÄÖÜß\-]+)( [A-Za-zäöüÄÖÜß\-]+)+$" required>
+
                             <span *ngIf="!name.valid && (name.touched || editContactForm.submitted)">Please enter name &
                                 surname.</span>
                         </label>
