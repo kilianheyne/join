@@ -215,7 +215,7 @@ form {
                     cursor: pointer;
                     box-shadow: inset -1px 1px 0px 0px #c8c8c8;
                     z-index: 1;
-                    
+
                     &:hover {
                         box-shadow: inset -2px 2px 0px 0px #c1c1c1;
                     }
@@ -467,15 +467,17 @@ form {
                 }
             }
 
-            label.subtasks {
-                >div:nth-child(3) {
-                    position: absolute;
-                    top: 48px;
-                    right: 25px;
+            div.subtasks {
+                >label {
+                    >div:nth-child(3) {
+                        position: absolute;
+                        top: 48px;
+                        right: 25px;
 
-                    span {
-                        &::before {
-                            vertical-align: middle;
+                        span {
+                            &::before {
+                                vertical-align: middle;
+                            }
                         }
                     }
                 }
@@ -486,12 +488,13 @@ form {
                     max-height: 90px;
                     overflow: auto;
                     margin-top: 10px;
-                    border-top: 0.5px solid  #c8c8c8;
-                    border-left: 0.5px solid  #c8c8c8;
-                    border-bottom: 0.5px solid  #c8c8c8;;
+                    border-top: 0.5px solid #c8c8c8;
+                    border-left: 0.5px solid #c8c8c8;
+                    border-bottom: 0.5px solid #c8c8c8;
+                    ;
                     border-top-left-radius: 10px;
                     border-bottom-left-radius: 10px;
-                    
+
 
                     &::-webkit-scrollbar {
                         width: 8px;
