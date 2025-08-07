@@ -1,5 +1,5 @@
-<section [class.visible]="isVisible" (click)="closeTask()">
-    <div *ngIf="isVisible" @slideInFromRight (click)="$event.stopPropagation();">
+<section [class.visible]="isVisible" (mousedown)="closeTask()">
+    <div *ngIf="isVisible" @slideInFromRight (mousedown)="$event.stopPropagation();">
         <div *ngIf="!showEditPage">
             <div class="top-card">
                 <div class="task-name" [style.background]="categoryData?.color || '#0038FF'">

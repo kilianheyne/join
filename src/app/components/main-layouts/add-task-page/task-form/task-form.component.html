@@ -30,7 +30,7 @@
         </div>
         <div></div>
         <div>
-            <label (click)="$event.stopPropagation()" class="form-label" for="priority">
+            <label (click)="$event.stopPropagation();closeAllFormList()" class="form-label" for="priority">
                 <span class="label">Priority</span>
                 <div>
                     @for (priority of getPriorities(); track priority.id) {
@@ -43,8 +43,9 @@
                 </div>
             </label>
 
-            <label (click)="$event.stopPropagation()" [class.opened-list]="isContactListOpen"
-                class="form-label select-contact" [class.open]="isContactListOpen">
+            <label (click)="$event.stopPropagation();closeAllFormList('contact')"
+                [class.opened-list]="isContactListOpen" class="form-label select-contact"
+                [class.open]="isContactListOpen">
                 <span class="label">Assigned to</span>
                 <input type="text" name="contact" [(ngModel)]="searchContactInput"
                     [placeholder]="isContactListOpen ? '' : 'Select contacts to assign'"
@@ -86,8 +87,9 @@
                 </div>
             </label>
 
-            <label (click)="$event.stopPropagation()" [class.opened-list]="isCategoryListOpen"
-                class="form-label select-category" [class.open]="isCategoryListOpen">
+            <label (click)="$event.stopPropagation();closeAllFormList('category')"
+                [class.opened-list]="isCategoryListOpen" class="form-label select-category"
+                [class.open]="isCategoryListOpen">
                 <span class="label">Category<span>*</span></span>
                 <input type="text" name="categoryTitle" [(ngModel)]="categoryTitle"
                     [class.error]="!categoryId.valid && (categoryId.touched || taskForm.submitted)"
@@ -110,7 +112,7 @@
                     required</span>
             </label>
 
-            <label class="form-label subtasks" (click)="$event.stopPropagation()">
+            <label class="form-label subtasks" (click)="$event.stopPropagation();closeAllFormList('subtask')">
                 <span class="label">Subtasks</span>
                 <input type="text" id="subtask" name="subtask" placeholder="Add new subtask" [(ngModel)]="subtaskTitle"
                     trimOnBlur (keydown.enter)="addSubtask()">
@@ -128,14 +130,14 @@
                         <div class="no-input" *ngIf="subtask.edit === false">
                             {{subtask.title}}
                             <div class="icon-with-separate">
-                                <span class="icon icon-edit" (click)="subtask.edit = true"></span>
+                                <span class="icon icon-edit" (click)="startEditSubtask($index)"></span>
                                 <span class="separate">|</span>
                                 <span class="icon icon-delete" (click)="deleteSubtask($index)"></span>
                             </div>
                         </div>
 
                         <div class="with-input" *ngIf="subtask.edit === true">
-                            <input type="text" [name]="'subtask'+$index" [(ngModel)]="subtask.title"
+                            <input type="text" #subtaskInput [name]="'subtask'+$index" [(ngModel)]="subtask.title"
                                 (keydown.enter)="deleteEmptySubtask($index)">
                             <div class="icon-with-separate">
                                 <span class="icon icon-delete" (click)="deleteSubtask($index)"></span>

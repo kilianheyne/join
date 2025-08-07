@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostListener, inject, Input, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, inject, Input, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { TrimOnBlurDirective } from '../../../../directives/trim-on-blur.directive';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -81,6 +81,7 @@ export class TaskFormComponent {
   momentDate: moment.Moment | null = null;
 
   @ViewChild('scrollContainer') private scrollContainer!: ElementRef;
+  @ViewChild('subtaskInput') private subtaskInput!: ElementRef;
 
   constructor(
     private router: Router,
@@ -226,6 +227,13 @@ export class TaskFormComponent {
     el.scrollTop = el.scrollHeight;
   }
 
+  startEditSubtask(index: number) {
+    this.subtasks[index].edit = true
+    setTimeout(() => {
+      this.subtaskInput.nativeElement.focus()
+    });
+  }
+
   deleteSubtask(index: number) {
     this.subtasks.splice(index, 1);
   }
@@ -310,18 +318,15 @@ export class TaskFormComponent {
     }
   }
 
-  // @HostListener('document:click', ['$event'])
-  // onClickOutside(event: MouseEvent) {
-  //   const target = event.target as HTMLElement;
-  //   const clickInsideAssignedTo = target.closest('.select-contact');
-  //   const clickInsideCategory = target.closest('.select-category');
-
-  //   if (!clickInsideAssignedTo) {
-  //     this.isContactListOpen = false;
-  //   }
-
-  //   if (!clickInsideCategory) {
-  //     this.isCategoryListOpen = false;
-  //   }
-  // }
+  closeAllFormList(element = '') {
+    if (element != 'contact') {
+      this.isContactListOpen = false;
+    }
+    if (element != 'category') {
+      this.isCategoryListOpen = false;
+    }
+    if (element != 'subtask') {
+      this.closeAllSubtaskEdit();
+    }
+  }
 }
