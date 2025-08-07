@@ -11,7 +11,7 @@
 
             <div class="input-wrapper">
                 <input type="text" placeholder="Name" #name="ngModel" name="name" [(ngModel)]="signupFormData.name"
-                    pattern="^(?!.*[-'\s]{2,})(?!.*[-'\s]$)(?![-'\s])[A-ZÀ-ÝÄÖÜÆÇÑ][a-zà-ÿäöüßœŒæçñ`’'‑\-]*(?: [a-zà-ÿäöüßœŒæçñA-ZÀ-ÝÄÖÜÆÇÑ][a-zà-ÿäöüßœŒæçñ'`’‑\-]*)*$" trimOnBlur required>
+                pattern="^([a-zA-ZäöüÄÖÜß]+\.?(-[a-zA-ZäöüÄÖÜß]+\.?)*\s+)+[a-zA-ZäöüÄÖÜß]+\.?(-[a-zA-ZäöüÄÖÜß]+\.?)*$" trimOnBlur required>
                 <i class="icon-person"></i>
                 <div *ngIf="!name.valid && (name.touched || signupForm.submitted)" class="error-msg">
                     Please enter your full name.
