@@ -48,4 +48,10 @@ export class AddTaskPageComponent {
     this.taskForm.isCategoryListOpen = false;
     this.taskForm.closeAllSubtaskEdit();
   }
+
+  ngOnDestroy() {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
+  }
 }

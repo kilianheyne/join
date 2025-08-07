@@ -216,4 +216,10 @@ export class BoardComponent {
   onDragEnd(): void {
     this.isDragging = false;
   }
+
+  ngOnDestroy() {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
+  }
 }

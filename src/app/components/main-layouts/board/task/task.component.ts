@@ -89,9 +89,11 @@ export class TaskComponent {
   }
 
   closeAllFormList() {
-    this.taskForm.isContactListOpen = false;
-    this.taskForm.isCategoryListOpen = false;
-    this.taskForm.closeAllSubtaskEdit();
+    if (this.taskForm) {
+      this.taskForm.isContactListOpen = false;
+      this.taskForm.isCategoryListOpen = false;
+      this.taskForm.closeAllSubtaskEdit();
+    }
   }
 
   returnToDetailPage(taskData: Task) {

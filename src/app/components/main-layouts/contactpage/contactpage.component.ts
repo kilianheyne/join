@@ -112,5 +112,11 @@ export class ContactpageComponent {
     showContactNotification(this.contactPageNotification, 'Contact successfully deleted');
   }
 
+  ngOnDestroy() {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
+  }
+
   // #endregion
 }
