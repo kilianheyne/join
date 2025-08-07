@@ -1,3 +1,30 @@
-<div class="login-screen">
-    <router-outlet />
-</div>
+<section>
+    <div class="login-screen-animation" [class.animate]="animateLogo" *ngIf="showAnimation">
+        <img src="assets/images/logo/logo-dark-big.png" alt="">
+    </div>
+    <div class="content" [class.fade-in]="animateLogo">
+        <div class="login-top">
+            <img src="assets/images/logo/logo-dark-big.png" alt="" [class.visible]="!showAnimation"
+                class="logo-top-img">
+            <div class="top-right" *ngIf="!showSignUp">
+                <span>Not a Join user?</span>
+                <app-black-button title="Sign up" routerLink="/signup"></app-black-button>
+            </div>
+        </div>
+
+        <div class="login-center">
+            <router-outlet />
+        </div>
+
+        <div class="top-right-mobile" *ngIf="!showSignUp">
+            <span>Not a Join user?</span>
+            <app-black-button title="Sign up" routerLink="/signup"></app-black-button>
+        </div>
+        <div class="login-bottom">
+            <div class="links">
+                <a routerLink="/privacy-policy" routerLinkActive="active">Privacy Policy</a>
+                <a routerLink="/legal-notice" routerLinkActive="active">Legal Notice</a>
+            </div>
+        </div>
+    </div>
+</section>
